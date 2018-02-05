@@ -1,0 +1,13 @@
+class CreateOpenStaxAccountsGroupMembers < ActiveRecord::Migration[4.2]
+  def change
+    create_table :openstax_accounts_group_members do |t|
+      t.references :group, null: false
+      t.references :user, null: false
+
+      t.timestamps null: false
+    end
+
+    add_index :openstax_accounts_group_members, [:group_id, :user_id], unique: true
+    add_index :openstax_accounts_group_members, :user_id
+  end
+end

@@ -46,6 +46,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'capybara'
   gem 'dotenv-rails'
+  gem 'guard-rspec', require: false
+  gem 'spring-commands-rspec'
+  # Lorem Ipsum
+  gem 'faker'
 end
 
 group :development do

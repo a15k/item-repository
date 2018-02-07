@@ -1,0 +1,22 @@
+sudo: false
+dist: trusty
+language: ruby
+rvm:
+  - '2.5.0'
+cache: bundler
+bundler_args: --without production --retry=6
+addons:
+ postgresql: '9.5'
+script:
+  - bundle exec rake spec
+branches:
+  only:
+    - master
+    - alpha
+    - beta
+    - /^int-.*$/
+    - /^release-.*$/
+before_script:
+  - export OXT_DB_USER=postgres
+  - export OXT_DB_PASS=
+  - export OXT_TEST_DB=travis_ci_test

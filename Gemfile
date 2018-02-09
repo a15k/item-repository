@@ -37,6 +37,11 @@ gem 'jbuilder', '~> 2.5'
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
 
+gem 'graphql', '~> 1.7.9'
+gem 'graphql-errors', '~> 0.1.0'
+gem 'graphql-pundit', '~> 0.5.1'
+gem 'pundit'
+gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,7 +52,6 @@ group :development, :test do
   gem 'capybara'
   gem 'dotenv-rails'
   gem 'guard-rspec', require: false
-  gem 'spring-commands-rspec'
   # Lorem Ipsum
   gem 'faker'
 end
@@ -59,8 +63,5 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
+  gem 'graphiql-rails'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

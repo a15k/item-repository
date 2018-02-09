@@ -1,4 +1,5 @@
 class Assessment < ApplicationRecord
+
   belongs_to :owner, class_name: 'AssessmentOwner'
   belongs_to :format
   belongs_to :created_by, class_name: 'User'

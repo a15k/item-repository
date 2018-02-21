@@ -49,7 +49,9 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.text "content_type", null: false
     t.integer "type", limit: 2, null: false
     t.uuid "assessment_id", null: false
+    t.uuid "related_asset_id"
     t.index ["assessment_id"], name: "index_assets_on_assessment_id"
+    t.index ["related_asset_id"], name: "index_assets_on_related_asset_id"
   end
 
   create_table "formats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -168,6 +170,7 @@ ActiveRecord::Schema.define(version: 20180206164741) do
   add_foreign_key "assessments_tags", "assessments"
   add_foreign_key "assessments_tags", "tags"
   add_foreign_key "assets", "assessments"
+  add_foreign_key "assets", "assets", column: "related_asset_id"
   add_foreign_key "tags", "organizations"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"

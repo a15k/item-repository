@@ -17,12 +17,30 @@ ActiveRecord::Schema.define(version: 20180206164741) do
   enable_extension "pgcrypto"
   enable_extension "citext"
 
-  create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "assessment_owners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organization_id", null: false
     t.uuid "license_id", null: false
     t.datetime "created_at"
-    t.index ["license_id"], name: "index_assessments_on_license_id"
-    t.index ["organization_id"], name: "index_assessments_on_organization_id"
+    t.index ["license_id"], name: "index_assessment_owners_on_license_id"
+    t.index ["organization_id"], name: "index_assessment_owners_on_organization_id"
+  end
+
+  create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "visibility", limit: 2
+    t.uuid "owner_id", null: false
+    t.uuid "format_id", null: false
+    t.uuid "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["created_by_id"], name: "index_assessments_on_created_by_id"
+    t.index ["format_id"], name: "index_assessments_on_format_id"
+    t.index ["owner_id"], name: "index_assessments_on_owner_id"
+  end
+
+  create_table "assessments_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "tag_id", null: false
+    t.uuid "assessment_id", null: false
+    t.index ["assessment_id"], name: "index_assessments_tags_on_assessment_id"
+    t.index ["tag_id"], name: "index_assessments_tags_on_tag_id"
   end
 
   create_table "assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -30,8 +48,8 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.text "content"
     t.text "content_type", null: false
     t.integer "type", limit: 2, null: false
-    t.uuid "version_id", null: false
-    t.index ["version_id"], name: "index_assets_on_version_id"
+    t.uuid "assessment_id", null: false
+    t.index ["assessment_id"], name: "index_assets_on_assessment_id"
   end
 
   create_table "formats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -41,6 +59,7 @@ ActiveRecord::Schema.define(version: 20180206164741) do
 
   create_table "licenses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "abbreviation", null: false
+    t.text "name", null: false
     t.text "url", null: false
     t.text "terms", null: false
   end
@@ -141,35 +160,16 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
-  create_table "version_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "tag_id", null: false
-    t.uuid "version_id", null: false
-    t.index ["tag_id"], name: "index_version_tags_on_tag_id"
-    t.index ["version_id"], name: "index_version_tags_on_version_id"
-  end
-
-  create_table "versions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "visibility", limit: 2
-    t.string "solution_key"
-    t.uuid "format_id", null: false
-    t.uuid "assessment_id", null: false
-    t.uuid "created_by_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["assessment_id"], name: "index_versions_on_assessment_id"
-    t.index ["created_by_id"], name: "index_versions_on_created_by_id"
-    t.index ["format_id"], name: "index_versions_on_format_id"
-  end
-
-  add_foreign_key "assessments", "licenses"
-  add_foreign_key "assessments", "organizations"
-  add_foreign_key "assets", "versions"
+  add_foreign_key "assessment_owners", "licenses"
+  add_foreign_key "assessment_owners", "organizations"
+  add_foreign_key "assessments", "assessment_owners", column: "owner_id"
+  add_foreign_key "assessments", "formats"
+  add_foreign_key "assessments", "users", column: "created_by_id"
+  add_foreign_key "assessments_tags", "assessments"
+  add_foreign_key "assessments_tags", "tags"
+  add_foreign_key "assets", "assessments"
   add_foreign_key "tags", "organizations"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
   add_foreign_key "users", "organizations"
-  add_foreign_key "version_tags", "tags"
-  add_foreign_key "version_tags", "versions"
-  add_foreign_key "versions", "assessments"
-  add_foreign_key "versions", "formats"
-  add_foreign_key "versions", "users", column: "created_by_id"
 end

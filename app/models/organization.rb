@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
 
-  has_many :user_profiles, inverse_of: :organization
+  has_many :user, inverse_of: :organization
 
 end

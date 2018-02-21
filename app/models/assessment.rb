@@ -1,11 +1,13 @@
 class Assessment < ApplicationRecord
+  belongs_to :owner, class_name: 'AssessmentOwner'
+  belongs_to :format
+  belongs_to :created_by, class_name: 'User'
 
-  belongs_to :organization
-  belongs_to :license
+  has_many :assets, inverse_of: :version
+  has_many :version_tags
+  has_many :tags, through: :version_tags
 
-  has_many :versions,
-            -> { order(created_at: :desc) },
-            inverse_of: :assessment
+  enum visiblity: %i[internal external]
 
-  validates :organization, :license, presence: true
+  validates :format, :created_by, :owner, presence: true
 end

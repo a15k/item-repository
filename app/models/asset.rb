@@ -6,8 +6,8 @@ class Asset < ApplicationRecord
          :assessment
        ]
 
-  belongs_to :version
+  belongs_to :assessment
 
-  validates :version, :type, :content_type, presence: true
+  validates :assessment, :type, :content_type, presence: true
 
 end

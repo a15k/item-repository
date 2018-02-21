@@ -1,5 +1,5 @@
 class Assessment < ApplicationRecord
-  has_many :versions
+
   belongs_to :organization
   belongs_to :license
 

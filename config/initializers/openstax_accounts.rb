@@ -32,7 +32,7 @@ Rails.application.config.to_prepare do
   OpenStax::Accounts::Account.class_exec do
     has_one :profile, primary_key: :id,
             foreign_key: :account_id,
-            class_name: 'UserProfile',
+            class_name: 'User',
             inverse_of: :account
 
     # TODO: Move this to accounts-rails

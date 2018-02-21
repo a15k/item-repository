@@ -135,10 +135,10 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.index ["output_id"], name: "index_translators_on_output_id"
   end
 
-  create_table "user_profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "account_id", null: false
     t.uuid "organization_id"
-    t.index ["organization_id"], name: "index_user_profiles_on_organization_id"
+    t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
   create_table "version_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -166,10 +166,10 @@ ActiveRecord::Schema.define(version: 20180206164741) do
   add_foreign_key "tags", "organizations"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
-  add_foreign_key "user_profiles", "organizations"
+  add_foreign_key "users", "organizations"
   add_foreign_key "version_tags", "tags"
   add_foreign_key "version_tags", "versions"
   add_foreign_key "versions", "assessments"
   add_foreign_key "versions", "formats"
-  add_foreign_key "versions", "user_profiles", column: "created_by_id"
+  add_foreign_key "versions", "users", column: "created_by_id"
 end

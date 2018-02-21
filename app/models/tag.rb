@@ -2,6 +2,6 @@ class Tag < ApplicationRecord
 
   belongs_to :organization
 
-  validates :name, :organization, presence: true
+  validates :name, presence: true
 
 end

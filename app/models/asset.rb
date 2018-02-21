@@ -11,6 +11,6 @@ class Asset < ApplicationRecord
   belongs_to :assessment
   belongs_to :related_asset, class_name: 'Asset', optional: true
 
-  validates :assessment, :type, :content_type, presence: true
+  validates :type, :content_type, presence: true
 
 end

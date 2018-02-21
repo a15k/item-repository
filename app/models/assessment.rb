@@ -9,5 +9,4 @@ class Assessment < ApplicationRecord
 
   enum visiblity: %i[internal external]
 
-  validates :format, :created_by, :owner, presence: true
 end

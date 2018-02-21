@@ -6,8 +6,6 @@ class User < ApplicationRecord
 
   belongs_to :organization
 
-  validates :account, presence: true
-
   def self.anonymous
     ::User::Anonymous.instance
   end

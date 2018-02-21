@@ -7,5 +7,4 @@ class AssessmentOwner < ApplicationRecord
             -> { order(created_at: :desc) },
             inverse_of: :owner
 
-  validates :organization, :license, presence: true
 end

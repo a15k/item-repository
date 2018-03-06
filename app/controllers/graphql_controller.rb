@@ -1,7 +1,10 @@
 class GraphqlController < ApplicationController
+  before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
 
   def execute
+
+
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
@@ -13,6 +16,12 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def authenticate_user!
+    unless current_user
+      render json: { message: 'Access Denied', status: 'unauthorized' }, status: :unauthorized
+    end
+  end
 
   def current_user
     user = super

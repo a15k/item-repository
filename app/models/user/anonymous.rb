@@ -1,6 +1,6 @@
-class UserProfile < ApplicationRecord
+class User < ApplicationRecord
 
-  class Anonymous < UserProfile
+  class Anonymous < User
 
     include Singleton
 

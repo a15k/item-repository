@@ -26,11 +26,10 @@ class GraphqlController < ApplicationController
   def current_user
     user = super
     return user if user.present? && !user.anonymous?
-
     if request.headers['Authorization']
-      token = Access::Token.decode(request.headers['Authorization'])
+      token = Access::Token.decode(authorization: request.headers['Authorization'])
       if token && token['id']
-        UserProfile.where(id: token['id']).first
+        User.where(id: token['id']).first
       end
     end
   end

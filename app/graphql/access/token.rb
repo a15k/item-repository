@@ -12,14 +12,17 @@ module Access
       Rails.application.secrets.secret_key_base
     end
 
-    def for_profile(profile)
-        JWT.encode({id: profile.id, exp: expiration}, secret, 'HS256')
+    def for_user(user)
+        JWT.encode({id: user.id, exp: expiration}, secret, 'HS256')
     end
 
-    def decode(token)
+    def decode(authorization:)
+      type, token = authorization.split(' ')
+      raise "Only 'Bearer' is supported" if type != 'Bearer'
       begin
         JWT.decode(token, secret, true, algorithm: 'HS256').first
-      rescue
+      rescue => e
+        p e
         nil
       end
     end

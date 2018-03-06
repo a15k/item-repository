@@ -12,7 +12,7 @@ module MapUsersAccounts
     private
 
     def anonymous_user(account)
-      UserProfile.anonymous if account.is_anonymous?
+      User.anonymous if account.is_anonymous?
     end
 
     def find_or_create_user(account)

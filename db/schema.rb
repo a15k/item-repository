@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.uuid "format_id", null: false
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
+    t.index ["created_at"], name: "index_assessments_on_created_at"
     t.index ["created_by_id"], name: "index_assessments_on_created_by_id"
     t.index ["format_id"], name: "index_assessments_on_format_id"
     t.index ["owner_id"], name: "index_assessments_on_owner_id"
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.text "abbreviation", null: false
     t.text "name", null: false
     t.text "url", null: false
-    t.text "terms", null: false
+    t.text "terms"
   end
 
   create_table "openstax_accounts_accounts", id: :serial, force: :cascade do |t|

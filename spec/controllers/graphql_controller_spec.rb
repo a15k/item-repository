@@ -4,17 +4,16 @@ RSpec.describe GraphqlController, type: :controller do
 
   describe "with a logged in user" do
 
-    let :user, { FactoryBot.create :user }
+    let(:user) { FactoryBot.create(:user) }
 
     it 'using a cookie' do
       # TODO: figure out how to make a session cookie
     end
 
     it 'using a jwt token' do
-
-      token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    { 'Authorization': "Bearer #{token}" }
-      get :execute, headers: authenticated_header(user)
+      token = Access::Token.for_user(user)
+      request.headers.merge!({ 'Authorization' => "Bearer #{token}" })
+      get :execute
       expect(response.status).to eq 200
     end
 

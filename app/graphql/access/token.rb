@@ -22,7 +22,7 @@ module Access
       begin
         JWT.decode(token, secret, true, algorithm: 'HS256').first
       rescue => e
-        p e
+        Rails.logger.warn "Failed to decode JWT token: #{e}"
         nil
       end
     end

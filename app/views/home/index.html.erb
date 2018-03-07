@@ -1,6 +1,9 @@
 hello world!
 <br>
 Logged in as: <%= current_user.account.name %>
+<% unless current_user.anonymous? %>
+  Token: <input value="<%= Access::Token.for_profile(current_user) %>">
+<% end %>
 <br>
 <%= link_to 'Login', openstax_accounts.login_path %>
 <br>

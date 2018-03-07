@@ -12,7 +12,7 @@ module MapUsersAccounts
     private
 
     def anonymous_user(account)
-      UserProfile.anonymous if account.is_anonymous?
+      User.anonymous if account.is_anonymous?
     end
 
     def find_or_create_user(account)
@@ -20,9 +20,11 @@ module MapUsersAccounts
       begin
         user = UserProfile.where(account: account).first
         return user if user.present?
-
-        UserProfile.create!(account: account)
-
+        # TODO: somehow get organization from somewhere
+        UserProfile.create!(
+          account: account,
+          organization: Organization.find_or_create_by(name: 'OpenStax')
+        )
       rescue RuntimeError, ActiveRecord::RecordNotUnique, ::PG::UniqueViolation
         raise if retry_count >= 3
 

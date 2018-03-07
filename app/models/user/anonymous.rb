@@ -10,6 +10,10 @@ class User < ApplicationRecord
       OpenStax::Accounts::AnonymousAccount.instance
     end
 
+    def anonymous?
+      true
+    end
+
     def account_id
       nil
     end

@@ -4,7 +4,7 @@ class CreateLicenses < ActiveRecord::Migration[5.1]
       t.text :abbreviation, null: false
       t.text :name, null: false
       t.text :url, null: false
-      t.text :terms, null: false
+      t.text :terms
     end
   end
 end

@@ -10,4 +10,9 @@ class User < ApplicationRecord
     ::User::Anonymous.instance
   end
 
+  def anonymous?
+    false
+  end
+
+
 end

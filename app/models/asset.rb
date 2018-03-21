@@ -1,16 +1,8 @@
 class Asset < ApplicationRecord
 
-  enum type: [
-         :link,
-         :image,
-         :assessment,
-         :solution,
-         :solution_key
-       ]
+  belongs_to :owner, polymorphic: true
+  belongs_to :created_by, class_name: 'User'
 
-  belongs_to :assessment
-  belongs_to :related_asset, class_name: 'Asset', optional: true
-
-  validates :type, :content_type, presence: true
+  validates :content_type, presence: true
 
 end

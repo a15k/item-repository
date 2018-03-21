@@ -4,7 +4,7 @@ class User < ApplicationRecord
              class_name: 'OpenStax::Accounts::Account',
              inverse_of: :profile
 
-  belongs_to :organization
+  belongs_to :member
 
   def self.anonymous
     ::User::Anonymous.instance

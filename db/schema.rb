@@ -10,48 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206164741) do
+ActiveRecord::Schema.define(version: 20180321160334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
   enable_extension "citext"
 
-  create_table "assessment_owners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "organization_id", null: false
-    t.uuid "license_id", null: false
-    t.datetime "created_at"
-    t.index ["license_id"], name: "index_assessment_owners_on_license_id"
-    t.index ["organization_id"], name: "index_assessment_owners_on_organization_id"
-  end
-
   create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "identifier", default: -> { "gen_random_uuid()" }, null: false
+    t.string "version", default: "1", null: false
     t.integer "visibility", limit: 2
-    t.uuid "owner_id", null: false
     t.uuid "format_id", null: false
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
+    t.index ["created_at"], name: "index_assessments_on_created_at"
     t.index ["created_by_id"], name: "index_assessments_on_created_by_id"
     t.index ["format_id"], name: "index_assessments_on_format_id"
-    t.index ["owner_id"], name: "index_assessments_on_owner_id"
-  end
-
-  create_table "assessments_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "tag_id", null: false
-    t.uuid "assessment_id", null: false
-    t.index ["assessment_id"], name: "index_assessments_tags_on_assessment_id"
-    t.index ["tag_id"], name: "index_assessments_tags_on_tag_id"
+    t.index ["identifier"], name: "index_assessments_on_identifier"
+    t.index ["version"], name: "index_assessments_on_version"
   end
 
   create_table "assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "size"
-    t.text "content"
+    t.string "owner_type", null: false
+    t.bigint "owner_id", null: false
     t.text "content_type", null: false
-    t.integer "type", limit: 2, null: false
-    t.uuid "assessment_id", null: false
-    t.uuid "related_asset_id"
-    t.index ["assessment_id"], name: "index_assets_on_assessment_id"
-    t.index ["related_asset_id"], name: "index_assets_on_related_asset_id"
+    t.jsonb "info", default: {}, null: false
+    t.uuid "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["created_by_id"], name: "index_assets_on_created_by_id"
+    t.index ["owner_type", "owner_id"], name: "index_assets_on_owner_type_and_owner_id"
   end
 
   create_table "formats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -64,6 +52,11 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.text "name", null: false
     t.text "url", null: false
     t.text "terms", null: false
+  end
+
+  create_table "members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "name"
+    t.text "website"
   end
 
   create_table "openstax_accounts_accounts", id: :serial, force: :cascade do |t|
@@ -134,15 +127,26 @@ ActiveRecord::Schema.define(version: 20180206164741) do
     t.index ["openstax_uid"], name: "index_openstax_accounts_groups_on_openstax_uid", unique: true
   end
 
-  create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "name"
-    t.text "website"
+  create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "assessment_id", null: false
+    t.uuid "format_id", null: false
+    t.text "content", null: false
+    t.uuid "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["assessment_id"], name: "index_questions_on_assessment_id"
+    t.index ["created_by_id"], name: "index_questions_on_created_by_id"
+    t.index ["format_id"], name: "index_questions_on_format_id"
   end
 
-  create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "name", null: false
-    t.uuid "organization_id", null: false
-    t.index ["organization_id"], name: "index_tags_on_organization_id"
+  create_table "solutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "assessment_id", null: false
+    t.uuid "format_id", null: false
+    t.text "content", null: false
+    t.uuid "created_by_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["assessment_id"], name: "index_solutions_on_assessment_id"
+    t.index ["created_by_id"], name: "index_solutions_on_created_by_id"
+    t.index ["format_id"], name: "index_solutions_on_format_id"
   end
 
   create_table "translators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -158,21 +162,20 @@ ActiveRecord::Schema.define(version: 20180206164741) do
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "account_id", null: false
-    t.uuid "organization_id"
-    t.index ["organization_id"], name: "index_users_on_organization_id"
+    t.uuid "member_id"
+    t.index ["member_id"], name: "index_users_on_member_id"
   end
 
-  add_foreign_key "assessment_owners", "licenses"
-  add_foreign_key "assessment_owners", "organizations"
-  add_foreign_key "assessments", "assessment_owners", column: "owner_id"
   add_foreign_key "assessments", "formats"
   add_foreign_key "assessments", "users", column: "created_by_id"
-  add_foreign_key "assessments_tags", "assessments"
-  add_foreign_key "assessments_tags", "tags"
-  add_foreign_key "assets", "assessments"
-  add_foreign_key "assets", "assets", column: "related_asset_id"
-  add_foreign_key "tags", "organizations"
+  add_foreign_key "assets", "users", column: "created_by_id"
+  add_foreign_key "questions", "assessments"
+  add_foreign_key "questions", "formats"
+  add_foreign_key "questions", "users", column: "created_by_id"
+  add_foreign_key "solutions", "assessments"
+  add_foreign_key "solutions", "formats"
+  add_foreign_key "solutions", "users", column: "created_by_id"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
-  add_foreign_key "users", "organizations"
+  add_foreign_key "users", "members"
 end

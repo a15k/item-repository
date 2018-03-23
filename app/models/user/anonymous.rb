@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
     before_save { false }
 
+    def anonymous?
+      true
+    end
+
     def account
       OpenStax::Accounts::AnonymousAccount.instance
     end

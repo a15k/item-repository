@@ -1,7 +1,6 @@
 require 'map_users_accounts'
 
 secrets = Rails.application.secrets[:openstax][:accounts]
-p secrets
 approved_host_regexes = []
 
 approved_host_regexes.push(/localhost\z/) if !Rails.env.production?

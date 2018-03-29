@@ -1,0 +1,40 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Formats accepted by the A15K item repository
+description: A format describes how an accessment‘s question and solution are encoded.
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  name:
+    description: The unique name of format
+    readOnly: true
+    type:
+    - string
+  description:
+    description: A human readable description of a format
+    readOnly: true
+    type:
+    - string
+  identity:
+    anyOf:
+      -
+        "$ref": "/formats#/definitions/id"
+
+links:
+- description: List all formats.
+  http_header:
+    Authorization: <jwt-access-token>
+  href: "/formats"
+  method: GET
+  rel: instances
+  rel: instances
+  title: List
+
+properties:
+  name:
+    "$ref": "/formats#/definitions/name"
+  description:
+    "$ref": "/formats#/definitions/description"
+id: schema/formats

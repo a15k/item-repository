@@ -1,5 +1,6 @@
 {
-  "name": "item-repository",
+
+  "name": "mothership",
   "private": true,
   "dependencies": {}
 }

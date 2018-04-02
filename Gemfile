@@ -23,6 +23,12 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+# Gemfile
+gem 'webpacker', '~> 3.4'
+
+gem 'versionist'
+gem 'swagger-blocks'
+gem 'swagger-docs'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -41,8 +47,8 @@ gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 gem 'fast_jsonapi', '~> 1.1'
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
+gem 'rswag'
 
-gem 'prmd', '~> 0.13' # documentation from json schema
 gem "jquery-rails", "~> 4.3"
 
 group :development, :test do

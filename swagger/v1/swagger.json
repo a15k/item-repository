@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/formats.json": {
+      "get": {
+        "summary": "Retrieves all formats",
+        "tags": [
+          "Formats"
+        ],
+        "security": [
+          {
+            "Token": {
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "formats returned",
+            "schema": {
+              "type": "object",
+              "required": [
+                "data"
+              ],
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "title": "Format",
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "required": [
+                          "name",
+                          "description"
+                        ],
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "id": "2180675d-b1a4-4022-85f3-203730a1262a",
+                    "type": "format",
+                    "attributes": {
+                      "name": "brooklyn",
+                      "description": "Put a bird on it venmo pabst direct trade butcher neutra single-origin coffee brunch tattooed."
+                    }
+                  },
+                  {
+                    "id": "1374a93c-1fe6-4411-b6bb-4d86ecd0c334",
+                    "type": "format",
+                    "attributes": {
+                      "name": "cliche",
+                      "description": "Scenester readymade goth next level."
+                    }
+                  },
+                  {
+                    "id": "a5b5d7d9-e88c-410e-8d74-5a7225f8a5b0",
+                    "type": "format",
+                    "attributes": {
+                      "name": "iPhone",
+                      "description": "Mixtape +1 food truck beard yuccie tote bag cold-pressed twee."
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "invalid user token",
+            "examples": {
+              "application/json": {
+                "message": "Access Denied",
+                "status": "unauthorized"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Token": {
+      "description": "JWT Access Token",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

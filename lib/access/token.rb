@@ -18,7 +18,7 @@ module Access
 
     def decode(authorization:)
       type, token = authorization.split(' ')
-      raise "Only 'Bearer' is supported" if type != 'Bearer'
+      token = type if token.blank?
       begin
         JWT.decode(token, secret, true, algorithm: 'HS256').first
       rescue => e

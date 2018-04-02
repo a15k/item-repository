@@ -11,35 +11,10 @@ describe 'Formats API' do
    get 'Retrieves all formats' do
      tags 'Formats'
      security [Token: {}]
-     produces 'application/json', 'application/xml'
-     #parameter name: :id, :in => :path, :type => :string
+     produces 'application/json'
 
      response '200', 'formats returned' do
-       schema type: :object,
-
-              required: ['data'],
-              properties: {
-                data: {
-                  type: 'array',
-                  items: {
-                    title: 'Format',
-                    type: 'object',
-                    required: %w[id type],
-                    properties: {
-                      id: { type: :string, format: :uuid },
-                      type: { type: :string },
-                      attributes: {
-                        type: 'object',
-                        required: %w[name description],
-                        properties: {
-                          name: { type: :string },
-                          description: { type: :string },
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+       schema json_api_retrieval_schema(Format)
 
        let(:user) { FactoryBot.create(:user) }
        let(:Authorization) { Access::Token.for_user(user) }

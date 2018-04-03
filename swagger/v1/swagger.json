@@ -5,6 +5,207 @@
     "version": "v1"
   },
   "paths": {
+    "/api/v1/assessments.json": {
+      "post": {
+        "summary": "create an assessment",
+        "tags": [
+          "Assessments"
+        ],
+        "security": [
+          {
+            "Token": {
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "assessment",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "data"
+              ],
+              "properties": {
+                "data": {
+                  "title": "Assessment",
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string"
+                        },
+                        "visibility": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "an assessment is created",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "id": "9e99cc76-5df0-4a9b-a93e-455fb7148c8a",
+                  "type": "assessment",
+                  "attributes": {
+                    "version": "1",
+                    "visibility": null
+                  },
+                  "relationships": {
+                    "format": {
+                      "data": {
+                        "id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e",
+                        "type": "format"
+                      }
+                    },
+                    "questions": {
+                      "data": [
+                        {
+                          "id": "339bc059-f2a6-4329-b29c-da25d4bc6d26",
+                          "type": "question"
+                        }
+                      ]
+                    },
+                    "solutions": {
+                      "data": [
+                        {
+                          "id": "1c4e92ef-e015-4bec-915d-6ae7612d7e70",
+                          "type": "solution"
+                        },
+                        {
+                          "id": "a7846636-930a-4295-86a9-ccbfa126b9a7",
+                          "type": "solution"
+                        },
+                        {
+                          "id": "bc331041-17b8-44f4-9635-cd902c36310c",
+                          "type": "solution"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "included": [
+                  {
+                    "id": "339bc059-f2a6-4329-b29c-da25d4bc6d26",
+                    "type": "question",
+                    "attributes": {
+                      "content": "Aut repellat rerum nulla suscipit repudiandae.",
+                      "format_id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e",
+                      "created_at": "2018-04-03 19:06:37 UTC"
+                    },
+                    "relationships": {
+                      "assets": {
+                        "data": [
+
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "1c4e92ef-e015-4bec-915d-6ae7612d7e70",
+                    "type": "solution",
+                    "attributes": {
+                      "content": "Nihil minima asperiores ab dolor.",
+                      "created_at": "2018-04-03 19:06:37 UTC",
+                      "format_id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e"
+                    },
+                    "relationships": {
+                      "format": {
+                        "data": {
+                          "id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e",
+                          "type": "format"
+                        }
+                      },
+                      "assets": {
+                        "data": [
+
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "a7846636-930a-4295-86a9-ccbfa126b9a7",
+                    "type": "solution",
+                    "attributes": {
+                      "content": "Minus consequatur et quia ut.",
+                      "created_at": "2018-04-03 19:06:37 UTC",
+                      "format_id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e"
+                    },
+                    "relationships": {
+                      "format": {
+                        "data": {
+                          "id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e",
+                          "type": "format"
+                        }
+                      },
+                      "assets": {
+                        "data": [
+
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "bc331041-17b8-44f4-9635-cd902c36310c",
+                    "type": "solution",
+                    "attributes": {
+                      "content": "Iure possimus beatae nobis dicta est repudiandae.",
+                      "created_at": "2018-04-03 19:06:37 UTC",
+                      "format_id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e"
+                    },
+                    "relationships": {
+                      "format": {
+                        "data": {
+                          "id": "9b03a56a-aacc-4be2-977c-1e03d637cc1e",
+                          "type": "format"
+                        }
+                      },
+                      "assets": {
+                        "data": [
+
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/formats.json": {
       "get": {
         "summary": "Retrieves all formats",
@@ -18,8 +219,7 @@
           }
         ],
         "produces": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -49,10 +249,6 @@
                       },
                       "attributes": {
                         "type": "object",
-                        "required": [
-                          "name",
-                          "description"
-                        ],
                         "properties": {
                           "name": {
                             "type": "string"
@@ -71,27 +267,99 @@
               "application/json": {
                 "data": [
                   {
-                    "id": "2180675d-b1a4-4022-85f3-203730a1262a",
+                    "id": "000ead66-067a-4a39-b2bc-c29967fe9846",
                     "type": "format",
                     "attributes": {
-                      "name": "brooklyn",
-                      "description": "Put a bird on it venmo pabst direct trade butcher neutra single-origin coffee brunch tattooed."
+                      "name": "microdosing",
+                      "description": "Aesthetic lomo yr pitchfork freegan chillwave gentrify."
                     }
                   },
                   {
-                    "id": "1374a93c-1fe6-4411-b6bb-4d86ecd0c334",
+                    "id": "ea47f167-2a13-4b3a-81ef-72db8fcf4b6f",
                     "type": "format",
                     "attributes": {
-                      "name": "cliche",
-                      "description": "Scenester readymade goth next level."
+                      "name": "+1",
+                      "description": "Vegan umami vinyl migas narwhal chillwave street."
                     }
                   },
                   {
-                    "id": "a5b5d7d9-e88c-410e-8d74-5a7225f8a5b0",
+                    "id": "b3531e16-211b-445a-a6cc-6077cd0e7f57",
                     "type": "format",
                     "attributes": {
-                      "name": "iPhone",
-                      "description": "Mixtape +1 food truck beard yuccie tote bag cold-pressed twee."
+                      "name": "mumblecore",
+                      "description": "Park kinfolk cred iphone offal tousled."
+                    }
+                  },
+                  {
+                    "id": "1538790a-99b3-4429-b76e-17d03d147d9c",
+                    "type": "format",
+                    "attributes": {
+                      "name": "wolf",
+                      "description": "Ramps fingerstache beard green juice mlkshk selfies next level cray schlitz."
+                    }
+                  },
+                  {
+                    "id": "2df713f7-74d3-442f-ab34-dcf2780e5079",
+                    "type": "format",
+                    "attributes": {
+                      "name": "PBR&B",
+                      "description": "Kombucha 90's aesthetic sriracha next level."
+                    }
+                  },
+                  {
+                    "id": "337b54da-6ea4-4e2b-a274-fbd0131dbe0d",
+                    "type": "format",
+                    "attributes": {
+                      "name": "paleo",
+                      "description": "Fixie phlogiston irony vinyl typewriter disrupt cronut vegan bushwick."
+                    }
+                  },
+                  {
+                    "id": "2ff5a9e2-6e08-4aaf-b3b4-2c839d9ee5de",
+                    "type": "format",
+                    "attributes": {
+                      "name": "quinoa",
+                      "description": "Kinfolk hammock direct trade tacos diy flannel synth."
+                    }
+                  },
+                  {
+                    "id": "b6daf7f5-d16a-44ab-9dde-5b081453e4bf",
+                    "type": "format",
+                    "attributes": {
+                      "name": "paleo",
+                      "description": "Yolo flexitarian gastropub hella chillwave blue bottle irony synth."
+                    }
+                  },
+                  {
+                    "id": "fe2f0fe7-2f22-4a0b-b87a-21424f0fe670",
+                    "type": "format",
+                    "attributes": {
+                      "name": "forage",
+                      "description": "Taxidermy next level selfies cardigan butcher tote bag."
+                    }
+                  },
+                  {
+                    "id": "875acabe-7e2e-42f2-b781-733b662910ec",
+                    "type": "format",
+                    "attributes": {
+                      "name": "wolf",
+                      "description": "Pork belly viral heirloom artisan wes anderson cornhole."
+                    }
+                  },
+                  {
+                    "id": "b690228e-a1a4-4084-a1e8-0bc618ab23b7",
+                    "type": "format",
+                    "attributes": {
+                      "name": "plaid",
+                      "description": "Polaroid farm-to-table fixie mumblecore."
+                    }
+                  },
+                  {
+                    "id": "3486a520-299c-43d0-9be2-cf2ef4735440",
+                    "type": "format",
+                    "attributes": {
+                      "name": "tofu",
+                      "description": "Green juice bicycle rights organic scenester helvetica etsy blue bottle."
                     }
                   }
                 ]

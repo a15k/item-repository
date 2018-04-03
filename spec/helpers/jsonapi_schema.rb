@@ -21,7 +21,7 @@ module JsonApiSchema
   end
 
 
-  def json_api_retrieval_schema(model, schema = {})
+  def json_api_list_schema(model, schema = {})
     {
       type: :object,
       required: ['data'],
@@ -30,6 +30,26 @@ module JsonApiSchema
           type: 'array',
           items: model_schema(model)
         }
+      }
+    }.deep_merge(schema)
+  end
+
+  def json_api_show_schema(model, schema = {})
+    {
+      type: :object,
+      required: ['data'],
+      properties: {
+        data: model_schema(model)
+      }
+    }.deep_merge(schema)
+  end
+
+  def json_api_create_schema(model, schema = {})
+    {
+      type: :object,
+      required: ['data'],
+      properties: {
+        data: model_schema(model)
       }
     }.deep_merge(schema)
   end

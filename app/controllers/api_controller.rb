@@ -5,7 +5,7 @@ class ApiController < ActionController::API
   protected
 
   def authenticate_user!
-    unless current_user
+    unless current_user && !current_user.anonymous?
       render json: { message: 'Access Denied', status: 'unauthorized' }, status: :unauthorized
     end
   end

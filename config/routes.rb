@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     ) do
 
       resources :formats, only: [:index]
+      resources :assessments
 
     end
   end

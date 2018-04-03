@@ -7,21 +7,20 @@ describe 'Formats API' do
 
   path '/api/v1/formats.json' do
 
-
    get 'Retrieves all formats' do
      tags 'Formats'
      security [Token: {}]
      produces 'application/json'
 
      response '200', 'formats returned' do
-       schema json_api_retrieval_schema(Format)
+       schema json_api_list_schema(Format)
 
        let(:user) { FactoryBot.create(:user) }
        let(:Authorization) { Access::Token.for_user(user) }
 
-       before(:each) do
-         3.times { FactoryBot.create :format }
-       end
+
+       3.times { FactoryBot.create :format }
+
        run_test!
      end
 

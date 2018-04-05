@@ -44,7 +44,11 @@ gem 'swagger-docs'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
-gem 'fast_jsonapi', '~> 1.1'
+
+gem 'fast_jsonapi', path: '../../forks/fast_jsonapi'
+
+#branch: 'serialize_nested_includes'
+
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
 gem 'rswag'

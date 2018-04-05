@@ -9,7 +9,7 @@ describe 'Formats API' do
 
    get 'Retrieves all formats' do
      tags 'Formats'
-     security [Token: {}]
+     security [token: []]
      produces 'application/json'
 
      response '200', 'formats returned' do

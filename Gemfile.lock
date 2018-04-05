@@ -18,6 +18,12 @@ GIT
       representable (>= 2.0)
       roar (>= 1.0)
 
+PATH
+  remote: ../../forks/fast_jsonapi
+  specs:
+    fast_jsonapi (1.1.1)
+      activesupport (>= 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,8 +129,6 @@ GEM
       i18n (>= 0.7)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
-    fast_jsonapi (1.1.1)
-      activesupport (>= 4.2)
     ffi (1.9.23)
     formatador (0.2.5)
     globalid (0.4.1)
@@ -397,7 +401,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
-  fast_jsonapi (~> 1.1)
+  fast_jsonapi!
   guard-rspec
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3)

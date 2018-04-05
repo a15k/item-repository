@@ -23,13 +23,13 @@ RSpec.configure do |config|
       },
       paths: {},
       securityDefinitions: {
-        Token: {
-          description: "JWT Access Token",
+        token: {
+          description: 'JWT Access Token',
           type: :apiKey,
           name: 'Authorization',
           in: :header
         }
-      },
+      }
     }
   }
 end

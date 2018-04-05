@@ -1,8 +1,10 @@
 class AssessmentSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :version,
-             :visibility
+  attributes :content,
+             :version,
+             :visibility,
+             :created_at
+
   belongs_to :format
   has_many :questions
-  has_many :solutions
 end

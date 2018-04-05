@@ -6,8 +6,7 @@ class Assessment < ApplicationRecord
   enum visibility: %i[internal external]
 
   has_many :questions
-  has_many :solutions
 
-  # has_many :related, -> { where(identifier: identifier) } )class_name: 'Assessment',
+  validates :format, presence: true
 
 end

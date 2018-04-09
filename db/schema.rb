@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
 
   create_table "formats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name", null: false
+    t.text "identifier", null: false
     t.text "description", null: false
   end
 

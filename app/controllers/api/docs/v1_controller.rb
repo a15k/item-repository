@@ -1,5 +1,7 @@
 class Api::Docs::V1Controller < ApplicationController
 
+  layout 'docs'
+
   include Swagger::Blocks
   ACCEPT_HEADER = 'application/vnd.interactions.a15k.org; version=1'
 

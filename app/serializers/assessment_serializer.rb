@@ -5,6 +5,8 @@ class AssessmentSerializer
              :visibility,
              :created_at
 
-  belongs_to :format
   has_many :questions
+  attribute :format_identifier do |object|
+    object.format.identifier
+  end
 end

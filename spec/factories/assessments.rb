@@ -6,7 +6,7 @@ FactoryBot.define do
     visibility { :internal }
 
     after(:create) do |asm|
-      create_list(:question, 1, assessment: asm)
+      create_list(:question, 1, assessment: asm, format: asm.format)
     end
 
   end

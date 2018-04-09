@@ -1,18 +1,36 @@
 {
+
   "presets": [
+    "react",
     ["env", {
       "modules": false,
       "targets": {
-        "browsers": "> 1%",
+        "browsers": "> 5%",
         "uglify": true
       },
       "useBuiltIns": true
     }]
   ],
-
   "plugins": [
-    "syntax-dynamic-import",
+    "transform-decorators-legacy",
+    "transform-class-properties",
     "transform-object-rest-spread",
-    ["transform-class-properties", { "spec": true }]
-  ]
+    "inline-react-svg",
+    "babel-plugin-lodash",
+    "transform-react-jsx",
+    "transform-runtime"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        "transform-react-jsx",
+        "transform-runtime"
+      ],
+      "presets": [
+        "env", "react"
+      ]
+    }
+  }   
 }

@@ -1,10 +1,13 @@
-hello world!
-<br>
-Logged in as: <%= current_user.account.name %>
-<% unless current_user.anonymous? %>
-  Token: <input value="<%= Access::Token.for_user(current_user) %>">
+<% if current_user.anonymous? %>
+<nav class="navbar navbar-dark bg-dark">
+  <span class="navbar-brand mb-0 h1">Home</span>
+</nav>
+<div class="splash">
+  <%= image_tag('edu-particles.svg', class: 'edu-particles') %>
+  <div class="welcome">
+    <h3>Welcome to the</h3>
+    <h1>Assessment Network</h1>
+    <%= link_to 'Login', openstax_accounts.login_path, class: 'btn btn-secondary btn-lg' %>
+  </div>
+</div>
 <% end %>
-<br>
-<%= link_to 'Login', openstax_accounts.login_path %>
-<br>
-<%= link_to 'Logout', openstax_accounts.logout_path, :method => :delete %>

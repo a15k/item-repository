@@ -3,12 +3,18 @@
   <head>
     <title>ItemRepository</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag('application') unless current_user.anonymous? %>
   </head>
-
   <body>
-    <%= yield %>
+    <div id="application-root">
+      <script id="bootstrap-data" type="text/json">
+        <%= {
+            user: current_user,
+            token: Access::Token.for_user(current_user),
+        }.to_json.html_safe %>
+      </script>
+      <%= yield %>
+    </div>
   </body>
 </html>

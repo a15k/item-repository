@@ -6,7 +6,7 @@ class Format < ApplicationRecord
   validates :identifier, :name, :description, presence: true
   validates :identifier, uniqueness: true
 
-  before_save :set_identifier_from_name
+  before_validation :set_identifier_from_name
 
   def set_identifier_from_name
     self.identifier = StringsHelper.code_identifier(name, padding: false)

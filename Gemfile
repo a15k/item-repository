@@ -45,7 +45,8 @@ gem 'swagger-docs'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 
-gem 'fast_jsonapi', path: '../../forks/fast_jsonapi'
+# using fork until https://github.com/Netflix/fast_jsonapi/pull/152 is merged
+gem 'fast_jsonapi', github: 'LifeTales/fast_jsonapi', branch: 'serialize_nested_includes'
 
 #branch: 'serialize_nested_includes'
 

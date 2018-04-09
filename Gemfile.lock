@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/LifeTales/fast_jsonapi.git
+  revision: 049f8d91e7bdbe9c26eb188eee2ccb30a093c5ca
+  branch: serialize_nested_includes
+  specs:
+    fast_jsonapi (1.1.1)
+      activesupport (>= 4.2)
+
+GIT
   remote: https://github.com/openstax/accounts-rails.git
   revision: f7debd3ca0a376c5c28798e66f58fab2fda181f9
   branch: rails5
@@ -17,12 +25,6 @@ GIT
       rails (~> 5.1)
       representable (>= 2.0)
       roar (>= 1.0)
-
-PATH
-  remote: ../../forks/fast_jsonapi
-  specs:
-    fast_jsonapi (1.1.1)
-      activesupport (>= 4.2)
 
 GEM
   remote: https://rubygems.org/

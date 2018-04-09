@@ -19,6 +19,7 @@ before_script:
   - export A15K_DB_PASS=
   - export A15K_TEST_DB=travis_ci_test
   - bundle exec rake db:create db:migrate --trace
+  - yarn install
 script:
   - bundle exec rake spec
   - npm run test

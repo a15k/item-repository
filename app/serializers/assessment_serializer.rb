@@ -3,10 +3,9 @@ class AssessmentSerializer
   attributes :content,
              :version,
              :visibility,
+             :format_id,
              :created_at
 
   has_many :questions
-  attribute :format_identifier do |object|
-    object.format.identifier
-  end
+
 end

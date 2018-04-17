@@ -5,11 +5,10 @@ Rails.application.routes.draw do
 
   mount OpenStax::Accounts::Engine, at: 'accounts'
 
-  root to: 'home#index'
-
   namespace :api do
     api_version(
       module: 'V1',
+      default: true,
       path: { value: 'v1' },
       header: {
         name: 'Accept',
@@ -19,10 +18,13 @@ Rails.application.routes.draw do
 
       resources :formats, only: [:index]
       resources :assessments
-
+      resources :interactions
     end
   end
 
   get 'api/docs/v1', to: 'api/docs/v1#index'
+
+  get '*path', to: 'home#index'
+  root to: 'home#index'
 
 end

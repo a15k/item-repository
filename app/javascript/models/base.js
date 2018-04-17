@@ -1,18 +1,29 @@
 import { computed, action } from 'mobx';
 import lazyGetter from '../helpers/lazy-getter.js';
 import ModelApi from './api';
+import ModelCollection from './model-collection';
 
 export class BaseModel {
 
-  @lazyGetter api = new ModelApi(this, 'assessments');
+  @lazyGetter api = new ModelApi(this);
+
+  constructor(attrs) {
+    if (attrs) this.fromJSON(attrs);
+  }
 
   fromJSON(json) {
-    if(json.id) { this.id = json.id; }
     if (json.attributes) {
+      if(json.id) { this.id = json.id; }
       this.update(json.attributes);
+    } else {
+      this.update(json);
     }
   }
 
+  static get collection() {
+    if (!this.$collection) { this.$collection = new ModelCollection(this); }
+    return this.$collection;
+  }
 }
 
 // export decorators so they can be easily imported into model classes

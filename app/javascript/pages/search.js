@@ -1,15 +1,22 @@
-import { React, observer, observable, action } from './helpers/react';
+import { React, observer, observable, action } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
   InputGroup, InputGroupAddon, Button, Input,
 } from 'reactstrap';
-import Assessment from './models/assessment';
+import Assessment from '../models/assessment';
+import Interactions from '../models/interaction-app';
 
 @observer
 export default class Search extends React.Component {
 
   @observable isDropdownOpen = false;
   @observable assessment = new Assessment();
+
+  componentDidMount() {
+    Interactions.collection.api.create(
+      new Interactions()
+    )
+  }
 
   @action.bound onDropdownToggle() {
     this.isDropdownOpen = !this.isDropdownOpen;

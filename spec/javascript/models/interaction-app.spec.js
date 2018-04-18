@@ -12,11 +12,11 @@ describe(InteractionApp, () => {
   };
 
   beforeEach(() => {
-    fetch.mockResponseOnce(JSON.stringify([appJSON]));
   });
 
   test('fetching', () => {
     const id = 123;
+    fetch.mockResponseOnce(JSON.stringify([appJSON]));
     return InteractionApp.collection.api.fetch(id).then((models) => {
       expect(models).toHaveLength(1);
       expect(models[0]).toBeInstanceOf(InteractionApp);
@@ -31,6 +31,7 @@ describe(InteractionApp, () => {
   });
 
   test('creating', () => {
+    fetch.mockResponseOnce(JSON.stringify(appJSON));
     return InteractionApp.collection.create().then((created) => {
       expect(created).toBeInstanceOf(InteractionApp);
       expect(fetch.mock.calls[0][0]).toContain('/interactions.json');
@@ -44,6 +45,8 @@ describe(InteractionApp, () => {
   test('deletion', () => {
     const id = 123;
     InteractionApp.collection.set(id, appJSON);
+    fetch.mockResponseOnce('', { status: 204 });
+
     return InteractionApp.collection.destroy({ id }).then(() => {
       expect(fetch.mock.calls[0][0]).toContain(`/interactions/${id}.json`);
       expect(fetch.mock.calls[0][1]).toMatchObject({ method: 'DELETE' });

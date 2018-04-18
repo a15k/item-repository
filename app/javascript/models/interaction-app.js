@@ -8,6 +8,7 @@ export default class InteractionApp extends BaseModel {
 
   @identifier id;
   @field api_id;
+  @field name;
   @field api_token;
   @field({ type: 'array' }) whitelisted_domains;
 

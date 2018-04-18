@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/LifeTales/fast_jsonapi.git
-  revision: 049f8d91e7bdbe9c26eb188eee2ccb30a093c5ca
+  revision: 341bf9bd7f33014ea09f54e77d770eafa533ea72
   branch: serialize_nested_includes
   specs:
     fast_jsonapi (1.1.1)

@@ -11,7 +11,7 @@ module Interactions
       return mock_app(group_id)
     end
 
-    def delete_app(id:)
+    def delete_app(id)
       return mock_app(id)
     end
 

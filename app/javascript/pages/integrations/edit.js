@@ -1,0 +1,78 @@
+import {
+  Form, FormGroup, Label, Input, FormText,
+  ListGroup, ListGroupItem,
+} from 'reactstrap';
+import { map } from 'lodash';
+import Button from '../../components/button';
+import { React, PropTypes, observer, observable, action, computed } from '../../helpers/react';
+import Interaction from '../../models/interaction-app';
+import styled from 'styled-components';
+
+const EditForm = styled.form`
+display: flex;
+flex-direction: column;
+margin: 1rem;
+`;
+
+@observer
+export default class IntegrationEdit extends React.Component {
+
+  static propTypes = {
+    onDone: PropTypes.func.isRequired,
+    app: PropTypes.instanceOf(Interaction),
+  }
+
+  @action.bound onSave() {
+    const { app } = this.props;
+    app.name = this.form.querySelector('input[name="name"]').value;
+    app.whitelisted_domains = this.domains;
+    //map(this.form.querySelectorAll('input[name="domain"]'), 'value');
+  }
+
+  @computed get domains() {
+    const { app } = this.props;
+    return observable(app ? app.whitelisted_domains.slice() : []);
+  }
+
+  @action.bound onAddDomain() {
+    this.domains.push('');
+    console.log(this.domains)
+  }
+
+  @action.bound saveFormRef(form) {
+    this.form = form;
+  }
+
+  @action.bound onRemoveDomain(ev) {
+    this.domains.slice(ev.currentTarget.parentElement.dataset.id, 1)
+  }
+
+  render() {
+    const { app } = this.props;
+    if (!app) return null;
+    return (
+      <EditForm innerRef={this.saveFormRef}>
+        <FormGroup>
+          <Label for="name">Name</Label>
+          <Input type="text" name="name" id="name" defaultValue={app.name} />
+        </FormGroup>
+        <Label>
+          Whitelisted Domains
+          <Button icon="plus" onClick={this.onAddDomain} />
+        </Label>
+        <ListGroup>
+          {this.domains.map((domain, i) => (
+            <ListGroupItem key={i} data-index={i}>
+              <Input type="text" name="domain" data-index={i} defaultValue={domain} />
+              <Button icon="trash" onClick={this.onRemoveDomain} />
+            </ListGroupItem>
+          ))}
+        </ListGroup>
+        <div className="d-flex justify-content-end">
+          <Button icon="save" onClick={this.onSave}>Save</Button>
+        </div>
+      </EditForm>
+    );
+  }
+
+}

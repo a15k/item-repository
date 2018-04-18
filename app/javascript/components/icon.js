@@ -7,12 +7,16 @@ import signIn from '@fortawesome/fontawesome-free-solid/faSignInAlt';
 import signOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
 import plus from '@fortawesome/fontawesome-free-solid/faPlus';
 import trash from '@fortawesome/fontawesome-free-solid/faTrashAlt';
+import chevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight';
+import save from '@fortawesome/fontawesome-free-solid/faSave';
 
 const ICONS = {
   signIn,
   signOut,
   plus,
   trash,
+  chevronRight,
+  save,
 };
 
 export default function Icon({ icon, className, ...props }) {

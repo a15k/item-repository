@@ -1,5 +1,5 @@
 import {
-  Form, FormGroup, Label, Input, FormText,
+  Form, FormGroup, Label, Input, FormText, InputGroup, InputGroupAddon,
   ListGroup, ListGroupItem,
 } from 'reactstrap';
 import { map } from 'lodash';
@@ -26,7 +26,7 @@ export default class IntegrationEdit extends React.Component {
     const { app } = this.props;
     app.name = this.form.querySelector('input[name="name"]').value;
     app.whitelisted_domains = this.domains;
-    //map(this.form.querySelectorAll('input[name="domain"]'), 'value');
+    app.save();
   }
 
   @computed get domains() {
@@ -36,7 +36,10 @@ export default class IntegrationEdit extends React.Component {
 
   @action.bound onAddDomain() {
     this.domains.push('');
-    console.log(this.domains)
+  }
+
+  @action.bound saveDomain(ev) {
+    this.domains[ev.target.dataset.index] = ev.target.value;
   }
 
   @action.bound saveFormRef(form) {
@@ -44,7 +47,7 @@ export default class IntegrationEdit extends React.Component {
   }
 
   @action.bound onRemoveDomain(ev) {
-    this.domains.slice(ev.currentTarget.parentElement.dataset.id, 1)
+    this.domains.splice(ev.currentTarget.dataset.index, 1);
   }
 
   render() {
@@ -57,14 +60,18 @@ export default class IntegrationEdit extends React.Component {
           <Input type="text" name="name" id="name" defaultValue={app.name} />
         </FormGroup>
         <Label>
-          Whitelisted Domains
           <Button icon="plus" onClick={this.onAddDomain} />
+          Whitelisted Domains
         </Label>
         <ListGroup>
           {this.domains.map((domain, i) => (
             <ListGroupItem key={i} data-index={i}>
-              <Input type="text" name="domain" data-index={i} defaultValue={domain} />
-              <Button icon="trash" onClick={this.onRemoveDomain} />
+              <InputGroup>
+                <Input type="text" name="domain" data-index={i} onBlur={this.saveDomain} defaultValue={domain} />
+                <InputGroupAddon addonType="append">
+                  <Button icon="trash" data-index={i} onClick={this.onRemoveDomain} />
+                </InputGroupAddon>
+              </InputGroup>
             </ListGroupItem>
           ))}
         </ListGroup>

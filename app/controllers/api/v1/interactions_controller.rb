@@ -16,6 +16,12 @@ class Api::V1::InteractionsController < ApiController
     head :no_content
   end
 
+  def update
+    app = params.require(:interaction).permit(:name, whitelisted_domains: [])
+    interactions_api.update_app(params[:id], app: app)
+    render api_response data: app, serializer: false
+  end
+
   private
 
   def interactions_api

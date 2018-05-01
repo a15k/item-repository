@@ -55,6 +55,14 @@ export default class ModelApi {
     return this.request({ body: JSON.stringify(model.serialize()), method: 'post' });
   }
 
+  @action save(model) {
+    return this.request({
+      url: `${this.baseUrl}/${model.id}`,
+      body: JSON.stringify(model.serialize()),
+      method: 'put',
+    });
+  }
+
   @action request({ url = this.baseUrl, method = 'get', body }) {
     this.requestsInProgress.set(method, true);
     return fetch(`${url}.json`, {
@@ -66,6 +74,7 @@ export default class ModelApi {
       },
     })
       .then(resp => 204 !== resp.status ? resp.json() : null)
+      .then(json => json && json.data ? json.data : null)
       .then(json => {
         this.requestsInProgress.delete(fetch);
         this.requestCounts[method] += 1;

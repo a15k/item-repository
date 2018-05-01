@@ -5,6 +5,11 @@ import ModelCollection from './model-collection';
 
 export class BaseModel {
 
+  static get collection() {
+    if (!this.$collection) { this.$collection = new ModelCollection(this); }
+    return this.$collection;
+  }
+
   @lazyGetter api = new ModelApi(this);
 
   constructor(attrs) {
@@ -20,10 +25,10 @@ export class BaseModel {
     }
   }
 
-  static get collection() {
-    if (!this.$collection) { this.$collection = new ModelCollection(this); }
-    return this.$collection;
+  save() {
+    this.api.save(this);
   }
+
 }
 
 // export decorators so they can be easily imported into model classes

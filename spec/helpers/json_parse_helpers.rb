@@ -1,7 +1,11 @@
 module JsonParseHelpers
 
-  def request_json
+  def response_json
     JSON.parse(response.body)
+  end
+
+  def response_data
+    response_json['data']
   end
 
 end

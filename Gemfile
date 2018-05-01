@@ -5,8 +5,8 @@ ruby '2.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -29,6 +29,11 @@ gem 'webpacker', '~> 3.4'
 gem 'versionist'
 gem 'swagger-blocks'
 gem 'swagger-docs'
+
+gem 'colorize'
+
+# Lev framework
+gem 'lev', '~> 8.1.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -83,4 +88,5 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'database_cleaner'
 end

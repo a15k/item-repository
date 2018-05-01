@@ -5,6 +5,20 @@ class Api::Docs::V1Controller < ApplicationController
   include Swagger::Blocks
   ACCEPT_HEADER = 'application/vnd.interactions.a15k.org; version=1'
 
+  swagger_schema :Error do
+    property :status_code do
+      key :type, :integer
+      key :description, "The HTTP status code"
+    end
+    property :messages do
+      key :type, :array
+      key :description, "The error messages, if any"
+      items do
+        key :type, :string
+      end
+    end
+  end
+
   swagger_root do
     key :swagger, '2.0'
     info do
@@ -38,7 +52,12 @@ class Api::Docs::V1Controller < ApplicationController
   # A list of all classes that have swagger_* declarations.
   SWAGGERED_CLASSES = [
     Api::V1::FormatsController,
+    Api::V1::AssessmentsController,
     Format,
+    Assessment,
+    Question,
+    Solution,
+    Asset,
     self
   ].freeze
 

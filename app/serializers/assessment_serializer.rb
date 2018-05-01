@@ -1,11 +1,17 @@
-class AssessmentSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :content,
-             :version,
-             :visibility,
-             :format_id,
-             :created_at
+class AssessmentSerializer < Roar::Decorator
+  include Roar::JSON
 
-  has_many :questions
 
+  property :id
+  property :identifier
+  property :content
+  property :version
+  property :visibility
+  property :format_id
+  property :created_at
+  property :created_by,
+           reader: ->(user_options:, **) {
+    new_record? ? user_options[:current_user] : nil
+  }
+  collection :questions, extend: QuestionSerializer, class: Question
 end

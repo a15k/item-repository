@@ -7,13 +7,13 @@ describe 'Interactions API' do
   it "lists available interactions" do
     get "/api/interactions", headers: headers
     expect(response).to be_ok
-    expect(request_json).to_not be_empty
+    expect(response_data).to_not be_empty
   end
 
   it "can create an interaction app" do
     post "/api/interactions", headers: headers
     expect(response).to be_ok
-    expect(request_json).to_not be_empty
+    expect(response_data).to_not be_empty
   end
 
   it "can delete an app" do

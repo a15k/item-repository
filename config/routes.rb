@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       }
     ) do
 
-      resources :formats, only: [:index]
+      resources :formats, only: [:index, :create]
       resources :assessments
       resources :interactions
     end

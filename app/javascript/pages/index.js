@@ -1,11 +1,11 @@
 import Home from './home';
 import Search from './search';
-import Integrations from './integrations';
+import Interactions from './interactions';
 import NotFound from './not-found';
 
 export {
   Home,
   Search,
   NotFound,
-  Integrations,
+  Interactions,
 };

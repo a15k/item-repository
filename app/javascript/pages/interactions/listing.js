@@ -6,7 +6,7 @@ import { React, PropTypes, observer, observable, action, ModelCollectionType } f
 import Interactions from '../../models/interaction-app';
 
 @observer
-export default class IntegrationsListing extends React.Component {
+export default class InteractionsListing extends React.Component {
 
   static propTypes = {
     onEdit: PropTypes.func.isRequired,

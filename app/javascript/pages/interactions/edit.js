@@ -1,8 +1,6 @@
 import {
-  Form, FormGroup, Label, Input, FormText, InputGroup, InputGroupAddon,
-  ListGroup, ListGroupItem,
+  FormGroup, Label, Input, InputGroup, InputGroupAddon, ListGroup, ListGroupItem,
 } from 'reactstrap';
-import { map } from 'lodash';
 import Button from '../../components/button';
 import { React, PropTypes, observer, observable, action, computed } from '../../helpers/react';
 import Interaction from '../../models/interaction-app';
@@ -15,7 +13,7 @@ margin: 1rem;
 `;
 
 @observer
-export default class IntegrationEdit extends React.Component {
+export default class InteractionEdit extends React.Component {
 
   static propTypes = {
     onDone: PropTypes.func.isRequired,
@@ -75,6 +73,8 @@ export default class IntegrationEdit extends React.Component {
             </ListGroupItem>
           ))}
         </ListGroup>
+        <h3>Embed script tag</h3>
+        <textarea value={app.embed_html} />
         <div className="d-flex justify-content-end">
           <Button icon="save" onClick={this.onSave}>Save</Button>
         </div>

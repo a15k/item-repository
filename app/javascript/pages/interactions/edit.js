@@ -74,7 +74,7 @@ export default class InteractionEdit extends React.Component {
           ))}
         </ListGroup>
         <h3>Embed script tag</h3>
-        <textarea value={app.embed_html} />
+        <textarea readOnly value={app.embed_html} />
         <div className="d-flex justify-content-end">
           <Button icon="save" onClick={this.onSave}>Save</Button>
         </div>

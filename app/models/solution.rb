@@ -19,7 +19,7 @@ class Solution < ApplicationRecord
       key :type, :string
       key :format, 'date-time'
     end
-    property :varient, { type: :string }
+    property :variant, { type: :string }
     property :format_id, { type: :string, format: :uuid  }
 
     property :assets do

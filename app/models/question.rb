@@ -20,7 +20,7 @@ class Question < ApplicationRecord
       key :type, :string
       key :format, 'date-time'
     end
-    property :varient, { type: :string }
+
     property :format_id, { type: :string, format: :uuid  }
 
     property :solutions do

@@ -3,7 +3,7 @@ class Api::Docs::V1Controller < ApplicationController
   layout 'docs'
 
   include Swagger::Blocks
-  ACCEPT_HEADER = 'application/vnd.interactions.a15k.org; version=1'
+  ACCEPT_HEADER = 'application/json'
 
   swagger_schema :Error do
     property :status_code do
@@ -51,13 +51,13 @@ class Api::Docs::V1Controller < ApplicationController
 
   # A list of all classes that have swagger_* declarations.
   SWAGGERED_CLASSES = [
-    Api::V1::FormatsController,
-    Api::V1::AssessmentsController,
     Format,
     Assessment,
     Question,
     Solution,
     Asset,
+    Api::V1::FormatsController,
+    Api::V1::AssessmentsController,
     self
   ].freeze
 

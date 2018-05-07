@@ -22,6 +22,22 @@ class Api::V1::FormatsController < ApiController
     render api_response data: Format.all
   end
 
+  swagger_schema :FormatInput do
+    allOf do
+      schema do
+        key :required, [:name, :description]
+
+        property :name,
+                 type: :string,
+                 description: 'The name of the format'
+
+        property :description,
+                 type: :string,
+                 description: 'A longer description that fully explains the format'
+
+      end
+    end
+  end
 
   swagger_path '/formats' do
     operation :post do
@@ -31,7 +47,21 @@ class Api::V1::FormatsController < ApiController
         key :api_token, []
       end
       key :tags, ['Formats']
-
+      parameter do
+        key :paramType, :body
+        key :name, :name
+        key :description, 'The name of the format'
+        key :required, true
+      end
+      parameter do
+        key :name, :assessment
+        key :in, :body
+        key :description, 'Format to be created'
+        key :required, true
+        schema do
+          key :'$ref', :FormatInput
+        end
+      end
       extend Api::SwaggerResponses
       success_schema(model: 'Format')
     end

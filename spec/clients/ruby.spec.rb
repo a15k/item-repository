@@ -11,10 +11,9 @@ describe 'Ruby client', type: :api do
 
   before(:each) {
     A15kClient.configure do |c|
-      c.host = "localhost:#{api_server_port}"
       c.scheme = 'http'
+      c.host = "localhost:#{api_server_port}/"
       c.api_key['Authorization'] = authorization
-      c.verify_ssl_host = false
     end
   }
 

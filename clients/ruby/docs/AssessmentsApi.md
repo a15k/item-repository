@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **create_assessment**
-> InlineResponse2003 create_assessment(assessment)
+> InlineResponse2002 create_assessment(assessment)
 
 create an assessment
 
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**InlineResponse2002**](InlineResponse2002.md)
 
 ### Authorization
 
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 
 # **get_assessment**
-> InlineResponse2002 get_assessment
+> InlineResponse2002 get_assessment(id)
 
 Retrieve an assessment
 
@@ -79,9 +79,12 @@ end
 
 api_instance = A15kClient::AssessmentsApi.new
 
+id = 56 # Integer | UUID of assessment to fetch
+
+
 begin
   #Retrieve an assessment
-  result = api_instance.get_assessment
+  result = api_instance.get_assessment(id)
   p result
 rescue A15kClient::ApiError => e
   puts "Exception when calling AssessmentsApi->get_assessment: #{e}"
@@ -89,7 +92,10 @@ end
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **Integer**| UUID of assessment to fetch | 
 
 ### Return type
 

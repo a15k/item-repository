@@ -28,7 +28,6 @@ require 'a15k_client/models/format_input'
 require 'a15k_client/models/inline_response_200'
 require 'a15k_client/models/inline_response_200_1'
 require 'a15k_client/models/inline_response_200_2'
-require 'a15k_client/models/inline_response_200_3'
 require 'a15k_client/models/question'
 require 'a15k_client/models/solution'
 

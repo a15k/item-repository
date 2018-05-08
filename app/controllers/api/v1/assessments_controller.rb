@@ -12,9 +12,18 @@ class Api::V1::AssessmentsController < ApiController
       end
       key :tags, ['Assessments']
 
+      parameter do
+        key :name, :id
+        key :in, :path
+        key :description, 'UUID of assessment to fetch'
+        key :required, true
+        key :type, :integer
+        key :format, :uuid
+      end
+
       extend Api::SwaggerResponses
 
-      success_schema(model: 'Assessment', format: :array)
+      success_schema(model: 'Assessment')
     end
   end
   def show

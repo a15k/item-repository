@@ -102,7 +102,6 @@ Class | Method | HTTP request | Description
  - [A15kClient::InlineResponse200](docs/InlineResponse200.md)
  - [A15kClient::InlineResponse2001](docs/InlineResponse2001.md)
  - [A15kClient::InlineResponse2002](docs/InlineResponse2002.md)
- - [A15kClient::InlineResponse2003](docs/InlineResponse2003.md)
  - [A15kClient::Question](docs/Question.md)
  - [A15kClient::Solution](docs/Solution.md)
 

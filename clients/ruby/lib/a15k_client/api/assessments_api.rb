@@ -24,7 +24,7 @@ module A15kClient
     # 
     # @param assessment Assessment to be created
     # @param [Hash] opts the optional parameters
-    # @return [InlineResponse2003]
+    # @return [InlineResponse2002]
     def create_assessment(assessment, opts = {})
       data, _status_code, _headers = create_assessment_with_http_info(assessment, opts)
       return data
@@ -34,7 +34,7 @@ module A15kClient
     # 
     # @param assessment Assessment to be created
     # @param [Hash] opts the optional parameters
-    # @return [Array<(InlineResponse2003, Fixnum, Hash)>] InlineResponse2003 data, response status code and response headers
+    # @return [Array<(InlineResponse2002, Fixnum, Hash)>] InlineResponse2002 data, response status code and response headers
     def create_assessment_with_http_info(assessment, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AssessmentsApi.create_assessment ..."
@@ -68,7 +68,7 @@ module A15kClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'InlineResponse2003')
+        :return_type => 'InlineResponse2002')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: AssessmentsApi#create_assessment\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -77,23 +77,29 @@ module A15kClient
 
     # Retrieve an assessment
     # 
+    # @param id UUID of assessment to fetch
     # @param [Hash] opts the optional parameters
     # @return [InlineResponse2002]
-    def get_assessment(opts = {})
-      data, _status_code, _headers = get_assessment_with_http_info(opts)
+    def get_assessment(id, opts = {})
+      data, _status_code, _headers = get_assessment_with_http_info(id, opts)
       return data
     end
 
     # Retrieve an assessment
     # 
+    # @param id UUID of assessment to fetch
     # @param [Hash] opts the optional parameters
     # @return [Array<(InlineResponse2002, Fixnum, Hash)>] InlineResponse2002 data, response status code and response headers
-    def get_assessment_with_http_info(opts = {})
+    def get_assessment_with_http_info(id, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug "Calling API: AssessmentsApi.get_assessment ..."
       end
+      # verify the required parameter 'id' is set
+      if @api_client.config.client_side_validation && id.nil?
+        fail ArgumentError, "Missing the required parameter 'id' when calling AssessmentsApi.get_assessment"
+      end
       # resource path
-      local_var_path = "/assessments/{id}"
+      local_var_path = "/assessments/{id}".sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}

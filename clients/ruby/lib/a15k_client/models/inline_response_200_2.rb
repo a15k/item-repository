@@ -38,7 +38,7 @@ module A15kClient
       {
         :'success' => :'BOOLEAN',
         :'message' => :'String',
-        :'data' => :'Array<Assessment>'
+        :'data' => :'Assessment'
       }
     end
 
@@ -59,9 +59,7 @@ module A15kClient
       end
 
       if attributes.has_key?(:'data')
-        if (value = attributes[:'data']).is_a?(Array)
-          self.data = value
-        end
+        self.data = attributes[:'data']
       end
 
     end

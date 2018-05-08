@@ -3,7 +3,9 @@ require 'strings'
 class Format < ApplicationRecord
   include Swagger::Blocks
 
-  validates :identifier, :name, :description, presence: true
+  belongs_to :created_by, class_name: 'User'
+
+  validates :identifier, :name, :description, :created_by, presence: true
   validates :identifier, uniqueness: true
 
   before_validation :set_identifier_from_name

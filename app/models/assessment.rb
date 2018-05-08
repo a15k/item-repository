@@ -8,7 +8,7 @@ class Assessment < ApplicationRecord
 
   has_many :questions
 
-  validates :format, :identifier, presence: true
+  validates :format, :identifier, :created_by, presence: true
 
 
   swagger_schema :Assessment do

@@ -10,7 +10,7 @@ class Solution < ApplicationRecord
   validates :content, :format, presence: true
 
   swagger_schema :Solution do
-    key :required, [:id, :content, :created_at, :varient, :format_id]
+    key :required, [:id, :content, :created_at, :variant, :format_id]
     property :id do
       key :type, :string
       format 'uuid'

@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'fileutils'
-require_relative '../swagger_codegen'
 
 desc <<-DESC.strip_heredoc
   Generate the Ruby API model bindings in the app/bindings directory.  swagger-codegen
@@ -31,6 +30,5 @@ task :generate_model_bindings, [:api_major_version] => :environment do |tt,args|
   bindings_dir = "#{Rails.application.root}/app/bindings/api/v#{api_major_version}/bindings"
   FileUtils::rm_rf(bindings_dir)
   FileUtils::mkdir_p(bindings_dir)
-
-  FileUtils::cp(Dir.glob("#{output_dir}/lib/#{gem_name}/models/*input.rb"), bindings_dir, verbose: true)
+  FileUtils::cp(Dir.glob("#{output_dir}/lib/#{gem_name}/models/*.rb"), bindings_dir, verbose: true)
 end

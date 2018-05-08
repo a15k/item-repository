@@ -4,7 +4,7 @@ class SolutionSerializer < Roar::Decorator
   property :id
   property :content
   property :created_at
-  property :varient
+  property :variant
   property :format_id
   property :created_at
   property :created_by,

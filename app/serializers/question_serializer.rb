@@ -8,10 +8,7 @@ class QuestionSerializer < Roar::Decorator
            reader: ->(user_options:, **) {
     new_record? ? user_options[:current_user] : nil
   }
-
-  property :varient
   property :format_id
-
   collection :solutions, extend: SolutionSerializer, class: Solution
   collection :assets, extend: QuestionSerializer, class: Question
 end

@@ -54,7 +54,7 @@ class Api::V1::FormatsController < ApiController
         key :required, true
       end
       parameter do
-        key :name, :assessment
+        key :name, :format
         key :in, :body
         key :description, 'Format to be created'
         key :required, true
@@ -68,7 +68,13 @@ class Api::V1::FormatsController < ApiController
   end
 
   def create
-    format = FormatSerializer.new(Format.new).from_hash(params)
+    format_data = Api::V1::Bindings::FormatInput.new(
+      request.parameters.to_hash
+    ).to_hash.deep_symbolize_keys
+
+    format_data[:created_by] = current_user
+
+    format = Format.new(format_data)
     render api_response data: format, success: format.save
   end
 

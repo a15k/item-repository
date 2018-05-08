@@ -11,7 +11,7 @@ class Question < ApplicationRecord
   validates :content, :created_by, :format, presence: true
 
   swagger_schema :Question do
-    key :required, [:id, :content, :created_at, :varient, :format_id]
+    key :required, [:id, :content, :created_at, :format_id]
     property :id do
       key :type, :string
       format 'uuid'

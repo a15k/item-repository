@@ -1,7 +1,7 @@
 =begin
 #Assessment Network API
 
-#> Stores content for the Assessment Network Requests to this API must include application/vnd.interactions.a15k.org; version=1 in the `Accept` header. All endpoints require an API key to be passed in the request header.  API keys can be obtained by members at www.a15k.org. 
+#> Stores content for the Assessment Network Requests to this API must include application/json in the `Accept` header. All endpoints require an API key to be passed in the request header.  API keys can be obtained by members at www.a15k.org. 
 
 OpenAPI spec version: 1.0.0
 
@@ -14,27 +14,27 @@ require 'date'
 
 module Api::V1::Bindings
 
-  class Error
-    # The HTTP status code
-    attr_accessor :status_code
+  class FormatInput
+    # The name of the format
+    attr_accessor :name
 
-    # The error messages, if any
-    attr_accessor :messages
+    # A longer description that fully explains the format
+    attr_accessor :description
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status_code' => :'status_code',
-        :'messages' => :'messages'
+        :'name' => :'name',
+        :'description' => :'description'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'status_code' => :'Integer',
-        :'messages' => :'Array<String>'
+        :'name' => :'String',
+        :'description' => :'String'
       }
     end
 
@@ -46,14 +46,12 @@ module Api::V1::Bindings
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'status_code')
-        self.status_code = attributes[:'status_code']
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'messages')
-        if (value = attributes[:'messages']).is_a?(Array)
-          self.messages = value
-        end
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
       end
 
     end
@@ -62,12 +60,22 @@ module Api::V1::Bindings
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @name.nil?
+        invalid_properties.push("invalid value for 'name', name cannot be nil.")
+      end
+
+      if @description.nil?
+        invalid_properties.push("invalid value for 'description', description cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @name.nil?
+      return false if @description.nil?
       return true
     end
 
@@ -76,8 +84,8 @@ module Api::V1::Bindings
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status_code == o.status_code &&
-          messages == o.messages
+          name == o.name &&
+          description == o.description
     end
 
     # @see the `==` method
@@ -89,7 +97,7 @@ module Api::V1::Bindings
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [status_code, messages].hash
+      [name, description].hash
     end
 
     # Builds the object from hash

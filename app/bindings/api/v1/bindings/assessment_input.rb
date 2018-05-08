@@ -1,7 +1,7 @@
 =begin
 #Assessment Network API
 
-#> Stores content for the Assessment Network Requests to this API must include application/vnd.interactions.a15k.org; version=1 in the `Accept` header. All endpoints require an API key to be passed in the request header.  API keys can be obtained by members at www.a15k.org. 
+#> Stores content for the Assessment Network Requests to this API must include application/json in the `Accept` header. All endpoints require an API key to be passed in the request header.  API keys can be obtained by members at www.a15k.org. 
 
 OpenAPI spec version: 1.0.0
 
@@ -14,33 +14,46 @@ require 'date'
 
 module Api::V1::Bindings
 
-  class Format
-    attr_accessor :id
-
+  class AssessmentInput
+    # A unique identifier for the assessment, uuid is recommended but not required
     attr_accessor :identifier
 
-    attr_accessor :name
+    # The uuid of a previously registered format
+    attr_accessor :format_id
 
-    attr_accessor :description
+    # The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier
+    attr_accessor :version
+
+    # Content the applies to all questions and solutions.  The formatting the the content is indicated by the assessment's linked format
+    attr_accessor :content
+
+    # If the assessment may be viewed by the public, or only by other a15k members.  Defaults to \"internal\"
+    attr_accessor :visibility
+
+    attr_accessor :questions
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
         :'identifier' => :'identifier',
-        :'name' => :'name',
-        :'description' => :'description'
+        :'format_id' => :'format_id',
+        :'version' => :'version',
+        :'content' => :'content',
+        :'visibility' => :'visibility',
+        :'questions' => :'questions'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
         :'identifier' => :'String',
-        :'name' => :'String',
-        :'description' => :'String'
+        :'format_id' => :'String',
+        :'version' => :'String',
+        :'content' => :'String',
+        :'visibility' => :'String',
+        :'questions' => :'Array<AssessmentInputQuestions>'
       }
     end
 
@@ -52,20 +65,30 @@ module Api::V1::Bindings
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.has_key?(:'identifier')
         self.identifier = attributes[:'identifier']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.has_key?(:'format_id')
+        self.format_id = attributes[:'format_id']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'version')
+        self.version = attributes[:'version']
+      end
+
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
+      end
+
+      if attributes.has_key?(:'visibility')
+        self.visibility = attributes[:'visibility']
+      end
+
+      if attributes.has_key?(:'questions')
+        if (value = attributes[:'questions']).is_a?(Array)
+          self.questions = value
+        end
       end
 
     end
@@ -74,16 +97,8 @@ module Api::V1::Bindings
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @name.nil?
-        invalid_properties.push("invalid value for 'name', name cannot be nil.")
-      end
-
-      if @description.nil?
-        invalid_properties.push("invalid value for 'description', description cannot be nil.")
+      if @format_id.nil?
+        invalid_properties.push("invalid value for 'format_id', format_id cannot be nil.")
       end
 
       return invalid_properties
@@ -92,9 +107,7 @@ module Api::V1::Bindings
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @name.nil?
-      return false if @description.nil?
+      return false if @format_id.nil?
       return true
     end
 
@@ -103,10 +116,12 @@ module Api::V1::Bindings
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
           identifier == o.identifier &&
-          name == o.name &&
-          description == o.description
+          format_id == o.format_id &&
+          version == o.version &&
+          content == o.content &&
+          visibility == o.visibility &&
+          questions == o.questions
     end
 
     # @see the `==` method
@@ -118,7 +133,7 @@ module Api::V1::Bindings
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, identifier, name, description].hash
+      [identifier, format_id, version, content, visibility, questions].hash
     end
 
     # Builds the object from hash

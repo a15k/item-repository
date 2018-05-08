@@ -120,11 +120,23 @@ class Api::V1::AssessmentsController < ApiController
   end
 
   def create
-    assessment = AssessmentSerializer.new(
-      Assessment.new,
-    ).from_hash(params, user_options: { current_user: current_user })
+    assessment_data = Api::V1::Bindings::AssessmentInput.new(
+      request.parameters.to_hash
+    ).to_hash.deep_symbolize_keys
+
+    assessment_data[:created_by] = current_user
+    assessment_data[:questions] = (assessment_data[:questions] || []).map do |question_data|
+      question_data[:created_by] = current_user
+      question_data[:solutions] = (question_data[:solutions] || []).map do | solution_data |
+        solution_data[:created_by] = current_user
+        Solution.new(solution_data)
+      end
+      Question.new(question_data)
+    end
+
+    assessment = Assessment.new(assessment_data)
+
     render api_response data: assessment, success: assessment.save
   end
-
 
 end

@@ -4,6 +4,8 @@ class CreateFormats < ActiveRecord::Migration[5.1]
       t.text :name, null: false
       t.text :identifier, null: false
       t.text :description, null: false
+      t.timestamp :created_at, null: false, index: true
+      t.belongs_to :created_by, type: :uuid, null: false, foreign_key: { to_table: :users }
     end
   end
 end

@@ -1,7 +1,14 @@
-class QuestionSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :content, :created_at, :varient, :format_id
+class QuestionSerializer < Roar::Decorator
+  include Roar::JSON
 
-  has_many :assets
-  has_many :solutions
+  property :id
+  property :content
+  property :created_at
+  property :created_by,
+           reader: ->(user_options:, **) {
+    new_record? ? user_options[:current_user] : nil
+  }
+  property :format_id
+  collection :solutions, extend: SolutionSerializer, class: Solution
+  collection :assets, extend: QuestionSerializer, class: Question
 end

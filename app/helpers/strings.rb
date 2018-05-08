@@ -33,6 +33,7 @@ module StringsHelper
   #     Strings.code_identifier('General I B', padding:false) #=> 'GENERALIB' *(no trailing X)*
   #     Strings.to_code_identifier('Top Cat', maxlen: 5 )     #=> 'TOCAT'
   def self.code_identifier( string, length:10, padding: 'X' )
+    return if string.nil?
     stripped = string.gsub(/\W/, '').downcase
     if stripped.length < length
       return padding.present? ? stripped.ljust( length, padding ) : stripped

@@ -1,4 +1,8 @@
-class FormatSerializer
-  include FastJsonapi::ObjectSerializer
-  attributes :name, :identifier, :description
+class FormatSerializer < Roar::Decorator
+  include Roar::JSON
+
+  property :id, type: String
+  property :name
+  property :identifier
+  property :description
 end

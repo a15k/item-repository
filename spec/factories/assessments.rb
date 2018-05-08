@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :assessment do
     format
 
+    identifier { SecureRandom.uuid }
     association :created_by, factory: :user
     visibility { :internal }
 

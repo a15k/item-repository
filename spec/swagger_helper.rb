@@ -29,6 +29,14 @@ RSpec.configure do |config|
           name: 'Authorization',
           in: :header
         }
+      },
+      definitions: {
+        'Format' => {
+          type: 'object',
+          properties: {
+            errors: { '$ref' => '#/definitions/errors_map' }
+          }
+        }
       }
     }
   }

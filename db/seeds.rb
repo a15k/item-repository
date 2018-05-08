@@ -9,10 +9,23 @@
 
 OX = 'OpenStax'
 
+
 unless Member.exists?(name: OX)
   Member.create!(name: OX, website: 'openstax.org')
 end
 
+OX_MEMBER = Member.find_by(name: OX)
+unless User.exists?(member_id: OX_MEMBER.id)
+  account = OpenStax::Accounts::Account.create!(
+    uuid: SecureRandom.uuid
+  )
+  User.create!(member_id: OX_MEMBER.id, account_id: account.id)
+end
+
 unless Format.exists?(name: OX)
-  Format.create!(name: OX, description: 'Openstax exercise format')
+  Format.create!(
+    name: OX,
+    description: 'Openstax exercise format',
+    created_by: User.find_by(member_id: OX_MEMBER.id)
+  )
 end

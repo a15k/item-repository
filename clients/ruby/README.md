@@ -57,9 +57,9 @@ require 'a15k_client'
 # Setup authorization
 A15kClient.configure do |config|
   # Configure API key authorization: api_token
-  config.api_key['api_token'] = 'YOUR API KEY'
+  config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['api_token'] = 'Bearer'
+  #config.api_key_prefix['Authorization'] = 'Bearer'
 end
 
 api_instance = A15kClient::AssessmentsApi.new
@@ -79,12 +79,12 @@ end
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://null/api*
+All URIs are relative to *https://null/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*A15kClient::AssessmentsApi* | [**create_assessment**](docs/AssessmentsApi.md#create_assessment) | **POST** /assessment | create an assessment
-*A15kClient::AssessmentsApi* | [**get_assessment**](docs/AssessmentsApi.md#get_assessment) | **GET** /assessment/{id} | Retrieve an assessment
+*A15kClient::AssessmentsApi* | [**create_assessment**](docs/AssessmentsApi.md#create_assessment) | **POST** /assessments | create an assessment
+*A15kClient::AssessmentsApi* | [**get_assessment**](docs/AssessmentsApi.md#get_assessment) | **GET** /assessments/{id} | Retrieve an assessment
 *A15kClient::FormatsApi* | [**create_format**](docs/FormatsApi.md#create_format) | **POST** /formats | create  a format
 *A15kClient::FormatsApi* | [**get_formats**](docs/FormatsApi.md#get_formats) | **GET** /formats | Get all formats
 
@@ -102,6 +102,7 @@ Class | Method | HTTP request | Description
  - [A15kClient::InlineResponse200](docs/InlineResponse200.md)
  - [A15kClient::InlineResponse2001](docs/InlineResponse2001.md)
  - [A15kClient::InlineResponse2002](docs/InlineResponse2002.md)
+ - [A15kClient::InlineResponse2003](docs/InlineResponse2003.md)
  - [A15kClient::Question](docs/Question.md)
  - [A15kClient::Solution](docs/Solution.md)
 
@@ -112,6 +113,6 @@ Class | Method | HTTP request | Description
 ### api_token
 
 - **Type**: API key
-- **API key parameter name**: api_token
+- **API key parameter name**: Authorization
 - **Location**: HTTP header
 

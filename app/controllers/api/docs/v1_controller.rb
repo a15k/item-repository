@@ -40,11 +40,11 @@ class Api::Docs::V1Controller < ApplicationController
     end
     security_definition :api_token do
       key :type, :apiKey
-      key :name, :api_token
+      key :name, :Authorization
       key :in, :header
     end
     key :host, URI.parse(Rails.application.secrets.base_url).host
-    key :basePath, '/api'
+    key :basePath, '/api/v1'
     key :consumes, [ACCEPT_HEADER]
     key :produces, ['application/json']
   end

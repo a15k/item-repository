@@ -18,7 +18,7 @@ describe A15kClient::Configuration do
   before(:each) do
     # uncomment below to setup host and base_path
     #require 'URI'
-    #uri = URI.parse("https://null/api")
+    #uri = URI.parse("https://null/api/v1")
     #A15kClient.configure do |c|
     #  c.host = uri.host
     #  c.base_path = uri.path
@@ -28,14 +28,14 @@ describe A15kClient::Configuration do
   describe '#base_url' do
     it 'should have the default value' do
       # uncomment below to test default value of the base path
-      #expect(config.base_url).to eq("https://null/api")
+      #expect(config.base_url).to eq("https://null/api/v1")
     end
 
     it 'should remove trailing slashes' do
       [nil, '', '/', '//'].each do |base_path|
         config.base_path = base_path
         # uncomment below to test trailing slashes
-        #expect(config.base_url).to eq("https://null/api")
+        #expect(config.base_url).to eq("https://null/api/v1")
       end
     end
   end

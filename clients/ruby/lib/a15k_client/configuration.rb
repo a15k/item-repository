@@ -130,7 +130,7 @@ module A15kClient
     def initialize
       @scheme = 'https'
       @host = 'null'
-      @base_path = '/api'
+      @base_path = '/api/v1'
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0
@@ -200,8 +200,8 @@ module A15kClient
           {
             type: 'api_key',
             in: 'header',
-            key: 'api_token',
-            value: api_key_with_prefix('api_token')
+            key: 'Authorization',
+            value: api_key_with_prefix('Authorization')
           },
       }
     end

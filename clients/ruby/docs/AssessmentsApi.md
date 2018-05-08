@@ -1,15 +1,15 @@
 # A15kClient::AssessmentsApi
 
-All URIs are relative to *https://null/api*
+All URIs are relative to *https://null/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_assessment**](AssessmentsApi.md#create_assessment) | **POST** /assessment | create an assessment
-[**get_assessment**](AssessmentsApi.md#get_assessment) | **GET** /assessment/{id} | Retrieve an assessment
+[**create_assessment**](AssessmentsApi.md#create_assessment) | **POST** /assessments | create an assessment
+[**get_assessment**](AssessmentsApi.md#get_assessment) | **GET** /assessments/{id} | Retrieve an assessment
 
 
 # **create_assessment**
-> InlineResponse2001 create_assessment(assessment)
+> InlineResponse2003 create_assessment(assessment)
 
 create an assessment
 
@@ -20,9 +20,9 @@ require 'a15k_client'
 # setup authorization
 A15kClient.configure do |config|
   # Configure API key authorization: api_token
-  config.api_key['api_token'] = 'YOUR API KEY'
+  config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['api_token'] = 'Bearer'
+  #config.api_key_prefix['Authorization'] = 'Bearer'
 end
 
 api_instance = A15kClient::AssessmentsApi.new
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**InlineResponse2003**](InlineResponse2003.md)
 
 ### Authorization
 
@@ -72,9 +72,9 @@ require 'a15k_client'
 # setup authorization
 A15kClient.configure do |config|
   # Configure API key authorization: api_token
-  config.api_key['api_token'] = 'YOUR API KEY'
+  config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['api_token'] = 'Bearer'
+  #config.api_key_prefix['Authorization'] = 'Bearer'
 end
 
 api_instance = A15kClient::AssessmentsApi.new

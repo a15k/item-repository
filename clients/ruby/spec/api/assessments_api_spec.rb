@@ -37,7 +37,7 @@ describe 'AssessmentsApi' do
   # 
   # @param assessment Assessment to be created
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse2001]
+  # @return [InlineResponse2003]
   describe 'create_assessment test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

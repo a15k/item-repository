@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
   enable_extension "plpgsql"
 
   create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "identifier", default: -> { "gen_random_uuid()" }, null: false
+    t.string "identifier"
     t.string "version", default: "1", null: false
     t.integer "visibility", limit: 2
     t.uuid "format_id", null: false
@@ -137,13 +137,13 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
     t.uuid "assessment_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
-    t.text "variant"
+    t.text "varient"
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["assessment_id"], name: "index_questions_on_assessment_id"
     t.index ["created_by_id"], name: "index_questions_on_created_by_id"
     t.index ["format_id"], name: "index_questions_on_format_id"
-    t.index ["variant"], name: "index_questions_on_variant"
+    t.index ["varient"], name: "index_questions_on_varient"
   end
 
   create_table "solutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

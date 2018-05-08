@@ -3,7 +3,7 @@ class Api::V1::AssessmentsController < ApiController
 
   include Swagger::Blocks
 
-  swagger_path '/assessment/{id}' do
+  swagger_path '/assessments/{id}' do
     operation :get do
       key :summary, 'Retrieve an assessment'
       key :operationId, 'getAssessment'
@@ -93,7 +93,7 @@ class Api::V1::AssessmentsController < ApiController
     end
   end
 
-  swagger_path '/assessment' do
+  swagger_path '/assessments' do
     operation :post do
       key :summary, 'create an assessment'
       key :operationId, 'createAssessment'
@@ -115,7 +115,7 @@ class Api::V1::AssessmentsController < ApiController
         end
       end
       extend Api::SwaggerResponses
-      success_schema(model: 'Format')
+      success_schema(model: 'Assessment')
     end
   end
 
@@ -135,7 +135,6 @@ class Api::V1::AssessmentsController < ApiController
     end
 
     assessment = Assessment.new(assessment_data)
-
     render api_response data: assessment, success: assessment.save
   end
 

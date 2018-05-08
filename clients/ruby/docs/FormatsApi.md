@@ -1,6 +1,6 @@
 # A15kClient::FormatsApi
 
-All URIs are relative to *https://null/api*
+All URIs are relative to *https://null/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -20,9 +20,9 @@ require 'a15k_client'
 # setup authorization
 A15kClient.configure do |config|
   # Configure API key authorization: api_token
-  config.api_key['api_token'] = 'YOUR API KEY'
+  config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['api_token'] = 'Bearer'
+  #config.api_key_prefix['Authorization'] = 'Bearer'
 end
 
 api_instance = A15kClient::FormatsApi.new
@@ -74,9 +74,9 @@ require 'a15k_client'
 # setup authorization
 A15kClient.configure do |config|
   # Configure API key authorization: api_token
-  config.api_key['api_token'] = 'YOUR API KEY'
+  config.api_key['Authorization'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['api_token'] = 'Bearer'
+  #config.api_key_prefix['Authorization'] = 'Bearer'
 end
 
 api_instance = A15kClient::FormatsApi.new

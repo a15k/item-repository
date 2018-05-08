@@ -71,6 +71,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'guard-rspec', require: false
   gem 'faker' # Lorem Ipsum
+  gem 'childprocess'
 end
 
 group :development do
@@ -89,4 +90,5 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'database_cleaner'
+  gem 'a15k_client', path: './clients/ruby'
 end

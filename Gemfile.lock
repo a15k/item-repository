@@ -33,6 +33,13 @@ PATH
       json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
+PATH
+  remote: clients/ruby
+  specs:
+    a15k_client (1.0.0)
+      json (~> 2.1, >= 2.1.0)
+      typhoeus (~> 1.0, >= 1.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -408,10 +415,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  a15k_client!
   a15k_interactions!
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15, < 4.0)
+  childprocess
   chromedriver-helper
   coffee-rails (~> 4.2)
   colorize

@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
     t.string "version", default: "1", null: false
     t.integer "visibility", limit: 2
     t.uuid "format_id", null: false
-    t.text "content"
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_assessments_on_created_at"
@@ -137,26 +136,24 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
     t.uuid "assessment_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
-    t.text "varient"
+    t.text "variant"
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["assessment_id"], name: "index_questions_on_assessment_id"
     t.index ["created_by_id"], name: "index_questions_on_created_by_id"
     t.index ["format_id"], name: "index_questions_on_format_id"
-    t.index ["varient"], name: "index_questions_on_varient"
+    t.index ["variant"], name: "index_questions_on_variant"
   end
 
   create_table "solutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "question_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
-    t.text "variant"
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["created_by_id"], name: "index_solutions_on_created_by_id"
     t.index ["format_id"], name: "index_solutions_on_format_id"
     t.index ["question_id"], name: "index_solutions_on_question_id"
-    t.index ["variant"], name: "index_solutions_on_variant"
   end
 
   create_table "translators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -10,24 +10,10 @@ class Solution < ApplicationRecord
   validates :content, :format, presence: true
 
   swagger_schema :Solution do
-    key :required, [:id, :content, :created_at, :variant, :format_id]
-    property :id do
-      key :type, :string
-      format 'uuid'
-    end
-    property :created_at do
-      key :type, :string
-      key :format, 'date-time'
-    end
-    property :variant, { type: :string }
-    property :format_id, { type: :string, format: :uuid  }
-
-    property :assets do
-      key :type, :array
-      items do
-        key :'$ref', :Asset
-      end
-    end
+    key :required, [:content, :created_at, :format_id]
+    property :variant,    type: :string
+    property :format_id,  type: :string, format: :uuid
+    property :content,    type: :string
   end
 
 end

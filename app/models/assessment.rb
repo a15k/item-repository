@@ -17,6 +17,7 @@ class Assessment < ApplicationRecord
     property :identifier, type: :string
     property :version,    type: :string
     property :visibility, type: :string
+    property :content,    type: :string
     property :format_id,  type: :string, format: :uuid
     property :questions do
       key :type, :array

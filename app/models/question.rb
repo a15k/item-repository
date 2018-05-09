@@ -11,29 +11,9 @@ class Question < ApplicationRecord
   validates :content, :created_by, :format, presence: true
 
   swagger_schema :Question do
-    key :required, [:id, :content, :created_at, :format_id]
-    property :id do
-      key :type, :string
-      format 'uuid'
-    end
-    property :created_at do
-      key :type, :string
-      key :format, 'date-time'
-    end
-
-    property :format_id, { type: :string, format: :uuid  }
-
-    property :solutions do
-      key :type, :array
-      items do
-        key :'$ref', :Solution
-      end
-    end
-    property :assets do
-      key :type, :array
-      items do
-        key :'$ref', :Asset
-      end
-    end
+    key :required, [:content, :created_at, :format_id]
+    property :format_id,  type: :string, format: :uuid
+    property :content,    type: :string
+    property :solutions,  type: :array, '$ref': :Solution
   end
 end

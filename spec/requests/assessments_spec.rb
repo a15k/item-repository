@@ -14,7 +14,7 @@ describe 'Assessments API', type: :request do
     expect(response).to be_ok
   end
 
-  fit 'can create an assessment' do
+  it 'can create an assessment' do
     format = FactoryBot.create(:format)
     expect {
       post "/api/v1/assessments.json", params: {
@@ -38,7 +38,6 @@ describe 'Assessments API', type: :request do
              ]
            }.to_json, headers: headers
       expect(response).to be_ok
-      pp response_json
       expect(response_json['success']).to be true
       expect(response_data['questions'].length).to eq 1
       expect(response_data['questions'][0]['solutions'].length).to eq 2

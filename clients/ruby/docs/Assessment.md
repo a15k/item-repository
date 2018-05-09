@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **identifier** | **String** |  | [optional] 
 **version** | **String** |  | 
 **visibility** | **String** |  | 
+**content** | **String** |  | 
 **format_id** | **String** |  | 
 **questions** | [**Array&lt;Question&gt;**](Question.md) |  | [optional] 
 

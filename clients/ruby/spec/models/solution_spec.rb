@@ -32,18 +32,6 @@ describe 'Solution' do
       expect(@instance).to be_instance_of(A15kClient::Solution)
     end
   end
-  describe 'test attribute "id"' do
-    it 'should work' do
-       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "created_at"' do
-    it 'should work' do
-       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "variant"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -56,7 +44,7 @@ describe 'Solution' do
     end
   end
 
-  describe 'test attribute "assets"' do
+  describe 'test attribute "content"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

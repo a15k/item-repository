@@ -15,36 +15,28 @@ require 'date'
 module A15kClient
 
   class Question
-    attr_accessor :id
-
-    attr_accessor :created_at
-
     attr_accessor :format_id
 
-    attr_accessor :solutions
+    attr_accessor :content
 
-    attr_accessor :assets
+    attr_accessor :solutions
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created_at' => :'created_at',
         :'format_id' => :'format_id',
-        :'solutions' => :'solutions',
-        :'assets' => :'assets'
+        :'content' => :'content',
+        :'solutions' => :'solutions'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
-        :'created_at' => :'DateTime',
         :'format_id' => :'String',
-        :'solutions' => :'Array<Solution>',
-        :'assets' => :'Array<Asset>'
+        :'content' => :'String',
+        :'solutions' => :'Solution'
       }
     end
 
@@ -56,28 +48,16 @@ module A15kClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
       if attributes.has_key?(:'format_id')
         self.format_id = attributes[:'format_id']
       end
 
-      if attributes.has_key?(:'solutions')
-        if (value = attributes[:'solutions']).is_a?(Array)
-          self.solutions = value
-        end
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
       end
 
-      if attributes.has_key?(:'assets')
-        if (value = attributes[:'assets']).is_a?(Array)
-          self.assets = value
-        end
+      if attributes.has_key?(:'solutions')
+        self.solutions = attributes[:'solutions']
       end
 
     end
@@ -86,16 +66,12 @@ module A15kClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @created_at.nil?
-        invalid_properties.push("invalid value for 'created_at', created_at cannot be nil.")
-      end
-
       if @format_id.nil?
         invalid_properties.push("invalid value for 'format_id', format_id cannot be nil.")
+      end
+
+      if @content.nil?
+        invalid_properties.push("invalid value for 'content', content cannot be nil.")
       end
 
       return invalid_properties
@@ -104,9 +80,8 @@ module A15kClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created_at.nil?
       return false if @format_id.nil?
+      return false if @content.nil?
       return true
     end
 
@@ -115,11 +90,9 @@ module A15kClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created_at == o.created_at &&
           format_id == o.format_id &&
-          solutions == o.solutions &&
-          assets == o.assets
+          content == o.content &&
+          solutions == o.solutions
     end
 
     # @see the `==` method
@@ -131,7 +104,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, format_id, solutions, assets].hash
+      [format_id, content, solutions].hash
     end
 
     # Builds the object from hash

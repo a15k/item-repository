@@ -3,10 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**created_at** | **DateTime** |  | 
-**variant** | **String** |  | 
+**variant** | **String** |  | [optional] 
 **format_id** | **String** |  | 
-**assets** | [**Array&lt;Asset&gt;**](Asset.md) |  | [optional] 
+**content** | **String** |  | 
 
 

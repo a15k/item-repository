@@ -15,36 +15,28 @@ require 'date'
 module A15kClient
 
   class Solution
-    attr_accessor :id
-
-    attr_accessor :created_at
-
     attr_accessor :variant
 
     attr_accessor :format_id
 
-    attr_accessor :assets
+    attr_accessor :content
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created_at' => :'created_at',
         :'variant' => :'variant',
         :'format_id' => :'format_id',
-        :'assets' => :'assets'
+        :'content' => :'content'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'id' => :'String',
-        :'created_at' => :'DateTime',
         :'variant' => :'String',
         :'format_id' => :'String',
-        :'assets' => :'Array<Asset>'
+        :'content' => :'String'
       }
     end
 
@@ -56,14 +48,6 @@ module A15kClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
       if attributes.has_key?(:'variant')
         self.variant = attributes[:'variant']
       end
@@ -72,10 +56,8 @@ module A15kClient
         self.format_id = attributes[:'format_id']
       end
 
-      if attributes.has_key?(:'assets')
-        if (value = attributes[:'assets']).is_a?(Array)
-          self.assets = value
-        end
+      if attributes.has_key?(:'content')
+        self.content = attributes[:'content']
       end
 
     end
@@ -84,20 +66,12 @@ module A15kClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push("invalid value for 'id', id cannot be nil.")
-      end
-
-      if @created_at.nil?
-        invalid_properties.push("invalid value for 'created_at', created_at cannot be nil.")
-      end
-
-      if @variant.nil?
-        invalid_properties.push("invalid value for 'variant', variant cannot be nil.")
-      end
-
       if @format_id.nil?
         invalid_properties.push("invalid value for 'format_id', format_id cannot be nil.")
+      end
+
+      if @content.nil?
+        invalid_properties.push("invalid value for 'content', content cannot be nil.")
       end
 
       return invalid_properties
@@ -106,10 +80,8 @@ module A15kClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @created_at.nil?
-      return false if @variant.nil?
       return false if @format_id.nil?
+      return false if @content.nil?
       return true
     end
 
@@ -118,11 +90,9 @@ module A15kClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created_at == o.created_at &&
           variant == o.variant &&
           format_id == o.format_id &&
-          assets == o.assets
+          content == o.content
     end
 
     # @see the `==` method
@@ -134,7 +104,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, variant, format_id, assets].hash
+      [variant, format_id, content].hash
     end
 
     # Builds the object from hash

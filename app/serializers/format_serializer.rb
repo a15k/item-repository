@@ -4,5 +4,9 @@ class FormatSerializer < Roar::Decorator
   property :id, type: String
   property :name
   property :identifier
-  property :description
+  property :specification
+  property :created_by,
+           reader: ->(user_options:, **) {
+    new_record? ? user_options[:current_user] : nil
+  }
 end

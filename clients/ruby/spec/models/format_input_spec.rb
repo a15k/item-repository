@@ -38,7 +38,7 @@ describe 'FormatInput' do
     end
   end
 
-  describe 'test attribute "description"' do
+  describe 'test attribute "specification"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

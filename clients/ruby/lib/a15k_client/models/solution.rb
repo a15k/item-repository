@@ -13,10 +13,12 @@ Swagger Codegen version: unset
 require 'date'
 
 module A15kClient
-
+  # A walkthrough of how to answer the question. This is often some prose combined with math formulas or diagrams. A Solution is not the answer to a question (e.g. it isn't the (a), (b), and (c) answers of a multiple choice question.)  Solutions are recommended but not required when contributing assessments. Additionally, other members may contribute solutions to your assessments without involving you. 
   class Solution
+    # The uuid of a previously registered format
     attr_accessor :format_id
 
+    # A walkthrough of how to answer the question.  The formatting the the content is indicated by the assessment's linked format
     attr_accessor :content
 
 

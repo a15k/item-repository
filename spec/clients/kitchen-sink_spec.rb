@@ -21,7 +21,7 @@ describe 'complete api flow', type: :api do
 
     # create a simple text based format
     format = formats.create_format(
-      name: 'plain-text', description: 'The plain text format uses ascii text'
+      name: 'plain-text', specification: 'The plain text format uses ascii text'
     ).data
 
     # double check that the new format is included in the listing
@@ -48,11 +48,25 @@ describe 'complete api flow', type: :api do
           **answer: b**
           EOC
         }
-      ]
+      ],
+      preview_html: <<~EOS
+       <div>
+         <p>
+          A car drives at 60 mph for half an hour.  How far does it travel?
+         </p>
+         <ul>
+          <li>a) 120 miles</li>
+          <li>b) 30 miles</li>
+          <li>c) 60 miles</li>
+         </ul>
+       </div>
+      EOS
     ).data
+
 
     fetched = assessments.get_assessment(assessment.id).data
     expect(fetched.questions[0].content).to include 'drives at 60 mph'
+    expect(fetched.preview_html).to include 'drives at 60 mph'
   end
 
 end

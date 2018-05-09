@@ -19,14 +19,14 @@ module A15kClient
     attr_accessor :name
 
     # A longer description that fully explains the format
-    attr_accessor :description
+    attr_accessor :specification
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
-        :'description' => :'description'
+        :'specification' => :'specification'
       }
     end
 
@@ -34,7 +34,7 @@ module A15kClient
     def self.swagger_types
       {
         :'name' => :'String',
-        :'description' => :'String'
+        :'specification' => :'String'
       }
     end
 
@@ -50,8 +50,8 @@ module A15kClient
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'description')
-        self.description = attributes[:'description']
+      if attributes.has_key?(:'specification')
+        self.specification = attributes[:'specification']
       end
 
     end
@@ -64,8 +64,8 @@ module A15kClient
         invalid_properties.push("invalid value for 'name', name cannot be nil.")
       end
 
-      if @description.nil?
-        invalid_properties.push("invalid value for 'description', description cannot be nil.")
+      if @specification.nil?
+        invalid_properties.push("invalid value for 'specification', specification cannot be nil.")
       end
 
       return invalid_properties
@@ -75,7 +75,7 @@ module A15kClient
     # @return true if the model is valid
     def valid?
       return false if @name.nil?
-      return false if @description.nil?
+      return false if @specification.nil?
       return true
     end
 
@@ -85,7 +85,7 @@ module A15kClient
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
-          description == o.description
+          specification == o.specification
     end
 
     # @see the `==` method
@@ -97,7 +97,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, description].hash
+      [name, specification].hash
     end
 
     # Builds the object from hash

@@ -11,6 +11,7 @@ describe 'Ruby client', type: :api do
   before(:each) {
     A15kClient.configure do |c|
       c.scheme = 'http'
+      # c.debugging = true
       c.host = "localhost:#{api_server_port}/"
       c.api_key['Authorization'] = authorization
     end
@@ -28,7 +29,7 @@ describe 'Ruby client', type: :api do
       expect(response.data).to be_a_kind_of(A15kClient::Assessment)
     end
 
-    it 'can be created' do
+    fit 'can be created' do
       response = api_instance.create_assessment(
         format_id: format.id,
         identifier: 'TEST-Test-AND-TEST-MORE',
@@ -40,14 +41,14 @@ describe 'Ruby client', type: :api do
               index: question_index,
               text: Faker::Lorem.paragraph
             }.to_json,
-            solutions: 3.times.map{ |solution_index|
+            solutions: [
               {
                 format_id: format.id,
                 content: {
-                  index: solution_index, text: Faker::Lorem.paragraph
+                  text: Faker::Lorem.paragraph
                 }.to_json,
               }
-            }
+            ]
           }
         }
       )
@@ -57,7 +58,7 @@ describe 'Ruby client', type: :api do
       expect(assessment.identifier).to eq('TEST-Test-AND-TEST-MORE')
       expect(assessment.format_id).to eq(format.id)
       expect(assessment.questions.length).to eq(2)
-      expect(assessment.questions[0].solutions.length).to eq(3)
+      expect(assessment.questions[0].solutions.length).to eq(1)
     end
 
   end
@@ -67,14 +68,14 @@ describe 'Ruby client', type: :api do
 
     it 'can be created' do
       response = api_instance.create_format(
-        name: 'test', description: 'this is an explanation of the format'
+        name: 'test', specification: 'this is an explanation of the format'
       )
       expect(response.success).to eq(true)
       expect(response.data).to be_a_kind_of(A15kClient::Format)
       expect(response.data.as_json).to(
         include(
           'name' => 'test',
-          'description' => 'this is an explanation of the format'
+          'specification' => 'this is an explanation of the format'
         )
       )
     end

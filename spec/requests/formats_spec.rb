@@ -18,7 +18,7 @@ describe 'Formats API', type: :request do
 
   it 'creates a format' do
     expect {
-      post "/api/v1/formats.json", params: {name: 'test', description: 'Test Format' }.to_json, headers: headers
+      post "/api/v1/formats.json", params: {name: 'test', specification: 'Test Format' }.to_json, headers: headers
       expect(response_json['success']).to be true
     }.to change {
       Format.count

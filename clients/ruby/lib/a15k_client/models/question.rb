@@ -13,12 +13,15 @@ Swagger Codegen version: unset
 require 'date'
 
 module A15kClient
-
+  # The container for all of the content needed to present an assessment and to grade it. E.g. for a multiple-choice assessment, the question would contain the stem, the answer choices, and the correct choice would be flagged.  Assessments typically only have one question. Multiple questions are allowed to support generative assessments. A generative assessment is a single assessment that has many variants, which are often randomly generated. Typically, the author of a generative assessment uses a small amount of code to create many variants of the same question where all of the numbers change between variants. Because these variants are essentially the same one original question, we bundle them all under one Assessment. 
   class Question
+    # The uuid of a previously registered format
     attr_accessor :format_id
 
+    # A key that links multiple questions together to form variants
     attr_accessor :variant
 
+    # The content of the question. The formatting the the content is indicated by the assessment's linked format
     attr_accessor :content
 
     attr_accessor :solutions
@@ -40,7 +43,7 @@ module A15kClient
         :'format_id' => :'String',
         :'variant' => :'String',
         :'content' => :'String',
-        :'solutions' => :'Solution'
+        :'solutions' => :'Array<Solution>'
       }
     end
 
@@ -65,7 +68,9 @@ module A15kClient
       end
 
       if attributes.has_key?(:'solutions')
-        self.solutions = attributes[:'solutions']
+        if (value = attributes[:'solutions']).is_a?(Array)
+          self.solutions = value
+        end
       end
 
     end

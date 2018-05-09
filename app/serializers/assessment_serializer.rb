@@ -7,6 +7,7 @@ class AssessmentSerializer < Roar::Decorator
   property :version
   property :visibility
   property :format_id
+  property :preview_html
   property :created_at
   property :created_by,
            reader: ->(user_options:, **) {

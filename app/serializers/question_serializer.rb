@@ -3,6 +3,7 @@ class QuestionSerializer < Roar::Decorator
 
   property :id
   property :content
+  property :variant
   property :created_at
   property :created_by,
            reader: ->(user_options:, **) {

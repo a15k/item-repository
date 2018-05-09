@@ -25,7 +25,7 @@ end
 unless Format.exists?(name: OX)
   Format.create!(
     name: OX,
-    description: 'Openstax exercise format',
+    specification: 'Openstax exercise format, see https://openstax.org/ for details',
     created_by: User.find_by(member_id: OX_MEMBER.id)
   )
 end

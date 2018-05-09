@@ -13,22 +13,50 @@ Swagger Codegen version: unset
 require 'date'
 
 module A15kClient
-
+  # The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants
   class Assessment
     attr_accessor :id
 
     attr_accessor :created_at
 
+    # A unique value that can be used to link the assessment back to the contributors copy
     attr_accessor :identifier
 
+    # The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier
     attr_accessor :version
 
+    # If the assessment may be viewed by the public, or only by other a15k members.  Defaults to \"internal\"
     attr_accessor :visibility
 
+    # If provided, will be used to generate a preview on the a15k website
+    attr_accessor :preview_html
+
+    # The uuid of a previously registered format
     attr_accessor :format_id
 
     attr_accessor :questions
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -38,6 +66,7 @@ module A15kClient
         :'identifier' => :'identifier',
         :'version' => :'version',
         :'visibility' => :'visibility',
+        :'preview_html' => :'preview_html',
         :'format_id' => :'format_id',
         :'questions' => :'questions'
       }
@@ -51,6 +80,7 @@ module A15kClient
         :'identifier' => :'String',
         :'version' => :'String',
         :'visibility' => :'String',
+        :'preview_html' => :'String',
         :'format_id' => :'String',
         :'questions' => :'Array<Question>'
       }
@@ -82,6 +112,10 @@ module A15kClient
 
       if attributes.has_key?(:'visibility')
         self.visibility = attributes[:'visibility']
+      end
+
+      if attributes.has_key?(:'preview_html')
+        self.preview_html = attributes[:'preview_html']
       end
 
       if attributes.has_key?(:'format_id')
@@ -130,8 +164,20 @@ module A15kClient
       return false if @created_at.nil?
       return false if @version.nil?
       return false if @visibility.nil?
+      visibility_validator = EnumAttributeValidator.new('String', ["internal", "external"])
+      return false unless visibility_validator.valid?(@visibility)
       return false if @format_id.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] visibility Object to be assigned
+    def visibility=(visibility)
+      validator = EnumAttributeValidator.new('String', ["internal", "external"])
+      unless validator.valid?(visibility)
+        fail ArgumentError, "invalid value for 'visibility', must be one of #{validator.allowable_values}."
+      end
+      @visibility = visibility
     end
 
     # Checks equality by comparing each attribute.
@@ -144,6 +190,7 @@ module A15kClient
           identifier == o.identifier &&
           version == o.version &&
           visibility == o.visibility &&
+          preview_html == o.preview_html &&
           format_id == o.format_id &&
           questions == o.questions
     end
@@ -157,7 +204,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, identifier, version, visibility, format_id, questions].hash
+      [id, created_at, identifier, version, visibility, preview_html, format_id, questions].hash
     end
 
     # Builds the object from hash

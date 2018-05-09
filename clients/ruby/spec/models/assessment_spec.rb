@@ -59,6 +59,16 @@ describe 'Assessment' do
   describe 'test attribute "visibility"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+       #validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["internal", "external"])
+       #validator.allowable_values.each do |value|
+       #  expect { @instance.visibility = value }.not_to raise_error
+       #end
+    end
+  end
+
+  describe 'test attribute "preview_html"' do
+    it 'should work' do
+       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 

@@ -25,13 +25,13 @@ class Api::V1::FormatsController < ApiController
   swagger_schema :FormatInput do
     allOf do
       schema do
-        key :required, [:name, :description]
+        key :required, [:name, :specification]
 
         property :name,
                  type: :string,
                  description: 'The name of the format'
 
-        property :description,
+        property :specification,
                  type: :string,
                  description: 'A longer description that fully explains the format'
 
@@ -68,13 +68,9 @@ class Api::V1::FormatsController < ApiController
   end
 
   def create
-    format_data = Api::V1::Bindings::FormatInput.new(
-      request.parameters.to_hash
-    ).to_hash.deep_symbolize_keys
-
-    format_data[:created_by] = current_user
-
-    format = Format.new(format_data)
+    format = FormatSerializer.new(
+      Format.new
+    ).from_hash(params, user_options: { current_user: current_user })
     render api_response data: format, success: format.save
   end
 

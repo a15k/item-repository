@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
     t.string "version", default: "1", null: false
     t.integer "visibility", limit: 2
     t.uuid "format_id", null: false
+    t.text "preview_html"
     t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_assessments_on_created_at"
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
   create_table "formats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name", null: false
     t.text "identifier", null: false
-    t.text "description", null: false
+    t.text "specification", null: false
     t.datetime "created_at", null: false
     t.uuid "created_by_id", null: false
     t.index ["created_at"], name: "index_formats_on_created_at"

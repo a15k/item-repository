@@ -25,8 +25,6 @@ module A15kClient
 
     attr_accessor :visibility
 
-    attr_accessor :content
-
     attr_accessor :format_id
 
     attr_accessor :questions
@@ -40,7 +38,6 @@ module A15kClient
         :'identifier' => :'identifier',
         :'version' => :'version',
         :'visibility' => :'visibility',
-        :'content' => :'content',
         :'format_id' => :'format_id',
         :'questions' => :'questions'
       }
@@ -54,7 +51,6 @@ module A15kClient
         :'identifier' => :'String',
         :'version' => :'String',
         :'visibility' => :'String',
-        :'content' => :'String',
         :'format_id' => :'String',
         :'questions' => :'Array<Question>'
       }
@@ -86,10 +82,6 @@ module A15kClient
 
       if attributes.has_key?(:'visibility')
         self.visibility = attributes[:'visibility']
-      end
-
-      if attributes.has_key?(:'content')
-        self.content = attributes[:'content']
       end
 
       if attributes.has_key?(:'format_id')
@@ -124,10 +116,6 @@ module A15kClient
         invalid_properties.push("invalid value for 'visibility', visibility cannot be nil.")
       end
 
-      if @content.nil?
-        invalid_properties.push("invalid value for 'content', content cannot be nil.")
-      end
-
       if @format_id.nil?
         invalid_properties.push("invalid value for 'format_id', format_id cannot be nil.")
       end
@@ -142,7 +130,6 @@ module A15kClient
       return false if @created_at.nil?
       return false if @version.nil?
       return false if @visibility.nil?
-      return false if @content.nil?
       return false if @format_id.nil?
       return true
     end
@@ -157,7 +144,6 @@ module A15kClient
           identifier == o.identifier &&
           version == o.version &&
           visibility == o.visibility &&
-          content == o.content &&
           format_id == o.format_id &&
           questions == o.questions
     end
@@ -171,7 +157,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, identifier, version, visibility, content, format_id, questions].hash
+      [id, created_at, identifier, version, visibility, format_id, questions].hash
     end
 
     # Builds the object from hash

@@ -4,7 +4,6 @@ class AssessmentSerializer < Roar::Decorator
 
   property :id
   property :identifier
-  property :content
   property :version
   property :visibility
   property :format_id

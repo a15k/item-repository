@@ -11,7 +11,6 @@ class Solution < ApplicationRecord
 
   swagger_schema :Solution do
     key :required, [:content, :created_at, :format_id]
-    property :variant,    type: :string
     property :format_id,  type: :string, format: :uuid
     property :content,    type: :string
   end

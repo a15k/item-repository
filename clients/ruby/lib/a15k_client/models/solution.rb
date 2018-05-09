@@ -15,8 +15,6 @@ require 'date'
 module A15kClient
 
   class Solution
-    attr_accessor :variant
-
     attr_accessor :format_id
 
     attr_accessor :content
@@ -25,7 +23,6 @@ module A15kClient
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'variant' => :'variant',
         :'format_id' => :'format_id',
         :'content' => :'content'
       }
@@ -34,7 +31,6 @@ module A15kClient
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'variant' => :'String',
         :'format_id' => :'String',
         :'content' => :'String'
       }
@@ -47,10 +43,6 @@ module A15kClient
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
-
-      if attributes.has_key?(:'variant')
-        self.variant = attributes[:'variant']
-      end
 
       if attributes.has_key?(:'format_id')
         self.format_id = attributes[:'format_id']
@@ -90,7 +82,6 @@ module A15kClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          variant == o.variant &&
           format_id == o.format_id &&
           content == o.content
     end
@@ -104,7 +95,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [variant, format_id, content].hash
+      [format_id, content].hash
     end
 
     # Builds the object from hash

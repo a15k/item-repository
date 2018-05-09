@@ -13,6 +13,7 @@ class Question < ApplicationRecord
   swagger_schema :Question do
     key :required, [:content, :created_at, :format_id]
     property :format_id,  type: :string, format: :uuid
+    property :variant,    type: :string
     property :content,    type: :string
     property :solutions,  type: :array, '$ref': :Solution
   end

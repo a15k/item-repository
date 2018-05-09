@@ -17,6 +17,8 @@ module A15kClient
   class Question
     attr_accessor :format_id
 
+    attr_accessor :variant
+
     attr_accessor :content
 
     attr_accessor :solutions
@@ -26,6 +28,7 @@ module A15kClient
     def self.attribute_map
       {
         :'format_id' => :'format_id',
+        :'variant' => :'variant',
         :'content' => :'content',
         :'solutions' => :'solutions'
       }
@@ -35,6 +38,7 @@ module A15kClient
     def self.swagger_types
       {
         :'format_id' => :'String',
+        :'variant' => :'String',
         :'content' => :'String',
         :'solutions' => :'Solution'
       }
@@ -50,6 +54,10 @@ module A15kClient
 
       if attributes.has_key?(:'format_id')
         self.format_id = attributes[:'format_id']
+      end
+
+      if attributes.has_key?(:'variant')
+        self.variant = attributes[:'variant']
       end
 
       if attributes.has_key?(:'content')
@@ -91,6 +99,7 @@ module A15kClient
       return true if self.equal?(o)
       self.class == o.class &&
           format_id == o.format_id &&
+          variant == o.variant &&
           content == o.content &&
           solutions == o.solutions
     end
@@ -104,7 +113,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_id, content, solutions].hash
+      [format_id, variant, content, solutions].hash
     end
 
     # Builds the object from hash

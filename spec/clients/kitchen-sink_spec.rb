@@ -35,45 +35,30 @@ describe 'complete api flow', type: :api do
       questions: [
         {
           format_id: format.id,
-          content: 'How much time do hippos spend in the water each day?',
+          content: <<~EOC
+             How much time do hippos spend in the water each day?
+
+             a) 2 hours
+             b) 16 hours
+             c) 24 hours
+
+             **answerkey:b**
+          EOC,
           solutions: [
-            { format_id: format.id, content: '2 hours'  },
-            { format_id: format.id, content: '16 hours' },
-            { format_id: format.id, content: '24 hours' },
-          ]
+            {
+              format_id: format.id,
+              content: <<~EOC
+                a) that seems really low, hippos love water
+                b) excellent!
+                c) Do they really stay in the water all day long?
+              EOC
         }
       ]
     ).data
 
-    # add a new version of the assessment that has a new question
-    assessment = assessments.create_assessment(
-      identifier: 'hippo-maddness', # matches id given in first assessment
-      version: '2', # this is new
-      format_id: format.id,
-      questions: [
-        assessment.questions[0].to_hash,
-        {
-          format_id: format.id,
-          content: 'A baby hippo is known as a what?',
-          solutions: [
-            { format_id: format.id, content: 'calf'   },
-            { format_id: format.id, content: 'kids'   },
-            { format_id: format.id, content: 'colt'   },
-            { format_id: format.id, content: 'murder' },
-          ]
-        }
-      ]
-    ).data
+    fetched = assessments.get_assessment(assessment.id).data
+    expect(fetched.questions[0].content).to include 'spend in the water'
 
-    expect(assessment.version).to eq('2')
-
-    # test that our assessment now has 2 questions
-    expect(assessment.questions.map(&:content)).to(
-      include(
-        "How much time do hippos spend in the water each day?",
-        "A baby hippo is known as a what?"
-      )
-    )
   end
 
 end

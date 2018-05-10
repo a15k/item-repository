@@ -50,15 +50,11 @@ gem 'lev', '~> 8.1.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 
-# using fork until https://github.com/Netflix/fast_jsonapi/pull/152 is merged
-gem 'fast_jsonapi', github: 'LifeTales/fast_jsonapi', branch: 'serialize_nested_includes'
-
 gem 'a15k_interactions', path: '../interactions-api/tmp/ruby-client'
 #branch: 'serialize_nested_includes'
 
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
-gem 'rswag'
 
 gem "jquery-rails", "~> 4.3"
 

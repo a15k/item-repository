@@ -90,4 +90,7 @@ group :test do
   gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'a15k_client', path: './clients/ruby'
+
+  gem "codecov"
+  gem "parallel_tests"
 end

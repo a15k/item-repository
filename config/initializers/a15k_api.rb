@@ -1,4 +1,4 @@
-require 'interactions/fake_api'
+require 'a15k'
 
 secrets = Rails.application.secrets.interactions_api
 

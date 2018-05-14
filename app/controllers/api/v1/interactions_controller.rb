@@ -1,31 +1,25 @@
 class Api::V1::InteractionsController < ApiController
 
   def index
-    apps = interactions_api.get_apps(group_id: current_user.member.id)
+    apps = A15K::Interactions.api.get_apps(group_id: current_user.member.id)
     render api_response data: apps, serializer: false
   end
 
 
   def create
-    app = interactions_api.create_app(group_id: current_user.member.id)
+    app = A15K::Interactions.api.create_app(group_id: current_user.member.id)
     render api_response data: app, serializer: false
   end
 
   def destroy
-    interactions_api.delete_app(params[:id])
+    A15K::Interactions.api.delete_app(params[:id])
     head :no_content
   end
 
   def update
     app = params.require(:interaction).permit(:name, whitelisted_domains: [])
-    interactions_api.update_app(params[:id], app: app)
+    A15K::Interactions.api.update_app(params[:id], app: app)
     render api_response data: app, serializer: false
-  end
-
-  private
-
-  def interactions_api
-    Rails.env.test? ? Interactions::FakeApi : A15kInteractions::AppsApi.new
   end
 
 end

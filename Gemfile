@@ -29,11 +29,10 @@ gem 'webpacker', '~> 3.4'
 gem 'versionist'
 gem 'swagger-blocks'
 gem 'swagger-docs'
-
+gem 'json_api_client'
 gem 'colorize'
-
-# Lev framework
-gem 'lev', '~> 8.1.0'
+gem 'roar'
+gem 'lev', github: 'nathanstitt/lev', branch: 'coerce-to_sym'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

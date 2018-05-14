@@ -29,7 +29,7 @@ describe 'Ruby client', type: :api do
       expect(response.data).to be_a_kind_of(A15kClient::Assessment)
     end
 
-    fit 'can be created' do
+    it 'can be created' do
       response = api_instance.create_assessment(
         format_id: format.id,
         identifier: 'TEST-Test-AND-TEST-MORE',

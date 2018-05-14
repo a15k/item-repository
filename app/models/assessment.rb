@@ -46,4 +46,9 @@ class Assessment < ApplicationRecord
       end
     end
   end
+
+
+  def public_json
+    AssessmentSerializer.new(self).as_json
+  end
 end

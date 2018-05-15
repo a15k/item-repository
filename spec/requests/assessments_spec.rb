@@ -14,6 +14,21 @@ describe 'Assessments API', type: :request do
     expect(response).to be_ok
   end
 
+  it "renders not found" do
+    get "/api/v1/assessments/1234.json", headers: headers
+    expect(response.status).to eq 404
+    expect(response).to_not be_ok
+    expect(response_json).to eq('success' => false, 'message' => 'Not Found', 'data' => {})
+  end
+
+  it "renders access denied" do
+    headers.delete('Authorization')
+    get "/api/v1/assessments/1234.json", headers: headers
+    expect(response.status).to eq 401
+    expect(response).to_not be_ok
+    expect(response_json).to eq('success' => false, 'message' => 'Access Denied', 'data' => {})
+  end
+
   it 'can create an assessment' do
     format = FactoryBot.create(:format)
     expect {

@@ -3,8 +3,4 @@
 
 require_relative 'config/application'
 
-RSpec.configure do |config|
-  config.swagger_dry_run = false
-end
-
 Rails.application.load_tasks

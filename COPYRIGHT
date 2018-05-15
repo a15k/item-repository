@@ -9,7 +9,7 @@ distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; withou
 even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the aforementioned license for more details.
 
-Components of OpenStax Tutor (e.g. libraries, gems, plugins, etc) are
+Components of this software (e.g. libraries, gems, plugins, etc) are
 licensed under various other open source licenses. All unmodified files from these
 and other sources retain their original copyright and license notices.  For a full
 listing, see the Gemfile and the contents of the assets directories.

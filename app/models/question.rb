@@ -4,8 +4,8 @@ class Question < ApplicationRecord
   belongs_to :assessment
   belongs_to :format
   belongs_to :created_by, class_name: 'User'
-  has_many :solutions, inverse_of: :question
-  has_many :assets, as: :owner
+  has_many :solutions, inverse_of: :question, dependent: :destroy
+  has_many :assets, as: :owner, dependent: :destroy
 
   # TODO add a validate method to format and use it to verify content is well-formed
   validates :content, :created_by, :format, presence: true
@@ -27,7 +27,7 @@ class Question < ApplicationRecord
              description: 'The uuid of a previously registered format'
 
     property :variant,    type: :string,
-             description: 'A key that links multiple questions together to form variants'
+             description: 'Identifies which variant of a generative item this question is. Only required for generative items.'
 
     property :content,    type: :string,
              description: "The content of the question. The formatting the the content is indicated by the assessment's linked format"

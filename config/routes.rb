@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       path: { value: 'v1' },
       header: {
         name: 'Accept',
-        value: 'application/vnd.interactions.a15k.org; version=1'
+        value: 'application/vnd.a15k.org; version=1'
       }
     ) do
 
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   get 'api/docs/v1', to: 'api/docs/v1#index'
-
+  get 'terms', to: 'home#terms'
   get '*path', to: 'home#index'
   root to: 'home#index'
 

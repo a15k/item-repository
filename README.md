@@ -5,7 +5,7 @@
 
 This contains the item repository for assesments.
 
-Further docs to be written
+Full api documentation is located at http://develop.a15k.org/
 
 PG USER:
 `createuser --superuser --pwprompt a15k_item_repo`

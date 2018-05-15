@@ -22,6 +22,10 @@ class A15KApplication extends React.Component {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  @action.bound onLogout(ev) {
+    ev.currentTarget.querySelector('form').submit();
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -38,7 +42,7 @@ class A15KApplication extends React.Component {
                 <MenuLink to="/search" name="Search" />
                 <DropdownItem divider />
                 <DropdownItem tag="div" onClick={this.onLogout}>
-                  <form path="/accounts/logout">
+                  <form action="/accounts/logout" method="post">
                     Logout
                   </form>
                 </DropdownItem>
@@ -56,7 +60,7 @@ class A15KApplication extends React.Component {
         </div>
       </BrowserRouter>
     );
-  };
+  }
 }
 
 whenDomReady(() => {

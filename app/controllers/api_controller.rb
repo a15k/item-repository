@@ -1,12 +1,15 @@
 class ApiController < ActionController::API
 
   before_action :authenticate_user!
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   protected
 
   def authenticate_user!
     unless current_user && !current_user.anonymous?
-      render json: { message: 'Access Denied', status: 'unauthorized' }, status: :unauthorized
+    render api_response(
+             data: {}, success: false, message: 'Access Denied', serializer: false
+           ).merge(status: :unauthorized)
     end
   end
 
@@ -28,9 +31,15 @@ class ApiController < ActionController::API
       json: {
         success: success,
         data: serialized_data(data, serializer),
-        message: message,
+        message: message
       }
     }
+  end
+
+  def record_not_found
+    render api_response(
+             data: {}, success: false, message: 'Not Found', serializer: false
+           ).merge(status: :not_found)
   end
 
   def serialized_data(data, serializer)

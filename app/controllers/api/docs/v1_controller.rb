@@ -3,7 +3,7 @@ class Api::Docs::V1Controller < ApplicationController
   layout 'docs'
 
   include Swagger::Blocks
-  ACCEPT_HEADER = 'application/json'
+  ACCEPT_HEADER = 'application/vnd.a15k.org; version=1'
 
   swagger_schema :Error do
     property :status_code do

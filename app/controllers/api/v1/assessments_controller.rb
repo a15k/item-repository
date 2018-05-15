@@ -51,6 +51,7 @@ class Api::V1::AssessmentsController < ApiController
         property :content,
                  type: :string,
                  description: "Content the applies to all questions and solutions.  The formatting the the content is indicated by the assessment's linked format"
+
         property :visibility,
                  type: :string,
                  format: :uuid,
@@ -110,7 +111,6 @@ class Api::V1::AssessmentsController < ApiController
         key :api_token, []
       end
       key :tags, ['Assessments']
-      key :produces, ['application/json']
       extend Api::SwaggerResponses
       success_schema(model: 'Assessment')
 

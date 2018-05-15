@@ -28,7 +28,7 @@ gem 'webpacker', '~> 3.4'
 
 gem 'versionist'
 gem 'swagger-blocks'
-gem 'swagger-docs'
+
 gem 'json_api_client'
 gem 'colorize'
 gem 'roar'

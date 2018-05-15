@@ -16,6 +16,7 @@ describe 'complete api flow', type: :api do
     end
   }
 
+
   it 'can use the api to do useful things' do
     formats = A15kClient::FormatsApi.new
 

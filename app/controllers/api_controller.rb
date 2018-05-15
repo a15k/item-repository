@@ -53,7 +53,7 @@ class ApiController < ActionController::API
 
   def serializer_for_record(data)
     klass = data.is_a?(ActiveRecord::Relation) ? data.klass : data.class
-    "#{klass.to_s}Serializer".constantize
+    "#{self.class.to_s.deconstantize}::#{klass.to_s}Serializer".constantize
   end
 
   ACTION_STATUS_NAMES = {

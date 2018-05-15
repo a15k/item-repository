@@ -1,7 +1,6 @@
 require 'strings'
 
 class Format < ApplicationRecord
-  include Swagger::Blocks
 
   belongs_to :created_by, class_name: 'User'
 
@@ -14,13 +13,4 @@ class Format < ApplicationRecord
     self.identifier = StringsHelper.code_identifier(name, padding: false)
   end
 
-  swagger_schema :Format do
-    key :required, [:id, :name, :specification]
-    property :id, type: :string, format: 'uuid'
-
-    property :name, type: :string, description: 'A short description of the format'
-
-    property :specification, type: :string, specification: 'A comprehensive description of the format'
-
-  end
 end

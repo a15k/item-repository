@@ -86,6 +86,7 @@ group :test do
   gem 'database_cleaner'
   gem 'a15k_client', path: './clients/ruby'
 
-  gem "codecov"
   gem "parallel_tests"
+  gem "codecov", require: false
+  gem "simplecov", require: false
 end

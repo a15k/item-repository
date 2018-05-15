@@ -29,7 +29,7 @@ describe 'Assessments API', type: :request do
     expect(response_json).to eq('success' => false, 'message' => 'Access Denied', 'data' => {})
   end
 
-  it 'can create an assessment' do
+  fit 'can create an assessment' do
     format = FactoryBot.create(:format)
     expect {
       post "/api/v1/assessments.json", params: {

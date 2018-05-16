@@ -1,6 +1,5 @@
 # coding: utf-8
 class Assessment < ApplicationRecord
-  include Swagger::Blocks
 
   belongs_to :format
   belongs_to :created_by, class_name: 'User'

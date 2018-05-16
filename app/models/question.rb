@@ -1,5 +1,4 @@
 class Question < ApplicationRecord
-  include Swagger::Blocks
 
   belongs_to :assessment
   belongs_to :format

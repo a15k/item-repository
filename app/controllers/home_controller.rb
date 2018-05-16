@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
-  def terms
-  end
+
+  layout 'application', only: [:index]
+  layout 'static', except: [:index]
+
 end

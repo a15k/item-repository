@@ -21,7 +21,15 @@ describe 'Assessments API', type: :request do
     expect(response_json).to eq('success' => false, 'message' => 'Not Found', 'data' => {})
   end
 
-  it "renders access denied" do
+  it "renders forbidden if header is incorrect" do
+    headers['Authorization'] = 'evil token'
+    get "/api/v1/assessments/1234.json", headers: headers
+    expect(response.status).to eq 403
+    expect(response).to_not be_ok
+    expect(response_json).to eq('success' => false, 'message' => 'Access is Forbidden', 'data' => {})
+  end
+
+  it "renders access denied if header is missing" do
     headers.delete('Authorization')
     get "/api/v1/assessments/1234.json", headers: headers
     expect(response.status).to eq 401
@@ -29,7 +37,7 @@ describe 'Assessments API', type: :request do
     expect(response_json).to eq('success' => false, 'message' => 'Access Denied', 'data' => {})
   end
 
-  fit 'can create an assessment' do
+  it 'can create an assessment' do
     format = FactoryBot.create(:format)
     expect {
       post "/api/v1/assessments.json", params: {

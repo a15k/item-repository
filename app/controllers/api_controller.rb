@@ -6,17 +6,25 @@ class ApiController < ActionController::API
   protected
 
   def authenticate_user!
-    unless current_user && !current_user.anonymous?
-    render api_response(
-             data: {}, success: false, message: 'Access Denied', serializer: false
-           ).merge(status: :unauthorized)
+    return true if current_user && !current_user.anonymous?
+    if authorization_token.present?
+      render api_response(
+               data: {}, success: false, message: 'Access is Forbidden', serializer: false
+             ).merge(status: :forbidden)
+    else
+      render api_response(
+               data: {}, success: false, message: 'Access Denied', serializer: false
+             ).merge(status: :unauthorized)
     end
   end
 
+  def authorization_token
+    request.headers['Authorization']
+  end
+
   def current_user
-    token = request.headers['Authorization']
-    return nil unless token.present?
-    decoded = Access::Token.decode(authorization: token)
+    return nil unless authorization_token.present?
+    decoded = Access::Token.decode(authorization: authorization_token)
     if decoded && decoded['id']
       User.where(id: decoded['id']).first
     end

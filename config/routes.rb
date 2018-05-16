@@ -8,11 +8,7 @@ Rails.application.routes.draw do
     api_version(
       module: 'V1',
       default: true,
-      path: { value: 'v1' },
-      header: {
-        name: 'Accept',
-        value: 'application/vnd.a15k.org; version=1'
-      }
+      path: { value: 'v1' }
     ) do
 
       resources :formats, only: [:index, :create]

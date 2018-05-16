@@ -3,7 +3,7 @@ class Api::Docs::V1Controller < ApplicationController
   layout 'docs'
 
   include Swagger::Blocks
-  ACCEPT_HEADER = 'application/vnd.a15k.org; version=1'
+  ACCEPT_HEADER = 'application/json'
 
   swagger_schema :Error do
     property :status_code do
@@ -27,8 +27,12 @@ class Api::Docs::V1Controller < ApplicationController
       key :description, <<~DESC
           >
           Stores content for the Assessment Network
-          Requests to this API must include #{ACCEPT_HEADER} in the `Accept` header.
-          All endpoints require an API key to be passed in the request header.  API keys can be obtained by members at www.a15k.org.
+
+          API Version is specified in the URL path as `api/<version>/resource`
+          Version will default to the latest if it's ommited
+
+          All endpoints require an API key to be passed in the request header.
+          API keys can be obtained by members at www.a15k.org.
       DESC
       key :termsOfService, 'http://a15k.org/terms/'
       contact do

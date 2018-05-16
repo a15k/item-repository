@@ -8,12 +8,11 @@ module A15K::Metadata
     end
 
     def add_assessment(assessment)
-#      p assessment.public_json,
       model = JsonApi::Resource.new(
         uuid: assessment.id,
         uri: "https://a15k.org/api/#{assessment.id}.json",
         resource_type: 'assessment',
-        content: assessment.public_json.to_json,
+        content: Api::V1::AssessmentSerializer.new(assessment).to_json,
       )
       model.relationships.format = JsonApi::Format.new(
         id: assessment.format.id,

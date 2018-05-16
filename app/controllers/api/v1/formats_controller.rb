@@ -53,7 +53,7 @@ class Api::V1::FormatsController < ApiController
   def create
     format = Api::V1::FormatSerializer.new(
       Format.new
-    ).from_hash(params, user_options: { current_user: current_user })
+    ).from_hash(params, user_options: { current_member: current_member })
     render api_response data: format, success: format.save
   end
 

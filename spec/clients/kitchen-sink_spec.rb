@@ -4,9 +4,8 @@ require 'rack/test'
 
 describe 'complete api flow', type: :api do
 
-  let(:user) { FactoryBot.create(:user) }
   let(:format) { FactoryBot.create(:format) }
-  let(:authorization) { Access::Token.for_user(user) }
+  let(:authorization) { FactoryBot.create(:member).access_tokens.valid.first.as_jwt }
 
   before(:each) {
     A15kClient.configure do |c|

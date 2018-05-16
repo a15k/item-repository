@@ -1,12 +1,12 @@
 class ApiController < ActionController::API
 
-  before_action :authenticate_user!
+  before_action :authenticate_member!
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   protected
 
-  def authenticate_user!
-    return true if current_user && !current_user.anonymous?
+  def authenticate_member!
+    return true if current_member
     if authorization_token.present?
       render api_response(
                data: {}, success: false, message: 'Access is Forbidden', serializer: false
@@ -22,14 +22,11 @@ class ApiController < ActionController::API
     request.headers['Authorization']
   end
 
-  def current_user
-    return nil unless authorization_token.present?
-    decoded = Access::Token.decode(authorization: authorization_token)
-    if decoded && decoded['id']
-      User.where(id: decoded['id']).first
-    end
+  def current_member
+    @current_member ||= (
+      authorization_token.present? ? AccessToken.member_for(jwt: authorization_token) : nil
+    )
   end
-
 
   def api_response(data:,
                    success: response.status < 300,

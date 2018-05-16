@@ -2,7 +2,7 @@
 class Assessment < ApplicationRecord
 
   belongs_to :format
-  belongs_to :created_by, class_name: 'User'
+  belongs_to :created_by, class_name: 'Member'
 
   enum visibility: %i[internal external]
 

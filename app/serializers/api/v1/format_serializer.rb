@@ -15,7 +15,7 @@ module Api
                document: false,
                readable: false,
                reader: ->(user_options:, **) {
-        new_record? ? user_options[:current_user] : nil
+        new_record? ? user_options[:current_member] : nil
       }
 
     end

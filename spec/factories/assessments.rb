@@ -3,7 +3,7 @@ FactoryBot.define do
     format
 
     identifier { SecureRandom.uuid }
-    association :created_by, factory: :user
+    association :created_by, factory: :member
     visibility { :internal }
 
     after(:create) do |asm|

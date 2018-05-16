@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_21_160334) do
+ActiveRecord::Schema.define(version: 2018_05_16_193738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "access_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "member_id"
+    t.boolean "is_revoked", default: false, null: false
+    t.datetime "created_at"
+    t.index ["member_id"], name: "index_access_tokens_on_member_id"
+  end
 
   create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "identifier"
@@ -174,16 +181,17 @@ ActiveRecord::Schema.define(version: 2018_03_21_160334) do
     t.index ["member_id"], name: "index_users_on_member_id"
   end
 
+  add_foreign_key "access_tokens", "members"
   add_foreign_key "assessments", "formats"
-  add_foreign_key "assessments", "users", column: "created_by_id"
-  add_foreign_key "assets", "users", column: "created_by_id"
-  add_foreign_key "formats", "users", column: "created_by_id"
+  add_foreign_key "assessments", "members", column: "created_by_id"
+  add_foreign_key "assets", "members", column: "created_by_id"
+  add_foreign_key "formats", "members", column: "created_by_id"
   add_foreign_key "questions", "assessments"
   add_foreign_key "questions", "formats"
-  add_foreign_key "questions", "users", column: "created_by_id"
+  add_foreign_key "questions", "members", column: "created_by_id"
   add_foreign_key "solutions", "formats"
+  add_foreign_key "solutions", "members", column: "created_by_id"
   add_foreign_key "solutions", "questions"
-  add_foreign_key "solutions", "users", column: "created_by_id"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
   add_foreign_key "users", "members"

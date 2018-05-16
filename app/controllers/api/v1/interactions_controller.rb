@@ -1,13 +1,13 @@
 class Api::V1::InteractionsController < ApiController
 
   def index
-    apps = A15K::Interactions.api.get_apps(group_id: current_user.member.id)
+    apps = A15K::Interactions.api.get_apps(group_id: current_member.id)
     render api_response data: apps, serializer: false
   end
 
 
   def create
-    app = A15K::Interactions.api.create_app(group_id: current_user.member.id)
+    app = A15K::Interactions.api.create_app(group_id: current_member.id)
     render api_response data: app, serializer: false
   end
 

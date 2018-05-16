@@ -8,13 +8,6 @@
   </head>
   <body>
     <div id="application-root">
-      <script id="bootstrap-data" type="text/json">
-        <%= {
-            user: current_user,
-            interactions_api_url: Rails.application.secrets.interactions_api[:url],
-            token: Access::Token.for_user(current_user),
-        }.to_json.html_safe %>
-      </script>
       <%= yield %>
     </div>
   </body>

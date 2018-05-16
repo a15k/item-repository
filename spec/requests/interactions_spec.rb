@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'Interactions API' do
-  let(:user) { FactoryBot.create(:user) }
-  let(:headers) { { 'AUTHORIZATION' => Access::Token.for_user(user) } }
+  let(:authorization) { FactoryBot.create(:member).access_tokens.valid.first.as_jwt }
+  let(:headers) { { 'AUTHORIZATION' => authorization } }
 
   it "lists available interactions" do
     get "/api/interactions", headers: headers

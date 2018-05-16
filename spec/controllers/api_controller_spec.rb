@@ -7,11 +7,26 @@ RSpec.describe ApiController, type: :controller do
     end
   end
 
-  describe "with a logged in user" do
-    let(:user) { FactoryBot.create(:user) }
+  describe "using a jwt token" do
+    let(:member) { FactoryBot.create(:member) }
 
-    it 'using a jwt token' do
-      token = Access::Token.for_user(user)
+    it "renders access denied if header is missing" do
+      get :index
+      expect(response.status).to eq 401
+      expect(response).to_not be_ok
+      expect(response_json).to eq('success' => false, 'message' => 'Access Denied', 'data' => {})
+    end
+
+    it "renders forbidden if header is incorrect" do
+      request.headers['Authorization'] = 'evil token'
+      get :index
+      expect(response.status).to eq 403
+      expect(response).to_not be_ok
+      expect(response_json).to eq('success' => false, 'message' => 'Access is Forbidden', 'data' => {})
+    end
+
+    it 'succeeds when token is present and valid' do
+      token = member.access_tokens.valid.first.as_jwt
       request.headers.merge!({ 'Authorization' => "Bearer #{token}" })
       get :index
       expect(response.status).to eq 200

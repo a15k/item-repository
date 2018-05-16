@@ -58,7 +58,7 @@ class Api::V1::AssessmentsController < ApiController
   def create
     assessment = Api::V1::AssessmentSerializer.new(
       Assessment.new,
-    ).from_hash(params, user_options: { current_user: current_user })
+    ).from_hash(params, user_options: { current_member: current_member })
     render api_response data: assessment, success: assessment.save
   end
 

@@ -2,7 +2,7 @@ require 'strings'
 
 class Format < ApplicationRecord
 
-  belongs_to :created_by, class_name: 'User'
+  belongs_to :created_by, class_name: 'Member'
 
   validates :identifier, :name, :specification, :created_by, presence: true
   validates :identifier, uniqueness: true

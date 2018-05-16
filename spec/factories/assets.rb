@@ -11,7 +11,7 @@ FactoryBot.define do
       association :owner, factory: :solution
     end
 
-    association :created_by, factory: :user
+    association :created_by, factory: :member
     content_type { ['text/html', 'application/json', 'image/png'].sample }
   end
 end

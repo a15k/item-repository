@@ -7,7 +7,6 @@ class Question < ApplicationRecord
   has_many :solutions, inverse_of: :question, dependent: :destroy
   has_many :assets, as: :owner, dependent: :destroy
 
-  # TODO add a validate method to format and use it to verify content is well-formed
   validates :content, :created_by, :format, presence: true
 
 end

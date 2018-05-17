@@ -14,8 +14,8 @@ class Api::V1::FormatsController < ApiController
       key :tags, ['Formats']
 
       extend Api::SwaggerResponses
-
-      success_schema(model: 'Format', format: :array)
+      include_404_schema
+      include_success_schema(model: 'Format', format: :array)
     end
   end
   def index
@@ -31,12 +31,6 @@ class Api::V1::FormatsController < ApiController
       end
       key :tags, ['Formats']
       parameter do
-        key :paramType, :body
-        key :name, :name
-        key :description, 'The name of the format'
-        key :required, true
-      end
-      parameter do
         key :name, :format
         key :in, :body
         key :description, 'Format to be created'
@@ -46,7 +40,7 @@ class Api::V1::FormatsController < ApiController
         end
       end
       extend Api::SwaggerResponses
-      success_schema(model: 'Format')
+      include_success_schema(model: 'Format')
     end
   end
 

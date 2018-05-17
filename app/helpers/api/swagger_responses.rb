@@ -10,10 +10,6 @@ module Api::SwaggerResponses
       key :description, 'Forbidden'
     end
 
-    base.response 404 do
-      key :description, 'Not found'
-    end
-
     base.response 500 do
       key :description, 'Server error.'
       schema do
@@ -23,7 +19,13 @@ module Api::SwaggerResponses
 
   end
 
-  def success_schema(
+  def include_404_schema
+    response 404 do
+      key :description, 'Not found'
+    end
+  end
+
+  def include_success_schema(
         model:,
         format: :single,
         description: "Success.  Returns all #{model.downcase.pluralize}"

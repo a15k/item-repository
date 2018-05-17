@@ -22,8 +22,8 @@ class Api::V1::AssessmentsController < ApiController
       end
 
       extend Api::SwaggerResponses
-
-      success_schema(model: 'Assessment')
+      include_404_schema
+      include_success_schema(model: 'Assessment')
     end
   end
   def show
@@ -38,9 +38,6 @@ class Api::V1::AssessmentsController < ApiController
         key :api_token, []
       end
       key :tags, ['Assessments']
-      extend Api::SwaggerResponses
-      success_schema(model: 'Assessment')
-
       parameter do
         key :name, :assessment
         key :in, :body
@@ -51,7 +48,7 @@ class Api::V1::AssessmentsController < ApiController
         end
       end
       extend Api::SwaggerResponses
-      success_schema(model: 'Assessment')
+      include_success_schema(model: 'Assessment')
     end
   end
 

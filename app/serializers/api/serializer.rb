@@ -4,7 +4,7 @@ module Api
       include Roar::JSON
       include Swagger::Blocks
 
-      ROAR_OPTION_KEYS = %i[reader extend class collection readable writable]
+      ROAR_OPTION_KEYS = %i[reader extend class collection readable writeable]
       INTERNAL_OPTION_KEYS = %i[document]
 
       class << self

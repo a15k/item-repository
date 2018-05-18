@@ -81,6 +81,7 @@ class Api::V1::AccessTokensController < ApiController
         end
       end
       extend Api::SwaggerResponses
+      include_404_schema
       include_success_schema(model: 'AccessToken')
     end
   end

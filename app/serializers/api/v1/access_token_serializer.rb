@@ -7,10 +7,10 @@ module Api
         key :required, [:id, :name, :specification]
       end
 
-      property :id, type: String, format: 'uuid'
+      property :id, type: :string, format: 'uuid'
       property :is_revoked, type: :boolean, description: 'Is the token de-activated and cannot be used'
-      property :name, type: String, description: 'The name assigned to the token so it can be identified'
-      property :token, type: String, writeable: false
+      property :name, type: :string, description: 'The name assigned to the token so it can be identified'
+      property :token, type: :string, writeable: false
 
       property :member_id,
                document: false,

@@ -7,8 +7,8 @@ module Api
         key :required, [:id, :name, :specification]
       end
 
-      property :id, type: String, format: 'uuid'
-      property :name, type: String, description: 'A short description of the format'
+      property :id, type: :string, format: 'uuid'
+      property :name, type: :string, description: 'A short description of the format'
       property :specification, type: :string, specification: 'A comprehensive description of the format'
 
       property :created_by,

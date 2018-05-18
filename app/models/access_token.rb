@@ -1,16 +1,13 @@
 class AccessToken < ApplicationRecord
 
   belongs_to :member
+  before_validation :set_default_name, on: :create
 
   scope :valid, -> { where(is_revoked: false) }
 
   ALGORITHM = 'HS256'
 
-  def expiration
-    30.days.from_now.to_i
-  end
-
-  def as_jwt
+  def token
     JWT.encode({ id: id, exp: expiration }, AccessToken.secret, ALGORITHM)
   end
 
@@ -29,6 +26,14 @@ class AccessToken < ApplicationRecord
   end
 
   private
+
+  def set_default_name
+    self.name ||= "Token ##{self.member.access_tokens.count}"
+  end
+
+  def expiration
+    30.days.from_now.to_i
+  end
 
   def self.secret
     Rails.application.secrets.secret_key_base

@@ -18,7 +18,7 @@ export default class ModelApi {
 
   constructor(model, baseUrl) {
     this.model = model;
-    this.path = baseUrl || model.constructor.identifiedBy;
+    this.path = baseUrl || model.constructor.baseUrl || model.constructor.identifiedBy;
   }
 
   @computed get isPending() {

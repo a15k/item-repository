@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
 
   create_table "access_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id"
+    t.text "name", null: false
     t.boolean "is_revoked", default: false, null: false
     t.datetime "created_at"
     t.index ["member_id"], name: "index_access_tokens_on_member_id"

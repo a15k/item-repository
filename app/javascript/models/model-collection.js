@@ -7,7 +7,7 @@ const Map = observable.map().constructor;
 
 export default class ModelCollection extends Map {
 
-  @lazyGetter api = new ModelApi(this, this.model.identifiedBy);
+  @lazyGetter api = new ModelApi(this, this.model.baseUrl || this.model.identifiedBy);
 
   constructor(model, baseUrl) {
     super();

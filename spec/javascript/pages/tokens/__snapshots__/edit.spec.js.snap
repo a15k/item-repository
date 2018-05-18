@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TokensEdit matches snapshot 1`] = `
+<form
+  className="sc-bwzfXH fRUQqG"
+>
+  <div
+    className="form-group"
+  >
+    <label
+      className=""
+      htmlFor="name"
+    >
+      Name
+    </label>
+    <input
+      className="form-control"
+      defaultValue="Movies"
+      id="name"
+      name="name"
+      type="text"
+    />
+  </div>
+  <h3>
+    Tokens
+  </h3>
+  <textarea
+    readOnly={true}
+    value="8700c4e3-5b9e-41f5-9e6a-768cc5796d96-fc028b7b-635e-4d7a-a00f-2b0eae9f8604-865c8911-9b92-4009-9e7c-1f6f1ce4c967-03e6c097-3f41-4a1e-ba95-731031eb6f8b"
+  />
+  <div
+    className="d-flex justify-content-end"
+  >
+    <button
+      className="sc-bdVaJa kaVmVf btn btn-secondary"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-save fa-w-14 icon"
+        data-icon="save"
+        data-prefix="fas"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+      <span>
+        Save
+      </span>
+    </button>
+  </div>
+</form>
+`;

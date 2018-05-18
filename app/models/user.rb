@@ -14,4 +14,6 @@ class User < ApplicationRecord
     false
   end
 
+  enum role: %i[power_user standard_user]
+
 end

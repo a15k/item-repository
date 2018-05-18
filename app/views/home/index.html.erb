@@ -15,7 +15,7 @@
         <%= {
             user: current_user,
             interactions_api_url: Rails.application.secrets.interactions_api[:url],
-            token: current_user.member.access_tokens.valid.first,
+            token: current_user.member.access_tokens.valid.first.token,
         }.to_json.html_safe %>
       </script>
 <% end %>

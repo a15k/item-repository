@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     ) do
 
       resources :formats, only: [:index, :create]
+      resources :access_tokens
       resources :assessments
       resources :interactions
     end

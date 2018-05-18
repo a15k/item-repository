@@ -13,12 +13,7 @@ import Edit from './interactions/edit';
 export default class Interactions extends React.Component {
 
   componentDidMount() {
-
-    // FIXME remove this, is only for debugging
-    InteractionApp.collection.api.fetch()
-      .then(() => {
-        this.editingapp = InteractionApp.collection.array[0];
-      });
+    InteractionApp.collection.api.fetch();
   }
 
   @observable editingApp;

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Formats API', type: :request do
-  let(:authorization) { FactoryBot.create(:member).access_tokens.valid.first.as_jwt }
+  let(:authorization) { FactoryBot.create(:member).access_tokens.valid.first.token }
   let(:headers) {
     { "CONTENT_TYPE" => "application/json", 'Authorization' =>  authorization }
   }

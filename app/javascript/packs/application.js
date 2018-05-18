@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import whenDomReady from 'when-dom-ready';
 import User from '../models/user';
 import InteractionsApp from '../models/interaction-app';
-import { Home, Search, Interactions, NotFound } from '../pages';
+import * as Pages from '../pages';
 
 const MenuLink = ({ to, name }) => (
   <NavLink activeClassName="active" className="dropdown-item" to={to}>
@@ -40,6 +40,7 @@ class A15KApplication extends React.Component {
 
                 <MenuLink to="/interactions" name="Interactions" />
                 <MenuLink to="/search" name="Search" />
+                <MenuLink to="/tokens" name="Tokens" />
                 <DropdownItem divider />
                 <DropdownItem tag="div" onClick={this.onLogout}>
                   <form action="/accounts/logout" method="post">
@@ -51,10 +52,11 @@ class A15KApplication extends React.Component {
           </nav>
           <Container>
             <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/search" component={Search} />
-              <Route path="/interactions" component={Interactions} />
-              <Route component={NotFound} />
+              <Route path="/" exact component={Pages.Home} />
+              <Route path="/search" component={Pages.Search} />
+              <Route path="/tokens" component={Pages.Tokens} />
+              <Route path="/interactions" component={Pages.Interactions} />
+              <Route component={Pages.NotFound} />
             </Switch>
           </Container>
         </div>

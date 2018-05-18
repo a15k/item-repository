@@ -59,8 +59,10 @@ class Api::Docs::V1Controller < ApplicationController
     Api::V1::AssessmentSerializer,
     Api::V1::QuestionSerializer,
     Api::V1::SolutionSerializer,
+    Api::V1::AccessTokenSerializer,
     Api::V1::FormatsController,
     Api::V1::AssessmentsController,
+    Api::V1::AccessTokensController,
     self
   ].freeze
 

@@ -7,12 +7,12 @@ module A15K::Metadata
       @user = user
     end
 
-    def add_assessment(assessment)
+    def create(assessment)
       model = JsonApi::Resource.new(
-        uuid: assessment.id,
+        id: assessment.id,
         uri: "https://a15k.org/api/#{assessment.id}.json",
         resource_type: 'assessment',
-        content: Api::V1::AssessmentSerializer.new(assessment).to_json,
+        content: ::Api::V1::AssessmentSerializer.new(assessment).to_json,
       )
       model.relationships.format = JsonApi::Format.new(
         id: assessment.format.id,
@@ -24,8 +24,11 @@ module A15K::Metadata
         id: Rails.application.secrets.metadata_api[:application_uuid]
       )
       model.save
-      ApiResult.new(model.last_result_set.errors)
+      ApiResult.new(model.id, model.last_result_set.errors)
     end
 
+    def retrieve(assessment)
+      JsonApi::Resource.find(assessment.id)
+    end
   end
 end

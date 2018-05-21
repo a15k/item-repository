@@ -1,8 +1,8 @@
 module A15K::Metadata
   class ApiResult
-    attr_reader :errors
+    attr_reader :id, :errors
 
-    def initialize(errors = [])
+    def initialize(id, errors = [])
       @errors = errors.freeze
     end
 

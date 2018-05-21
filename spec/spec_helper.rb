@@ -2,7 +2,7 @@ require_relative 'helpers/json_parse_helpers'
 
 require 'parallel_tests'
 require 'simplecov'
-SimpleCov.start
+#SimpleCov.start
 require 'codecov'
 
 SimpleCov.formatter = SimpleCov::Formatter::Codecov

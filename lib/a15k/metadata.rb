@@ -6,10 +6,8 @@ module A15K
 
   module Metadata
 
-    def self.api
-      @api ||= (
-        Rails.env.test? ? FakeApi.new : Api.new
-      )
+    def self.api(fake: Rails.env.test?, **args)
+        fake ? FakeApi.new(**args) : Api.new(**args)
     end
 
   end

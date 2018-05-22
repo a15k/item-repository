@@ -1,3 +1,4 @@
+require_relative 'metadata/assessment_to_metadata'
 require_relative 'metadata/api_result'
 require_relative 'metadata/fake_api'
 require_relative 'metadata/api'

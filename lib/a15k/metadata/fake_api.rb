@@ -8,6 +8,10 @@ module A15K::Metadata
       @user = user
     end
 
+    def query(clause, options = {})
+      @@created.values.select{|a| a.content =~ /#{clause}/ }
+    end
+
     def create(assessment)
       @@created[assessment.id] = OpenStruct.new(
         content: ::Api::V1::AssessmentSerializer.new(assessment).to_json

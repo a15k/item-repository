@@ -8,6 +8,10 @@ module A15K::Metadata
       @user = user
     end
 
+    def query(clause, options = {})
+      JsonApi::Resource.where({ query: clause }.merge(options)).all
+    end
+
     def create(assessment)
       resource = JsonApi::Resource.new(
         id: assessment.id,

@@ -5,7 +5,13 @@ require 'rack/test'
 describe 'Metadata repo client' do
   let(:user) { FactoryBot.create(:user) }
   let(:assessment) { FactoryBot.create :assessment }
-  let(:api) { A15K::Metadata.api(user: user) } #, fake: false) }
+  let(:api) { A15K::Metadata.api(user: user) }
+
+  it 'can search' do
+    assessment.questions.first.update_attributes! content: 'testing'
+    api.create(assessment)
+    expect(api.query('testing').length).to be >= 1
+  end
 
   it 'can create a resource for assessments' do
     result = api.create(assessment)

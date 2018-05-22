@@ -2,33 +2,42 @@ require_relative 'json_api'
 
 module A15K::Metadata
   class Api
+    include AssessmentToMetadata
 
     def initialize(user:)
       @user = user
     end
 
     def create(assessment)
-      model = JsonApi::Resource.new(
+      resource = JsonApi::Resource.new(
         id: assessment.id,
         uri: "https://a15k.org/api/#{assessment.id}.json",
         resource_type: 'assessment',
-        content: ::Api::V1::AssessmentSerializer.new(assessment).to_json,
+        content: content_for_assessment(assessment)
       )
-      model.relationships.format = JsonApi::Format.new(
+      resource.relationships.format = JsonApi::Format.new(
         id: assessment.format.id,
       )
-      model.relationships.application_user = JsonApi::ApplicationUser.new(
+      resource.relationships.application_user = JsonApi::ApplicationUser.new(
         id: @user.id,
       )
-      model.relationships.application = JsonApi::Application.new(
+      resource.relationships.application = JsonApi::Application.new(
         id: Rails.application.secrets.metadata_api[:application_uuid]
       )
-      model.save
-      ApiResult.new(model.id, model.last_result_set.errors)
+      resource.save
+      ApiResult.new(resource.id, resource.last_result_set.errors)
     end
 
     def retrieve(assessment)
       JsonApi::Resource.find(assessment.id)
+    end
+
+    def update(assessment)
+      resource = JsonApi::Resource.find(assessment.id).first
+      result = resource.update_attributes(
+        content: content_for_assessment(assessment)
+      )
+      ApiResult.new(assessment.id, result ? [] : resourse.errors)
     end
   end
 end

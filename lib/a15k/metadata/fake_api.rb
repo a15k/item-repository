@@ -1,5 +1,7 @@
 module A15K::Metadata
   class FakeApi
+    include AssessmentToMetadata
+
     @@created = {}
 
     def initialize(user:)
@@ -17,5 +19,12 @@ module A15K::Metadata
       found = @@created[assessment.id]
       found ? [found] : []
     end
+
+    def update(assessment)
+      found = @@created[assessment.id]
+      found.content = content_for_assessment(assessment) if found
+      ApiResult.new(assessment.id, found ? [] : ['not found'])
+    end
+
   end
 end

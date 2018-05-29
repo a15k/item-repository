@@ -3,7 +3,6 @@ module Api
   module V1
 
     class AssessmentSerializer < Serializer
-      include Roar::JSON
 
       swagger_schema :Assessment do
         key :description, "The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants"

@@ -4,7 +4,9 @@ class User < ApplicationRecord
              class_name: 'OpenStax::Accounts::Account',
              inverse_of: :profile
 
-  belongs_to :member
+  belongs_to :member, optional: true
+
+  enum role: %i[power_user standard_user]
 
   def self.anonymous
     ::User::Anonymous.instance
@@ -13,7 +15,4 @@ class User < ApplicationRecord
   def anonymous?
     false
   end
-
-  enum role: %i[power_user standard_user]
-
 end

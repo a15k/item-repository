@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     ) do
 
       resources :formats, only: [:index, :create]
+      resources :users do
+        post 'add', on: :collection
+      end
       resources :access_tokens
       resources :assessments
       resources :interactions

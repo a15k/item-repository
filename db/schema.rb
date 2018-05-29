@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "account_id", null: false
+    t.integer "role", limit: 2, default: 1
     t.uuid "member_id"
     t.index ["member_id"], name: "index_users_on_member_id"
   end

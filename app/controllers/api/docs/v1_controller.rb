@@ -55,11 +55,13 @@ class Api::Docs::V1Controller < ApplicationController
 
   # A list of all classes that have swagger_* declarations.
   SWAGGERED_CLASSES = [
+    Api::V1::UserSerializer,
     Api::V1::FormatSerializer,
     Api::V1::AssessmentSerializer,
     Api::V1::QuestionSerializer,
     Api::V1::SolutionSerializer,
     Api::V1::AccessTokenSerializer,
+    Api::V1::UsersController,
     Api::V1::FormatsController,
     Api::V1::AssessmentsController,
     Api::V1::AccessTokensController,

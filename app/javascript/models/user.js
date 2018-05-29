@@ -9,6 +9,7 @@ export class User extends BaseModel {
 
   @identifier id;
   @field name;
+  @field username;
 
   @computed get isLoggedIn() {
     return Boolean(this.id);

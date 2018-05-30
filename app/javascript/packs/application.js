@@ -34,12 +34,12 @@ class A15KApplication extends React.Component {
             <Link className="navbar-brand" to="/">Home</Link>
             <Dropdown isOpen={this.isMenuOpen} toggle={this.onMenuToggle}>
               <DropdownToggle caret>
-                Dropdown
+                Actions
               </DropdownToggle>
               <DropdownMenu>
-
                 <MenuLink to="/interactions" name="Interactions" />
                 <MenuLink to="/search" name="Search" />
+                <MenuLink to="/users" name="Users" />
                 <MenuLink to="/tokens" name="Tokens" />
                 <DropdownItem divider />
                 <DropdownItem tag="div" onClick={this.onLogout}>
@@ -54,6 +54,7 @@ class A15KApplication extends React.Component {
             <Switch>
               <Route path="/" exact component={Pages.Home} />
               <Route path="/search" component={Pages.Search} />
+              <Route path="/users" component={Pages.Users} />
               <Route path="/tokens" component={Pages.Tokens} />
               <Route path="/interactions" component={Pages.Interactions} />
               <Route component={Pages.NotFound} />

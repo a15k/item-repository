@@ -9,7 +9,7 @@ export default class AccessToken extends BaseModel {
 
   @identifier id;
   @field is_revoked;
-  @field name;
+  @field name = '';
   @field token;
 
 }

@@ -2,31 +2,36 @@ import { observable, computed, action } from 'mobx';
 import { first, isArray } from 'lodash';
 import lazyGetter from '../helpers/lazy-getter.js';
 import ModelApi from './api';
-
-const Map = observable.map().constructor;
-
-export default class ModelCollection extends Map {
+export default class ModelCollection {
 
   @lazyGetter api = new ModelApi(this, this.model.baseUrl || this.model.identifiedBy);
 
+  @observable map = observable.map();
+  @observable errors;
+
   constructor(model, baseUrl) {
-    super();
     this.model = model;
     this.baseUrl = baseUrl;
-    this.intercept(this.onModelChange);
+  }
+
+  fetch({ id }) {
+    let url = this.api.baseUrl;
+    if (id) { url += `/${id}`; }
+    return this.api.request({ model: this, url });
   }
 
   objectToModel(dataOrModel) {
     return (dataOrModel instanceof this.model) ? dataOrModel : new this.model(dataOrModel);
   }
 
-  @action.bound onModelChange(change) {
-    change.newValue = this.objectToModel(change.newValue);
-    return change;
+  get array() {
+    return Array.from(this.map.values());
   }
 
-  get array() {
-    return Array.from(super.values());
+  delete(key){ this.map.delete(key); }
+  get(key) { return this.map.get(key); }
+  set(key, value) {
+    return this.map.set(key, this.objectToModel(value));
   }
 
   @action fromJSON(data) {

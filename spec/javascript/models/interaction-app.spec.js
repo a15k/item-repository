@@ -13,8 +13,9 @@ describe(InteractionApp, () => {
 
   test('fetching', () => {
     const id = 123;
-    fetch.mockResponseOnce(JSON.stringify({ data: [appJSON] }));
-    return InteractionApp.collection.api.fetch(id).then((models) => {
+    fetch.mockResponseOnce(JSON.stringify({ success: true, data: [appJSON] }));
+    return InteractionApp.collection.api.fetch(id).then((collection) => {
+      const models = collection.array;
       expect(models).toHaveLength(1);
       expect(models[0]).toBeInstanceOf(InteractionApp);
       expect(fetch.mock.calls.length).toEqual(1);

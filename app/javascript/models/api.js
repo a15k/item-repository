@@ -40,32 +40,36 @@ export default class ModelApi {
   }
 
   @action destroy({ id }) {
-    return this.request({ url: `${this.baseUrl}/${id}`, method: 'delete' });
+    return this.request({ model: this.model, url: `${this.baseUrl}/${id}`, method: 'delete' });
   }
 
   @action fetch(id) {
-    let url = this.baseUrl;
-    if (id) { url += `/${id}`; }
-    return this
-      .request({ url })
-      .then(json => this.model.fromJSON(json));
+    return this.model.fetch({ id });
   }
 
   @action create(model) {
-    return this.request({ body: JSON.stringify(model.serialize()), method: 'post' });
-  }
-
-  @action save(model) {
     return this.request({
-      url: `${this.baseUrl}/${model.id}`,
+      model,
+      method: 'post',
       body: JSON.stringify(model.serialize()),
-      method: 'put',
     });
   }
 
-  @action request({ url = this.baseUrl, method = 'get', body }) {
+  @action save(model) {
+    const { isNew } = model;
+    let url = this.baseUrl;
+    if (!isNew) { url += `/${model.id}`; }
+    return this.request({
+      url,
+      model,
+      method: isNew ? 'post' : 'put',
+      body: JSON.stringify(model.serialize()),
+    });
+  }
+
+  @action request({ model, url = this.baseUrl, method = 'get', format = '.json', body }) {
     this.requestsInProgress.set(method, true);
-    return fetch(`${url}.json`, {
+    return fetch(`${url}${format}`, {
       method: method.toUpperCase(),
       body,
       headers: {
@@ -73,12 +77,21 @@ export default class ModelApi {
         Authorization: Config.jwt,
       },
     })
-      .then(resp => 204 !== resp.status ? resp.json() : null)
-      .then(json => json && json.data ? json.data : null)
-      .then(json => {
+      .then(resp => {
         this.requestsInProgress.delete(fetch);
         this.requestCounts[method] += 1;
-        return json;
+        model.lastServerResponse = resp;
+        return resp.json && resp.status !== 204 ? // 204 == no content
+          resp.json() : { success: false, message: resp.statusText };
+      })
+      .then(msg => {
+        model.errors = null;
+        if (msg.success) {
+          model.fromJSON(msg.data);
+        } else {
+          model.errors = msg.errors || { base: msg.message };
+        }
+        return model;
       });
   }
 }

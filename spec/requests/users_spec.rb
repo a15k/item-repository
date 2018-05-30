@@ -48,4 +48,11 @@ describe 'Tokens API', type: :request do
     expect(ids).not_to include other_user.id
   end
 
+  it 'deletes users by removing the membership' do
+    expect{
+      delete "/api/v1/users/#{user.id}", headers: headers
+    }.to change{ user.reload.member_id }
+           .from(user.member_id)
+           .to(nil)
+  end
 end

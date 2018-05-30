@@ -1,13 +1,10 @@
-import {
-
-  ListGroup, ListGroupItem,
-} from 'reactstrap';
 import SwipeableViews from 'react-swipeable-views';
 import Button from '../components/button';
 import Listing from './tokens/listing';
 import Edit from './tokens/editing';
 import { React, ModelCollectionType, observer, observable, action, computed } from '../helpers/react';
-import AccessTokens from '../models/access-token';
+import AccessToken from '../models/access-token';
+import ButtonsBar from '../components/buttons-bar';
 
 @observer
 export default class Tokens extends React.Component {
@@ -17,7 +14,7 @@ export default class Tokens extends React.Component {
   }
 
   static defaultProps = {
-    tokens: AccessTokens.collection,
+    tokens: AccessToken.collection,
   }
 
   componentDidMount() {
@@ -30,10 +27,6 @@ export default class Tokens extends React.Component {
     return this.editing ? 1 : 0;
   }
 
-  // @action.bound onAdd() {
-  //   InteractionApp.collection.create({});
-  // }
-
   @action.bound onEdit(interaction) {
     this.editing = interaction;
   }
@@ -42,11 +35,9 @@ export default class Tokens extends React.Component {
     this.editing = null;
   }
 
-  // @action.bound onDelete(ev) {
-  //   InteractionApp.collection.destroy({
-  //     id: ev.currentTarget.parentElement.dataset.id,
-  //   });
-  // }
+  @action.bound onAdd() {
+    this.editing = new AccessToken();
+  }
 
   render() {
     return (
@@ -55,10 +46,12 @@ export default class Tokens extends React.Component {
           Access Tokens
         </h1>
         <SwipeableViews index={this.currentIndex}>
-          <Listing tokens = {this.props.tokens} onEdit={this.onEdit} />
-          <Edit token={this.editing} onDone={this.onEditComplete} />
+          <Listing tokens={this.props.tokens} onEdit={this.onEdit} />
+          <Edit isActive={!!this.editing} tokens={this.props.tokens} token={this.editing} onDone={this.onEditComplete} />
         </SwipeableViews>
-        <Button icon="plus" onClick={this.onAdd}>Add</Button>
+        <ButtonsBar>
+          {!this.editing && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
+        </ButtonsBar>
       </div>
     );
   }

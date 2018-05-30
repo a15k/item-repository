@@ -10,7 +10,7 @@ export default class TokensListing extends React.Component {
 
   static propTypes = {
     onEdit: PropTypes.func.isRequired,
-    tokens: ModelCollectionType,
+    tokens: ModelCollectionType.isRequired,
   }
 
   static defaultProps = {
@@ -29,16 +29,16 @@ export default class TokensListing extends React.Component {
     const { tokens } = this.props;
     return (
       <ListGroup>
-      {tokens.array.map((token) =>
-        <ListGroupItem
-          key={token.id}
-          data-id={token.id}
-          className="d-flex justify-content-between"
-        >
-          <div>{token.name}</div>
-          <Button icon="chevronRight" onClick={this.onEdit} />
-        </ListGroupItem>
-      )}
+        {tokens.array.map((token) =>
+          <ListGroupItem
+            key={token.id}
+            data-id={token.id}
+            className="d-flex justify-content-between align-items-center"
+          >
+            <div>{token.name}</div>
+            <Button icon="chevronRight" onClick={this.onEdit} />
+          </ListGroupItem>
+        )}
       </ListGroup>
     );
   }

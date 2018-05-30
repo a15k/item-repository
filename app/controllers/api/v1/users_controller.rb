@@ -68,7 +68,6 @@ class Api::V1::UsersController < ApiController
     render api_response data: user, success: true
   end
 
-
   swagger_path '/users/{id}' do
     operation :put do
       key :summary, 'alter a user'
@@ -88,16 +87,46 @@ class Api::V1::UsersController < ApiController
       include_success_schema(model: 'User')
     end
   end
-
   def update
     user = User.find(params[:id])
+    if validate_member(user)
+      user.assign_attributes(params.permit(:role))
+      render api_response data: user, success: user.save
+    end
+  end
+
+
+  swagger_path '/users/{id}' do
+    operation :delete do
+      key :summary, 'remove a user from membership'
+      key :operationId, 'deleteUser'
+      security do
+        key :api_token, []
+      end
+      key :tags, ['Users']
+
+      extend Api::SwaggerResponses
+      include_404_schema
+      include_success_schema(model: 'User')
+    end
+  end
+  def destroy
+    user = User.find(params[:id])
+    if validate_member(user)
+      user.member_id = nil
+      render api_response data: user, success: user.save
+    end
+  end
+
+  private
+
+  def validate_member(user)
     if user.member != current_member
       render api_response(
                serializer: false, message: 'not allowed', data: {}, success: false
              ).merge(status: :forbidden)
+      return false
     end
-    user.assign_attributes(params.permit(:role))
-    render api_response data: user, success: user.save
+    return true
   end
-
 end

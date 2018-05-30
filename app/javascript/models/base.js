@@ -1,4 +1,4 @@
-import { computed, action } from 'mobx';
+import { computed, action, observable } from 'mobx';
 import lazyGetter from '../helpers/lazy-getter.js';
 import ModelApi from './api';
 import ModelCollection from './model-collection';
@@ -11,6 +11,14 @@ export class BaseModel {
   }
 
   @lazyGetter api = new ModelApi(this);
+  @observable errors;
+
+  static fetch({ id }) {
+    let url = this.baseUrl;
+    if (id) { url += `/${id}`; }
+    const model = new this({ id });
+    this.api.request({ model, url });
+  }
 
   constructor(attrs) {
     if (attrs) this.fromJSON(attrs);
@@ -26,9 +34,12 @@ export class BaseModel {
   }
 
   save() {
-    this.api.save(this);
+    return this.api.save(this);
   }
 
+  @computed get isNew() {
+    return !this.id;
+  }
 }
 
 // export decorators so they can be easily imported into model classes

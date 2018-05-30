@@ -8,7 +8,7 @@ describe(User, () => {
     expect(user).toMatchObject({
       id: 1, name: 'Test',
     });
-    expect(user.isLoggedIn).toBe(true);
+    expect(user.isLoggedIn).toBe(false);
   });
 
 });

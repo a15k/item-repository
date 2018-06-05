@@ -14,8 +14,8 @@ const CheckBox = styled.input.attrs({
 margin-right: 1rem;
 `;
 const DeleteLabel = styled.div`
-width: 80;
-textAlign: center;
+width: 70px;
+text-align: center;
 `;
 @observer
 export default class Users extends React.Component {
@@ -43,7 +43,7 @@ export default class Users extends React.Component {
     user.save();
   }
 
-  @action.bound onInvite(ev) {
+  @action.bound onInvite() {
     this.props.users.invite(this.invite.value).then(() => {
       this.invite.value = '';
       this.invite.focus();
@@ -79,18 +79,14 @@ export default class Users extends React.Component {
 
         <InputGroup style={{ marginTop: 30 }}>
           <InputGroupAddon addonType="prepend">
-            Invite username:
+            Invite email:
           </InputGroupAddon>
-          <Input innerRef={(e) => this.invite = e} type="text" name="username" />
+          <Input type="email" innerRef={(e) => this.invite = e} name="email" />
           <InputGroupAddon addonType="append">
-            <Button icon="save" onClick={this.onInvite} />
+            <Button icon="envelope" onClick={this.onInvite} />
           </InputGroupAddon>
         </InputGroup>
-
-        <br />
-
         <ErrorDisplay errors={users.errors} />
-
       </div>
     );
   }

@@ -1,6 +1,11 @@
 import { React } from '../helpers/react';
 import { Alert } from 'reactstrap';
 import { isEmpty, isString, trim, capitalize, map } from 'lodash';
+import styled from 'styled-components';
+
+const ErrorWrapper = styled.div`
+  margin: 1rem 0;
+`;
 
 function underscored(str) {
   return trim(str)
@@ -25,7 +30,8 @@ function toSentence(sentence, comma = ', ', nd = ' and ') {
   return '';
 }
 
-export default function ModelErrors({ errors, className }) {
+export default function ModelErrors({ model, errors, className }) {
+  if (model && isEmpty(errors)) { errors = model.errors; }
   if (isEmpty(errors)) return null;
 
   const msg = toSentence(
@@ -35,6 +41,8 @@ export default function ModelErrors({ errors, className }) {
   );
 
   return (
-    <Alert className={className} color="danger">{msg}</Alert>
+    <ErrorWrapper>
+      <Alert className={className} color="danger">{msg}</Alert>
+    </ErrorWrapper>
   );
 }

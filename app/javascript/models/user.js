@@ -35,11 +35,11 @@ export class User extends BaseModel {
 
 }
 
-User.collection.invite = function(username, role = 'standard_user') {
+User.collection.invite = function(email, role = 'standard_user') {
   const user = new User({ role });
   return user.api.request({
     model: this,
-    body: JSON.stringify({ role, username }),
+    body: JSON.stringify({ role, email }),
     method: 'post',
     url: `${user.api.baseUrl}/add`,
   });

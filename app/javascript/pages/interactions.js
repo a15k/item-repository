@@ -3,7 +3,6 @@ import {
 } from 'reactstrap';
 import Button from '../components/button';
 import { React, observer, observable, action, computed } from '../helpers/react';
-import Assessment from '../models/assessment';
 import InteractionApp from '../models/interaction-app';
 import SwipeableViews from 'react-swipeable-views';
 import Listing from './interactions/listing';

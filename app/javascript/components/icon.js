@@ -7,6 +7,7 @@ import signIn from '@fortawesome/fontawesome-free-solid/faSignInAlt';
 import signOut from '@fortawesome/fontawesome-free-solid/faSignOutAlt';
 import plus from '@fortawesome/fontawesome-free-solid/faPlus';
 import trash from '@fortawesome/fontawesome-free-solid/faTrashAlt';
+import envelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
 import chevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight';
 import chevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft';
 import save from '@fortawesome/fontawesome-free-solid/faSave';
@@ -16,6 +17,7 @@ const ICONS = {
   signOut,
   plus,
   trash,
+  envelope,
   chevronRight,
   chevronLeft,
   save,

@@ -14,10 +14,10 @@ export class BaseModel {
   @observable errors;
 
   static fetch({ id }) {
-    let url = this.baseUrl;
-    if (id) { url += `/${id}`; }
     const model = new this({ id });
-    this.api.request({ model, url });
+    let url = model.api.baseUrl;
+    if (id) { url += `/${id}`; }
+    return model.api.request({ model, url });
   }
 
   constructor(attrs) {

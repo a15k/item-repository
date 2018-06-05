@@ -8,5 +8,6 @@ export default class Accessment extends BaseModel {
   @identifier id;
   @field format_identifier;
   @field contents;
+  @field preview_html;
 
 }

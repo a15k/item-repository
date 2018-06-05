@@ -1,10 +1,15 @@
-import { React, observer, observable, action } from '../helpers/react';
+import { React, observer, observable, action, computed } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
   InputGroup, InputGroupAddon, Button, Input,
 } from 'reactstrap';
+import styled from 'styled-components';
 import Assessment from '../models/assessment';
 import ModelErrors from '../components/model-errors';
+
+const Preview = styled.div`
+margin-top: 1rem;
+`;
 
 @observer
 export default class Search extends React.Component {
@@ -29,6 +34,9 @@ export default class Search extends React.Component {
 
   @action.bound setInputRef(input) { this.inputRef = input; }
 
+  @computed get previewHTML() {
+    return { __html: this.assessment.preview_html };
+  }
   render() {
 
     return (
@@ -58,6 +66,7 @@ export default class Search extends React.Component {
           </InputGroupAddon>
         </InputGroup>
         <ModelErrors model={this.assessment} />
+        <Preview dangerouslySetInnerHTML={this.previewHTML} />
       </div>
     );
   }

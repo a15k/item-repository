@@ -33,6 +33,7 @@ gem 'json_api_client'
 gem 'colorize'
 gem 'roar'
 gem 'lev', github: 'nathanstitt/lev', branch: 'coerce-to_sym'
+gem 'faraday'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -50,7 +51,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 
 gem 'a15k_interactions', path: '../interactions-api/tmp/ruby-client'
-#branch: 'serialize_nested_includes'
 
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
@@ -84,7 +84,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'database_cleaner'
-  gem 'a15k_client', path: './clients/ruby'
+  gem 'a15k_client', path: './clients/1.0.0/ruby'
 
   gem "parallel_tests"
   gem "codecov", require: false

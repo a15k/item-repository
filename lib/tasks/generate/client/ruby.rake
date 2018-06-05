@@ -7,11 +7,11 @@ namespace 'generate:client' do
     Generate the Ruby API client in the clients directory.
   DESC
   task :ruby, [:api_major_version] => :environment do |tt,args|
-
-    output_dir = "#{Rails.application.root}/clients/ruby"
+    version = args[:api_major_version] || '1'
+    output_dir = "#{Rails.application.root}/clients/v#{version}/ruby"
     FileUtils::rm_rf(output_dir)
 
-    SwaggerCodegen.execute(args[:api_major_version] || '1') do |json|
+    SwaggerCodegen.execute(version) do |json|
       {
         cmd_options: %w[-l ruby],
         output_dir: output_dir,

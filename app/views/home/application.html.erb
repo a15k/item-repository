@@ -1,0 +1,8 @@
+<script id="bootstrap-data" type="text/json">
+  <%= {
+      user: current_user,
+      interactions_api_url: Rails.application.secrets.interactions_api[:url],
+      token: current_user.member.access_tokens.valid.first.token,
+      }.to_json.html_safe %>
+</script>
+<%= javascript_pack_tag('application') unless current_user.anonymous? %>

@@ -1,6 +1,13 @@
 class HomeController < ApplicationController
 
-  layout 'application', only: [:index]
-  layout 'static', except: [:index]
+  layout 'home'
 
+  def index
+    render case
+           when current_user.can_access_ui? then 'application'
+           when current_user.anonymous? then 'login'
+           else
+             'access_denied'
+           end
+  end
 end

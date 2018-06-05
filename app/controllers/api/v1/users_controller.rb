@@ -30,9 +30,9 @@ class Api::V1::UsersController < ApiController
       end
       key :tags, ['Users']
       parameter do
-        key :name, :username
+        key :name, :email
         key :in, :path
-        key :description, 'username of user to join to membership'
+        key :description, 'email of user to join to membership'
         key :required, true
       end
       parameter do
@@ -50,11 +50,12 @@ class Api::V1::UsersController < ApiController
     end
   end
   def add
+    account = A15K::OpenStax::Accounts.api.invite_user(email: params[:email])
     user = User
-      .where(openstax_accounts_accounts: {username: params[:username]})
+      .where(openstax_accounts_accounts: {id: account.id})
       .joins(:account)
-      .first!
-    if user.member
+      .first
+    if user && user.member && user.member != current_member
       render api_response(
                serializer: false,
                message: 'unable to claim already claimed account',
@@ -63,9 +64,11 @@ class Api::V1::UsersController < ApiController
              ).merge(status: :not_acceptable)
       return
     end
+    user ||= User.new
     user.role = params[:role]
     current_member.users << user
-    render api_response data: user, success: true
+    user.account = account
+    render api_response data: user, success: user.save
   end
 
   swagger_path '/users/{id}' do

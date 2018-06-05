@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def anonymous?
     false
   end
+
+  def can_access_ui?
+    member && power_user?
+  end
 end

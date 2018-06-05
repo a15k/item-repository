@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/a15k/interactions-api.git
+  revision: 07a10281782a290bc7ec81bb42ffefaf7f8b5c7c
+  branch: fix-client
+  glob: clients/0.1.0/ruby/*gemspec
+  specs:
+    a15k_interactions_api (0.1.0)
+      json (~> 2.1, >= 2.1.0)
+      typhoeus (~> 1.0, >= 1.0.1)
+
+GIT
   remote: https://github.com/nathanstitt/lev.git
   revision: a78207e4b7dd2597a8540d5de039fef1c544291e
   branch: coerce-to_sym
@@ -32,13 +42,6 @@ GIT
       rails (~> 5.1)
       representable (>= 2.0)
       roar (>= 1.0)
-
-PATH
-  remote: ../interactions-api/tmp/ruby-client
-  specs:
-    a15k_interactions (0.1.0)
-      json (~> 2.1, >= 2.1.0)
-      typhoeus (~> 1.0, >= 1.0.1)
 
 PATH
   remote: clients/1.0.0/ruby
@@ -418,7 +421,7 @@ PLATFORMS
 
 DEPENDENCIES
   a15k_client!
-  a15k_interactions!
+  a15k_interactions_api!
   bootsnap (>= 1.1.0)
   byebug
   capybara

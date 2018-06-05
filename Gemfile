@@ -50,7 +50,12 @@ gem 'faraday'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 
-gem 'a15k_interactions', path: '../interactions-api/tmp/ruby-client'
+# gem 'a15k_interactions', path: '../interactions-api/tmp/ruby-client'
+
+gem 'a15k_interactions_api',
+    git: 'https://github.com/a15k/interactions-api.git',
+    glob: 'clients/0.1.0/ruby/*gemspec',
+    branch: 'fix-client'
 
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'

@@ -2,7 +2,7 @@ module A15K::OpenStax
 
   module Accounts
 
-    def self.api(fake: Rails.env.test?, **args)
+    def self.api(fake: OpenStax::Accounts.configuration.enable_stubbing?, **args)
         fake ? FakeApi.new : Api.new
     end
 

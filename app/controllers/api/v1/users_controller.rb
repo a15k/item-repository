@@ -51,6 +51,10 @@ class Api::V1::UsersController < ApiController
   end
   def add
     account = A15K::OpenStax::Accounts.api.invite_user(email: params[:email])
+    if account.nil? || account.new_record?
+      render api_response data: {}, serializer: false, message: "Failed to create user", success: false
+      return
+    end
     user = User
       .where(openstax_accounts_accounts: {id: account.id})
       .joins(:account)
@@ -61,12 +65,11 @@ class Api::V1::UsersController < ApiController
                message: 'unable to claim already claimed account',
                data: {},
                success: false
-             ).merge(status: :not_acceptable)
-      return
+             ).merge(status: :not_acceptable) and return
     end
     user ||= User.new
     user.role = params[:role]
-    current_member.users << user
+    user.member = current_member
     user.account = account
     render api_response data: user, success: user.save
   end

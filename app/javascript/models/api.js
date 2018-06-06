@@ -1,6 +1,7 @@
 import { observable, computed, action } from 'mobx';
 import { readonly } from 'core-decorators';
 import Config from './config';
+import qs from 'qs';
 
 export default class ModelApi {
 
@@ -67,9 +68,14 @@ export default class ModelApi {
     });
   }
 
-  @action request({ model, url = this.baseUrl, method = 'get', format = '.json', body }) {
+  @action request({
+    model, url = this.baseUrl, method = 'get', body, query,
+  }) {
     this.requestsInProgress.set(method, true);
-    return fetch(`${url}${format}`, {
+    if (query) {
+      url += '?' + qs.stringify(query);
+    }
+    return fetch(url, {
       method: method.toUpperCase(),
       body,
       headers: {

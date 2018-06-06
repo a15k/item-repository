@@ -19,7 +19,7 @@ describe(InteractionApp, () => {
       expect(models).toHaveLength(1);
       expect(models[0]).toBeInstanceOf(InteractionApp);
       expect(fetch.mock.calls.length).toEqual(1);
-      expect(fetch.mock.calls[0][0]).toContain(`/interactions/${id}.json`);
+      expect(fetch.mock.calls[0][0]).toContain(`/interactions/${id}`);
       expect(fetch.mock.calls[0][1]).toMatchObject({ method: 'GET' });
       const app = InteractionApp.collection.get(responseUuid);
       expect(app).not.toBeUndefined();
@@ -32,7 +32,7 @@ describe(InteractionApp, () => {
     fetch.mockResponseOnce(JSON.stringify({ data: appJSON }));
     return InteractionApp.collection.create().then((created) => {
       expect(created).toBeInstanceOf(InteractionApp);
-      expect(fetch.mock.calls[0][0]).toContain('/interactions.json');
+      expect(fetch.mock.calls[0][0]).toContain('/interactions');
       expect(fetch.mock.calls[0][1]).toMatchObject({ method: 'POST' });
       const app = InteractionApp.collection.get(responseUuid);
       expect(app).not.toBeUndefined();
@@ -45,7 +45,7 @@ describe(InteractionApp, () => {
     InteractionApp.collection.set(id, appJSON);
     fetch.mockResponseOnce('', { status: 204 });
     return InteractionApp.collection.destroy({ id }).then(() => {
-      expect(fetch.mock.calls[0][0]).toContain(`/interactions/${id}.json`);
+      expect(fetch.mock.calls[0][0]).toContain(`/interactions/${id}`);
       expect(fetch.mock.calls[0][1]).toMatchObject({ method: 'DELETE' });
       expect(InteractionApp.collection.get(id)).toBeUndefined();
     });

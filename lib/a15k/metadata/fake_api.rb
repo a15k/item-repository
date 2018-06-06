@@ -4,10 +4,6 @@ module A15K::Metadata
 
     @@created = {}
 
-    def initialize(user:)
-      @user = user
-    end
-
     def query(clause, options = {})
       @@created.values.select{|a| a.content =~ /#{clause}/ }
     end

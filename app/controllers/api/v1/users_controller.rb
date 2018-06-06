@@ -60,12 +60,8 @@ class Api::V1::UsersController < ApiController
       .joins(:account)
       .first
     if user && user.member && user.member != current_member
-      render api_response(
-               serializer: false,
-               message: 'unable to claim already claimed account',
-               data: {},
-               success: false
-             ).merge(status: :not_acceptable) and return
+      render_invalid_response(message: 'unable to claim already claimed account')
+      return
     end
     user ||= User.new
     user.role = params[:role]

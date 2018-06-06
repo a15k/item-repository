@@ -4,10 +4,6 @@ module A15K::Metadata
   class Api
     include AssessmentToMetadata
 
-    def initialize(user:)
-      @user = user
-    end
-
     def query(clause, options = {})
       JsonApi::Resource.where({ query: clause }.merge(options)).all
     end
@@ -21,9 +17,6 @@ module A15K::Metadata
       )
       resource.relationships.format = JsonApi::Format.new(
         id: assessment.format.id,
-      )
-      resource.relationships.application_user = JsonApi::ApplicationUser.new(
-        id: @user.id,
       )
       resource.relationships.application = JsonApi::Application.new(
         id: Rails.application.secrets.metadata_api[:application_uuid]

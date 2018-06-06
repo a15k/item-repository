@@ -18,6 +18,15 @@ class ApiController < ActionController::API
     end
   end
 
+  def render_invalid_response(message: 'invalid!', status: :not_acceptable)
+    render api_response(
+               serializer: false,
+               message: message,
+               data: {},
+               success: false
+             ).merge(status: status)
+  end
+
   def authorization_token
     request.headers['Authorization']
   end

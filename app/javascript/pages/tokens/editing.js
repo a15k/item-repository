@@ -77,7 +77,7 @@ export default class TokensEdit extends React.Component {
         </FormGroup>
         {this.renderToken()}
         <ButtonsBar>
-          <Button icon="save" onClick={onDone}>Cancel</Button>
+          <Button icon="chevronLeft" onClick={onDone}>Cancel</Button>
           {token && <Button icon="save" color="primary" onClick={this.onSave}>Save</Button>}
         </ButtonsBar>
       </EditForm>

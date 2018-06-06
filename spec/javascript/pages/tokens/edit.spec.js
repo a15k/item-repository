@@ -8,6 +8,8 @@ describe(Edit, () => {
   beforeEach(() => {
     const tokens = Factory.accessTokenCollection({ count: 1 });
     props = {
+      tokens,
+      isActive: true,
       onDone: jest.fn(),
       token: tokens.array[0],
     };
@@ -27,7 +29,6 @@ describe(Edit, () => {
     const edit = mount(<Edit {...props} />);
     expect(edit).toRender(`input[defaultValue="${props.token.name}"]`);
     edit.find('[name="name"][className="form-control"]').getDOMNode().value = 'my token';
-
     edit.find('Button[icon="save"]').simulate('click');
     expect(fetch.mock.calls.length).toEqual(1);
     expect(JSON.parse(fetch.mock.calls[0][1].body)).toMatchObject({

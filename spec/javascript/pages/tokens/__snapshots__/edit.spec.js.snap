@@ -2,7 +2,7 @@
 
 exports[`TokensEdit matches snapshot 1`] = `
 <form
-  className="sc-bwzfXH fRUQqG"
+  className="sc-htpNat hbzTHP"
 >
   <div
     className="form-group"
@@ -21,18 +21,47 @@ exports[`TokensEdit matches snapshot 1`] = `
       type="text"
     />
   </div>
-  <h3>
-    Tokens
-  </h3>
-  <textarea
-    readOnly={true}
-    value="8700c4e3-5b9e-41f5-9e6a-768cc5796d96-fc028b7b-635e-4d7a-a00f-2b0eae9f8604-865c8911-9b92-4009-9e7c-1f6f1ce4c967-03e6c097-3f41-4a1e-ba95-731031eb6f8b"
-  />
   <div
-    className="d-flex justify-content-end"
+    className="token"
+  >
+    <h3>
+      Token
+    </h3>
+    <textarea
+      readOnly={true}
+      value="8700c4e3-5b9e-41f5-9e6a-768cc5796d96-fc028b7b-635e-4d7a-a00f-2b0eae9f8604-865c8911-9b92-4009-9e7c-1f6f1ce4c967-03e6c097-3f41-4a1e-ba95-731031eb6f8b"
+    />
+  </div>
+  <div
+    className="sc-bwzfXH ehHYlP"
   >
     <button
       className="sc-bdVaJa kaVmVf btn btn-secondary"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-chevron-left fa-w-10 icon"
+        data-icon="chevron-left"
+        data-prefix="fas"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 320 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+      <span>
+        Cancel
+      </span>
+    </button>
+    <button
+      className="sc-bdVaJa kaVmVf btn btn-primary"
       onClick={[Function]}
       type="button"
     >

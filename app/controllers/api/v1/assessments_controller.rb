@@ -13,12 +13,11 @@ class Api::V1::AssessmentsController < ApiController
       key :tags, ['Assessments']
 
       parameter do
-        key :name, :id
+        key :name, :q
         key :in, :path
-        key :description, 'UUID of assessment to fetch'
+        key :description, 'query to execute'
         key :required, true
-        key :type, :integer
-        key :format, :uuid
+        key :type, :string
       end
 
       extend Api::SwaggerResponses

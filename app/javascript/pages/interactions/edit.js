@@ -5,6 +5,7 @@ import Button from '../../components/button';
 import { React, PropTypes, observer, observable, action, computed } from '../../helpers/react';
 import Interaction from '../../models/interaction-app';
 import styled from 'styled-components';
+import ButtonsBar from '../../components/buttons-bar';
 
 const EditForm = styled.form`
 display: flex;
@@ -24,7 +25,7 @@ export default class InteractionEdit extends React.Component {
     const { app } = this.props;
     app.name = this.form.querySelector('input[name="name"]').value;
     app.whitelisted_domains = this.domains;
-    app.save();
+    app.save().then(this.props.onDone);
   }
 
   @computed get domains() {
@@ -75,9 +76,9 @@ export default class InteractionEdit extends React.Component {
         </ListGroup>
         <h3>Embed script tag</h3>
         <textarea readOnly value={app.embed_html} />
-        <div className="d-flex justify-content-end">
+        <ButtonsBar>
           <Button icon="save" onClick={this.onSave}>Save</Button>
-        </div>
+        </ButtonsBar>
       </EditForm>
     );
   }

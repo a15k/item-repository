@@ -7,6 +7,7 @@ import InteractionApp from '../models/interaction-app';
 import SwipeableViews from 'react-swipeable-views';
 import Listing from './interactions/listing';
 import Edit from './interactions/edit';
+import ButtonsBar from '../components/buttons-bar';
 
 @observer
 export default class Interactions extends React.Component {
@@ -51,7 +52,9 @@ export default class Interactions extends React.Component {
           <Listing onEdit={this.onEdit} />
           <Edit app={this.editingApp} onDone={this.onEditComplete} />
         </SwipeableViews>
-        {!this.editingApp && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
+        <ButtonsBar>
+          {!this.editingApp && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
+        </ButtonsBar>
       </div>
     );
   }

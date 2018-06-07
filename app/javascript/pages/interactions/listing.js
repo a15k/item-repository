@@ -36,7 +36,7 @@ export default class InteractionsListing extends React.Component {
             data-id={app.id}
             className="d-flex justify-content-between"
           >
-            {app.id}
+            {app.name || app.id}
             <Button icon="chevronRight" onClick={this.onEdit} />
           </ListGroupItem>
         )}

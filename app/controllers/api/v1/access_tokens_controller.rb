@@ -19,7 +19,7 @@ class Api::V1::AccessTokensController < ApiController
   end
 
   def index
-    render api_response data: AccessToken.all
+    render api_response data: current_member.access_tokens
   end
 
   swagger_path '/access_tokens' do
@@ -88,7 +88,7 @@ class Api::V1::AccessTokensController < ApiController
 
   def update
     token = Api::V1::AccessTokenSerializer.new(
-      AccessToken.find(params[:id])
+      current_member.access_tokens.find(params[:id])
     ).from_hash(params, user_options: { current_member: current_member })
     render api_response data: token, success: token.save
   end

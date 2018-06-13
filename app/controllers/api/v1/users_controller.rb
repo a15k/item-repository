@@ -12,7 +12,6 @@ class Api::V1::UsersController < ApiController
       key :tags, ['Users']
 
       extend Api::SwaggerResponses
-      include_404_schema
       include_success_schema(model: 'User', format: :array)
     end
   end

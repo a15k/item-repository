@@ -51,7 +51,7 @@ describe 'Tokens API', type: :request do
   end
 
   describe 'PUT' do
-    fit 'updates a token' do
+    it 'updates a token' do
       put "/api/v1/access_tokens/#{token.id}",
           params: {name: 'bad-token', is_revoked: true}.to_json, headers: headers
       expect(response_json['success']).to be true

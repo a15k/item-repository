@@ -26,7 +26,7 @@ class Api::V1::AssessmentsController < ApiController
   end
   def index
     if params[:q].blank?
-      render_invalid_response(message: 'must include "q" query parameter')
+      render api_response(success: false, message: 'must include "q" query parameter')
       return
     end
     found = A15K::Metadata.api.query(params[:q])

@@ -40,7 +40,6 @@ class Api::V1::UsersController < ApiController
         key :required, true
       end
       extend Api::SwaggerResponses
-      include_404_schema
       include_success_schema(model: 'User')
       response 406 do
         key :description, 'Given user cannot be added to member'
@@ -58,7 +57,7 @@ class Api::V1::UsersController < ApiController
       .joins(:account)
       .first
     if user && user.member && user.member != current_member
-      render_invalid_response(message: 'unable to claim already claimed account')
+      render api_response(success: false, message: 'unable to claim already claimed account')
       return
     end
     user ||= User.new
@@ -123,8 +122,8 @@ class Api::V1::UsersController < ApiController
   def validate_member(user)
     if user.member != current_member
       render api_response(
-               serializer: false, message: 'not allowed', data: {}, success: false
-             ).merge(status: :forbidden)
+               success: false, status: :forbidden,
+               serializer: false, message: 'not allowed')
       return false
     end
     return true

@@ -33,7 +33,7 @@ describe 'Tokens API', type: :request do
       post "/api/v1/users/add", headers: headers,
            params: { email: 'test@test.com', role: 'power_user' }.to_json
 
-      expect(response.status).to eq 406 # not_acceptable
+      expect(response.status).to eq 422
       expect(response_json['success']).to be false
     end
   end

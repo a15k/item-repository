@@ -8,23 +8,10 @@ class ApiController < ActionController::API
   def authenticate_member!
     return true if current_member
     if authorization_token.present?
-      render api_response(
-               data: {}, success: false, message: 'Access is Forbidden', serializer: false
-             ).merge(status: :forbidden)
+      render api_response(status: :forbidden, success: false, message: 'Access is Forbidden')
     else
-      render api_response(
-               data: {}, success: false, message: 'Access Denied', serializer: false
-             ).merge(status: :unauthorized)
+      render api_response(status: :unauthorized, success: false, message: 'Access Denied')
     end
-  end
-
-  def render_invalid_response(message: 'invalid!', status: :not_acceptable)
-    render api_response(
-               serializer: false,
-               message: message,
-               data: {},
-               success: false
-             ).merge(status: status)
   end
 
   def authorization_token
@@ -37,23 +24,23 @@ class ApiController < ActionController::API
     )
   end
 
-  def api_response(data:,
-                   success: response.status < 300,
+  def api_response(data: {},
+                   success: true,
+                   status: success ? :ok : :unprocessable_entity,
                    message: status_message(success: success, record: data),
                    serializer: serializer_for_record(data))
     {
+      status: status,
       json: {
         success: success,
         data: serialized_data(data, serializer),
         message: message
-      }
+      },
     }
   end
 
   def record_not_found
-    render api_response(
-             data: {}, success: false, message: 'Not Found', serializer: false
-           ).merge(status: :not_found)
+    render api_response(status: :not_found, success: false, message: 'Not Found')
   end
 
   def serialized_data(data, serializer)
@@ -66,6 +53,7 @@ class ApiController < ActionController::API
   end
 
   def serializer_for_record(data)
+    return false if data.is_a?(Hash) # hash doesn't need a serializer
     klass = data.is_a?(ActiveRecord::Relation) ? data.klass : data.class
     "#{self.class.to_s.deconstantize}::#{klass.to_s}Serializer".constantize
   end

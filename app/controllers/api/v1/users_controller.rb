@@ -4,8 +4,7 @@ class Api::V1::UsersController < ApiController
 
   swagger_path '/users' do
     operation :get do
-      key :summary, 'Get all users for the membership'
-      key :description, 'List all users'
+      key :summary, 'Get all users for the member'
       key :operationId, 'getUsers'
       security do
         key :api_token, []
@@ -23,7 +22,7 @@ class Api::V1::UsersController < ApiController
 
   swagger_path '/users/add' do
     operation :post do
-      key :summary, 'add a newly created user account to a membership'
+      key :summary, 'add a newly created user account to a member'
       key :operationId, 'claimUser'
       security do
         key :api_token, []
@@ -32,7 +31,7 @@ class Api::V1::UsersController < ApiController
       parameter do
         key :name, :email
         key :in, :path
-        key :description, 'email of user to join to membership'
+        key :description, 'email of user to join to member'
         key :required, true
       end
       parameter do
@@ -45,7 +44,7 @@ class Api::V1::UsersController < ApiController
       include_404_schema
       include_success_schema(model: 'User')
       response 406 do
-        key :description, 'Given user cannot be added to membership'
+        key :description, 'Given user cannot be added to member'
       end
     end
   end
@@ -100,7 +99,7 @@ class Api::V1::UsersController < ApiController
 
   swagger_path '/users/{id}' do
     operation :delete do
-      key :summary, 'remove a user from membership'
+      key :summary, 'remove a user from member'
       key :operationId, 'deleteUser'
       security do
         key :api_token, []

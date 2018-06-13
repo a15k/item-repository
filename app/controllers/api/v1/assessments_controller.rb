@@ -89,7 +89,7 @@ class Api::V1::AssessmentsController < ApiController
     success = assessment.save
     if success
       begin
-        A15K::Metadata.api.create(self)
+        A15K::Metadata.api.create(assessment)
       rescue => e
         Rails.logger.warn "Failed to create metadata for new assment: #{e}"
       end

@@ -5,11 +5,12 @@ module A15K::Metadata
     @@created = {}
 
     def query(clause, options = {})
-      @@created.values.select{|a| a.content =~ /#{clause}/ }
+      @@created.values.select{|a| a.content.include?(clause) }
     end
 
     def create(assessment)
       @@created[assessment.id] = OpenStruct.new(
+        id: assessment.id,
         content: ::Api::V1::AssessmentSerializer.new(assessment).to_json
       )
       ApiResult.new(assessment.id)

@@ -4,14 +4,17 @@ describe 'Tokens API', type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:member) { user.member }
 
+  let(:other_user) { FactoryBot.create(:user) }
+  let(:other_member) { other_user.member }
+
   let(:authorization) { member.access_tokens.valid.first.token }
   let(:headers) {
     { "CONTENT_TYPE" => "application/json", 'Authorization' =>  authorization }
   }
 
-  describe 'claiming a user account' do
+  describe 'inviting a user' do
 
-    it "can claim a user" do
+    it "can invite a user" do
       post "/api/v1/users/add", headers: headers,
            params: { email: 'test@test.com', role: 'power_user' }.to_json
       user = User.find(response_data['id'])
@@ -38,28 +41,50 @@ describe 'Tokens API', type: :request do
     end
   end
 
-  it 'can alter a users role' do
-    expect{
-      put "/api/v1/users/#{user.id}", headers: headers,
-          params: { role: 'power_user' }.to_json
-    }.to change{ user.reload.role }
-           .from('standard_user')
-           .to('power_user')
+  describe 'updating a user' do
+    it 'can alter a users role' do
+      expect{
+        put "/api/v1/users/#{user.id}", headers: headers,
+            params: { role: 'power_user' }.to_json
+      }.to change{ user.reload.role }
+             .from('standard_user')
+             .to('power_user')
+    end
+
+    it 'can only alter users for the current membership' do
+      expect{
+        put "/api/v1/users/#{other_user.id}", headers: headers,
+            params: { role: 'power_user' }.to_json
+        expect(response.status).to eq 403
+      }.not_to change{ other_user.reload.role }
+    end
   end
 
-  it 'lists users for a membership' do
-    other_user = FactoryBot.create(:user, member: nil)
-    get "/api/v1/users.json", headers: headers
-    ids = response_data.map{|u| u['id']}
-    expect(ids).to include user.id
-    expect(ids).not_to include other_user.id
+  describe 'listing users' do
+    it 'lists users for a membership' do
+      other_user = FactoryBot.create(:user, member: nil)
+      get "/api/v1/users.json", headers: headers
+      ids = response_data.map{|u| u['id']}
+      expect(ids).to include user.id
+      expect(ids).not_to include other_user.id
+    end
   end
 
-  it 'deletes users by removing the membership' do
-    expect{
-      delete "/api/v1/users/#{user.id}", headers: headers
-    }.to change{ user.reload.member_id }
-           .from(user.member_id)
-           .to(nil)
+  describe 'delete' do
+    it 'deletes users by removing the membership' do
+      expect{
+        delete "/api/v1/users/#{user.id}", headers: headers
+      }.to change{ user.reload.member_id }
+             .from(user.member_id)
+             .to(nil)
+    end
+
+    it 'can only delete own users' do
+      expect{
+        delete "/api/v1/users/#{other_user.id}", headers: headers
+        expect(response.status).to eq 403
+      }.not_to change{ other_user.reload.member_id }
+    end
+
   end
 end

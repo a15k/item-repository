@@ -13,12 +13,6 @@ gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
-
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
-gem 'jbuilder', '~> 2.5'
 
 # Gemfile
 gem 'webpacker', '~> 3.4'
@@ -32,28 +26,17 @@ gem 'roar'
 gem 'lev', github: 'nathanstitt/lev', branch: 'coerce-to_sym'
 gem 'faraday'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 
-# gem 'a15k_interactions', path: '../interactions-api/tmp/ruby-client'
-
 gem 'a15k_interactions_api',
     git: 'https://github.com/a15k/interactions-api.git',
     glob: 'clients/0.1.0/ruby/*gemspec',
-    ref: '66526ea14350f68af1efc9c3a17997efe99d0208'
+    ref: '510f2145e501625a541439a968c4f1d63ebe400c'
 
+# do not remove: CoffeeScript is needed for openstax_accounts
+gem 'coffee-rails', '~> 4.2'
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
 
@@ -86,6 +69,8 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'database_cleaner'
+
+  # load the client from it's relative path for testing
   gem 'a15k_client', path: './clients/1.0.0/ruby'
 
   gem "parallel_tests"

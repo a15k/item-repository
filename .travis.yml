@@ -1,0 +1,25 @@
+sudo: false
+dist: trusty
+language: ruby
+rvm:
+  - '2.5.0'
+cache: bundler
+bundler_args: --without production --retry=6
+addons:
+ postgresql: '9.5'
+branches:
+  only:
+    - master
+    - alpha
+    - beta
+    - /^int-.*$/
+    - /^release-.*$/
+before_script:
+  - export A15K_DB_USER=postgres
+  - export A15K_DB_PASS=
+  - export A15K_TEST_DB=travis_ci_test
+  - bundle exec rake db:create db:migrate --trace
+  - yarn install
+script:
+  - bundle exec rake spec
+  - npm run test

@@ -1,0 +1,12 @@
+<div class="splash">
+  <%= image_tag('edu-particles.svg', class: 'edu-particles') %>
+  <div class="welcome">
+    <h3>Your account cannot access the</h3>
+    <h1>Assessment Network</h1>
+    <form action="/accounts/logout" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" name="_method" value="delete" />
+      <input type="submit" class="btn btn-secondary" value="Logout">
+    </form>
+  </div>
+</div>

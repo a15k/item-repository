@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users renders listing 1`] = `
+<div
+  className="access-users"
+>
+  <h1>
+    Users
+  </h1>
+  <div
+    className="d-flex justify-content-end"
+  >
+    PowerUser?
+    <div
+      className="sc-ifAKCX fNMcFr"
+    >
+      Delete
+    </div>
+  </div>
+  <ul
+    className="list-group"
+  >
+    <li
+      className="d-flex align-items-center list-group-item"
+      data-id="379d79cc-cd42-443c-9f2e-15087a5bc518"
+    >
+      <div
+        className="sc-htpNat ccbDWo"
+      >
+        Mr. Imani Ankunding
+      </div>
+      <input
+        checked={true}
+        className="sc-bxivhb jBgGdK"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <button
+        className="sc-bdVaJa kaVmVf btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+          data-icon="trash-alt"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </button>
+    </li>
+    <li
+      className="d-flex align-items-center list-group-item"
+      data-id="5b9e1f51-e6a7-468c-8579-6d96fc028b7b"
+    >
+      <div
+        className="sc-htpNat ccbDWo"
+      >
+        Erling Walsh
+      </div>
+      <input
+        checked={false}
+        className="sc-bxivhb jBgGdK"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <button
+        className="sc-bdVaJa kaVmVf btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+          data-icon="trash-alt"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </button>
+    </li>
+    <li
+      className="d-flex align-items-center list-group-item"
+      data-id="00f2b0ea-e9f8-4604-865c-89119b920095"
+    >
+      <div
+        className="sc-htpNat ccbDWo"
+      >
+        Pattie Bernhard
+      </div>
+      <input
+        checked={true}
+        className="sc-bxivhb jBgGdK"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <button
+        className="sc-bdVaJa kaVmVf btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+          data-icon="trash-alt"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </button>
+    </li>
+  </ul>
+  <div
+    className="input-group"
+    style={
+      Object {
+        "marginTop": 30,
+      }
+    }
+  >
+    <div
+      className="input-group-prepend"
+    >
+      <span
+        className="input-group-text"
+      >
+        Invite email:
+      </span>
+    </div>
+    <input
+      className="form-control"
+      name="email"
+      type="email"
+    />
+    <div
+      className="input-group-append"
+    >
+      <button
+        className="sc-bdVaJa kaVmVf btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-envelope fa-w-16 icon"
+          data-icon="envelope"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+`;

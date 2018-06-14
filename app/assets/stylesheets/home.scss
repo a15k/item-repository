@@ -1,0 +1,46 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import 'bootstrap/scss/bootstrap';
+
+body {
+  font-family: 'Oswald', sans-serif;
+}
+
+.splash {
+  width: 60vw;
+  height: 60vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  margin: auto;
+  margin-top: 70px;
+  position: relative;
+
+  .edu-particles {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+  }
+
+  .welcome {
+    margin-top: -3vh;
+    text-align: center;
+    h1, h3 {
+      margin: 0;
+    }
+    h3 {
+      font-size: 3vw;
+    }
+    h1 {
+      font-size: 5vw;
+      margin-bottom: 1rem;
+    }
+  }
+
+}

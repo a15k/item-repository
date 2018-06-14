@@ -1,0 +1,659 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/assessments/{id}.json": {
+      "get": {
+        "summary": "Retrieves an assessment",
+        "tags": [
+          "Assessments"
+        ],
+        "security": [
+          {
+            "token": [
+
+            ]
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "a assessment is returned",
+            "schema": {
+              "type": "object",
+              "required": [
+                "data",
+                "included"
+              ],
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "type",
+                    "attributes"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "assessment"
+                      ]
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "required": [
+                        "version",
+                        "visibility",
+                        "created_at"
+                      ],
+                      "properties": {
+                        "version": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "visibility": {
+                          "type": "string",
+                          "enum": [
+                            "internal",
+                            "external"
+                          ]
+                        },
+                        "contents": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "included": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "type",
+                      "attributes"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "question",
+                          "solution"
+                        ]
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "required": [
+                          "content",
+                          "created_at",
+                          "format_id"
+                        ],
+                        "content": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "format_id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "varient": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "relationships": {
+                        "type": "object",
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "attributes": {
+                              "type": {
+                                "type": "string",
+                                "enum": [
+                                  "asset",
+                                  "question",
+                                  "solution"
+                                ]
+                              },
+                              "id": {
+                                "type": "string",
+                                "format": "uuid"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/assessments.json": {
+      "post": {
+        "summary": "create an assessment",
+        "tags": [
+          "Assessments"
+        ],
+        "security": [
+          {
+            "token": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "assessment",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "data"
+              ],
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "attributes"
+                  ],
+                  "properties": {
+                    "attributes": {
+                      "format_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "an assessment is created",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "attributes": {
+                    "format_id": "92552875-2e6e-4941-a2b2-4ddaecdd90f3",
+                    "content": "Ab accusamus sequi natus ea."
+                  },
+                  "relationships": {
+                    "questions": {
+                      "data": [
+                        {
+                          "type": "question",
+                          "attributes": {
+                            "format_id": "92552875-2e6e-4941-a2b2-4ddaecdd90f3",
+                            "content": "Atque eius tenetur laudantium vitae maiores sint itaque."
+                          },
+                          "relationships": {
+                            "solutions": {
+                              "data": [
+                                {
+                                  "type": "solution",
+                                  "attributes": {
+                                    "format_id": "92552875-2e6e-4941-a2b2-4ddaecdd90f3",
+                                    "content": "Modi eos ipsa quod qui inventore commodi fuga."
+                                  }
+                                },
+                                {
+                                  "type": "solution",
+                                  "attributes": {
+                                    "format_id": "92552875-2e6e-4941-a2b2-4ddaecdd90f3",
+                                    "content": "Et et quaerat reiciendis sunt aut libero dolore."
+                                  }
+                                },
+                                {
+                                  "type": "solution",
+                                  "attributes": {
+                                    "format_id": "92552875-2e6e-4941-a2b2-4ddaecdd90f3",
+                                    "content": "Porro facilis odio magnam."
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/formats.json": {
+      "get": {
+        "summary": "Retrieves all formats",
+        "tags": [
+          "Formats"
+        ],
+        "security": [
+          {
+            "token": [
+
+            ]
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "formats returned",
+            "schema": {
+              "type": "object",
+              "required": [
+                "data"
+              ],
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "title": "Format",
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "type"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "id": "1e8fa6f4-f3b9-4a60-9c14-3bd6d0ff97f0",
+                    "type": "format",
+                    "attributes": {
+                      "name": "etsy",
+                      "description": "Raw denim wayfarers green juice vinyl plaid neutra single-origin coffee williamsburg paleo."
+                    }
+                  },
+                  {
+                    "id": "17bbdf6e-e1f4-4949-bf8f-53555a3feb7d",
+                    "type": "format",
+                    "attributes": {
+                      "name": "chia",
+                      "description": "Single-origin coffee phlogiston lomo pour-over."
+                    }
+                  },
+                  {
+                    "id": "250472fd-e3f4-4c81-9e60-75ee129f61ad",
+                    "type": "format",
+                    "attributes": {
+                      "name": "normcore",
+                      "description": "Hashtag blog forage meggings."
+                    }
+                  },
+                  {
+                    "id": "c0d7c42c-acbf-4c09-bbc2-a247875866ed",
+                    "type": "format",
+                    "attributes": {
+                      "name": "iPhone",
+                      "description": "Chicharrones thundercats aesthetic cliche everyday."
+                    }
+                  },
+                  {
+                    "id": "c33e1391-cf0a-4d50-b1b6-b97f463e9e91",
+                    "type": "format",
+                    "attributes": {
+                      "name": "viral",
+                      "description": "Umami forage etsy shabby chic five dollar toast squid chartreuse wolf."
+                    }
+                  },
+                  {
+                    "id": "4df1237c-22e6-4b56-8fa7-3b7f08a04dea",
+                    "type": "format",
+                    "attributes": {
+                      "name": "pinterest",
+                      "description": "Cred 3 wolf moon photo booth venmo tofu try-hard chillwave umami locavore."
+                    }
+                  },
+                  {
+                    "id": "7f220022-ed06-414a-b363-ae6ba46e0256",
+                    "type": "format",
+                    "attributes": {
+                      "name": "asymmetrical",
+                      "description": "Five dollar toast readymade sriracha twee."
+                    }
+                  },
+                  {
+                    "id": "324a6992-7c26-4040-89a7-db7c255bc571",
+                    "type": "format",
+                    "attributes": {
+                      "name": "portland",
+                      "description": "Kombucha locavore gentrify post-ironic literally whatever marfa."
+                    }
+                  },
+                  {
+                    "id": "a6143b32-800a-4b35-8124-3104880a6f7f",
+                    "type": "format",
+                    "attributes": {
+                      "name": "squid",
+                      "description": "Fashion axe bespoke marfa umami five dollar toast fanny pack."
+                    }
+                  },
+                  {
+                    "id": "bb318a98-c9a2-4e71-ab06-94ee21901230",
+                    "type": "format",
+                    "attributes": {
+                      "name": "seitan",
+                      "description": "Freegan street literally food truck seitan semiotics pabst."
+                    }
+                  },
+                  {
+                    "id": "94a38943-e21a-412f-8126-3a7f1114eeb5",
+                    "type": "format",
+                    "attributes": {
+                      "name": "biodiesel",
+                      "description": "Echo celiac meditation truffaut mumblecore."
+                    }
+                  },
+                  {
+                    "id": "06661b1f-e94c-453d-babc-9f18d9ea8fb4",
+                    "type": "format",
+                    "attributes": {
+                      "name": "organic",
+                      "description": "Loko fashion axe crucifix 90's neutra asymmetrical poutine."
+                    }
+                  },
+                  {
+                    "id": "dcb13a0d-7c12-4449-9a20-729dcec034ad",
+                    "type": "format",
+                    "attributes": {
+                      "name": "Thundercats",
+                      "description": "Tumblr cliche trust fund ethical gentrify kickstarter waistcoat retro church-key."
+                    }
+                  },
+                  {
+                    "id": "c125eaa1-5fb6-4dfd-a093-aab43d86035d",
+                    "type": "format",
+                    "attributes": {
+                      "name": "street",
+                      "description": "Bicycle rights polaroid vegan literally mixtape pbr&b put a bird on it."
+                    }
+                  },
+                  {
+                    "id": "e98c5a42-9ddb-4380-9fe6-745c2ae8f334",
+                    "type": "format",
+                    "attributes": {
+                      "name": "brooklyn",
+                      "description": "Brunch freegan keytar trust fund mixtape flannel sartorial gluten-free franzen."
+                    }
+                  },
+                  {
+                    "id": "d7bbae3b-91c2-4f5a-834a-57f38987d446",
+                    "type": "format",
+                    "attributes": {
+                      "name": "readymade",
+                      "description": "Synth fingerstache kale chips locavore master stumptown authentic jean shorts craft beer."
+                    }
+                  },
+                  {
+                    "id": "50a46e44-130b-482e-a598-92566eedc918",
+                    "type": "format",
+                    "attributes": {
+                      "name": "letterpress",
+                      "description": "Sriracha xoxo fanny pack vinegar austin heirloom slow-carb leggings."
+                    }
+                  },
+                  {
+                    "id": "f2e4428b-30f8-4c80-82c3-1df588523f5c",
+                    "type": "format",
+                    "attributes": {
+                      "name": "Thundercats",
+                      "description": "Poutine deep v iphone intelligentsia carry fixie goth hashtag."
+                    }
+                  },
+                  {
+                    "id": "7e1f2bfa-3b5c-4028-ab38-38615eefadec",
+                    "type": "format",
+                    "attributes": {
+                      "name": "typewriter",
+                      "description": "Pug listicle bushwick gastropub flannel polaroid lumbersexual."
+                    }
+                  },
+                  {
+                    "id": "41216263-a896-4f68-9ecf-bf9a946f2429",
+                    "type": "format",
+                    "attributes": {
+                      "name": "freegan",
+                      "description": "Cardigan banh mi neutra cronut yolo fingerstache."
+                    }
+                  },
+                  {
+                    "id": "2385410b-a209-4052-a841-b99dbaa8a668",
+                    "type": "format",
+                    "attributes": {
+                      "name": "blog",
+                      "description": "Deep v slow-carb heirloom muggle magic."
+                    }
+                  },
+                  {
+                    "id": "4908fa16-64fe-410e-999e-93cd5a451b80",
+                    "type": "format",
+                    "attributes": {
+                      "name": "dreamcatcher",
+                      "description": "Retro umami organic 3 wolf moon ugh meh chambray humblebrag."
+                    }
+                  },
+                  {
+                    "id": "7a9c5eba-5067-42cb-9289-bf0915a4ff0b",
+                    "type": "format",
+                    "attributes": {
+                      "name": "Thundercats",
+                      "description": "Migas selfies tattooed master umami church-key chambray."
+                    }
+                  },
+                  {
+                    "id": "be47f648-b6a6-415d-86a0-9c4ab61fcba8",
+                    "type": "format",
+                    "attributes": {
+                      "name": "phlogiston",
+                      "description": "Yolo wayfarers five dollar toast post-ironic sartorial."
+                    }
+                  },
+                  {
+                    "id": "b8cf022d-3d9b-4903-b7d9-2eef04d864b1",
+                    "type": "format",
+                    "attributes": {
+                      "name": "meggings",
+                      "description": "Park cronut street hammock art party chicharrones cred fashion axe forage."
+                    }
+                  },
+                  {
+                    "id": "ee81ddbe-2941-4cb2-87a8-c8a6955c5858",
+                    "type": "format",
+                    "attributes": {
+                      "name": "sriracha",
+                      "description": "Art party williamsburg taxidermy intelligentsia muggle magic scenester literally pour-over +1."
+                    }
+                  },
+                  {
+                    "id": "3f2e9828-24b5-43bc-a908-e27784c5f6bd",
+                    "type": "format",
+                    "attributes": {
+                      "name": "master",
+                      "description": "Blog organic mumblecore farm-to-table beard phlogiston +1 viral."
+                    }
+                  },
+                  {
+                    "id": "8b1d7790-0079-408b-8866-3172b597eaec",
+                    "type": "format",
+                    "attributes": {
+                      "name": "humblebrag",
+                      "description": "Master butcher microdosing goth crucifix plaid health."
+                    }
+                  },
+                  {
+                    "id": "31c672bd-f8cc-44f6-8127-404e08eb3b64",
+                    "type": "format",
+                    "attributes": {
+                      "name": "kinfolk",
+                      "description": "Umami chambray keffiyeh photo booth skateboard meh post-ironic."
+                    }
+                  },
+                  {
+                    "id": "566902e4-7a48-4226-9081-00191f254d42",
+                    "type": "format",
+                    "attributes": {
+                      "name": "meh",
+                      "description": "Ramps retro tofu deep v microdosing selvage drinking."
+                    }
+                  },
+                  {
+                    "id": "c1a2c38c-66e1-47a7-953b-35b0464a0420",
+                    "type": "format",
+                    "attributes": {
+                      "name": "leggings",
+                      "description": "Tofu swag selvage disrupt iphone."
+                    }
+                  },
+                  {
+                    "id": "17ace11f-de8a-4471-a7aa-a122524bc9f0",
+                    "type": "format",
+                    "attributes": {
+                      "name": "polaroid",
+                      "description": "Flannel portland intelligentsia cleanse pinterest trust fund."
+                    }
+                  },
+                  {
+                    "id": "16218c25-b4fc-4209-85d0-c3a82815dad4",
+                    "type": "format",
+                    "attributes": {
+                      "name": "humblebrag",
+                      "description": "Muggle magic letterpress yolo lomo disrupt kale chips health vinyl."
+                    }
+                  },
+                  {
+                    "id": "28375b5a-cade-49e0-8605-8b5563e643af",
+                    "type": "format",
+                    "attributes": {
+                      "name": "DIY",
+                      "description": "Flexitarian swag next level ethical +1."
+                    }
+                  },
+                  {
+                    "id": "54dead1d-decc-4e72-be50-89748336ebe1",
+                    "type": "format",
+                    "attributes": {
+                      "name": "authentic",
+                      "description": "Banjo 90's 8-bit occupy brunch freegan portland."
+                    }
+                  },
+                  {
+                    "id": "ef1e5e5b-99aa-487a-9bba-0fc281f0102c",
+                    "type": "format",
+                    "attributes": {
+                      "name": "vinegar",
+                      "description": "Mumblecore fixie godard cardigan wayfarers."
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "invalid user token",
+            "examples": {
+              "application/json": {
+                "message": "Access Denied",
+                "status": "unauthorized"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "token": {
+      "description": "JWT Access Token",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

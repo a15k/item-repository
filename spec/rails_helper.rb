@@ -39,7 +39,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :api) do
-    Capybara.current_driver = :api
+    Capybara.current_driver = :api_client
     visit :api # force api to have the server booted and available
     DatabaseCleaner.strategy = :truncation
   end

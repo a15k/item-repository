@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/a15k/interactions-api.git
-  revision: 510f2145e501625a541439a968c4f1d63ebe400c
-  ref: 510f2145e501625a541439a968c4f1d63ebe400c
+  revision: f8028a61558235a412cb69ebe9ce4338c1b5cab3
+  branch: client-specs
   glob: clients/0.1.0/ruby/*gemspec
   specs:
     a15k_interactions_api (0.1.0)

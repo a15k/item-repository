@@ -5,4 +5,5 @@
       token: current_user.member.access_tokens.valid.first.token,
       }.to_json.html_safe %>
 </script>
-<%= javascript_pack_tag('application') unless current_user.anonymous? %>
+<%= javascript_pack_tag('application') %>
+<%= javascript_pack_tag('interactions-0') %>

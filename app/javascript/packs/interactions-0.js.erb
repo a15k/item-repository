@@ -1,0 +1,12 @@
+import Interactions from '../interactions';
+import ClientApi from '<%= A15K::Interactions.js_client_path.to_s %>';
+
+const api = new Interactions({
+      url: '<% Rails.application.secrets.interactions_api[:url] %>',
+      api: ClientApi,
+});
+
+global.A15K = (global.A15K || {});
+global.A15K.Interactions = api;
+
+export default api;

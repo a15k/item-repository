@@ -31,6 +31,7 @@
     "object-factory-bot": "^0.5.1",
     "prop-types": "^15.6.1",
     "qs": "^6.5.2",
+    "rails-erb-loader": "^5.4.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router": "^4.2.0",
@@ -40,6 +41,7 @@
     "regenerator-runtime": "^0.11.1",
     "serializr": "^1.1.14",
     "styled-components": "^3.2.5",
+    "superagent": "^3.8.3",
     "swagger-ui": "^3.13.1",
     "when-dom-ready": "^1.2.12"
   },

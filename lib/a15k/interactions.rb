@@ -13,7 +13,7 @@ module A15K
     def self.js_client_path
       spec = Gem::Specification.find_by_name('a15k_interactions_api')
       Pathname.new(spec.gem_dir).join(
-        '..', 'javascript', 'src', 'ApiClient.js'
+        '..', 'javascript', 'dist', 'bundle.js'
       )
     end
   end

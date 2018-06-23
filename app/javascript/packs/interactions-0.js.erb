@@ -6,6 +6,10 @@ const api = new Interactions({
       api: ClientApi,
 });
 
+if (global.document) {
+  api.parseIdFromScriptTag();
+}
+
 global.A15K = (global.A15K || {});
 global.A15K.Interactions = api;
 

@@ -1,5 +1,6 @@
 {
   "name": "mothership",
+  "pretest": "spec/javascript/spec_startup.js",
   "private": true,
   "dependencies": {
     "@commercetools/jest-enzyme-matchers": "^1.1.2",

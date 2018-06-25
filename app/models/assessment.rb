@@ -6,8 +6,6 @@ class Assessment < ApplicationRecord
 
   enum visibility: %i[internal external]
 
-  has_many :questions
-
+  has_many :questions, inverse_of: :assessment
   validates :format, :created_by, presence: true
-
 end

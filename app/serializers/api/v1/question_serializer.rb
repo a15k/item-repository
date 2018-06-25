@@ -27,7 +27,7 @@ module Api
       property :format_id,  type: :string, format: :uuid,
                description: 'The uuid of a previously registered format'
 
-      property :variant,    type: :string,
+      property :variant_id, type: :string,
                description: 'Identifies which variant of a generative item this question is. Only required for generative items.'
 
       property :content,    type: :string,

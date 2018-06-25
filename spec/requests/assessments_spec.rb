@@ -6,6 +6,7 @@ describe 'Assessments API', type: :request do
   let(:headers) {
     { "CONTENT_TYPE" => "application/json", 'Authorization' =>  authorization }
   }
+  let(:format) { FactoryBot.create(:format) }
 
   describe 'SEARCH' do
     it "finds assessments" do
@@ -53,7 +54,6 @@ describe 'Assessments API', type: :request do
 
   describe 'POST' do
     it 'can create an assessment' do
-      format = FactoryBot.create(:format)
       expect {
         post "/api/v1/assessments.json", params: {
                identifier: SecureRandom.uuid,
@@ -82,6 +82,35 @@ describe 'Assessments API', type: :request do
       }.to change {
         Assessment.count
       }.by 1
+    end
+
+    it 'can create a generative assessments' do
+        post "/api/v1/assessments.json", params: {
+               identifier: SecureRandom.uuid,
+               format_id: format.id,
+               questions: (1..20).flat_map do |a|
+                 (1..10).map do |b|
+                   content = <<~EOQ
+                     <question>
+                       What is the length of the hypotenuse for a right
+                       triangle with the other sides #{a} and #{b} inches?
+                     </question>
+                     <answer>{a**2 + b**2}</answer>
+                   EOQ
+                   {
+                     format_id: format.id,
+                     content: content,
+                     html_preview: content,
+                     solutions: [
+                       {
+                         format_id: format.id,
+                         content: 'Do you remember the Pythagorean Theorem?'
+                       }
+                     ]
+                   }
+                 end
+               end
+             }.to_json, headers: headers
     end
   end
 

@@ -1,7 +1,6 @@
 FactoryBot.define do
   factory :format do
-    identifier { Faker::Hipster.word.downcase }
-    name { Faker::Hipster.word }
+    name { Faker::Educator.university }
     specification { Faker::Hipster.sentence }
     association :created_by, factory: :member
   end

@@ -31,22 +31,25 @@ Factory.define('Format')
   .name(faker.company.companyName)
   .description(faker.company.catchPhrase);
 
-Factory.define('Accessment')
-  .id(uuid)
-  .attributes(reference('AccessmentAttributes'));
-
 Factory.define('User')
   .id(uuid)
   .name(() => faker.name.findName())
   .username(faker.internet.userName)
   .role(() => faker.random.arrayElement(['power_user', 'standard_user']));
 
-Factory.define('AccessmentAttributes')
-  .format_identifier(({ format }) => format ? format.identifier : faker.lorem.word())
-  .contents(() => JSON.stringify({
-    preamble: faker.company.catchPhrase(),
-  }));
+Factory.define('Assessment')
+  .id(uuid)
+  .format_id(({ format }) => format ? format.identifier : faker.lorem.word())
+  .created_at('2018-06-26T20:16:56.580Z')
+  .identifier(uuid)
+  .preview_html(() => `<p>${faker.lorem.paragraph()}</p>`)
+  .questions(Factory.reference('Question', { count: 1 }));
 
+Factory.define('Question')
+  .id(uuid)
+  .format_id(({ format }) => format ? format.identifier : faker.lorem.word())
+  .content(faker.lorem.paragraph)
+  .solutions([]);
 
 const buildCollection = (model, factory) => (
   ({ count = 3 } = {}) => {

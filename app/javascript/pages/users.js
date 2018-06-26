@@ -77,7 +77,7 @@ export default class Users extends React.Component {
           )}
         </ListGroup>
 
-        <InputGroup style={{ marginTop: 30 }}>
+        <InputGroup className="invite-user" style={{ marginTop: 30 }}>
           <InputGroupAddon addonType="prepend">
             Invite email:
           </InputGroupAddon>

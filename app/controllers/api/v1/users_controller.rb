@@ -57,7 +57,7 @@ class Api::V1::UsersController < ApiController
       .joins(:account)
       .first
     if user && user.member && user.member != current_member
-      render api_response(success: false, message: 'unable to claim already claimed account')
+      render api_response(success: false, message: 'unable to invite user')
       return
     end
     user ||= User.new

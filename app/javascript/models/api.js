@@ -75,13 +75,17 @@ export default class ModelApi {
     if (query) {
       url += '?' + qs.stringify(query);
     }
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    if (Config.jwt) {
+      headers.Authorization = Config.jwt;
+    }
+
     return fetch(url, {
+      credentials: 'include',
       method: method.toUpperCase(),
       body,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: Config.jwt,
-      },
     })
       .then(resp => {
         this.requestsInProgress.delete(fetch);

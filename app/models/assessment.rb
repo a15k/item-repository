@@ -8,4 +8,7 @@ class Assessment < ApplicationRecord
 
   has_many :questions, inverse_of: :assessment
   validates :format, :created_by, presence: true
+
+  validates :version, uniqueness: { scope: :identifier }
+
 end

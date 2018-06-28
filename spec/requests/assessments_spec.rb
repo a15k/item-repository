@@ -84,6 +84,35 @@ describe 'Assessments API', type: :request do
       }.by 1
     end
 
+    describe "multiple versions" do
+      it 'can create multiple versions' do
+        id = SecureRandom.uuid
+        post "/api/v1/assessments.json", params: {
+               identifier: id, version: '1', format_id: format.id,
+               questions: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response).to be_ok
+
+        post "/api/v1/assessments.json", params: {
+               identifier: id, version: '2', format_id: format.id,
+               questions: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response).to be_ok
+        expect(Assessment.where(identifier: id).count).to eq 2
+      end
+
+      it 'fails if version is taken' do
+        asm = FactoryBot.create :assessment, version: '1', identifier: '1'
+        post "/api/v1/assessments.json", params: {
+               identifier: asm.identifier, version: asm.version,
+               format_id: asm.format_id,
+               questions: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response.status).to eq 422
+        expect(response_json['success']).to be false
+        expect(response_json['message']).to include 'Version has already been taken'
+      end
+    end
     it 'can create a generative assessments' do
       expect {
         post "/api/v1/assessments.json", params: {

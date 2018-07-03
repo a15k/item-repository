@@ -14,7 +14,7 @@ describe 'Tokens API', type: :request do
 
   describe 'inviting a user' do
 
-    it "can invite a user" do
+    it "can invite by using a new email" do
       post "/api/v1/users/add", headers: headers,
            params: { email: 'test@test.com', role: 'power_user' }.to_json
       user = User.find(response_data['id'])

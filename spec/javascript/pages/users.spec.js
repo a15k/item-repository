@@ -29,4 +29,24 @@ describe(Users, () => {
     users.unmount();
   });
 
+  it('can invite users', () => {
+    const users = mount(<Users {...props} />);
+    users.instance().invite.value = 'newUserOne@test.com';
+    props.users.invite = jest.fn(() => Promise.resolve());
+    users.find('[icon="envelope"] .btn-secondary').simulate('click');
+    expect(props.users.invite).toHaveBeenCalledWith('newUserOne@test.com');
+  });
+
+  it('displays errors while inviting', () => {
+    const users = mount(<Users {...props} />);
+    users.instance().invite.value = 'not-an-email';
+    props.users.invite = jest.fn(function() {
+      this.errors = { base: 'unable to invite user' };
+      return Promise.resolve();
+    });
+    users.find('[icon="envelope"] .btn-secondary').simulate('click');
+    expect(props.users.invite).toHaveBeenCalled();
+    expect(users.find('Alert').text()).toEqual('unable to invite user');
+  });
+
 });

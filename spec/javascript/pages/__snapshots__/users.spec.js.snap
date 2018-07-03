@@ -136,7 +136,7 @@ exports[`Users renders listing 1`] = `
     </li>
   </ul>
   <div
-    className="input-group"
+    className="invite-user input-group"
     style={
       Object {
         "marginTop": 30,

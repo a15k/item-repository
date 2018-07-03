@@ -6,6 +6,7 @@ describe 'Assessments API', type: :request do
   let(:headers) {
     { "CONTENT_TYPE" => "application/json", 'Authorization' =>  authorization }
   }
+  let(:format) { FactoryBot.create(:format) }
 
   describe 'SEARCH' do
     it "finds assessments" do
@@ -53,7 +54,6 @@ describe 'Assessments API', type: :request do
 
   describe 'POST' do
     it 'can create an assessment' do
-      format = FactoryBot.create(:format)
       expect {
         post "/api/v1/assessments.json", params: {
                identifier: SecureRandom.uuid,
@@ -82,6 +82,75 @@ describe 'Assessments API', type: :request do
       }.to change {
         Assessment.count
       }.by 1
+    end
+
+    describe "multiple versions" do
+      it 'can create multiple versions' do
+        id = SecureRandom.uuid
+        post "/api/v1/assessments.json", params: {
+               identifier: id, version: '1', format_id: format.id,
+               questions: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response).to be_ok
+
+        post "/api/v1/assessments.json", params: {
+               identifier: id, version: '2', format_id: format.id,
+               questions: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response).to be_ok
+        expect(Assessment.where(identifier: id).count).to eq 2
+      end
+
+      it 'fails if version is taken' do
+        asm = FactoryBot.create :assessment, version: '1', identifier: '1'
+        post "/api/v1/assessments.json", params: {
+               identifier: asm.identifier, version: asm.version,
+               format_id: asm.format_id,
+               questions: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response.status).to eq 422
+        expect(response_json['success']).to be false
+        expect(response_json['message']).to include 'Version has already been taken'
+      end
+    end
+    it 'can create a generative assessments' do
+      expect {
+        post "/api/v1/assessments.json", params: {
+               identifier: SecureRandom.uuid,
+               format_id: format.id,
+               questions: (1..20).flat_map do |a|
+                 (1..10).map do |b|
+                   {
+                     format_id: format.id,
+                     variant_id: "#{a}-#{b}",
+                     content: <<~EOQ
+                     <question>
+                       What is the length of the hypotenuse for a right
+                       triangle with the other sides #{a} and #{b} inches?
+                     </question>
+                     <answer>{a**2 + b**2}</answer>
+                   EOQ
+                   }
+                 end
+               end
+             }.to_json, headers: headers
+      }.to change {
+        Question.count
+      }.by 200
+    end
+
+    it 'errors when variants are not correct' do
+        post "/api/v1/assessments.json", params: {
+               identifier: SecureRandom.uuid,
+               format_id: format.id,
+               questions: [
+                 { format_id: format.id, content: '1st' },
+                 { format_id: format.id, content: '2nd' },
+               ]
+             }.to_json, headers: headers
+        expect(response.status).to eq 422
+        expect(response_json['success']).to be false
+        expect(response_json['message']).to include 'Questions'
     end
   end
 

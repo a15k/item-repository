@@ -20,8 +20,16 @@ class ApiController < ActionController::API
 
   def current_member
     @current_member ||= (
-      authorization_token.present? ? AccessToken.member_for(jwt: authorization_token) : nil
+      member_for_token || member_for_session
     )
+  end
+
+  def member_for_token
+    authorization_token.present? && AccessToken.member_for(jwt: authorization_token)
+  end
+
+  def member_for_session
+    session[:account_id] && Member.joins(:users).where(users: { account_id: session[:account_id] }).first
   end
 
   def api_response(data: {},

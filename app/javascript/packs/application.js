@@ -32,6 +32,13 @@ class A15KApplication extends React.Component {
     ev.currentTarget.querySelector('form').submit();
   }
 
+  renderPowerUserOptions() {
+    return [
+      <MenuLink key="i" to="/interactions" name="Interactions" />,
+      <MenuLink key="u" to="/users" name="Users" />,
+      <MenuLink key="t" to="/tokens" name="Tokens" />,
+    ];
+  }
   render() {
     return (
       <BrowserRouter>
@@ -43,10 +50,8 @@ class A15KApplication extends React.Component {
                 Actions
               </DropdownToggle>
               <DropdownMenu>
-                <MenuLink to="/interactions" name="Interactions" />
                 <MenuLink to="/search" name="Search" />
-                <MenuLink to="/users" name="Users" />
-                <MenuLink to="/tokens" name="Tokens" />
+                {User.isPowerUser && this.renderPowerUserOptions()}
                 <DropdownItem divider />
                 <DropdownItem tag="div" onClick={this.onLogout}>
                   <form action="/accounts/logout" method="post">

@@ -7,8 +7,8 @@ module A15K
 
   module Metadata
 
-    def self.api(fake: Rails.env.test?)
-      fake ? FakeApi.new : Api.new
+    def self.api(stub: Rails.application.secrets.metadata_api[:stub])
+      stub ? FakeApi.new : Api.new
     end
 
   end

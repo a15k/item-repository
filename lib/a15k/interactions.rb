@@ -4,9 +4,9 @@ module A15K
 
   module Interactions
 
-    def self.api(fake: Rails.env.test?)
+    def self.api(stub: Rails.application.secrets.interactions_api[:stub])
       @api ||= (
-        fake ? FakeApi : A15kInteractions::AppsApi.new
+        stub ? FakeApi : A15kInteractions::AppsApi.new
       )
     end
 

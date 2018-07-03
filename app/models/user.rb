@@ -16,7 +16,7 @@ class User < ApplicationRecord
     false
   end
 
-  def can_access_ui?
-    member && power_user?
+  def membership_access_token
+     power_user? ? member.access_tokens.valid.first.token : nil
   end
 end

@@ -1,11 +1,10 @@
-import { React, observer, observable, action, computed } from '../helpers/react';
+import { React, PropTypes, observer, observable, action, computed } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
   InputGroup, InputGroupAddon, Button, Input,
 } from 'reactstrap';
 import AssessmentCollection from './search/collection';
 import styled from 'styled-components';
-import Assessment from '../models/assessment';
 import ModelErrors from '../components/model-errors';
 
 const PreviewWrapper = styled.div`
@@ -19,9 +18,13 @@ const Preview = ({ assessment }) => {
 @observer
 export default class Search extends React.Component {
 
-  @observable collection = new AssessmentCollection();
+  static propTypes = {
+    collection: PropTypes.instanceOf(AssessmentCollection),
+  };
+
+  @observable collection = this.props.collection || new AssessmentCollection();
   @observable isDropdownOpen = false;
-  @observable searchingBy = 'ID'
+  @observable searchingBy = 'Text'
 
   @action.bound onDropdownToggle() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -40,10 +43,6 @@ export default class Search extends React.Component {
   }
 
   @action.bound setInputRef(input) { this.inputRef = input; }
-
-  @computed get previewHTML() {
-    return ;
-  }
 
   @action.bound onSearchTypeChange(ev) {
     this.searchingBy = ev.target.dataset.type;

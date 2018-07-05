@@ -16,10 +16,12 @@ end
 
 OX_MEMBER = Member.find_by(name: OX)
 unless User.exists?(member_id: OX_MEMBER.id)
-  account = OpenStax::Accounts::Account.create!(
-    uuid: SecureRandom.uuid
+  account = ::OpenStax::Accounts::FindOrCreateAccount.call(
+    email: 'support@openstax.org', username: 'openstax', password: 'password'
+  ).outputs.account
+  User.create!(
+    member_id: OX_MEMBER.id, account_id: account.id, role: 'power_user'
   )
-  User.create!(member_id: OX_MEMBER.id, account_id: account.id)
 end
 
 unless Format.exists?(name: OX)

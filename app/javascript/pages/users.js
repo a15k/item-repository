@@ -1,7 +1,8 @@
 import { Card, ListGroup, ListGroupItem, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import Button from '../components/button';
 import { React, ModelCollectionType, observer, observable, action, computed } from '../helpers/react';
-import { User } from '../models/user';
+import User from '../models/user';
+import SuretyGuard from '../components/surety-guard';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
 
@@ -17,6 +18,41 @@ const DeleteLabel = styled.div`
 width: 70px;
 text-align: center;
 `;
+
+const UserRow = ({ users, user }) => {
+  const isSelf = User.id == user.id
+  const message =  isSelf ?
+    'If you remove yourself you will be logged out and no longer be able to access A15K' : 'Removing a user will no longer grant them access to A15K'
+
+  const onDelete = () => {
+    const done = users.destroy(user);
+    if (isSelf) {
+      done.then(User.logout);
+    }
+  };
+
+  const setPowerUserStatus = ({ currentTarget: { checked } }) => {
+    user.isPowerUser = checked;
+    user.save();
+  };
+
+  return (
+    <ListGroupItem
+      key={user.id}
+      data-id={user.id}
+      className="d-flex align-items-center"
+    >
+      <Name>{user.name}</Name>
+      <CheckBox checked={user.role == 'power_user'} onChange={setPowerUserStatus} />
+
+      <SuretyGuard onConfirm={onDelete} message={message}>
+        <Button icon="trash" />
+      </SuretyGuard>
+
+    </ListGroupItem>
+  );
+};
+
 @observer
 export default class Users extends React.Component {
 
@@ -25,22 +61,11 @@ export default class Users extends React.Component {
   }
 
   static defaultProps = {
-    users: User.collection,
+    users: User.constructor.collection,
   }
 
   componentDidMount() {
     this.props.users.api.fetch();
-  }
-
-  @action.bound onDelete(ev) {
-    const user = this.props.users.get(ev.currentTarget.parentElement.dataset.id);
-    this.props.users.destroy(user);
-  }
-
-  @action.bound setPowerUserStatus(ev) {
-    const user = this.props.users.get(ev.currentTarget.parentElement.dataset.id);
-    user.isPowerUser = ev.currentTarget.checked;
-    user.save();
   }
 
   @action.bound onInvite() {
@@ -64,17 +89,7 @@ export default class Users extends React.Component {
         </div>
 
         <ListGroup>
-          {users.array.map((user) =>
-            <ListGroupItem
-              key={user.id}
-              data-id={user.id}
-              className="d-flex align-items-center"
-              >
-              <Name>{user.name}</Name>
-              <CheckBox checked={user.isPowerUser} onChange={this.setPowerUserStatus} />
-              <Button icon="trash" onClick={this.onDelete} />
-            </ListGroupItem>
-          )}
+          {users.array.map((user) => <UserRow key={user.id} users={users} user={user} />)}
         </ListGroup>
 
         <InputGroup className="invite-user" style={{ marginTop: 30 }}>

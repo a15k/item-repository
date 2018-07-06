@@ -33,6 +33,12 @@ export class User extends BaseModel {
     this.role = pu ? 'power_user' : 'standard_user';
   }
 
+  @action.bound logout() {
+    // kinda nasty to rely on the DOM from a model
+    // but the logout call needs to be a real form post
+    document.getElementById('logout-form').submit();
+  }
+
 }
 
 User.collection.invite = function(email, role = 'standard_user') {

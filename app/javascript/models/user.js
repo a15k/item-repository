@@ -14,6 +14,7 @@ export class User extends BaseModel {
   @identifier id;
   @field name;
   @field role;
+  @field member_id;
   @field username;
 
   @computed get isLoggedIn() {
@@ -26,7 +27,9 @@ export class User extends BaseModel {
   }
 
   @computed get isPowerUser() {
-    return this.role === 'power_user';
+    return Boolean(
+      this.role === 'power_user' && this.member_id
+    );
   }
 
   set isPowerUser(pu) {

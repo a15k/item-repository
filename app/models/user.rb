@@ -16,6 +16,10 @@ class User < ApplicationRecord
     false
   end
 
+  def power_user?
+    self.role == 'power_user' && member.present?
+  end
+
   def membership_access_token
      power_user? ? member.access_tokens.valid.first.token : nil
   end

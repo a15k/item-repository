@@ -1,4 +1,5 @@
 import { readonly } from 'core-decorators';
+import { filter } from 'lodash';
 import {
   BaseModel, identifiedBy, computed, field, identifier, action,
 } from './base';
@@ -52,6 +53,10 @@ User.collection.invite = function(email, role = 'standard_user') {
     method: 'post',
     url: `${user.api.baseUrl}/add`,
   });
+};
+
+User.collection.powerUsers = function() {
+  return filter(this.array, { role: 'power_user' });
 };
 
 currentUser = new User;

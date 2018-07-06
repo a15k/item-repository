@@ -1,57 +1,18 @@
 import { Card, ListGroup, ListGroupItem, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { filter } from 'lodash';
 import Button from '../components/button';
-import { React, ModelCollectionType, observer, observable, action, computed } from '../helpers/react';
+import { React, ModelCollectionType, observer, action } from '../helpers/react';
 import User from '../models/user';
-import SuretyGuard from '../components/surety-guard';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
+import UserRow from './users/row';
 
-const Name = styled.div`
-flex: 1;
-`;
-const CheckBox = styled.input.attrs({
-  type: 'checkbox',
-})`
-margin-right: 1rem;
-`;
+
 const DeleteLabel = styled.div`
 width: 70px;
 text-align: center;
 `;
 
-const UserRow = ({ users, user }) => {
-  const isSelf = User.id == user.id
-  const message =  isSelf ?
-    'If you remove yourself you will be logged out and no longer be able to access A15K' : 'Removing a user will no longer grant them access to A15K'
-
-  const onDelete = () => {
-    const done = users.destroy(user);
-    if (isSelf) {
-      done.then(User.logout);
-    }
-  };
-
-  const setPowerUserStatus = ({ currentTarget: { checked } }) => {
-    user.isPowerUser = checked;
-    user.save();
-  };
-
-  return (
-    <ListGroupItem
-      key={user.id}
-      data-id={user.id}
-      className="d-flex align-items-center"
-    >
-      <Name>{user.name}</Name>
-      <CheckBox checked={user.role == 'power_user'} onChange={setPowerUserStatus} />
-
-      <SuretyGuard onConfirm={onDelete} message={message}>
-        <Button icon="trash" />
-      </SuretyGuard>
-
-    </ListGroupItem>
-  );
-};
 
 @observer
 export default class Users extends React.Component {

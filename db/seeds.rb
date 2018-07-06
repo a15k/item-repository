@@ -1,33 +1,34 @@
-# coding: utf-8
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# members/accounts will be configured by deployment scripts on production
+# and in test mode by the factories
+if Rails.env.development?
 
-OX = 'OpenStax'
+  OX = 'OpenStax'.freeze
 
+  unless Member.exists?(name: OX)
+    Member.create!(name: OX, website: 'openstax.org')
+  end
 
-unless Member.exists?(name: OX)
-  Member.create!(name: OX, website: 'openstax.org')
-end
+  OX_MEMBER = Member.find_by(name: OX)
+  unless User.exists?(member_id: OX_MEMBER.id)
+    [
+      %w[ox standard_user],
+      %w[ox_power_user power_user]
+    ].each do |username, role|
 
-OX_MEMBER = Member.find_by(name: OX)
-unless User.exists?(member_id: OX_MEMBER.id)
-  account = ::OpenStax::Accounts::FindOrCreateAccount.call(
-    email: 'support@openstax.org', username: 'openstax', password: 'password'
-  ).outputs.account
-  User.create!(
-    member_id: OX_MEMBER.id, account_id: account.id, role: 'power_user'
-  )
-end
+      account = ::OpenStax::Accounts::FindOrCreateAccount.call(
+        email: 'support@openstax.org', username: username, password: 'password'
+      ).outputs.account
+      User.create!(
+        member_id: OX_MEMBER.id, account_id: account.id, role: role
+      )
+    end
+  end
 
-unless Format.exists?(name: OX)
-  Format.create!(
-    name: OX,
-    specification: 'Openstax exercise format, see https://openstax.org/ for details',
-    created_by: OX_MEMBER
-  )
+  unless Format.exists?(name: OX)
+    Format.create!(
+      name: OX,
+      specification: 'Openstax exercise format, see https://openstax.org/ for details',
+      created_by: OX_MEMBER
+    )
+  end
 end

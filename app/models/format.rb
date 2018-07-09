@@ -7,10 +7,15 @@ class Format < ApplicationRecord
   validates :identifier, :name, :specification, :created_by, presence: true
   validates :identifier, uniqueness: true
 
-  before_validation :set_identifier_from_name
+  before_validation :set_identifier_from_name, on: :create
 
   def set_identifier_from_name
-    self.identifier = StringsHelper.code_identifier(name, padding: false)
+    return if self.identifier
+    identifier = StringsHelper.code_identifier(name, padding: false)
+    while Format.where(identifier: identifier).any?
+      identifier << 'X'
+    end
+    self.identifier = identifier
   end
 
 end

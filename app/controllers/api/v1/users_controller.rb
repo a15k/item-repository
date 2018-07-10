@@ -112,8 +112,8 @@ class Api::V1::UsersController < ApiController
   def destroy
     user = User.find(params[:id])
     if validate_member(user)
-      user.member_id = nil
-      render api_response data: user, success: user.save
+      current_member.users.delete user
+      render api_response data: user, success: current_member.save
     end
   end
 

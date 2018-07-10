@@ -31,13 +31,8 @@ class User < ApplicationRecord
   protected
 
   def membership_has_power_users
-    if (member_id.nil? && member_id_changed?) || # unlinking
-       (role_changed? && !power_user?) # downgrading from power user
-
-      if Member.find(member_id || member_id_was).users.power_users.count < 2
-        errors.add(:member, 'must have at least one power user')
-      end
-
+    if !power_user? && role_changed? && member.users.power_users.count < 2
+      errors.add(:member, 'must have at least one power user')
     end
   end
 end

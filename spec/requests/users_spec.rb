@@ -71,7 +71,15 @@ describe 'Tokens API', type: :request do
   end
 
   describe 'delete' do
+    it 'wont delete the last power user' do
+      delete "/api/v1/users/#{user.id}", headers: headers
+      expect(response.status).to eq 422
+      expect(response_json['success']).to be false
+    end
+
     it 'deletes users by removing the membership' do
+      # must have another power user
+      FactoryBot.create(:user, member: user.member, role: 'power_user')
       expect{
         delete "/api/v1/users/#{user.id}", headers: headers
       }.to change{ user.reload.member_id }

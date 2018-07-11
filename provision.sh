@@ -22,3 +22,5 @@ fi
 # TODO only call it if the checkout changed the SHA
 
 ./provision_after_checkout.sh
+yarn install
+

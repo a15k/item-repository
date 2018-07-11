@@ -61,7 +61,7 @@ class Api::V1::UsersController < ApiController
       return
     end
     user ||= User.new
-    user.role = params[:role]
+    user.role = params[:role] || 'standard_user'
     user.member = current_member
     user.account = account
     render api_response data: user, success: user.save
@@ -89,7 +89,7 @@ class Api::V1::UsersController < ApiController
   def update
     user = User.find(params[:id])
     if validate_member(user)
-      user.assign_attributes(params.permit(:role))
+      user.assign_attributes(params.slice(:role).permit(:role))
       render api_response data: user, success: user.save
     end
   end

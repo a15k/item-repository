@@ -19,9 +19,9 @@ const DeletePlaceHolder = styled.div`
 min-width: 40px;
 `;
 
-const DeleteButton = ({ users, user }) => {
-  const isSelf = User.id === user.id;
 
+const DeleteButton = observer(({ users, user }) => {
+  const isSelf = User.id === user.id;
   // no deleting last power user
   if (isSelf && users.powerUsers().length == 1) {
     return <DeletePlaceHolder />;
@@ -42,7 +42,7 @@ const DeleteButton = ({ users, user }) => {
       <Button icon="trash" />
     </SuretyGuard>
   );
-};
+});
 
 const UserRow = observer(({ users, user }) => {
 

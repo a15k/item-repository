@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage renders a non-member message 1`] = `
+<div
+  className="not-a-member"
+>
+  <h3>
+    Your account do not belong to any A15K member organizations
+  </h3>
+  <p>
+    Please contact the A15K representative at your organization and ask them to invite your email address.
+  </p>
+</div>
+`;
+
+exports[`HomePage renders for member users 1`] = `
+<div>
+  <h1>
+    Homepage
+  </h1>
+</div>
+`;

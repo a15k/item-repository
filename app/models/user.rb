@@ -6,11 +6,11 @@ class User < ApplicationRecord
 
   belongs_to :member, optional: true
 
-  enum role: %i[power_user standard_user]
+  enum role: %i[standard_user power_user]
 
   scope :power_users, -> { where(role: 'power_user') }
 
-  validate :membership_has_power_users
+  validate :membership_has_power_users, on: :update
 
   def self.anonymous
     ::User::Anonymous.instance

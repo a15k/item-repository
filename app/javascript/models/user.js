@@ -1,5 +1,5 @@
 import { readonly } from 'core-decorators';
-import { filter } from 'lodash';
+import { isNil, filter } from 'lodash';
 import {
   BaseModel, identifiedBy, computed, field, identifier, action,
 } from './base';
@@ -22,6 +22,10 @@ export class User extends BaseModel {
     return Boolean(this.id) && currentUser === this;
   }
 
+  @computed get isMember() {
+    return !isNil(this.member_id);
+  }
+
   @action.bound bootstrap(data) {
     Config.bootstrap(data);
     this.update(data.user);
@@ -29,7 +33,7 @@ export class User extends BaseModel {
 
   @computed get isPowerUser() {
     return Boolean(
-      this.role === 'power_user' && this.member_id
+      this.isMember && this.role === 'power_user'
     );
   }
 

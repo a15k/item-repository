@@ -60,7 +60,7 @@ end
 
 def yaml(hash)
   # write the hash as yaml, getting rid of the "---\n" at the front
-  hash.to_yaml[4..-1])
+  hash.to_yaml[4..-1]
 end
 
 def get_env_var!(name)

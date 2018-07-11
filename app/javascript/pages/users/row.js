@@ -1,6 +1,6 @@
 import { ListGroupItem } from 'reactstrap';
 import styled from 'styled-components';
-import { React, observer } from '../../helpers/react';
+import { React, PropTypes, observer, observable, action, computed } from '../../helpers/react';
 import Button from '../../components/button';
 import User from '../../models/user';
 import SuretyGuard from '../../components/surety-guard';
@@ -19,50 +19,82 @@ const DeletePlaceHolder = styled.div`
 min-width: 40px;
 `;
 
+@observer
+class DeleteButton extends React.Component {
 
-const DeleteButton = observer(({ users, user }) => {
-  const isSelf = User.id === user.id;
-  // no deleting last power user
-  if (isSelf && users.powerUsers().length == 1) {
-    return <DeletePlaceHolder />;
+  static propTypes = {
+    users: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   }
 
-  const message =  isSelf ?
-    'If you remove yourself you will be logged out and no longer be able to access A15K' : 'Removing a user will no longer grant them access to A15K'
+  @computed get isSelf() {
+    return User.id === this.props.user.id;
+  }
 
-  const onDelete = () => {
-    const done = users.destroy(user);
-    if (isSelf) {
-      done.then(User.logout);
+  @computed get singlePowerUser() {
+    return 1 === this.props.users.powerUsers().length;
+  }
+
+  // no deleting last power user
+  @computed get usePlaceHolder() {
+    return Boolean(this.isSelf && this.singlePowerUser);
+  }
+
+  @action.bound onDelete() {
+    const done = this.props.users.destroy(this.props.user);
+    if (this.isSelf) {
+      done.then(this.props.onSelfDelete);
     }
-  };
+  }
 
-  return (
-    <SuretyGuard onConfirm={onDelete} message={message}>
-      <Button icon="trash" />
-    </SuretyGuard>
-  );
-});
+  @computed get message() {
+    return this.isSelf ?
+      'If you remove yourself you will be logged out and no longer be able to access A15K' :
+      'Removing a user will no longer grant them access to A15K';
+  }
 
-const UserRow = observer(({ users, user }) => {
+  render() {
+    if (this.usePlaceHolder) {
+      return <DeletePlaceHolder />;
+    }
 
-  const setPowerUserStatus = ({ currentTarget: { checked } }) => {
-    user.isPowerUser = checked;
-    user.save();
-  };
+    return (
+      <SuretyGuard onConfirm={this.onDelete} message={this.message}>
+        <Button icon="trash" />
+      </SuretyGuard>
+    );
+  }
 
-  return (
-    <ListGroupItem
-      key={user.id}
-      data-id={user.id}
-      className="d-flex align-items-center"
-    >
-      <Name>{user.name}</Name>
-      <CheckBox checked={user.role == 'power_user'} onChange={setPowerUserStatus} />
+}
 
-      <DeleteButton users={users} user={user} />
-    </ListGroupItem>
-  );
-});
+@observer
+export default class UserRow extends React.Component {
 
-export default UserRow;
+  static propTypes = {
+    users: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    onSelfDelete: PropTypes.func.isRequired,
+  }
+
+  @action.bound setPowerUserStatus({ currentTarget: { checked } }) {
+    this.props.user.isPowerUser = checked;
+    this.props.user.save();
+  }
+
+  render() {
+    const { user, users, onSelfDelete } = this.props;
+
+    return (
+      <ListGroupItem
+        key={user.id}
+        data-id={user.id}
+        className="d-flex align-items-center"
+      >
+        <Name>{user.name}</Name>
+        <CheckBox checked={user.role == 'power_user'} onChange={this.setPowerUserStatus} />
+
+        <DeleteButton onSelfDelete={onSelfDelete} users={users} user={user} />
+      </ListGroupItem>
+    );
+  }
+}

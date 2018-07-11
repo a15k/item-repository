@@ -46,7 +46,7 @@ class A15KApplication extends React.Component {
                 Actions
               </DropdownToggle>
               <DropdownMenu>
-                <MenuLink to="/search" name="Search" />
+                {User.isMember && <MenuLink to="/search" name="Search" />}
                 {User.isPowerUser && this.renderPowerUserOptions()}
                 <DropdownItem divider />
                 <DropdownItem onClick={User.logout}>Logout</DropdownItem>

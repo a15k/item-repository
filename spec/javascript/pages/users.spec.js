@@ -7,8 +7,23 @@ jest.mock('models/user', () => ({
   id: 1,
 }));
 
+jest.mock('pages/users/delete-placeholder', () => {
+  return () => <div className="delete-placeholder" />;
+});
+
+jest.mock('pages/users/disabled-power-user-toggle', () => {
+  return () => <input type="checkbox" className="disabled-power-user" readOnly checked />;
+});
+
 describe(Users, () => {
   let props;
+
+  const setSinglePowerUser = () => {
+    const user = props.users.array[2];
+    props.users.powerUsers = () => [ user ];
+    props.users.map.replace({ [`${user.id}`]: user });
+    return user;
+  };
 
   beforeEach(() => {
     const users = Factory.usersCollection({ count: 3 });
@@ -37,16 +52,21 @@ describe(Users, () => {
   });
 
   it('hides delete for last power user', () => {
-    const user = props.users.array[2];
-    props.users.powerUsers = () => [ user ];
-    props.users.map.replace({ [`${user.id}`]: user });
-
+    const user = setSinglePowerUser();
     const users = mount(<Users {...props} />);
     expect(users.find('ListGroupItem').length).toEqual(1);
     expect(users).toRender('DeleteButton Button');
     user.id = 1;
     users.update();
     expect(users).not.toRender('DeleteButton Button');
+  });
+
+  it('de-activates toggle for last power user', () => {
+    const user = setSinglePowerUser();
+    user.id = 1;
+    const users = mount(<Users {...props} />);
+    expect(users).toRender('PowerUserToggle input[readOnly]');
+    users.unmount();
   });
 
   it('can invite users', () => {

@@ -31,6 +31,10 @@ export class User extends BaseModel {
     this.update(data.user);
   }
 
+  @action togglePowerUser() {
+    this.role = this.role === 'power_user' ? 'standard_user' : 'power_user';
+  }
+
   @computed get isPowerUser() {
     return Boolean(
       this.isMember && this.role === 'power_user'

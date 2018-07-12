@@ -12,7 +12,7 @@ exports[`Users renders listing 1`] = `
   >
     PowerUser?
     <div
-      className="sc-bZQynM cbsshv"
+      className="sc-EHOje bpwXKy"
     >
       Delete
     </div>
@@ -25,13 +25,13 @@ exports[`Users renders listing 1`] = `
       data-id="379d79cc-cd42-443c-9f2e-15087a5bc518"
     >
       <div
-        className="sc-bxivhb kVArnT"
+        className="sc-ifAKCX kJjvUS"
       >
         Mr. Imani Ankunding
       </div>
       <input
         checked={true}
-        className="sc-ifAKCX fgiLBn"
+        className="sc-bxivhb jBgGdK"
         onChange={[Function]}
         type="checkbox"
       />
@@ -69,13 +69,13 @@ exports[`Users renders listing 1`] = `
       data-id="5b9e1f51-e6a7-468c-8579-6d96fc028b7b"
     >
       <div
-        className="sc-bxivhb kVArnT"
+        className="sc-ifAKCX kJjvUS"
       >
         Erling Walsh
       </div>
       <input
         checked={false}
-        className="sc-ifAKCX fgiLBn"
+        className="sc-bxivhb jBgGdK"
         onChange={[Function]}
         type="checkbox"
       />
@@ -113,13 +113,13 @@ exports[`Users renders listing 1`] = `
       data-id="00f2b0ea-e9f8-4604-865c-89119b920095"
     >
       <div
-        className="sc-bxivhb kVArnT"
+        className="sc-ifAKCX kJjvUS"
       >
         Pattie Bernhard
       </div>
       <input
         checked={true}
-        className="sc-ifAKCX fgiLBn"
+        className="sc-bxivhb jBgGdK"
         onChange={[Function]}
         type="checkbox"
       />

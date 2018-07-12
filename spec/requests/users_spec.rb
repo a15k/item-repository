@@ -43,12 +43,14 @@ describe 'Tokens API', type: :request do
 
   describe 'updating a user' do
     it 'can alter a users role' do
+      # must have at least one other power user
+      FactoryBot.create(:user, member: user.member, role: 'power_user')
       expect{
         put "/api/v1/users/#{user.id}", headers: headers,
-            params: { role: 'power_user' }.to_json
+            params: { role: 'standard_user' }.to_json
       }.to change{ user.reload.role }
-             .from('standard_user')
-             .to('power_user')
+             .from('power_user')
+             .to('standard_user')
     end
 
     it 'can only alter users for the current membership' do

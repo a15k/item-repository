@@ -3,7 +3,7 @@ import User from '../models/user';
 
 const NoMemberMessage = () => (
   <div className="not-a-member">
-    <h3>Your account do not belong to any A15K member organizations</h3>
+    <h3>Your account does not belong to any A15K member organizations</h3>
     <p>
       Please contact the A15K representative at your organization and ask
       them to invite your email address.

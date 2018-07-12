@@ -1,7 +1,7 @@
 import { Card, ListGroup, ListGroupItem, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import { filter } from 'lodash';
+import { Redirect } from 'react-router-dom';
 import Button from '../components/button';
-import { React, ModelCollectionType, observer, action } from '../helpers/react';
+import { React, ModelCollectionType, observer, observable, action } from '../helpers/react';
 import User from '../models/user';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
@@ -29,6 +29,13 @@ export default class Users extends React.Component {
     this.props.users.api.fetch();
   }
 
+  @observable redirectToHome = false;
+
+  @action.bound onSelfDelete() {
+    User.member_id = null;
+    this.redirectToHome = true;
+  }
+
   @action.bound onInvite() {
     this.props.users.invite(this.invite.value).then(() => {
       this.invite.value = '';
@@ -38,6 +45,11 @@ export default class Users extends React.Component {
 
   render() {
     const { users } = this.props;
+
+    if (this.redirectToHome) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="access-users">
         <h1>
@@ -50,7 +62,8 @@ export default class Users extends React.Component {
         </div>
 
         <ListGroup>
-          {users.array.map((user) => <UserRow key={user.id} users={users} user={user} />)}
+          {users.array.map((user) =>
+            <UserRow key={user.id} onSelfDelete={this.onSelfDelete} users={users} user={user} />)}
         </ListGroup>
 
         <InputGroup className="invite-user" style={{ marginTop: 30 }}>

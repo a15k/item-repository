@@ -42,7 +42,7 @@ module Api
                type: :string,
                format: 'Date'
 
-      property :created_by, document: false, readable: false,
+      property :member, document: false, readable: false,
                reader: ->(user_options:, **) {
         new_record? ? user_options[:current_member] : nil
       }

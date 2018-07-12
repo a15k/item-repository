@@ -28,9 +28,6 @@ class DeleteButton extends React.Component {
     onSelfDelete: PropTypes.func.isRequired,
   }
 
-  @computed get isSelf() {
-    return User.id === this.props.user.id;
-  }
 
   @computed get singlePowerUser() {
     return 1 === this.props.users.powerUsers().length;
@@ -43,13 +40,13 @@ class DeleteButton extends React.Component {
 
   @action.bound onDelete() {
     const done = this.props.users.destroy(this.props.user);
-    if (this.isSelf) {
+    if (this.props.isSelf) {
       done.then(this.props.onSelfDelete);
     }
   }
 
   @computed get message() {
-    return this.isSelf ?
+    return this.props.isSelf ?
       'If you remove yourself you will be logged out and no longer be able to access A15K' :
       'Removing a user will no longer grant them access to A15K';
   }
@@ -69,12 +66,11 @@ class DeleteButton extends React.Component {
 }
 
 @observer
-export default class UserRow extends React.Component {
+class PowerUserToggle extends React.Component {
 
   static propTypes = {
     users: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    onSelfDelete: PropTypes.func.isRequired,
     onSelfDemotion: PropTypes.func.isRequired,
   }
 
@@ -88,7 +84,39 @@ export default class UserRow extends React.Component {
   }
 
   render() {
-    const { user, users, onSelfDelete } = this.props;
+    const { user, users, onSelfDelete, onSelfDemotion } = this.props;
+
+    // if (this.usePlaceHolder) {
+    //   return <DeletePlaceHolder />;
+    // }
+
+    return (
+      <SuretyGuard onConfirm={this.setPowerUserStatus} message={this.message}>
+        <CheckBox checked={user.role == 'power_user'} onChange={this.setPowerUserStatus} />
+      </SuretyGuard>
+    );
+  }
+
+}
+
+
+@observer
+export default class UserRow extends React.Component {
+
+  static propTypes = {
+    users: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    onSelfDelete: PropTypes.func.isRequired,
+    onSelfDemotion: PropTypes.func.isRequired,
+  }
+
+  @computed get isSelf() {
+    return User.id === this.props.user.id;
+  }
+
+  render() {
+    const { user, users, onSelfDelete, onSelfDemotion } = this.props;
+    const childProps = { isSelf: this.isSelf, users, user };
 
     return (
       <ListGroupItem
@@ -96,10 +124,9 @@ export default class UserRow extends React.Component {
         data-id={user.id}
         className="d-flex align-items-center"
       >
-        <Name>{user.name}</Name>
-        <CheckBox checked={user.role == 'power_user'} onChange={this.setPowerUserStatus} />
-
-        <DeleteButton onSelfDelete={onSelfDelete} users={users} user={user} />
+        <Name>{user.name || user.email}</Name>
+        <PowerUserToggle {...childProps} onSelfDemotion={onSelfDemotion} />
+        <DeleteButton {...childProps}  onSelfDelete={onSelfDelete} />
       </ListGroupItem>
     );
   }

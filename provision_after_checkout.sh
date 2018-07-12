@@ -10,4 +10,7 @@ gem install --conservative bundler
 echo Installing gems
 bundle install
 
+echo Installing JS packages
+yarn install
+
 echo Done!

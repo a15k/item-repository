@@ -33,7 +33,8 @@ gem 'jwt', '~> 1.5' # can't upgrade until openstax_accounts can update oauth2
 gem 'a15k_interactions_api',
     git: 'https://github.com/a15k/interactions-api.git',
     glob: 'clients/0.1.0/ruby/*gemspec',
-    ref: '510f2145e501625a541439a968c4f1d63ebe400c'
+    branch: 'client-specs'
+#    ref: '510f2145e501625a541439a968c4f1d63ebe400c'
 
 # do not remove: CoffeeScript is needed for openstax_accounts
 gem 'coffee-rails', '~> 4.2'

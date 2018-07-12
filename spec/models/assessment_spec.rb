@@ -14,10 +14,10 @@ RSpec.describe Assessment, type: :model do
   it 'disallows other members from making new versions' do
     other_member = FactoryBot.create :member
     other = Assessment.new(
-      identifier: '1234',
-      member: other_member,
-      format: assessment.format
+      identifier: assessment.identifier,
+      member: other_member
     )
+    expect(other.other_versions.size).to eq 1
     expect(other.save).to be false
     expect(other.errors[:member]).to include 'must be the same as other versions'
   end

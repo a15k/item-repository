@@ -30,11 +30,9 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "member_id", null: false
     t.string "version", default: "1", null: false
     t.integer "visibility", limit: 2
-    t.uuid "format_id", null: false
     t.text "preview_html"
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_assessments_on_created_at"
-    t.index ["format_id"], name: "index_assessments_on_format_id"
     t.index ["identifier"], name: "index_assessments_on_identifier"
     t.index ["member_id"], name: "index_assessments_on_member_id"
     t.index ["version"], name: "index_assessments_on_version"
@@ -182,7 +180,6 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
   end
 
   add_foreign_key "access_tokens", "members"
-  add_foreign_key "assessments", "formats"
   add_foreign_key "assessments", "members"
   add_foreign_key "assets", "members", column: "created_by_id"
   add_foreign_key "formats", "members", column: "created_by_id"

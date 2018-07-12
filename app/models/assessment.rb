@@ -1,7 +1,6 @@
 # coding: utf-8
 class Assessment < ApplicationRecord
 
-  belongs_to :format
   belongs_to :member
   has_many :questions, inverse_of: :assessment
   has_many :other_versions,

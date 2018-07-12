@@ -36,6 +36,11 @@ export default class Users extends React.Component {
     this.redirectToHome = true;
   }
 
+  @action.bound onSelfDemotion() {
+    User.role = 'standard_user';
+    this.redirectToHome = true;
+  }
+
   @action.bound onInvite() {
     this.props.users.invite(this.invite.value).then(() => {
       this.invite.value = '';
@@ -63,7 +68,12 @@ export default class Users extends React.Component {
 
         <ListGroup>
           {users.array.map((user) =>
-            <UserRow key={user.id} onSelfDelete={this.onSelfDelete} users={users} user={user} />)}
+            <UserRow
+              key={user.id}
+              onSelfDemotion={this.onSelfDemotion}
+              onSelfDelete={this.onSelfDelete}
+              users={users}
+              user={user} />)}
         </ListGroup>
 
         <InputGroup className="invite-user" style={{ marginTop: 30 }}>

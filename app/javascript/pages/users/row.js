@@ -25,6 +25,7 @@ class DeleteButton extends React.Component {
   static propTypes = {
     users: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
+    onSelfDelete: PropTypes.func.isRequired,
   }
 
   @computed get isSelf() {
@@ -74,11 +75,16 @@ export default class UserRow extends React.Component {
     users: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     onSelfDelete: PropTypes.func.isRequired,
+    onSelfDemotion: PropTypes.func.isRequired,
   }
 
   @action.bound setPowerUserStatus({ currentTarget: { checked } }) {
-    this.props.user.isPowerUser = checked;
-    this.props.user.save();
+    const { user, onSelfDemotion } = this.props;
+    user.isPowerUser = checked;
+    const done = this.props.user.save();
+    if (User.id === user.id) {
+      done.then(onSelfDemotion);
+    }
   }
 
   render() {

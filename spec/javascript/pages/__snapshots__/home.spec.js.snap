@@ -5,7 +5,7 @@ exports[`HomePage renders a non-member message 1`] = `
   className="not-a-member"
 >
   <h3>
-    Your account do not belong to any A15K member organizations
+    Your account does not belong to any A15K member organizations
   </h3>
   <p>
     Please contact the A15K representative at your organization and ask them to invite your email address.

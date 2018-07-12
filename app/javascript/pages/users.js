@@ -5,7 +5,7 @@ import { React, ModelCollectionType, observer, observable, action } from '../hel
 import User from '../models/user';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
-import UserRow from './users/row';
+import UserRow from './users/user';
 
 
 const DeleteLabel = styled.div`

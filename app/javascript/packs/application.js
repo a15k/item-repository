@@ -1,4 +1,4 @@
-import { React, observer, observable, action } from '../helpers/react';
+import { React, PropTypes, observer, observable, action } from '../helpers/react';
 import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ReactDOM from 'react-dom';
@@ -14,6 +14,10 @@ const MenuLink = ({ to, name }) => (
     {name}
   </NavLink>
 );
+MenuLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 const Nav = styled.nav`
  margin-bottom: 1rem;

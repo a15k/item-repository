@@ -1,4 +1,4 @@
-import { React } from '../helpers/react';
+import { React, PropTypes } from '../helpers/react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import invariant from 'invariant';
 import cn from 'classnames';
@@ -33,3 +33,8 @@ export default function Icon({ icon, className, ...props }) {
     />
   );
 }
+
+Icon.propTypes = {
+  icon: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};

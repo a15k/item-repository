@@ -1,5 +1,5 @@
-import { observable, computed, action } from 'mobx';
-import { first, isArray } from 'lodash';
+import { observable, action } from 'mobx';
+import { isArray } from 'lodash';
 import lazyGetter from '../helpers/lazy-getter.js';
 import ModelApi from './api';
 export default class ModelCollection {

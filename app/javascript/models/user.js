@@ -1,4 +1,3 @@
-import { readonly } from 'core-decorators';
 import { isNil, filter } from 'lodash';
 import {
   BaseModel, identifiedBy, computed, field, identifier, action,

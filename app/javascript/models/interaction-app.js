@@ -1,6 +1,5 @@
-import { readonly } from 'core-decorators';
 import {
-  BaseModel, identifiedBy, computed, field, identifier, action,
+  BaseModel, identifiedBy, computed, field, identifier,
 } from './base';
 
 @identifiedBy('interactions')

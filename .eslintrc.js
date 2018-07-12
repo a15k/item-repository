@@ -4,7 +4,10 @@ module.exports = {
     "es6": true
   },
   "parser": "babel-eslint",
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
@@ -23,7 +26,7 @@ module.exports = {
       "error",
       2
     ],
-    "no-unused-vars": [2, {'varsIgnorePattern': '_+'}],
+    "no-unused-vars": ["error", {'varsIgnorePattern': '_+'}],
     "consistent-return": ["error", { "treatUndefinedAsUnspecified": true }],
     "object-curly-spacing": ["error", "always"],
     "quotes": ["error", "double"],

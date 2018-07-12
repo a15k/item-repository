@@ -6,7 +6,6 @@ FactoryBot.define do
 
     format
     content { Faker::Hacker.say_something_smart }
-    association :created_by, factory: :member
 
     transient do
       solutions_count 1

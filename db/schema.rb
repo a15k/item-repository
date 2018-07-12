@@ -27,16 +27,16 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
 
   create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "identifier"
+    t.uuid "member_id", null: false
     t.string "version", default: "1", null: false
     t.integer "visibility", limit: 2
     t.uuid "format_id", null: false
     t.text "preview_html"
-    t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_assessments_on_created_at"
-    t.index ["created_by_id"], name: "index_assessments_on_created_by_id"
     t.index ["format_id"], name: "index_assessments_on_format_id"
     t.index ["identifier"], name: "index_assessments_on_identifier"
+    t.index ["member_id"], name: "index_assessments_on_member_id"
     t.index ["version"], name: "index_assessments_on_version"
   end
 
@@ -146,10 +146,8 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "format_id", null: false
     t.text "content", null: false
     t.text "variant_id"
-    t.uuid "created_by_id", null: false
     t.datetime "created_at", null: false
     t.index ["assessment_id"], name: "index_questions_on_assessment_id"
-    t.index ["created_by_id"], name: "index_questions_on_created_by_id"
     t.index ["format_id"], name: "index_questions_on_format_id"
     t.index ["variant_id"], name: "index_questions_on_variant_id"
   end
@@ -158,10 +156,10 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "question_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
-    t.uuid "created_by_id", null: false
+    t.uuid "member_id", null: false
     t.datetime "created_at", null: false
-    t.index ["created_by_id"], name: "index_solutions_on_created_by_id"
     t.index ["format_id"], name: "index_solutions_on_format_id"
+    t.index ["member_id"], name: "index_solutions_on_member_id"
     t.index ["question_id"], name: "index_solutions_on_question_id"
   end
 
@@ -185,14 +183,13 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
 
   add_foreign_key "access_tokens", "members"
   add_foreign_key "assessments", "formats"
-  add_foreign_key "assessments", "members", column: "created_by_id"
+  add_foreign_key "assessments", "members"
   add_foreign_key "assets", "members", column: "created_by_id"
   add_foreign_key "formats", "members", column: "created_by_id"
   add_foreign_key "questions", "assessments"
   add_foreign_key "questions", "formats"
-  add_foreign_key "questions", "members", column: "created_by_id"
   add_foreign_key "solutions", "formats"
-  add_foreign_key "solutions", "members", column: "created_by_id"
+  add_foreign_key "solutions", "members"
   add_foreign_key "solutions", "questions"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"

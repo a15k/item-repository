@@ -16,14 +16,9 @@ if [ $? -ne 0 ]; then
   fi
 fi
 
-ruby_version=`cat .ruby-version`
-echo Installing Ruby $ruby_version
-source /home/ubuntu/rbenv-init && rbenv install -s $ruby_version
+# Wrap the remaining calls inside another script so that we get the checkedout
+# version of the script.
 
-echo Installing bundler
-gem install --conservative bundler
+# TODO only call it if the checkout changed the SHA
 
-echo Installing gems
-bundle install
-
-echo Done!
+./provision_after_checkout.sh

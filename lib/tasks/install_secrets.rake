@@ -37,18 +37,17 @@ task :install_secrets, [] do
     end
   end
 
-  debugger
   database_secrets = secrets.delete('database')
 
   File.open(File.expand_path("config/database.yml"), "w") do |file|
     file.write(yaml({
       'production' => {
-        database: database_secrets[''],
-        host: database_secrets[''],
-        port: database_secrets[''],
-        adapter: postgresql,
-        username: database_secrets[''],
-        password: database_secrets['']
+        'database' => database_secrets['database_name'],
+        'host' => database_secrets['database_host'],
+        'port' => database_secrets['database_port'],
+        'adapter' => "postgresql",
+        'username' => database_secrets['database_username'],
+        'password' => database_secrets['database_password']
       }
     }))
   end

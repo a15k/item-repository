@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Search renders help 1`] = `
+<div
+  className="search-page"
+>
+  <div
+    className="input-group"
+  >
+    <div
+      className="input-group-prepend"
+      onKeyDown={[Function]}
+    >
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="dropdown-toggle btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        Search by 
+        Text
+      </button>
+      <div
+        aria-hidden={true}
+        className="dropdown-menu"
+        role="menu"
+        tabIndex="-1"
+      >
+        <button
+          className="dropdown-item"
+          data-type="ID"
+          onClick={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          ID
+        </button>
+        <button
+          className="dropdown-item"
+          data-type="Text"
+          onClick={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          Text
+        </button>
+      </div>
+    </div>
+    <input
+      className="form-control"
+      onKeyPress={[Function]}
+      type="text"
+    />
+    <div
+      className="input-group-append"
+    >
+      <button
+        className="btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+  <small
+    className="form-text text-muted"
+  >
+    Enter text to search for.  Assessment metadata is searched first and then statisistics
+  </small>
+</div>
+`;
+
 exports[`Search renders search 1`] = `
 <div
   className="search-page"

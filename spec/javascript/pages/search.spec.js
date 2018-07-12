@@ -14,6 +14,13 @@ describe(Search, () => {
     };
   });
 
+  it('renders help', () => {
+    props.collection.assessments.clear();
+    const search = renderer.create(<Search {...props} />);
+    expect(search.toJSON()).toMatchSnapshot();
+    search.unmount();
+  });
+
   it('renders search', () => {
     const search = renderer.create(<Search {...props} />);
     expect(search.toJSON()).toMatchSnapshot();

@@ -1,7 +1,7 @@
 import { React, PropTypes, observer, observable, action, computed } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-  InputGroup, InputGroupAddon, Button, Input,
+  InputGroup, InputGroupAddon, Button, Input, FormText,
 } from 'reactstrap';
 import AssessmentCollection from './search/collection';
 import styled from 'styled-components';
@@ -14,6 +14,15 @@ const Preview = ({ assessment }) => {
   const html = { __html: assessment.preview_html };
   return <PreviewWrapper dangerouslySetInnerHTML={html} />
 };
+
+const HELP = {
+  Text: 'Enter text to search for.  Assessment metadata is searched first and then statisistics',
+  ID: 'Enter assessment identifier to search for',
+};
+
+const SearchHelp = ({ type, results }) => (
+  results.assessments.length == 0 && <FormText color="muted">{HELP[type]}</FormText>
+);
 
 @observer
 export default class Search extends React.Component {
@@ -50,7 +59,6 @@ export default class Search extends React.Component {
   }
 
   render() {
-
     return (
       <div className="search-page">
         <InputGroup>
@@ -85,6 +93,7 @@ export default class Search extends React.Component {
             <Button onClick={this.onSearchClick} color="secondary">Search</Button>
           </InputGroupAddon>
         </InputGroup>
+        <SearchHelp type={this.searchingBy} results={this.collection} />
         <ModelErrors model={this.assessment} />
         {this.collection.map(a => <Preview key={a.id} assessment={a} />)}
       </div>

@@ -1,22 +1,19 @@
 import { Card, ListGroup, ListGroupItem, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import Button from '../components/button';
-import { React, ModelCollectionType, observer, observable, action, computed } from '../helpers/react';
-import { User } from '../models/user';
+import { React, ModelCollectionType, observer, observable, action } from '../helpers/react';
+import User from '../models/user';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
+import UserRow from './users/row';
 
-const Name = styled.div`
-flex: 1;
-`;
-const CheckBox = styled.input.attrs({
-  type: 'checkbox',
-})`
-margin-right: 1rem;
-`;
+
 const DeleteLabel = styled.div`
 width: 70px;
 text-align: center;
 `;
+
+
 @observer
 export default class Users extends React.Component {
 
@@ -25,22 +22,23 @@ export default class Users extends React.Component {
   }
 
   static defaultProps = {
-    users: User.collection,
+    users: User.constructor.collection,
   }
 
   componentDidMount() {
     this.props.users.api.fetch();
   }
 
-  @action.bound onDelete(ev) {
-    const user = this.props.users.get(ev.currentTarget.parentElement.dataset.id);
-    this.props.users.destroy(user);
+  @observable redirectToHome = false;
+
+  @action.bound onSelfDelete() {
+    User.member_id = null;
+    this.redirectToHome = true;
   }
 
-  @action.bound setPowerUserStatus(ev) {
-    const user = this.props.users.get(ev.currentTarget.parentElement.dataset.id);
-    user.isPowerUser = ev.currentTarget.checked;
-    user.save();
+  @action.bound onSelfDemotion() {
+    User.role = 'standard_user';
+    this.redirectToHome = true;
   }
 
   @action.bound onInvite() {
@@ -52,6 +50,11 @@ export default class Users extends React.Component {
 
   render() {
     const { users } = this.props;
+
+    if (this.redirectToHome) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="access-users">
         <h1>
@@ -65,16 +68,12 @@ export default class Users extends React.Component {
 
         <ListGroup>
           {users.array.map((user) =>
-            <ListGroupItem
+            <UserRow
               key={user.id}
-              data-id={user.id}
-              className="d-flex align-items-center"
-              >
-              <Name>{user.name}</Name>
-              <CheckBox checked={user.isPowerUser} onChange={this.setPowerUserStatus} />
-              <Button icon="trash" onClick={this.onDelete} />
-            </ListGroupItem>
-          )}
+              onSelfDemotion={this.onSelfDemotion}
+              onSelfDelete={this.onSelfDelete}
+              users={users}
+              user={user} />)}
         </ListGroup>
 
         <InputGroup className="invite-user" style={{ marginTop: 30 }}>

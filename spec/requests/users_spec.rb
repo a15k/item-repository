@@ -43,12 +43,14 @@ describe 'Tokens API', type: :request do
 
   describe 'updating a user' do
     it 'can alter a users role' do
+      # must have at least one other power user
+      FactoryBot.create(:user, member: user.member, role: 'power_user')
       expect{
         put "/api/v1/users/#{user.id}", headers: headers,
-            params: { role: 'power_user' }.to_json
+            params: { role: 'standard_user' }.to_json
       }.to change{ user.reload.role }
-             .from('standard_user')
-             .to('power_user')
+             .from('power_user')
+             .to('standard_user')
     end
 
     it 'can only alter users for the current membership' do
@@ -71,7 +73,15 @@ describe 'Tokens API', type: :request do
   end
 
   describe 'delete' do
+    it 'wont delete the last power user' do
+      delete "/api/v1/users/#{user.id}", headers: headers
+      expect(response.status).to eq 422
+      expect(response_json['success']).to be false
+    end
+
     it 'deletes users by removing the membership' do
+      # must have another power user
+      FactoryBot.create(:user, member: user.member, role: 'power_user')
       expect{
         delete "/api/v1/users/#{user.id}", headers: headers
       }.to change{ user.reload.member_id }

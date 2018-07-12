@@ -1,12 +1,19 @@
 import renderer from 'react-test-renderer';
 import Users from 'pages/users';
 import Factory from '../factories';
+import User from 'models/user';
+
+jest.mock('models/user', () => ({
+  id: 1,
+}));
 
 describe(Users, () => {
   let props;
 
   beforeEach(() => {
     const users = Factory.usersCollection({ count: 3 });
+    users.powerUsers = () => [ ];
+
     users.api.fetch = jest.fn(() => Promise.resolve({ data: [] }));
     props = {
       users,
@@ -22,11 +29,24 @@ describe(Users, () => {
   it('can delete a user', () => {
     const users = mount(<Users {...props} />);
     const user = props.users.array[1];
-    const delBtn = users.find(`ListGroupItem[data-id="${user.id}"] Button[icon="trash"]`);
+    const delBtn = users.find(`ListGroupItem[data-id="${user.id}"] SuretyGuard`);
     props.users.destroy = jest.fn();
-    delBtn.simulate('click');
+    delBtn.props().onConfirm();
     expect(props.users.destroy).toHaveBeenCalledWith(user);
     users.unmount();
+  });
+
+  it('hides delete for last power user', () => {
+    const user = props.users.array[2];
+    props.users.powerUsers = () => [ user ];
+    props.users.map.replace({ [`${user.id}`]: user });
+
+    const users = mount(<Users {...props} />);
+    expect(users.find('ListGroupItem').length).toEqual(1);
+    expect(users).toRender('DeleteButton Button');
+    user.id = 1;
+    users.update();
+    expect(users).not.toRender('DeleteButton Button');
   });
 
   it('can invite users', () => {

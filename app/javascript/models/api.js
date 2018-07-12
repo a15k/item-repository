@@ -76,15 +76,15 @@ export default class ModelApi {
       url += '?' + qs.stringify(query);
     }
     const headers = {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
     };
     if (Config.jwt) {
       headers.Authorization = Config.jwt;
     }
-
     return fetch(url, {
       credentials: 'include',
       method: method.toUpperCase(),
+      headers,
       body,
     })
       .then(resp => {

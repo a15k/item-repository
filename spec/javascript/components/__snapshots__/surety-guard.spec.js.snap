@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SuretyGuard renders 1`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex="0"
+>
+  <p>
+    Hi
+  </p>
+</span>
+`;
+
+exports[`SuretyGuard renders into dom 1`] = `"<h3 class=\\"popover-header\\">Sure are you?</h3><div class=\\"popover-body\\">Yo! are you sure?</div><div class=\\"sc-bdVaJa jVFQRp\\"><button type=\\"button\\" class=\\"btn btn-secondary\\">Cancel</button><button type=\\"button\\" class=\\"btn btn-primary\\">OK</button></div>"`;

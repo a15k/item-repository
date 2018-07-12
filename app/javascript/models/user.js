@@ -1,4 +1,5 @@
 import { readonly } from 'core-decorators';
+import { isNil, filter } from 'lodash';
 import {
   BaseModel, identifiedBy, computed, field, identifier, action,
 } from './base';
@@ -14,10 +15,15 @@ export class User extends BaseModel {
   @identifier id;
   @field name;
   @field role;
+  @field member_id;
   @field username;
 
   @computed get isLoggedIn() {
     return Boolean(this.id) && currentUser === this;
+  }
+
+  @computed get isMember() {
+    return !isNil(this.member_id);
   }
 
   @action.bound bootstrap(data) {
@@ -26,11 +32,19 @@ export class User extends BaseModel {
   }
 
   @computed get isPowerUser() {
-    return this.role === 'power_user';
+    return Boolean(
+      this.isMember && this.role === 'power_user'
+    );
   }
 
   set isPowerUser(pu) {
     this.role = pu ? 'power_user' : 'standard_user';
+  }
+
+  @action.bound logout() {
+    // kinda nasty to rely on the DOM from a model
+    // but the logout call needs to be a real form post
+    document.getElementById('logout-form').submit();
   }
 
 }
@@ -43,6 +57,10 @@ User.collection.invite = function(email, role = 'standard_user') {
     method: 'post',
     url: `${user.api.baseUrl}/add`,
   });
+};
+
+User.collection.powerUsers = function() {
+  return filter(this.array, { role: 'power_user' });
 };
 
 currentUser = new User;

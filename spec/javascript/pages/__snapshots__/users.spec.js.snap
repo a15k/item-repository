@@ -12,7 +12,7 @@ exports[`Users renders listing 1`] = `
   >
     PowerUser?
     <div
-      className="sc-ifAKCX fNMcFr"
+      className="sc-bZQynM cbsshv"
     >
       Delete
     </div>
@@ -25,114 +25,132 @@ exports[`Users renders listing 1`] = `
       data-id="379d79cc-cd42-443c-9f2e-15087a5bc518"
     >
       <div
-        className="sc-htpNat ccbDWo"
+        className="sc-bxivhb kVArnT"
       >
         Mr. Imani Ankunding
       </div>
       <input
         checked={true}
-        className="sc-bxivhb jBgGdK"
+        className="sc-ifAKCX fgiLBn"
         onChange={[Function]}
         type="checkbox"
       />
-      <button
-        className="sc-bdVaJa kaVmVf btn btn-secondary"
+      <span
         onClick={[Function]}
-        type="button"
+        role="button"
+        tabIndex="0"
       >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
-          data-icon="trash-alt"
-          data-prefix="fas"
-          role="img"
-          style={Object {}}
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          className="sc-bdVaJa kaVmVf btn btn-secondary"
+          onClick={[Function]}
+          type={undefined}
         >
-          <path
-            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
-            fill="currentColor"
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+            data-icon="trash-alt"
+            data-prefix="fas"
+            role="img"
             style={Object {}}
-          />
-        </svg>
-      </button>
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+        </button>
+      </span>
     </li>
     <li
       className="d-flex align-items-center list-group-item"
       data-id="5b9e1f51-e6a7-468c-8579-6d96fc028b7b"
     >
       <div
-        className="sc-htpNat ccbDWo"
+        className="sc-bxivhb kVArnT"
       >
         Erling Walsh
       </div>
       <input
         checked={false}
-        className="sc-bxivhb jBgGdK"
+        className="sc-ifAKCX fgiLBn"
         onChange={[Function]}
         type="checkbox"
       />
-      <button
-        className="sc-bdVaJa kaVmVf btn btn-secondary"
+      <span
         onClick={[Function]}
-        type="button"
+        role="button"
+        tabIndex="0"
       >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
-          data-icon="trash-alt"
-          data-prefix="fas"
-          role="img"
-          style={Object {}}
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          className="sc-bdVaJa kaVmVf btn btn-secondary"
+          onClick={[Function]}
+          type={undefined}
         >
-          <path
-            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
-            fill="currentColor"
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+            data-icon="trash-alt"
+            data-prefix="fas"
+            role="img"
             style={Object {}}
-          />
-        </svg>
-      </button>
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+        </button>
+      </span>
     </li>
     <li
       className="d-flex align-items-center list-group-item"
       data-id="00f2b0ea-e9f8-4604-865c-89119b920095"
     >
       <div
-        className="sc-htpNat ccbDWo"
+        className="sc-bxivhb kVArnT"
       >
         Pattie Bernhard
       </div>
       <input
         checked={true}
-        className="sc-bxivhb jBgGdK"
+        className="sc-ifAKCX fgiLBn"
         onChange={[Function]}
         type="checkbox"
       />
-      <button
-        className="sc-bdVaJa kaVmVf btn btn-secondary"
+      <span
         onClick={[Function]}
-        type="button"
+        role="button"
+        tabIndex="0"
       >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
-          data-icon="trash-alt"
-          data-prefix="fas"
-          role="img"
-          style={Object {}}
-          viewBox="0 0 448 512"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          className="sc-bdVaJa kaVmVf btn btn-secondary"
+          onClick={[Function]}
+          type={undefined}
         >
-          <path
-            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
-            fill="currentColor"
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+            data-icon="trash-alt"
+            data-prefix="fas"
+            role="img"
             style={Object {}}
-          />
-        </svg>
-      </button>
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+              fill="currentColor"
+              style={Object {}}
+            />
+          </svg>
+        </button>
+      </span>
     </li>
   </ul>
   <div

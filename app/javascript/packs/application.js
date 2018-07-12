@@ -28,10 +28,6 @@ class A15KApplication extends React.Component {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  @action.bound onLogout(ev) {
-    ev.currentTarget.querySelector('form').submit();
-  }
-
   renderPowerUserOptions() {
     return [
       <MenuLink key="i" to="/interactions" name="Interactions" />,
@@ -50,16 +46,10 @@ class A15KApplication extends React.Component {
                 Actions
               </DropdownToggle>
               <DropdownMenu>
-                <MenuLink to="/search" name="Search" />
+                {User.isMember && <MenuLink to="/search" name="Search" />}
                 {User.isPowerUser && this.renderPowerUserOptions()}
                 <DropdownItem divider />
-                <DropdownItem tag="div" onClick={this.onLogout}>
-                  <form action="/accounts/logout" method="post">
-                    <input type="hidden" name="authenticity_token" value={Config.csrf_token} />
-                    <input type="hidden" name="_method" value="delete" />
-                    Logout
-                  </form>
-                </DropdownItem>
+                <DropdownItem onClick={User.logout}>Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Nav>
@@ -73,6 +63,10 @@ class A15KApplication extends React.Component {
               <Route component={Pages.NotFound} />
             </Switch>
           </Container>
+          <form id="logout-form" action="/accounts/logout" method="post">
+            <input type="hidden" name="authenticity_token" value={Config.csrf_token} />
+            <input type="hidden" name="_method" value="delete" />
+          </form>
         </div>
       </BrowserRouter>
     );

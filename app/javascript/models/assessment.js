@@ -1,5 +1,5 @@
 import {
-  BaseModel, identifiedBy, computed, field, observable, hasMany, identifier, action,
+  BaseModel, identifiedBy, field, identifier,
 } from './base';
 
 @identifiedBy('assessments')

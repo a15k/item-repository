@@ -1,5 +1,6 @@
 import { React } from '../helpers/react';
 import { Alert } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { isEmpty, isString, trim, capitalize, map } from 'lodash';
 import styled from 'styled-components';
 
@@ -46,3 +47,9 @@ export default function ModelErrors({ model, errors, className }) {
     </ErrorWrapper>
   );
 }
+
+ModelErrors.propTypes = {
+  model: PropTypes.object,
+  errors: PropTypes.object,
+  className: PropTypes.string,
+};

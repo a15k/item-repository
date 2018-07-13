@@ -1,4 +1,4 @@
-import { computed, action, observable } from 'mobx';
+import { computed, observable } from 'mobx';
 import lazyGetter from '../helpers/lazy-getter.js';
 import ModelApi from './api';
 import ModelCollection from './model-collection';

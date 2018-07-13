@@ -1,6 +1,3 @@
-import {
-  ListGroup, ListGroupItem,
-} from 'reactstrap';
 import Button from '../components/button';
 import { React, observer, observable, action, computed } from '../helpers/react';
 import InteractionApp from '../models/interaction-app';

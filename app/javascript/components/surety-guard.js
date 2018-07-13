@@ -1,8 +1,6 @@
 import { React, action, observable, observer } from '../helpers/react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Popover, Button, PopoverHeader, PopoverBody } from 'reactstrap';
-import { defer } from 'lodash';
 import styled from 'styled-components';
 
 const Controls = styled.div`

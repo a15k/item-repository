@@ -1,4 +1,4 @@
-import { React, PropTypes, observer, observable, action, computed } from '../helpers/react';
+import { React, PropTypes, observer, observable, action } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
   InputGroup, InputGroupAddon, Button, Input, FormText,
@@ -10,9 +10,13 @@ import ModelErrors from '../components/model-errors';
 const PreviewWrapper = styled.div`
 margin-top: 1rem;
 `;
+
 const Preview = ({ assessment }) => {
   const html = { __html: assessment.preview_html };
-  return <PreviewWrapper dangerouslySetInnerHTML={html} />
+  return <PreviewWrapper dangerouslySetInnerHTML={html} />;
+};
+Preview.propTypes = {
+  assessment: PropTypes.shape({ preview_html: PropTypes.string }).isRequired,
 };
 
 const HELP = {

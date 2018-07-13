@@ -2,7 +2,7 @@ import {
   ListGroup, ListGroupItem,
 } from 'reactstrap';
 import Button from '../../components/button';
-import { React, PropTypes, observer, observable, action, ModelCollectionType } from '../../helpers/react';
+import { React, PropTypes, observer, action, ModelCollectionType } from '../../helpers/react';
 import AccessToken from '../../models/access-token';
 
 @observer

@@ -13,6 +13,12 @@ RSpec.describe Assessment, type: :model do
     expect(versions).to include other
   end
 
+  it 'has versions that only belong to the same identifier' do
+    other_member = FactoryBot.create :member
+    other_assment = FactoryBot.create :assessment, member: other_member
+    expect(assessment.other_versions).to be_empty
+  end
+
   it 'disallows other members from making new versions' do
     other_member = FactoryBot.create :member
     other = Assessment.new(

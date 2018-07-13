@@ -42,12 +42,12 @@ task :install_secrets, [] do
   File.open(File.expand_path("config/database.yml"), "w") do |file|
     file.write(yaml({
       'production' => {
-        'database' => database_secrets['database_name'],
-        'host' => database_secrets['database_host'],
-        'port' => database_secrets['database_port'],
+        'database' => database_secrets['name'],
+        'host' => database_secrets['host'],
+        'port' => database_secrets['port'],
         'adapter' => "postgresql",
-        'username' => database_secrets['database_username'],
-        'password' => database_secrets['database_password']
+        'username' => database_secrets['username'],
+        'password' => database_secrets['password']
       }
     }))
   end

@@ -9,23 +9,8 @@ GIT
       typhoeus (~> 1.0, >= 1.0.1)
 
 GIT
-  remote: https://github.com/nathanstitt/lev.git
-  revision: a78207e4b7dd2597a8540d5de039fef1c544291e
-  branch: coerce-to_sym
-  specs:
-    lev (9.0.0)
-      actionpack (>= 4.2)
-      active_attr
-      activejob
-      activemodel (>= 4.2)
-      activerecord (>= 4.2)
-      hashie
-      transaction_isolation
-      transaction_retry
-
-GIT
   remote: https://github.com/openstax/accounts-rails.git
-  revision: f7debd3ca0a376c5c28798e66f58fab2fda181f9
+  revision: 57fa8b21afdc081fdfe7d56df7905eefba6eb7cd
   branch: rails5
   specs:
     openstax_accounts (7.12.0)
@@ -42,6 +27,23 @@ GIT
       rails (~> 5.1)
       representable (>= 2.0)
       roar (>= 1.0)
+
+GIT
+  remote: https://github.com/openstax/openstax_api.git
+  revision: ff758e63d3d37158748836040fa2ede7da8ecd3a
+  branch: rails5
+  specs:
+    openstax_api (8.2.1)
+      doorkeeper (>= 2.0)
+      exception_notification (>= 4.0)
+      lev (>= 1.0.0)
+      openstax_utilities (>= 4.2.0)
+      rails (~> 5.1)
+      representable (>= 2.4, < 4.0)
+      responders
+      roar (>= 1.0)
+      roar-rails (>= 1.0)
+      uber (< 0.1.0)
 
 PATH
   remote: clients/1.0.0/ruby
@@ -105,11 +107,11 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     bindex (0.5.0)
-    bootsnap (1.3.0)
+    bootsnap (1.3.1)
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (3.2.1)
+    capybara (3.3.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -144,9 +146,9 @@ GEM
     docile (1.3.1)
     doorkeeper (4.3.2)
       railties (>= 4.2)
-    dotenv (2.4.0)
-    dotenv-rails (2.4.0)
-      dotenv (= 2.4.0)
+    dotenv (2.5.0)
+    dotenv-rails (2.5.0)
+      dotenv (= 2.5.0)
       railties (>= 3.2, < 6.0)
     erubi (1.7.1)
     ethon (0.11.0)
@@ -160,7 +162,7 @@ GEM
     factory_bot_rails (4.10.0)
       factory_bot (~> 4.10.0)
       railties (>= 3.0.0)
-    faker (1.8.7)
+    faker (1.9.1)
       i18n (>= 0.7)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
@@ -201,6 +203,15 @@ GEM
       faraday_middleware (~> 0.9)
     jwt (1.5.6)
     keyword_search (1.5.0)
+    lev (9.0.1)
+      actionpack (>= 4.2)
+      active_attr
+      activejob
+      activemodel (>= 4.2)
+      activerecord (>= 4.2)
+      hashie
+      transaction_isolation
+      transaction_retry
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -224,7 +235,7 @@ GEM
     multipart-post (2.0.0)
     nenv (0.3.0)
     nio4r (2.3.1)
-    nokogiri (1.8.2)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -241,16 +252,6 @@ GEM
     omniauth-oauth2 (1.3.1)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    openstax_api (7.1.1)
-      doorkeeper (>= 2.0)
-      exception_notification (>= 4.0)
-      lev (>= 1.0.0)
-      openstax_utilities (>= 4.2.0)
-      rails (>= 3.1)
-      representable (>= 2.0, < 4.0)
-      responders
-      roar (>= 1.0)
-      roar-rails (>= 1.0)
     openstax_utilities (4.2.3)
       keyword_search
       lev
@@ -263,7 +264,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.2)
-    puma (3.11.4)
+    puma (3.12.0)
     rack (2.0.5)
     rack-proxy (0.6.4)
       rack
@@ -347,7 +348,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (3.12.0)
+    selenium-webdriver (3.13.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
     shellany (0.0.1)
@@ -363,7 +364,7 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -377,17 +378,17 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    transaction_isolation (1.0.3)
+    transaction_isolation (1.0.5)
       activerecord (>= 3.0.11)
-    transaction_retry (1.0.2)
+    transaction_retry (1.0.3)
       activerecord (>= 3.0.11)
       transaction_isolation (>= 1.0.2)
     typhoeus (1.3.0)
       ethon (>= 0.9.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uber (0.1.0)
-    uglifier (4.1.11)
+    uber (0.0.15)
+    uglifier (4.1.15)
       execjs (>= 0.3.0, < 3)
     url (0.3.2)
     versionist (1.7.0)
@@ -399,7 +400,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webpacker (3.5.3)
+    webpacker (3.5.5)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
       railties (>= 4.2)
@@ -432,9 +433,10 @@ DEPENDENCIES
   jquery-rails (~> 4.3)
   json_api_client
   jwt (~> 1.5)
-  lev!
+  lev (~> 9.0)
   listen (>= 3.0.5, < 3.2)
   openstax_accounts!
+  openstax_api!
   parallel_tests
   pg
   puma (~> 3.11)
@@ -457,4 +459,4 @@ RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

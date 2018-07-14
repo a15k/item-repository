@@ -51,6 +51,17 @@ update_code() {
   fi
 }
 
+install_code() {
+  # Give us a temporary swap file so asset compilation succeeds
+  sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+
+  ./provision_after_checkout.sh
+
+  sudo swapoff /swapfile
+}
+
 echo "Starting provision.sh"
 
 original_sha=$(git rev-parse HEAD)
@@ -64,10 +75,10 @@ update_code
 
 if [ "$force_install" == "force_install" ]; then
   echo "Forcing code install"
-  ./provision_after_checkout.sh
+  install_code
 elif [ "$original_sha" != "$checked_out_sha" ]; then
   echo "Started on $original_sha but now at $checked_out_sha so running code install"
-  ./provision_after_checkout.sh
+  install_code
 else
   echo "Not running code install"
 fi

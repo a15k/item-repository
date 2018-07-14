@@ -13,6 +13,7 @@ bundle install
 echo Installing JS packages
 yarn install
 
+echo Precompling assets
 RAILS_ENV=production bundle exec rake assets:precompile
 
 echo Done!

@@ -20,4 +20,8 @@ test:
   database: '<%= ENV['A15K_TEST_DB'] || 'a15k_mothership_test' %><%= \
                  "_#{ENV['TEST_ENV_NUMBER']}" if !ENV['TEST_ENV_NUMBER'].blank? %>'
 
-# Production database is intentionally left unconfigured
+# Production database is left with bogus defaults so that the
+# rails environment can be spun up during asset precompilation
+production:
+  <<: *default
+  database: 'not_real'

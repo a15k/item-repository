@@ -47,12 +47,13 @@ class A15KApplication extends React.Component {
             <span className="navbar-brand">Assessment Network</span>
             <Dropdown isOpen={this.isMenuOpen} toggle={this.onMenuToggle}>
               <DropdownToggle caret>
-                Actions
+                {User.username}
               </DropdownToggle>
               <DropdownMenu>
                 {User.isMember && <MenuLink to="/search" name="Search" />}
                 {User.isPowerUser && this.renderPowerUserOptions()}
                 <DropdownItem divider />
+                <DropdownItem href={Config.openstax_accounts_url}>Profile</DropdownItem>
                 <DropdownItem onClick={User.logout}>Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -83,3 +84,5 @@ whenDomReady(() => {
   InteractionsApp.api_url = data.interactions_api_url;
   ReactDOM.render(<A15KApplication />, document.getElementById('application-root'));
 });
+
+export default A15KApplication;

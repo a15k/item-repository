@@ -30,7 +30,7 @@ GIT
 
 GIT
   remote: https://github.com/openstax/openstax_api.git
-  revision: ff758e63d3d37158748836040fa2ede7da8ecd3a
+  revision: f4e211ed03465621210d19086c37fffbf3f23700
   branch: rails5
   specs:
     openstax_api (8.2.1)

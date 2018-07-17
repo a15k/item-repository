@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Button from '../components/button';
 import { React, ModelCollectionType, observer, observable, action } from '../helpers/react';
 import User from '../models/user';
+import Config from '../models/config';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
 import UserRow from './users/user';
@@ -57,9 +58,9 @@ export default class Users extends React.Component {
 
     return (
       <div className="access-users">
-        <h1>
-          Users
-        </h1>
+        <h2>
+          Users for member {Config.member_name}
+        </h2>
 
         <div className="d-flex justify-content-end">
           PowerUser?

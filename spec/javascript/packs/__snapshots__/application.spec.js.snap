@@ -29,7 +29,7 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
       </button>
       <div
         aria-hidden={true}
-        className="dropdown-menu"
+        className="dropdown-menu dropdown-menu-right"
         role="menu"
         tabIndex="-1"
       >

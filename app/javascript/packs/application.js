@@ -49,7 +49,7 @@ class A15KApplication extends React.Component {
               <DropdownToggle caret>
                 {User.username}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu right>
                 {User.isMember && <MenuLink to="/search" name="Search" />}
                 {User.isPowerUser && this.renderPowerUserOptions()}
                 <DropdownItem divider />

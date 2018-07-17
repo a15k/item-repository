@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A15KApplication renders and matches snapshot 1`] = `
+<div
+  className="a15k-root"
+>
+  <nav
+    className="navbar navbar-dark bg-dark sc-gZMcBi iaETCR"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+      onClick={[Function]}
+    >
+      Home
+    </a>
+    <div
+      className="dropdown"
+      onKeyDown={[Function]}
+    >
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="dropdown-toggle btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        bobby tables
+      </button>
+      <div
+        aria-hidden={true}
+        className="dropdown-menu"
+        role="menu"
+        tabIndex="-1"
+      >
+        <a
+          aria-current={null}
+          className="dropdown-item"
+          href="/search"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Search
+        </a>
+        <div
+          className="dropdown-divider"
+          onClick={[Function]}
+          tabIndex="-1"
+          type={undefined}
+        />
+        <button
+          className="dropdown-item"
+          href={undefined}
+          onClick={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          Profile
+        </button>
+        <button
+          className="dropdown-item"
+          onClick={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div
+    className="container"
+  >
+    <h3>
+      Not Found
+    </h3>
+  </div>
+  <form
+    action="/accounts/logout"
+    id="logout-form"
+    method="post"
+  >
+    <input
+      name="authenticity_token"
+      type="hidden"
+      value={undefined}
+    />
+    <input
+      name="_method"
+      type="hidden"
+      value="delete"
+    />
+  </form>
+</div>
+`;

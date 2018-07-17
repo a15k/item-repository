@@ -1,5 +1,5 @@
 import { React, PropTypes, observer, observable, action } from '../helpers/react';
-import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
@@ -44,7 +44,7 @@ class A15KApplication extends React.Component {
       <BrowserRouter>
         <div className="a15k-root">
           <Nav className="navbar navbar-dark bg-dark">
-            <Link className="navbar-brand" to="/">Home</Link>
+            <span className="navbar-brand">Assessment Network</span>
             <Dropdown isOpen={this.isMenuOpen} toggle={this.onMenuToggle}>
               <DropdownToggle caret>
                 Actions

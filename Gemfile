@@ -23,7 +23,7 @@ gem 'swagger-blocks'
 gem 'json_api_client'
 gem 'colorize'
 gem 'roar'
-gem 'lev', github: 'nathanstitt/lev', branch: 'coerce-to_sym'
+gem 'lev', '~> 9.0'
 gem 'faraday'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -39,6 +39,7 @@ gem 'a15k_interactions_api',
 gem 'coffee-rails', '~> 4.2'
 # OpenStax Accounts integration
 gem 'openstax_accounts', github: 'openstax/accounts-rails', branch: 'rails5'
+gem 'openstax_api', github: 'openstax/openstax_api', branch: 'rails5'
 
 gem "jquery-rails", "~> 4.3"
 

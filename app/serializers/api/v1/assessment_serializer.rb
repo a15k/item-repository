@@ -6,7 +6,7 @@ module Api
 
       swagger_schema :Assessment do
         key :description, "The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants"
-        key :required, [:id, :version, :visibility, :format_id, :content, :created_at]
+        key :required, [:id, :version, :visibility, :content, :created_at]
         property :id,           type: :string, format: :uuid
         property :created_at,   type: :string, format: 'date-time'
       end
@@ -33,16 +33,11 @@ module Api
                type: :string,
                description: 'If provided, will be used to generate a preview on the a15k website'
 
-      property :format_id,
-               type: :string,
-               format: :uuid,
-               description: 'The uuid of a previously registered format'
-
       property :created_at,
                type: :string,
                format: 'Date'
 
-      property :created_by, document: false, readable: false,
+      property :member, document: false, readable: false,
                reader: ->(user_options:, **) {
         new_record? ? user_options[:current_member] : nil
       }

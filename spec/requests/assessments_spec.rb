@@ -58,7 +58,6 @@ describe 'Assessments API', type: :request do
         post "/api/v1/assessments.json", params: {
                identifier: SecureRandom.uuid,
                content: '1234 this is content',
-               format_id: format.id,
                questions: [
                  {
                    format_id: format.id,
@@ -88,36 +87,34 @@ describe 'Assessments API', type: :request do
       it 'can create multiple versions' do
         id = SecureRandom.uuid
         post "/api/v1/assessments.json", params: {
-               identifier: id, version: '1', format_id: format.id,
+               identifier: id, version: '1',
                questions: [{ format_id: format.id, content: '1st' }]
              }.to_json, headers: headers
         expect(response).to be_ok
 
         post "/api/v1/assessments.json", params: {
-               identifier: id, version: '2', format_id: format.id,
+               identifier: id, version: '2',
                questions: [{ format_id: format.id, content: '1st' }]
              }.to_json, headers: headers
         expect(response).to be_ok
         expect(Assessment.where(identifier: id).count).to eq 2
       end
 
-      it 'fails if version is taken' do
-        asm = FactoryBot.create :assessment, version: '1', identifier: '1'
+      it 'fails if member is different' do
+        asm = FactoryBot.create :assessment, identifier: '1'
         post "/api/v1/assessments.json", params: {
                identifier: asm.identifier, version: asm.version,
-               format_id: asm.format_id,
                questions: [{ format_id: format.id, content: '1st' }]
              }.to_json, headers: headers
         expect(response.status).to eq 422
         expect(response_json['success']).to be false
-        expect(response_json['message']).to include 'Version has already been taken'
+        expect(response_json['message']).to include 'Member must be the same'
       end
     end
     it 'can create a generative assessments' do
       expect {
         post "/api/v1/assessments.json", params: {
                identifier: SecureRandom.uuid,
-               format_id: format.id,
                questions: (1..20).flat_map do |a|
                  (1..10).map do |b|
                    {
@@ -142,7 +139,6 @@ describe 'Assessments API', type: :request do
     it 'errors when variants are not correct' do
         post "/api/v1/assessments.json", params: {
                identifier: SecureRandom.uuid,
-               format_id: format.id,
                questions: [
                  { format_id: format.id, content: '1st' },
                  { format_id: format.id, content: '2nd' },

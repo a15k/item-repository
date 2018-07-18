@@ -1,16 +1,21 @@
 FactoryBot.define do
   factory :assessment do
-    format
 
     identifier { SecureRandom.uuid }
-    association :created_by, factory: :member
+    association :member, factory: :member
+
     visibility { :internal }
 
-    after(:create) do |asm|
-      if asm.questions.none?
-        asm.questions << FactoryBot.create(:question, assessment: asm, format: asm.format)
-      end
+    transient do
+      format { FactoryBot.create(:format) }
+    end
 
+    after(:create) do |asm, evaluator|
+      if asm.questions.none?
+        asm.questions << FactoryBot.create(:question,
+                                           assessment: asm,
+                                           format: evaluator.format)
+      end
     end
 
   end

@@ -33,11 +33,6 @@ module Api
       property :content,    type: :string,
                description: "The content of the question. The formatting the the content is indicated by the assessment's linked format"
 
-      property :created_by, document: false, readable: false,
-               reader: ->(user_options:, **) {
-        new_record? ? user_options[:current_member] : nil
-      }
-
       property :solutions, collection: true, extend: SolutionSerializer, class: Solution do |doc|
         doc.key :type, :array
         doc.items do

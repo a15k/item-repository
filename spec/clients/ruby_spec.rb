@@ -30,7 +30,6 @@ describe 'Ruby client', type: :api do
 
     it 'can be created' do
       response = api_instance.create_assessment(
-        format_id: format.id,
         identifier: 'TEST-Test-AND-TEST-MORE',
         content: { text: Faker::Lorem.paragraph }.to_json,
         questions: 2.times.map{|question_index|
@@ -56,7 +55,6 @@ describe 'Ruby client', type: :api do
       expect(response.data).to be_a_kind_of(A15kClient::Assessment)
       assessment = response.data
       expect(assessment.identifier).to eq('TEST-Test-AND-TEST-MORE')
-      expect(assessment.format_id).to eq(format.id)
       expect(assessment.questions.length).to eq(2)
       expect(assessment.questions[0].solutions.length).to eq(1)
     end

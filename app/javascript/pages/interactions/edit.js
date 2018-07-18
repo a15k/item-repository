@@ -50,8 +50,9 @@ export default class InteractionEdit extends React.Component {
   }
 
   render() {
-    const { app } = this.props;
+    const { app, onDone } = this.props;
     if (!app) return null;
+
     return (
       <EditForm innerRef={this.saveFormRef}>
         <FormGroup>
@@ -77,7 +78,8 @@ export default class InteractionEdit extends React.Component {
         <h3>Embed script tag</h3>
         <textarea readOnly value={app.embed_html} />
         <ButtonsBar>
-          <Button icon="save" onClick={this.onSave}>Save</Button>
+          <Button icon="chevronLeft" onClick={onDone}>Cancel</Button>
+          <Button icon="save" color="primary" onClick={this.onSave}>Save</Button>
         </ButtonsBar>
       </EditForm>
     );

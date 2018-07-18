@@ -7,7 +7,7 @@ import Config from '../models/config';
 import ErrorDisplay from '../components/model-errors';
 import styled from 'styled-components';
 import UserRow from './users/user';
-
+import SectionHeading from '../components/section-heading';
 
 const DeleteLabel = styled.div`
 width: 70px;
@@ -58,9 +58,21 @@ export default class Users extends React.Component {
 
     return (
       <div className="access-users">
-        <h2>
-          Users for member {Config.member_name}
-        </h2>
+        <SectionHeading>
+          <h3>Users for member {Config.member_name}</h3>
+        </SectionHeading>
+
+        <InputGroup className="invite-user" style={{ marginTop: 30 }}>
+          <InputGroupAddon addonType="prepend">
+            Invite email:
+          </InputGroupAddon>
+          <Input type="email" innerRef={(e) => this.invite = e} name="email" />
+          <InputGroupAddon addonType="append">
+            <Button icon="envelope" onClick={this.onInvite} />
+          </InputGroupAddon>
+        </InputGroup>
+
+        <ErrorDisplay errors={users.errors} />
 
         <div className="d-flex justify-content-end">
           PowerUser?
@@ -77,16 +89,6 @@ export default class Users extends React.Component {
               user={user} />)}
         </ListGroup>
 
-        <InputGroup className="invite-user" style={{ marginTop: 30 }}>
-          <InputGroupAddon addonType="prepend">
-            Invite email:
-          </InputGroupAddon>
-          <Input type="email" innerRef={(e) => this.invite = e} name="email" />
-          <InputGroupAddon addonType="append">
-            <Button icon="envelope" onClick={this.onInvite} />
-          </InputGroupAddon>
-        </InputGroup>
-        <ErrorDisplay errors={users.errors} />
       </div>
     );
   }

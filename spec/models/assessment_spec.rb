@@ -5,9 +5,9 @@ RSpec.describe Assessment, type: :model do
   let(:assessment) { FactoryBot.create :assessment, member: member, identifier: '1234' }
 
   it 'tracks versions' do
-    expect(assessment.version).to eq '1'
+    expect(assessment.version).to eq 1
     other = FactoryBot.create :assessment, member: member, identifier: '1234'
-    expect(other.version).to eq '2'
+    expect(other.version).to eq 2
     versions = assessment.other_versions.reload
     expect(versions).not_to include assessment
     expect(versions).to include other

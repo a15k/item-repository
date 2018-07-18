@@ -6,7 +6,9 @@ import User from 'models/user';
 jest.mock('models/user', () => ({
   id: 1,
 }));
-
+jest.mock('models/config', () => ({
+  member_name: 'Illuminati',
+}));
 jest.mock('pages/users/delete-placeholder', () => {
   return () => <div className="delete-placeholder" />;
 });

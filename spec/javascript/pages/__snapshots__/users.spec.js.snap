@@ -4,9 +4,10 @@ exports[`Users renders listing 1`] = `
 <div
   className="access-users"
 >
-  <h1>
-    Users
-  </h1>
+  <h2>
+    Users for member 
+    Illuminati
+  </h2>
   <div
     className="d-flex justify-content-end"
   >

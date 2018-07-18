@@ -23,13 +23,28 @@ const Nav = styled.nav`
  margin-bottom: 1rem;
 `;
 
+const Title = styled.div.attrs({
+  className: 'navbar-brand',
+})`
+flex: 1;
+`;
+
+const Menu = styled(Dropdown)`
+ margin-left: 1rem;
+`;
+
 @observer
 class A15KApplication extends React.Component {
 
-  @observable isMenuOpen = false;
+  @observable isUserMenuOpen = false;
+  @observable isActionsMenuOpen = false;
 
-  @action.bound onMenuToggle() {
-    this.isMenuOpen = !this.isMenuOpen;
+  @action.bound onUserMenuToggle() {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  @action.bound onActionsMenuToggle() {
+    this.isActionsMenuOpen = !this.isActionsMenuOpen;
   }
 
   renderPowerUserOptions() {
@@ -44,18 +59,28 @@ class A15KApplication extends React.Component {
       <BrowserRouter>
         <div className="a15k-root">
           <Nav className="navbar navbar-dark bg-dark">
-            <span className="navbar-brand">Assessment Network</span>
-            <Dropdown isOpen={this.isMenuOpen} toggle={this.onMenuToggle}>
+            <Title>Assessment Network</Title>
+            {User.isMember &&
+              (
+                <Menu isOpen={this.isActionsMenuOpen} toggle={this.onActionsMenuToggle}>
+                  <DropdownToggle caret>
+                    Actions
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <MenuLink to="/search" name="Search" />
+                    {User.isPowerUser && this.renderPowerUserOptions()}
+                  </DropdownMenu>
+                </Menu>
+              )}
+            <Menu isOpen={this.isUserMenuOpen} toggle={this.onUserMenuToggle}>
               <DropdownToggle caret>
-                Actions
+                {User.username || User.name}
               </DropdownToggle>
-              <DropdownMenu>
-                {User.isMember && <MenuLink to="/search" name="Search" />}
-                {User.isPowerUser && this.renderPowerUserOptions()}
-                <DropdownItem divider />
+              <DropdownMenu right>
+                <DropdownItem href={Config.openstax_accounts_url}>Profile</DropdownItem>
                 <DropdownItem onClick={User.logout}>Logout</DropdownItem>
               </DropdownMenu>
-            </Dropdown>
+            </Menu>
           </Nav>
           <Container>
             <Switch>
@@ -83,3 +108,5 @@ whenDomReady(() => {
   InteractionsApp.api_url = data.interactions_api_url;
   ReactDOM.render(<A15KApplication />, document.getElementById('application-root'));
 });
+
+export default A15KApplication;

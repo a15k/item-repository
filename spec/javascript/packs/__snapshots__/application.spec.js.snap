@@ -7,15 +7,43 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
   <nav
     className="navbar navbar-dark bg-dark sc-gZMcBi iaETCR"
   >
-    <a
-      className="navbar-brand"
-      href="/"
-      onClick={[Function]}
-    >
-      Home
-    </a>
     <div
-      className="dropdown"
+      className="sc-gqjmRU navbar-brand jkwMQg"
+    >
+      Assessment Network
+    </div>
+    <div
+      className="sc-VigVT gqddzs dropdown"
+      onKeyDown={[Function]}
+    >
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="dropdown-toggle btn btn-secondary"
+        onClick={[Function]}
+        type="button"
+      >
+        Actions
+      </button>
+      <div
+        aria-hidden={true}
+        className="dropdown-menu dropdown-menu-right"
+        role="menu"
+        tabIndex="-1"
+      >
+        <a
+          aria-current={null}
+          className="dropdown-item"
+          href="/search"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Search
+        </a>
+      </div>
+    </div>
+    <div
+      className="sc-VigVT gqddzs dropdown"
       onKeyDown={[Function]}
     >
       <button
@@ -33,21 +61,6 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
         role="menu"
         tabIndex="-1"
       >
-        <a
-          aria-current={null}
-          className="dropdown-item"
-          href="/search"
-          onClick={[Function]}
-          style={undefined}
-        >
-          Search
-        </a>
-        <div
-          className="dropdown-divider"
-          onClick={[Function]}
-          tabIndex="-1"
-          type={undefined}
-        />
         <button
           className="dropdown-item"
           href={undefined}

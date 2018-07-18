@@ -47,7 +47,7 @@ class A15KApplication extends React.Component {
             <span className="navbar-brand">Assessment Network</span>
             <Dropdown isOpen={this.isMenuOpen} toggle={this.onMenuToggle}>
               <DropdownToggle caret>
-                {User.username}
+                {User.username || User.name}
               </DropdownToggle>
               <DropdownMenu right>
                 {User.isMember && <MenuLink to="/search" name="Search" />}

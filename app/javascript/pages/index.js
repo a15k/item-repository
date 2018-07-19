@@ -1,15 +1,13 @@
 import Home from './home';
+import Api from './api';
 import Search from './search';
-import Interactions from './interactions';
 import NotFound from './not-found';
 import Users from './users';
-import Tokens from './tokens';
 
 export {
   Home,
+  Api,
   Search,
   Users,
-  Tokens,
   NotFound,
-  Interactions,
 };

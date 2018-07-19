@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Icon from './icon';
 
 const StyledButton = styled(BSButton)`
+display: flex;
+align-items: center;
 .icon + span { margin-left: 0.5rem; }
 `;
 

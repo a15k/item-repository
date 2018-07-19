@@ -5,15 +5,15 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
   className="a15k-root"
 >
   <nav
-    className="navbar navbar-dark bg-dark sc-gZMcBi iaETCR"
+    className="navbar navbar-dark bg-dark sc-VigVT bArhLP"
   >
     <div
-      className="sc-gqjmRU navbar-brand jkwMQg"
+      className="sc-jTzLTM navbar-brand cMWaSC"
     >
       Assessment Network
     </div>
     <div
-      className="sc-VigVT gqddzs dropdown"
+      className="sc-fjdhpX gCzgD dropdown"
       onKeyDown={[Function]}
     >
       <button
@@ -43,7 +43,7 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="sc-VigVT gqddzs dropdown"
+      className="sc-fjdhpX gCzgD dropdown"
       onKeyDown={[Function]}
     >
       <button

@@ -4,7 +4,7 @@ import Listing from './tokens/listing';
 import Edit from './tokens/editing';
 import { React, ModelCollectionType, observer, observable, action, computed } from '../helpers/react';
 import AccessToken from '../models/access-token';
-import ButtonsBar from '../components/buttons-bar';
+import SectionHeading from '../components/section-heading';
 
 @observer
 export default class Tokens extends React.Component {
@@ -42,16 +42,17 @@ export default class Tokens extends React.Component {
   render() {
     return (
       <div className="access-tokens">
-        <h1>
-          Access Tokens
-        </h1>
+        <SectionHeading>
+          <h3>Access Tokens</h3>
+          {!this.editing && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
+        </SectionHeading>
+
+        <p>Access tokens are used to access the A15K api</p>
+
         <SwipeableViews index={this.currentIndex}>
           <Listing tokens={this.props.tokens} onEdit={this.onEdit} />
           <Edit isActive={!!this.editing} tokens={this.props.tokens} token={this.editing} onDone={this.onEditComplete} />
         </SwipeableViews>
-        <ButtonsBar>
-          {!this.editing && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
-        </ButtonsBar>
       </div>
     );
   }

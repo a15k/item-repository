@@ -4,7 +4,7 @@ import InteractionApp from '../models/interaction-app';
 import SwipeableViews from 'react-swipeable-views';
 import Listing from './interactions/listing';
 import Edit from './interactions/edit';
-import ButtonsBar from '../components/buttons-bar';
+import SectionHeading from '../components/section-heading';
 
 @observer
 export default class Interactions extends React.Component {
@@ -40,18 +40,19 @@ export default class Interactions extends React.Component {
   render() {
     return (
       <div className="interactions">
-        <h1>
-          {this.editingApp && <Button icon="chevronLeft" onClick={this.onEditComplete} />}
-          {this.editingApp ? 'Back' : 'Interactions'}
-        </h1>
+        <SectionHeading>
+          <h3>
+            Interactions
+          </h3>
+          {!this.editingApp && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
+        </SectionHeading>
+
+        <p>The interactions api is used to flag and add other metadata to assessments</p>
 
         <SwipeableViews index={this.currentIndex}>
           <Listing onEdit={this.onEdit} />
           <Edit app={this.editingApp} onDone={this.onEditComplete} />
         </SwipeableViews>
-        <ButtonsBar>
-          {!this.editingApp && <Button icon="plus" onClick={this.onAdd}>Add</Button>}
-        </ButtonsBar>
       </div>
     );
   }

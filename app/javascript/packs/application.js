@@ -47,13 +47,6 @@ class A15KApplication extends React.Component {
     this.isActionsMenuOpen = !this.isActionsMenuOpen;
   }
 
-  renderPowerUserOptions() {
-    return [
-      <MenuLink key="i" to="/interactions" name="Interactions" />,
-      <MenuLink key="u" to="/users" name="Users" />,
-      <MenuLink key="t" to="/tokens" name="Tokens" />,
-    ];
-  }
   render() {
     return (
       <BrowserRouter>
@@ -68,7 +61,8 @@ class A15KApplication extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <MenuLink to="/search" name="Search" />
-                    {User.isPowerUser && this.renderPowerUserOptions()}
+                    {User.isPowerUser && <MenuLink to="/users" name="Users" />}
+                    {User.isPowerUser && <MenuLink to="/api" name="Api Access" />}
                   </DropdownMenu>
                 </Menu>
               )}
@@ -87,8 +81,7 @@ class A15KApplication extends React.Component {
               <Route path="/" exact component={Pages.Home} />
               <Route path="/search" component={Pages.Search} />
               <Route path="/users" component={Pages.Users} />
-              <Route path="/tokens" component={Pages.Tokens} />
-              <Route path="/interactions" component={Pages.Interactions} />
+              <Route path="/api" component={Pages.Api} />
               <Route component={Pages.NotFound} />
             </Switch>
           </Container>

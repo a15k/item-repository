@@ -36,7 +36,7 @@ exports[`TokensEdit matches snapshot 1`] = `
     className="sc-bwzfXH ehHYlP"
   >
     <button
-      className="sc-bdVaJa kaVmVf btn btn-secondary"
+      className="sc-bdVaJa gZEDXH btn btn-secondary"
       onClick={[Function]}
       type="button"
     >
@@ -61,7 +61,7 @@ exports[`TokensEdit matches snapshot 1`] = `
       </span>
     </button>
     <button
-      className="sc-bdVaJa kaVmVf btn btn-primary"
+      className="sc-bdVaJa gZEDXH btn btn-primary"
       onClick={[Function]}
       type="button"
     >

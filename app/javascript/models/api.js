@@ -81,27 +81,31 @@ export default class ModelApi {
     if (Config.jwt) {
       headers.Authorization = Config.jwt;
     }
-    return fetch(url, {
+    const req = fetch(url, {
       credentials: 'include',
       method: method.toUpperCase(),
       headers,
       body,
-    })
-      .then(resp => {
-        this.requestsInProgress.delete(fetch);
-        this.requestCounts[method] += 1;
-        model.lastServerResponse = resp;
-        return resp.json && resp.status !== 204 ? // 204 == no content
-          resp.json() : { success: false, message: resp.statusText };
-      })
-      .then(msg => {
-        model.errors = null;
-        if (msg.success) {
-          model.fromJSON(msg.data);
-        } else {
-          model.errors = msg.errors || { base: msg.message };
-        }
-        return model;
-      });
+    });
+    if (req && req.then) {
+      return req
+        .then(resp => {
+          this.requestsInProgress.delete(fetch);
+          this.requestCounts[method] += 1;
+          model.lastServerResponse = resp;
+          return resp.json && resp.status !== 204 ? // 204 == no content
+            resp.json() : { success: false, message: resp.statusText };
+        })
+        .then(msg => {
+          model.errors = null;
+          if (msg.success) {
+            model.fromJSON(msg.data);
+          } else {
+            model.errors = msg.errors || { base: msg.message };
+          }
+          return model;
+        });
+    }
+    return req;
   }
 }

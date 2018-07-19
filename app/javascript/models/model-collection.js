@@ -47,16 +47,23 @@ export default class ModelCollection {
   }
 
   @action create(dataOrModel) {
-    return this.api.create(this.objectToModel(dataOrModel)).then((json) => {
-      return this.fromJSON(json);
-    });
+    const req = this.api.create(this.objectToModel(dataOrModel));
+    if (req && req.then) {
+      return req.then((json) => {
+        return this.fromJSON(json);
+      });
+    }
+    return req;
   }
 
   @action destroy(dataOrModel) {
-    return this.api.destroy(dataOrModel).then((json) => {
-      this.delete(dataOrModel.id);
-      return json;
-    });
-
+    const req = this.api.destroy(dataOrModel);
+    if (req && req.then) {
+      return req.then((json) => {
+        this.delete(dataOrModel.id);
+        return json;
+      });
+    }
+    return req;
   }
 }

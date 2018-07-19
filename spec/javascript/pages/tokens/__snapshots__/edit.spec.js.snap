@@ -57,7 +57,7 @@ exports[`TokensEdit matches snapshot 1`] = `
         />
       </svg>
       <span>
-        Cancel
+        Back
       </span>
     </button>
     <span

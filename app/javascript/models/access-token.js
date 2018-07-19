@@ -8,7 +8,6 @@ export default class AccessToken extends BaseModel {
   static baseUrl = 'access_tokens'
 
   @identifier id;
-  @field is_revoked;
   @field name = '';
   @field token;
 

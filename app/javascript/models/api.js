@@ -40,7 +40,7 @@ export default class ModelApi {
     return `/api/v1/${this.path}`;
   }
 
-  @action destroy({ id }) {
+  @action destroy({ id = this.model.id } = {}) {
     return this.request({ model: this.model, url: `${this.baseUrl}/${id}`, method: 'delete' });
   }
 

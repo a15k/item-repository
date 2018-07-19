@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def membership_access_token
-     power_user? ? member.access_tokens.valid.first.token : nil
+     power_user? ? member.access_tokens.first.token : nil
   end
 
   protected

@@ -71,4 +71,22 @@ describe 'Tokens API', type: :request do
     end
   end
 
+
+
+  describe 'DELETE' do
+    it 'deletes a token' do
+      delete "/api/v1/access_tokens/#{token.id}", headers: headers
+      expect(response_json['success']).to be true
+      expect(response.status).to eq 200
+      expect(AccessToken.where(id: token.id).first).to be nil
+    end
+
+    it 'will not delete other menbers tokens' do
+      delete "/api/v1/access_tokens/#{other_token.id}", headers: headers
+      expect(response_json['success']).to be false
+      expect(response.status).to eq 404
+      expect(AccessToken.where(id: other_token.id)).to exist
+    end
+  end
+
 end

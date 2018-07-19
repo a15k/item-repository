@@ -44,6 +44,11 @@ export default class TokensEdit extends React.Component {
     this.form = form;
   }
 
+  @action.bound onDelete() {
+    const { token, tokens, onDone } = this.props;
+    tokens.destroy(token).then(onDone);
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.isActive && !prevProps.isActive) {
       this.nameInput.value = this.props.token.name;
@@ -62,6 +67,13 @@ export default class TokensEdit extends React.Component {
     );
   }
 
+  renderActions() {
+    return [
+      <Button key="d" icon="trash" color="secondary" onClick={this.onDelete}>Delete</Button>,
+      <Button key="s" icon="save" color="primary" onClick={this.onSave}>Save</Button>,
+    ];
+  }
+
   render() {
     const { token, onDone } = this.props;
 
@@ -76,7 +88,7 @@ export default class TokensEdit extends React.Component {
         {this.renderToken()}
         <ButtonsBar>
           <Button icon="chevronLeft" onClick={onDone}>Cancel</Button>
-          {token && <Button icon="save" color="primary" onClick={this.onSave}>Save</Button>}
+          {token && this.renderActions()}
         </ButtonsBar>
       </EditForm>
     );

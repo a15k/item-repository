@@ -1,6 +1,7 @@
 import { FormGroup, Label, Input } from 'reactstrap';
 import Button from '../../components/button';
 import { React, PropTypes, observer, action, computed, ModelCollectionType } from '../../helpers/react';
+import SuretyGuard from '../../components/surety-guard';
 import AccessToken from '../../models/access-token';
 import styled from 'styled-components';
 import ButtonsBar from '../../components/buttons-bar';
@@ -69,7 +70,13 @@ export default class TokensEdit extends React.Component {
 
   renderActions() {
     return [
-      <Button key="d" icon="trash" color="secondary" onClick={this.onDelete}>Delete</Button>,
+      <SuretyGuard
+        key="d"
+        onConfirm={this.onDelete}
+        message="Deleting a token will immediately revoke it‘s access to the api"
+      >
+        <Button icon="trash">Delete</Button>
+      </SuretyGuard>,
       <Button key="s" icon="save" color="primary" onClick={this.onSave}>Save</Button>,
     ];
   }

@@ -15,7 +15,7 @@ RSpec.describe Assessment, type: :model do
 
   it 'has versions that only belong to the same identifier' do
     other_member = FactoryBot.create :member
-    other_assment = FactoryBot.create :assessment, member: other_member
+    FactoryBot.create :assessment, member: other_member
     expect(assessment.other_versions).to be_empty
   end
 
@@ -28,6 +28,13 @@ RSpec.describe Assessment, type: :model do
     expect(other.other_versions.size).to eq 1
     expect(other.save).to be false
     expect(other.errors[:member]).to include 'must be the same as other versions'
+  end
+
+  it 'blocks duplicate assessment content' do
+    dupe = FactoryBot.build :assessment
+    assessment.questions.each{ |q| dupe.questions.build(content: q.content, format: q.format) }
+    expect(dupe.save).to be false
+    expect(dupe.errors.full_messages).to include 'Fingerprint has already been taken'
   end
 
 end

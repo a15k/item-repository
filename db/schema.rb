@@ -30,9 +30,11 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "member_id", null: false
     t.integer "version", default: 1, null: false
     t.integer "visibility", limit: 2
+    t.text "fingerprint", null: false
     t.text "preview_html"
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_assessments_on_created_at"
+    t.index ["fingerprint"], name: "index_assessments_on_fingerprint"
     t.index ["identifier", "version"], name: "index_assessments_on_identifier_and_version", unique: true
     t.index ["identifier"], name: "index_assessments_on_identifier"
     t.index ["member_id"], name: "index_assessments_on_member_id"

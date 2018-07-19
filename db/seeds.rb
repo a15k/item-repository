@@ -27,6 +27,7 @@ if Rails.env.development?
   unless Format.exists?(name: OX)
     Format.create!(
       name: OX,
+      identifier: 'openstax',
       specification: 'Openstax exercise format, see https://openstax.org/ for details',
       created_by: OX_MEMBER
     )

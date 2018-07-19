@@ -31,12 +31,6 @@ class Api::V1::AccessTokensController < ApiController
       end
       key :tags, ['AccessTokens']
       parameter do
-        key :paramType, :body
-        key :name, :name
-        key :description, 'The name of the token'
-        key :required, true
-      end
-      parameter do
         key :name, :token
         key :in, :body
         key :description, 'Access Token to be created'
@@ -65,12 +59,6 @@ class Api::V1::AccessTokensController < ApiController
         key :api_token, []
       end
       key :tags, ['AccessTokens']
-      parameter do
-        key :paramType, :body
-        key :name, :name
-        key :description, 'The name of the token'
-        key :required, true
-      end
       parameter do
         key :name, :token
         key :in, :body

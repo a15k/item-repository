@@ -8,10 +8,10 @@ namespace 'generate:client' do
   DESC
   task :ruby, [:api_major_version] => :environment do |tt,args|
     version = args[:api_major_version] || '1'
-    output_dir = "#{Rails.application.root}/clients/v#{version}/ruby"
-    FileUtils::rm_rf(output_dir)
-
     SwaggerCodegen.execute(version) do |json|
+      api_exact_version = json[:info][:version]
+      output_dir = "#{Rails.application.root}/clients/#{api_exact_version}/ruby"
+      FileUtils::rm_rf(output_dir)
       {
         cmd_options: %w[-l ruby],
         output_dir: output_dir,
@@ -22,7 +22,5 @@ namespace 'generate:client' do
         }
       }
     end
-
   end
-
 end

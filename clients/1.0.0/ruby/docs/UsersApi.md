@@ -4,16 +4,16 @@ All URIs are relative to *https://null/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**claim_user**](UsersApi.md#claim_user) | **POST** /users/add | add a newly created user account to a membership
-[**delete_user**](UsersApi.md#delete_user) | **DELETE** /users/{id} | remove a user from membership
-[**get_users**](UsersApi.md#get_users) | **GET** /users | Get all users for the membership
+[**claim_user**](UsersApi.md#claim_user) | **POST** /users/add | add a newly created user account to a member
+[**delete_user**](UsersApi.md#delete_user) | **DELETE** /users/{id} | remove a user from member
+[**get_users**](UsersApi.md#get_users) | **GET** /users | Get all users for the member
 [**update_user**](UsersApi.md#update_user) | **PUT** /users/{id} | alter a user
 
 
 # **claim_user**
 > InlineResponse2001 claim_user(email, role)
 
-add a newly created user account to a membership
+add a newly created user account to a member
 
 ### Example
 ```ruby
@@ -29,13 +29,13 @@ end
 
 api_instance = A15kClient::UsersApi.new
 
-email = "email_example" # String | email of user to join to membership
+email = "email_example" # String | email of user to join to member
 
 role = A15kClient::null.new #  | role to grant to user
 
 
 begin
-  #add a newly created user account to a membership
+  #add a newly created user account to a member
   result = api_instance.claim_user(email, role)
   p result
 rescue A15kClient::ApiError => e
@@ -47,7 +47,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **email** | **String**| email of user to join to membership | 
+ **email** | **String**| email of user to join to member | 
  **role** | [****](.md)| role to grant to user | 
 
 ### Return type
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 # **delete_user**
 > InlineResponse2001 delete_user
 
-remove a user from membership
+remove a user from member
 
 ### Example
 ```ruby
@@ -85,7 +85,7 @@ end
 api_instance = A15kClient::UsersApi.new
 
 begin
-  #remove a user from membership
+  #remove a user from member
   result = api_instance.delete_user
   p result
 rescue A15kClient::ApiError => e
@@ -114,9 +114,7 @@ This endpoint does not need any parameter.
 # **get_users**
 > InlineResponse200 get_users
 
-Get all users for the membership
-
-List all users
+Get all users for the member
 
 ### Example
 ```ruby
@@ -133,7 +131,7 @@ end
 api_instance = A15kClient::UsersApi.new
 
 begin
-  #Get all users for the membership
+  #Get all users for the member
   result = api_instance.get_users
   p result
 rescue A15kClient::ApiError => e

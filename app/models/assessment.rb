@@ -21,7 +21,7 @@ class Assessment < ApplicationRecord
 
   def digest
     digest = Digest::MD5.new
-    questions.each { |q| digest << q.content }
+    questions.each { |q| digest << q.content if q.content}
     digest.hexdigest
   end
 

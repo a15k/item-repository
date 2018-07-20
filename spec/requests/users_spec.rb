@@ -7,7 +7,7 @@ describe 'Tokens API', type: :request do
   let(:other_user) { FactoryBot.create(:user) }
   let(:other_member) { other_user.member }
 
-  let(:authorization) { member.access_tokens.valid.first.token }
+  let(:authorization) { member.access_tokens.first.token }
   let(:headers) {
     { "CONTENT_TYPE" => "application/json", 'Authorization' =>  authorization }
   }
@@ -31,7 +31,7 @@ describe 'Tokens API', type: :request do
       expect(response).to be_ok
 
       other_member = FactoryBot.create(:member)
-      headers['Authorization'] = other_member.access_tokens.valid.first.token
+      headers['Authorization'] = other_member.access_tokens.first.token
 
       post "/api/v1/users/add", headers: headers,
            params: { email: 'test@test.com', role: 'power_user' }.to_json

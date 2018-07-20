@@ -5,7 +5,7 @@ require 'rack/test'
 describe 'complete api flow', type: :api do
 
   let(:format) { FactoryBot.create(:format) }
-  let(:authorization) { FactoryBot.create(:member).access_tokens.valid.first.token }
+  let(:authorization) { FactoryBot.create(:member).access_tokens.first.token }
 
   before(:each) {
     A15kClient.configure do |c|

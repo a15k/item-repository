@@ -26,7 +26,7 @@ RSpec.describe ApiController, type: :controller do
     end
 
     it 'succeeds when token is present and valid' do
-      token = member.access_tokens.valid.first.token
+      token = member.access_tokens.first.token
       request.headers.merge!({ 'Authorization' => "Bearer #{token}" })
       get :index
       expect(response.status).to eq 200

@@ -1,4 +1,4 @@
-import { ListGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { ListGroup, Input, InputGroup, InputGroupAddon, Alert } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import Button from '../components/button';
 import { React, ModelCollectionType, observer, observable, action } from '../helpers/react';
@@ -14,6 +14,9 @@ width: 70px;
 text-align: center;
 `;
 
+const InvitedNotice = styled(Alert).attrs({ color: 'info' })`
+margin-top: 20px;
+`;
 
 @observer
 export default class Users extends React.Component {
@@ -31,6 +34,7 @@ export default class Users extends React.Component {
   }
 
   @observable redirectToHome = false;
+  @observable inviteDeliveredTo = false;
 
   @action.bound onSelfDelete() {
     User.member_id = null;
@@ -42,8 +46,14 @@ export default class Users extends React.Component {
     this.redirectToHome = true;
   }
 
+  @action.bound onInviteMessageHide() {
+    this.inviteDeliveredTo = false;
+  }
+
   @action.bound onInvite() {
     this.props.users.invite(this.invite.value).then(() => {
+      if (!this.invite) return; // we were unmounted
+      this.inviteDeliveredTo = this.invite.value;
       this.invite.value = '';
       this.invite.focus();
     });
@@ -72,6 +82,13 @@ export default class Users extends React.Component {
           </InputGroupAddon>
         </InputGroup>
 
+        <InvitedNotice
+          isOpen={!!this.inviteDeliveredTo}
+          toggle={this.onInviteMessageHide}
+        >
+          An invitation email has been sent to {this.inviteDeliveredTo}
+        </InvitedNotice>
+
         <ErrorDisplay errors={users.errors} />
 
         <div className="d-flex justify-content-end">
@@ -81,12 +98,12 @@ export default class Users extends React.Component {
 
         <ListGroup>
           {users.array.map((user) =>
-            <UserRow
-              key={user.id}
-              onSelfDemotion={this.onSelfDemotion}
-              onSelfDelete={this.onSelfDelete}
-              users={users}
-              user={user} />)}
+          <UserRow
+            key={user.id}
+            onSelfDemotion={this.onSelfDemotion}
+            onSelfDelete={this.onSelfDelete}
+            users={users}
+            user={user} />)}
         </ListGroup>
 
       </div>

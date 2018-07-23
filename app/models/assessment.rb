@@ -16,7 +16,7 @@ class Assessment < ApplicationRecord
   before_validation :set_version, on: :create
 
   validates :version, uniqueness: { scope: :identifier }
-  validates :fingerprint, uniqueness: true #{ scope: :member_id }
+  validates :fingerprint, uniqueness: true # { scope: :member_id } # TODO decide if should be scoped
   validate :ensure_member_matches_other_versions
 
   def digest

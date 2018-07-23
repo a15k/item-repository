@@ -73,6 +73,10 @@ exports[`Search renders help 1`] = `
 `;
 
 exports[`Search renders search 1`] = `
+.c0 {
+  margin-top: 1rem;
+}
+
 <div
   className="search-page"
 >
@@ -137,7 +141,7 @@ exports[`Search renders search 1`] = `
     </div>
   </div>
   <div
-    className="sc-bwzfXH hGVWsu"
+    className="c0"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<p>Ipsa qui unde nihil laudantium nihil autem eius voluptas. Vel dignissimos facilis voluptates quae inventore asperiores sit est quae. Cum sint mollitia aut provident qui ipsa voluptatem natus et. Voluptas quas animi aut vitae. Nihil error neque consequatur aperiam et voluptas. Rem temporibus et asperiores eum a sed autem eveniet quis.</p>",

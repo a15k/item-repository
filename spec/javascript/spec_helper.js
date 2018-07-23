@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import fetch from 'jest-fetch-mock';
 import * as enzymeMatchers from '@commercetools/jest-enzyme-matchers'
 import Factory from './factories';
+import 'jest-styled-components'
 
 Enzyme.configure({ adapter: new Adapter() });
 expect.extend(enzymeMatchers);

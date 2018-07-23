@@ -1,8 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TokensEdit matches snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 .icon + span {
+  margin-left: 0.5rem;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem 0;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c1 .btn + .btn,
+.c1 .btn + .surety-guard,
+.c1 .surety-guard + .btn {
+  margin-left: 1rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .token {
+  width: 100%;
+}
+
+.c0 textarea {
+  width: 100%;
+  padding: 1rem;
+}
+
 <form
-  className="sc-htpNat hbzTHP"
+  className="c0"
 >
   <div
     className="form-group"
@@ -33,10 +85,10 @@ exports[`TokensEdit matches snapshot 1`] = `
     />
   </div>
   <div
-    className="sc-bwzfXH cryUfd"
+    className="c1"
   >
     <button
-      className="sc-bdVaJa gZEDXH btn btn-secondary"
+      className="c2 btn btn-secondary"
       onClick={[Function]}
       type="button"
     >
@@ -65,7 +117,7 @@ exports[`TokensEdit matches snapshot 1`] = `
       onClick={[Function]}
     >
       <button
-        className="sc-bdVaJa kaVmVf btn btn-secondary"
+        className="c2 btn btn-secondary"
         onClick={[Function]}
         type={undefined}
       >
@@ -91,7 +143,7 @@ exports[`TokensEdit matches snapshot 1`] = `
       </button>
     </span>
     <button
-      className="sc-bdVaJa gZEDXH btn btn-primary"
+      className="c2 btn btn-primary"
       onClick={[Function]}
       type="button"
     >

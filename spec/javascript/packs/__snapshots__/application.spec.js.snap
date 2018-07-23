@@ -1,19 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`A15KApplication renders and matches snapshot 1`] = `
+.c0 {
+  margin-bottom: 1rem;
+}
+
+.c1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c2 {
+  margin-left: 1rem;
+}
+
 <div
   className="a15k-root"
 >
   <nav
-    className="navbar navbar-dark bg-dark sc-VigVT bArhLP"
+    className="navbar navbar-dark bg-dark c0"
   >
     <div
-      className="sc-jTzLTM navbar-brand cMWaSC"
+      className="navbar-brand c1"
     >
       Assessment Network
     </div>
     <div
-      className="sc-fjdhpX gCzgD dropdown"
+      className="c2 dropdown"
       onKeyDown={[Function]}
     >
       <button
@@ -43,7 +57,7 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="sc-fjdhpX gCzgD dropdown"
+      className="c2 dropdown"
       onKeyDown={[Function]}
     >
       <button

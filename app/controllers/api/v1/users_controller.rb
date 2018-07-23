@@ -47,13 +47,22 @@ class Api::V1::UsersController < ApiController
     end
   end
   def add
-    account = A15K::OpenStax::Accounts.api.invite_user(email: params[:email])
-    if account.nil? || account.new_record?
-      render api_response data: {}, serializer: false, message: "Failed to create user", success: false
+    outputs = ::OpenStax::Accounts::FindOrCreateAccount.call(
+        email: params[:email],
+        username: params[:email],
+        password: false,
+      ).outputs
+
+    if outputs.errors?
+      render api_response(
+               errors: outputs.errors.full_messages,
+               data: {}, serializer: false, message: "Failed to create user",
+               success: false
+             )
       return
     end
     user = User
-      .where(openstax_accounts_accounts: {id: account.id})
+      .where(openstax_accounts_accounts: {id: outputs.account.id})
       .joins(:account)
       .first
     if user && user.member && user.member != current_member
@@ -63,7 +72,8 @@ class Api::V1::UsersController < ApiController
     user ||= User.new
     user.role = params[:role] || 'standard_user'
     user.member = current_member
-    user.account = account
+    user.account = outputs.account
+
     render api_response data: user, success: user.save
   end
 

@@ -1,0 +1,10 @@
+<div class="demo-assessment">
+
+  <h4 class="question"><%= nl2br question %></h4>
+
+  <% solutions.each do |solution| %>
+    <h5 class="solution"><%= nl2br solution %></h5>
+    <% if correct_solution == solution %>*<% end %>
+  <% end %>
+
+</div>

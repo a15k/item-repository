@@ -32,7 +32,7 @@ class Assessment < ApplicationRecord
   end
 
   def save_fingerprint(q)
-    update_attributes(fingerprint: digest)
+    update_attributes(fingerprint: digest) if persisted?
   end
 
   def set_version

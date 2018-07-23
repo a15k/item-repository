@@ -94,7 +94,7 @@ describe 'Assessments API', type: :request do
 
         post "/api/v1/assessments.json", params: {
                identifier: id, version: '2',
-               questions: [{ format_id: format.id, content: '1st' }]
+               questions: [{ format_id: format.id, content: '2st' }]
              }.to_json, headers: headers
         expect(response).to be_ok
         expect(Assessment.where(identifier: id).count).to eq 2

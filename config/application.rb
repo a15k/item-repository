@@ -19,6 +19,10 @@ module ItemRepository
 
     config.assets.enabled = false
 
+    # Don't spin up the app just to precomplie; avoiding that lets us
+    # not have a configured database when building an image
+    config.assets.initialize_on_precompile = false
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.assets false

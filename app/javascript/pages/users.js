@@ -98,12 +98,12 @@ export default class Users extends React.Component {
 
         <ListGroup>
           {users.array.map((user) =>
-          <UserRow
-            key={user.id}
-            onSelfDemotion={this.onSelfDemotion}
-            onSelfDelete={this.onSelfDelete}
-            users={users}
-            user={user} />)}
+            <UserRow
+              key={user.id}
+              onSelfDemotion={this.onSelfDemotion}
+              onSelfDelete={this.onSelfDelete}
+              users={users}
+              user={user} />)}
         </ListGroup>
 
       </div>

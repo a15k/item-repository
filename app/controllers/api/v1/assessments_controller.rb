@@ -92,6 +92,7 @@ class Api::V1::AssessmentsController < ApiController
         A15K::Metadata.api.create(assessment)
       rescue => e
         Rails.logger.warn "Failed to create metadata for new assment: #{e}"
+        Rails.logger.warn assessment.errors.as_json
       end
     end
     render api_response data: assessment, success: success

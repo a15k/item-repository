@@ -1,4 +1,5 @@
 import { React } from '../helpers/react';
+import cn from 'classnames';
 import { Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { isEmpty, isString, trim, capitalize, map } from 'lodash';
@@ -43,7 +44,7 @@ export default function ModelErrors({ model, errors, className }) {
 
   return (
     <ErrorWrapper>
-      <Alert className={className} color="danger">{msg}</Alert>
+      <Alert className={cn('model-errors', className)} color="danger">{msg}</Alert>
     </ErrorWrapper>
   );
 }

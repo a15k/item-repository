@@ -20,9 +20,7 @@ class Assessment < ApplicationRecord
   validate :ensure_member_matches_other_versions
 
   def digest
-    digest = Digest::MD5.new
-    questions.each { |q| digest << q.content if q.content}
-    digest.hexdigest
+    Digest::MD5.hexdigest questions.map(&:content).sort.join
   end
 
   protected

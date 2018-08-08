@@ -2,6 +2,7 @@
 
 exports[`SuretyGuard renders 1`] = `
 <span
+  className="surety-guard"
   onClick={[Function]}
   role="button"
   tabIndex="0"

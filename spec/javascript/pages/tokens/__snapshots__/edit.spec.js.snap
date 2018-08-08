@@ -1,8 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TokensEdit matches snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 .icon + span {
+  margin-left: 0.5rem;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem 0;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c1 .btn + .btn,
+.c1 .btn + .surety-guard,
+.c1 .surety-guard + .btn {
+  margin-left: 1rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c0 .token {
+  width: 100%;
+}
+
+.c0 textarea {
+  width: 100%;
+  padding: 1rem;
+}
+
 <form
-  className="sc-htpNat hbzTHP"
+  className="c0"
 >
   <div
     className="form-group"
@@ -33,10 +85,10 @@ exports[`TokensEdit matches snapshot 1`] = `
     />
   </div>
   <div
-    className="sc-bwzfXH ehHYlP"
+    className="c1"
   >
     <button
-      className="sc-bdVaJa gZEDXH btn btn-secondary"
+      className="c2 btn btn-secondary"
       onClick={[Function]}
       type="button"
     >
@@ -57,11 +109,41 @@ exports[`TokensEdit matches snapshot 1`] = `
         />
       </svg>
       <span>
-        Cancel
+        Back
       </span>
     </button>
+    <span
+      className="surety-guard"
+      onClick={[Function]}
+    >
+      <button
+        className="c2 btn btn-secondary"
+        onClick={[Function]}
+        type={undefined}
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-trash-alt fa-w-14 icon"
+          data-icon="trash-alt"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 84V56c0-13.3 10.7-24 24-24h112l9.4-18.7c4-8.2 12.3-13.3 21.4-13.3h114.3c9.1 0 17.4 5.1 21.5 13.3L312 32h112c13.3 0 24 10.7 24 24v28c0 6.6-5.4 12-12 12H12C5.4 96 0 90.6 0 84zm416 56v324c0 26.5-21.5 48-48 48H80c-26.5 0-48-21.5-48-48V140c0-6.6 5.4-12 12-12h360c6.6 0 12 5.4 12 12zm-272 68c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208zm96 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v224c0 8.8 7.2 16 16 16s16-7.2 16-16V208z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+        <span>
+          Delete
+        </span>
+      </button>
+    </span>
     <button
-      className="sc-bdVaJa gZEDXH btn btn-primary"
+      className="c2 btn btn-primary"
       onClick={[Function]}
       type="button"
     >

@@ -81,4 +81,25 @@ class Api::V1::AccessTokensController < ApiController
     render api_response data: token, success: token.save
   end
 
+
+  swagger_path '/access_tokens/{id}' do
+    operation :delete do
+      key :summary, 'delete  a token'
+      key :operationId, 'deleteToken'
+      security do
+        key :api_token, []
+      end
+      key :tags, ['AccessTokens']
+      extend Api::SwaggerResponses
+      include_404_schema
+      include_success_schema(model: 'AccessToken')
+    end
+  end
+
+  def destroy
+    token = current_member.access_tokens.find(params[:id])
+    token.destroy
+    render api_response data: token, success: !token.persisted?
+  end
+
 end

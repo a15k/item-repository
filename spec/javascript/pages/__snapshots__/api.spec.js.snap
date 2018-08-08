@@ -1,18 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Api renders combinded actions 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 .icon + span {
+  margin-left: 0.5rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem 0;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c3 .btn + .btn,
+.c3 .btn + .surety-guard,
+.c3 .surety-guard + .btn {
+  margin-left: 1rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.c0 h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c2 .token {
+  width: 100%;
+}
+
+.c2 textarea {
+  width: 100%;
+  padding: 1rem;
+}
+
+.c4 {
+  border-width: 5px;
+  border-radius: 3px;
+}
+
 <div>
   <div
     className="access-tokens"
   >
     <div
-      className="sc-bxivhb cjKfDO"
+      className="c0"
     >
       <h3>
         Access Tokens
       </h3>
       <button
-        className="sc-bdVaJa gZEDXH btn btn-secondary"
+        className="c1 btn btn-secondary"
         onClick={[Function]}
         type="button"
       >
@@ -98,7 +177,7 @@ exports[`Api renders combinded actions 1`] = `
           }
         >
           <form
-            className="sc-ifAKCX gitGbc"
+            className="c2"
           >
             <div
               className="form-group"
@@ -118,10 +197,10 @@ exports[`Api renders combinded actions 1`] = `
               />
             </div>
             <div
-              className="sc-bwzfXH ehHYlP"
+              className="c3"
             >
               <button
-                className="sc-bdVaJa gZEDXH btn btn-secondary"
+                className="c1 btn btn-secondary"
                 onClick={[Function]}
                 type="button"
               >
@@ -142,7 +221,7 @@ exports[`Api renders combinded actions 1`] = `
                   />
                 </svg>
                 <span>
-                  Cancel
+                  Back
                 </span>
               </button>
             </div>
@@ -152,19 +231,19 @@ exports[`Api renders combinded actions 1`] = `
     </div>
   </div>
   <hr
-    className="sc-EHOje chiHEN"
+    className="c4"
   />
   <div
     className="interactions"
   >
     <div
-      className="sc-bxivhb cjKfDO"
+      className="c0"
     >
       <h3>
         Interactions
       </h3>
       <button
-        className="sc-bdVaJa gZEDXH btn btn-secondary"
+        className="c1 btn btn-secondary"
         onClick={[Function]}
         type="button"
       >

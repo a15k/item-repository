@@ -1,12 +1,17 @@
 import Edit from 'pages/tokens/editing';
 import Factory from '../../factories';
 import renderer from 'react-test-renderer';
+jest.mock('components/surety-guard', () => ({ onConfirm, children }) => (
+  <span className="surety-guard" onClick={onConfirm}>{children}</span>
+));
+
 
 describe(Edit, () => {
   let props;
+  let tokens;
 
   beforeEach(() => {
-    const tokens = Factory.accessTokenCollection({ count: 1 });
+    tokens = Factory.accessTokenCollection({ count: 1 });
     props = {
       tokens,
       isActive: true,
@@ -18,6 +23,14 @@ describe(Edit, () => {
   it('matches snapshot', () => {
     const edit = renderer.create(<Edit {...props} />);
     expect(edit.toJSON()).toMatchSnapshot();
+    edit.unmount();
+  });
+
+  it('calls delete', () => {
+    tokens.destroy = jest.fn(() => Promise.resolve());
+    const edit = mount(<Edit {...props} />);
+    edit.find('Button[icon="trash"]').simulate('click');
+    expect(tokens.destroy).toHaveBeenCalled();
     edit.unmount();
   });
 
@@ -37,5 +50,6 @@ describe(Edit, () => {
     expect(props.token.name).toContain('my token');
     edit.unmount();
   });
+
 
 });

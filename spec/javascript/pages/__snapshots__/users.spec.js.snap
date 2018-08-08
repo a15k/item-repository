@@ -1,11 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Users renders listing 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 .icon + span {
+  margin-left: 0.5rem;
+}
+
+.c4 {
+  margin-right: 1rem;
+}
+
+.c3 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.c0 h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  width: 70px;
+  text-align: center;
+}
+
 <div
   className="access-users"
 >
   <div
-    className="sc-EHOje kDVYpY"
+    className="c0"
   >
     <h3>
       Users for member 
@@ -38,7 +90,7 @@ exports[`Users renders listing 1`] = `
       className="input-group-append"
     >
       <button
-        className="sc-bdVaJa gZEDXH btn btn-secondary"
+        className="c1 btn btn-secondary"
         onClick={[Function]}
         type="button"
       >
@@ -66,7 +118,7 @@ exports[`Users renders listing 1`] = `
   >
     PowerUser?
     <div
-      className="sc-bZQynM cbsshv"
+      className="c2"
     >
       Delete
     </div>
@@ -79,23 +131,24 @@ exports[`Users renders listing 1`] = `
       data-id="379d79cc-cd42-443c-9f2e-15087a5bc518"
     >
       <div
-        className="sc-ifAKCX kJjvUS"
+        className="c3"
       >
         Mr. Imani Ankunding
       </div>
       <input
         checked={true}
-        className="sc-bxivhb jBgGdK"
+        className="c4"
         onChange={[Function]}
         type="checkbox"
       />
       <span
+        className="surety-guard"
         onClick={[Function]}
         role="button"
         tabIndex="0"
       >
         <button
-          className="sc-bdVaJa gZEDXH btn btn-secondary"
+          className="c1 btn btn-secondary"
           onClick={[Function]}
           type={undefined}
         >
@@ -123,23 +176,24 @@ exports[`Users renders listing 1`] = `
       data-id="5b9e1f51-e6a7-468c-8579-6d96fc028b7b"
     >
       <div
-        className="sc-ifAKCX kJjvUS"
+        className="c3"
       >
         Erling Walsh
       </div>
       <input
         checked={false}
-        className="sc-bxivhb jBgGdK"
+        className="c4"
         onChange={[Function]}
         type="checkbox"
       />
       <span
+        className="surety-guard"
         onClick={[Function]}
         role="button"
         tabIndex="0"
       >
         <button
-          className="sc-bdVaJa gZEDXH btn btn-secondary"
+          className="c1 btn btn-secondary"
           onClick={[Function]}
           type={undefined}
         >
@@ -167,23 +221,24 @@ exports[`Users renders listing 1`] = `
       data-id="00f2b0ea-e9f8-4604-865c-89119b920095"
     >
       <div
-        className="sc-ifAKCX kJjvUS"
+        className="c3"
       >
         Pattie Bernhard
       </div>
       <input
         checked={true}
-        className="sc-bxivhb jBgGdK"
+        className="c4"
         onChange={[Function]}
         type="checkbox"
       />
       <span
+        className="surety-guard"
         onClick={[Function]}
         role="button"
         tabIndex="0"
       >
         <button
-          className="sc-bdVaJa gZEDXH btn btn-secondary"
+          className="c1 btn btn-secondary"
           onClick={[Function]}
           type={undefined}
         >

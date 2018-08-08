@@ -1,4 +1,4 @@
-import { React, action, observable, observer } from '../helpers/react';
+import { React, action, observable, cn, observer } from '../helpers/react';
 import PropTypes from 'prop-types';
 import { Popover, Button, PopoverHeader, PopoverBody } from 'reactstrap';
 import styled from 'styled-components';
@@ -18,6 +18,7 @@ export default class SuretyGuard extends React.Component {
     onConfirm:         PropTypes.func.isRequired,
     message:           PropTypes.node.isRequired,
     header:            PropTypes.node,
+    className:         PropTypes.string,
     placement:         PropTypes.string,
     okButtonLabel:     PropTypes.string,
     cancelButtonLabel: PropTypes.string,
@@ -41,7 +42,8 @@ export default class SuretyGuard extends React.Component {
     return this.props.onConfirm(ev);
   }
 
-  @action.bound onCancel() {
+  @action.bound onCancel(ev) {
+    ev.preventDefault();
     this.isShowing = false;
   }
 
@@ -49,7 +51,8 @@ export default class SuretyGuard extends React.Component {
     return this.node;
   }
 
-  @action.bound show() {
+  @action.bound show(ev) {
+    ev.preventDefault();
     this.isShowing = true;
   }
 
@@ -60,12 +63,13 @@ export default class SuretyGuard extends React.Component {
   render() {
     const {
       children, header, message, cancelButtonLabel,
-      okButtonLabel, tabIndex,
+      okButtonLabel, tabIndex, className,
     } = this.props;
 
     return (
       <span
         role="button"
+        className={cn('surety-guard', className)}
         tabIndex={tabIndex}
         ref={this.setTargetRef}
         onClick={this.show}

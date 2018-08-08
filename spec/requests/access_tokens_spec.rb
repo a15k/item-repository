@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Tokens API', type: :request do
   let(:member) { FactoryBot.create(:member) }
   let(:other_member) { FactoryBot.create(:member) }
-  let!(:token) { member.access_tokens.valid.first }
+  let!(:token) { member.access_tokens.first }
   let!(:other_token) { other_member.access_tokens.first }
   let(:headers) {
     { "CONTENT_TYPE" => "application/json", 'Authorization' =>  token.token }
@@ -53,10 +53,10 @@ describe 'Tokens API', type: :request do
   describe 'PUT' do
     it 'updates a token' do
       put "/api/v1/access_tokens/#{token.id}",
-          params: {name: 'bad-token', is_revoked: true}.to_json, headers: headers
+          params: {name: 'bad-token'}.to_json, headers: headers
       expect(response_json['success']).to be true
       expect(response.status).to eq 200
-      expect(token.reload.as_json).to include('is_revoked' => true, 'name' => 'bad-token')
+      expect(token.reload.as_json).to include('name' => 'bad-token')
     end
 
     it 'cannot update other members tokens' do
@@ -68,6 +68,24 @@ describe 'Tokens API', type: :request do
       }
       expect(response.status).to eq 404
       expect(response_json['success']).to be false
+    end
+  end
+
+
+
+  describe 'DELETE' do
+    it 'deletes a token' do
+      delete "/api/v1/access_tokens/#{token.id}", headers: headers
+      expect(response_json['success']).to be true
+      expect(response.status).to eq 200
+      expect(AccessToken.where(id: token.id).first).to be nil
+    end
+
+    it 'will not delete other menbers tokens' do
+      delete "/api/v1/access_tokens/#{other_token.id}", headers: headers
+      expect(response_json['success']).to be false
+      expect(response.status).to eq 404
+      expect(AccessToken.where(id: other_token.id)).to exist
     end
   end
 

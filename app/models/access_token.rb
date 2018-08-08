@@ -3,12 +3,10 @@ class AccessToken < ApplicationRecord
   belongs_to :member
   before_validation :set_default_name, on: :create
 
-  scope :valid, -> { where(is_revoked: false) }
-
   ALGORITHM = 'HS256'
 
   def token
-    JWT.encode({ id: id, exp: expiration }, AccessToken.secret, ALGORITHM)
+    JWT.encode({ id: id }, AccessToken.secret, ALGORITHM)
   end
 
   def self.member_for(jwt:)
@@ -22,17 +20,13 @@ class AccessToken < ApplicationRecord
       Rails.logger.warn "Failed to decode JWT token: #{e}"
     end
     return nil unless token_id
-    Member.joins(:access_tokens).where(access_tokens: { id: token_id, is_revoked: false }).first
+    Member.joins(:access_tokens).where(access_tokens: { id: token_id }).first
   end
 
   private
 
   def set_default_name
     self.name ||= "Token ##{self.member.access_tokens.count}"
-  end
-
-  def expiration
-    30.days.from_now.to_i
   end
 
   def self.secret

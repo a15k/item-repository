@@ -88,11 +88,12 @@ Class | Method | HTTP request | Description
 *A15kClient::AccessTokensApi* | [**update_token**](docs/AccessTokensApi.md#update_token) | **PUT** /access_tokens/{id} | update  a token
 *A15kClient::AssessmentsApi* | [**create_assessment**](docs/AssessmentsApi.md#create_assessment) | **POST** /assessments | create an assessment
 *A15kClient::AssessmentsApi* | [**get_assessment**](docs/AssessmentsApi.md#get_assessment) | **GET** /assessments/{id} | Retrieve an assessment
+*A15kClient::AssessmentsApi* | [**search_assessments**](docs/AssessmentsApi.md#search_assessments) | **GET** /assessments | Search for assessments
 *A15kClient::FormatsApi* | [**create_format**](docs/FormatsApi.md#create_format) | **POST** /formats | create  a format
 *A15kClient::FormatsApi* | [**get_formats**](docs/FormatsApi.md#get_formats) | **GET** /formats | Get all formats
-*A15kClient::UsersApi* | [**claim_user**](docs/UsersApi.md#claim_user) | **POST** /users/add | add a newly created user account to a membership
-*A15kClient::UsersApi* | [**delete_user**](docs/UsersApi.md#delete_user) | **DELETE** /users/{id} | remove a user from membership
-*A15kClient::UsersApi* | [**get_users**](docs/UsersApi.md#get_users) | **GET** /users | Get all users for the membership
+*A15kClient::UsersApi* | [**claim_user**](docs/UsersApi.md#claim_user) | **POST** /users/add | add a newly created user account to a member
+*A15kClient::UsersApi* | [**delete_user**](docs/UsersApi.md#delete_user) | **DELETE** /users/{id} | remove a user from member
+*A15kClient::UsersApi* | [**get_users**](docs/UsersApi.md#get_users) | **GET** /users | Get all users for the member
 *A15kClient::UsersApi* | [**update_user**](docs/UsersApi.md#update_user) | **PUT** /users/{id} | alter a user
 
 

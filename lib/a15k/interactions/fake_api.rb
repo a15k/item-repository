@@ -6,11 +6,11 @@ module A15K
       extend self
 
       def get_apps(group_id:)
-        return [mock_app(group_id)]
+        return [mock_app(SecureRandom.uuid)]
       end
 
       def create_app(group_id:)
-        return mock_app(group_id)
+        return mock_app(SecureRandom.uuid)
       end
 
       def delete_app(id)

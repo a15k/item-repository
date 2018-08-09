@@ -9,8 +9,6 @@ describe 'Demo data' do
   it 'generates an assessment' do
     expect {
       assessment = demo.create_assessment
-      p assessment.errors.full_messages
-
     }.to change{ Assessment.count }
   end
 end

@@ -21,16 +21,27 @@ class Demo
     @format.id
   end
 
-  def create_assessment(solutions_count: 4)
+  def select_unused_question
     question = DATA['questions'].sample
+    DATA['questions'].length.times do
+      return question unless Question.where(content: question).exists?
+      question = DATA['questions'].sample
+    end
+    raise("Failed to find question that wasn't in use")
+  end
+
+  def create_assessment(solutions_count: 4)
+    question = select_unused_question
     solutions = DATA['solutions'].sample(solutions_count)
-    Assessment.create(
+    a = Assessment.create(
       preview_html: Preview.new(question, solutions, solutions.sample).generate,
       member: member,
       questions: [
         Question.new(format_id: format_id, content: question)
       ]
     )
+    debugger if a.new_record?
+    a
   end
 
 end

@@ -4,7 +4,7 @@ require_relative '../../lib/demo'
 describe 'Demo data' do
 
   let(:member) { FactoryBot.create :member }
-  let(:demo) { Demo.new(member) }
+  let(:demo) { Demo.new(member: member) }
 
   it 'generates an assessment' do
     expect {

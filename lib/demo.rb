@@ -7,6 +7,10 @@ class Demo
 
   attr_accessor :member
 
+  def initialize(member: nil)
+    @member = member
+  end
+
   def format_id
     @format ||= ( Format.find_by(identifier: 'text') || Format.create!(
                     identifier: 'text', name: 'Plain Text',

@@ -28,7 +28,9 @@ class User < ApplicationRecord
     return {} unless member.present?
     info = {
       member_name: member.name,
-      member_power_users: member.users.power_users.map{|u| { name: u.account.name } },
+      member_power_users: member.users.power_users.map{ |u|
+        { name: u.account.name }
+      },
     }
     if power_user?
       info[:token] = member.access_tokens.first.token

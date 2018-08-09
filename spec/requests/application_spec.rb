@@ -5,7 +5,7 @@ describe 'Loading application', type: :request do
 
   describe 'when not logged in' do
     it 'shows link to login' do
-      get "/"
+      get '/'
       expect(response.body).to include 'href="/accounts/login"'
     end
   end
@@ -14,19 +14,19 @@ describe 'Loading application', type: :request do
     it 'renders without any member info' do
       user.update_attributes(member_id: nil)
       stub_current_user user
-      get "/"
+      get '/'
       expect(response.body).to include '"member_id":null'
-      expect(response.body).to include '"member_name":""'
+      expect(response.body).not_to include 'member_name'
+      expect(response.body).not_to include 'member_power_users'
     end
   end
 
   describe 'when logged in and has member' do
     it 'renders with member info' do
       stub_current_user user
-      get "/"
+      get '/'
       expect(response.body).to include "member_id\":\"#{user.member_id}"
       expect(response.body).to include "member_name\":\"#{user.member.name}"
     end
   end
-
 end

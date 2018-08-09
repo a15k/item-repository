@@ -45,8 +45,8 @@ export default class HomePage extends React.Component {
           The Assessment Network (a15k), established by Rice University’s OpenStax initiative, is a community of member organizations working through sustainable business models to pool assessment items and the knowledge accrued about them.
         </p>
 
-        {Config.isMember && <MemberInfo />}
-        {!Config.isMember && <NonMemberInfo />}
+        {User.isMember && <MemberInfo />}
+        {!User.isMember && <NonMemberInfo />}
       </div>
     );
   }

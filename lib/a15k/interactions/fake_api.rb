@@ -17,6 +17,9 @@ module A15K
         return mock_app(id)
       end
 
+      def update_app(_, app: app)
+        app
+      end
 
       def mock_app(group_id)
         { "id": group_id, "api_id":"HLwDJbcYuIk=","api_token":"sti0yiDHyM1S0k3FomGRewSiVbs=","whitelisted_domains":[]}

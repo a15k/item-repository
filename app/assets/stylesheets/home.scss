@@ -9,38 +9,20 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-.splash {
+.homepage {
   width: 60vw;
-  height: 60vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
-
   margin: auto;
   margin-top: 70px;
   position: relative;
-
-  .edu-particles {
-    position: absolute;
-    z-index: -1;
-    width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-size: 5vw;
+    margin-bottom: 1rem;
+    text-align:center;
   }
-
-  .welcome {
-    margin-top: -3vh;
-    text-align: center;
-    h1, h3 {
-      margin: 0;
-    }
-    h3 {
-      font-size: 3vw;
-    }
-    h1 {
-      font-size: 5vw;
-      margin-bottom: 1rem;
-    }
+  p {
+    font-size: 1.4rem;
   }
-
 }

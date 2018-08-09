@@ -1,11 +1,18 @@
 <nav class="navbar navbar-dark bg-dark">
-  <span class="navbar-brand mb-0 h1">Home</span>
+  <span class="navbar-brand h1">Assessment Network</span>
+  <%= link_to 'Login', openstax_accounts.login_path, class: 'btn btn-secondary' %>
 </nav>
-<div class="splash">
-  <%= image_tag('edu-particles.svg', class: 'edu-particles') %>
+<div class="homepage">
   <div class="welcome">
-    <h3>Welcome to the</h3>
-    <h1>Assessment Network</h1>
-    <%= link_to 'Login', openstax_accounts.login_path, class: 'btn btn-secondary btn-lg' %>
+    <h1>The Assessment Network</h1>
+    <p>
+      The Assessment Network (a15k), established by Rice University’s OpenStax initiative, is a community of member organizations working through sustainable business models to pool assessment items and the knowledge accrued about them.
+    </p>
+    <p>
+      If your organization is already a member and you are an a15k power user or have been invited here, please log in above to start participating in the network.
+    </p>
+    <p>
+      Not a member but interested in joining?  Contact <a href="mailto:info@a15k.org">info@a15k.org</a>.
+    </p>
   </div>
 </div>

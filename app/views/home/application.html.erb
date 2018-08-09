@@ -6,7 +6,7 @@
       openstax_accounts_url: Rails.application.secrets.openstax[:accounts][:url],
       interactions_api_url: Rails.application.secrets.interactions_api[:url],
       token: current_user.membership_access_token,
-      member_name: current_user.member.name,
-      }.to_json.html_safe %>
+      member_name: current_user.member ? current_user.member.name : '',
+    }.to_json.html_safe %>
 </script>
 <%= javascript_pack_tag('application') unless current_user.anonymous? %>

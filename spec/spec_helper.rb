@@ -1,5 +1,5 @@
 require_relative 'helpers/json_parse_helpers'
-
+require_relative 'helpers/signin_helpers'
 require 'simplecov'
 require 'parallel_tests'
 require 'codecov'
@@ -68,6 +68,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
   config.include JsonParseHelpers
+  config.include SigninHelpers, type: :request
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards

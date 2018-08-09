@@ -24,8 +24,16 @@ class User < ApplicationRecord
     self.role == 'power_user' && member.present?
   end
 
-  def membership_access_token
-     power_user? ? member.access_tokens.first.token : nil
+  def member_info
+    return {} unless member.present?
+    info = {
+      member_name: member.name,
+      member_power_users: member.users.power_users.map{|u| { name: u.account.name } },
+    }
+    if power_user?
+      info[:token] = member.access_tokens.first.token
+    end
+    info
   end
 
   protected

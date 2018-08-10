@@ -5,11 +5,25 @@ RSpec.describe User, type: :model do
     FactoryBot.create :user
   end
 
-  it 'only power users reveal token' do
-    user = FactoryBot.create :user, role: 'standard_user'
-    expect(user.membership_access_token).to be_nil
-    user.update_attributes role: 'power_user'
-    expect(user.membership_access_token).not_to be_nil
+  describe 'member info' do
+    let(:user) { FactoryBot.create :user, role: 'standard_user' }
+
+    it 'includes name and power users' do
+      user1 = FactoryBot.create :user, member: user.member, role: 'power_user'
+      expect(user.member_info).to(
+        eq(
+          member_name: user.member.name,
+          member_power_users: [{ name: user1.account.name }],
+        )
+      )
+    end
+
+    it 'only power users reveal token' do
+      expect(user.member_info[:token]).to be_nil
+      user.update_attributes role: 'power_user'
+      expect(user.member_info[:token]).not_to be_nil
+    end
+
   end
 
   it 'guards against last power user downgrade' do

@@ -71,6 +71,9 @@ class A15KApplication extends React.Component {
                 {User.username || User.name}
               </DropdownToggle>
               <DropdownMenu right>
+                {Config.member_name && [<DropdownItem key="n">
+                  Member: {Config.member_name}
+                </DropdownItem>,<DropdownItem key="d" divider/>]}
                 <DropdownItem href={Config.openstax_accounts_url}>Profile</DropdownItem>
                 <DropdownItem onClick={User.logout}>Logout</DropdownItem>
               </DropdownMenu>

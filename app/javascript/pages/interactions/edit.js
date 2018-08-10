@@ -6,6 +6,7 @@ import { React, PropTypes, observer, observable, action, computed } from '../../
 import Interaction from '../../models/interaction-app';
 import styled from 'styled-components';
 import ButtonsBar from '../../components/buttons-bar';
+import CopyInput from '../../components/copy-on-focus-input';
 
 const EditForm = styled.form`
 display: flex;
@@ -75,8 +76,12 @@ export default class InteractionEdit extends React.Component {
             </ListGroupItem>
           ))}
         </ListGroup>
-        <h3>Embed script tag</h3>
-        <textarea readOnly value={app.embed_html} />
+        <FormGroup>
+          <CopyInput label="API ID" readOnly value={app.id} />
+        </FormGroup>
+        <FormGroup>
+          <CopyInput label="API Token" readOnly value={app.api_token} />
+        </FormGroup>
         <ButtonsBar>
           <Button icon="chevronLeft" onClick={onDone}>Cancel</Button>
           <Button icon="save" color="primary" onClick={this.onSave}>Save</Button>

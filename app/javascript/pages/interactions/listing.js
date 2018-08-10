@@ -28,13 +28,13 @@ export default class InteractionsListing extends React.Component {
 
     return (
       <ListGroup>
-        {apps.array.map(app =>
+        {apps.array.map((app, index) =>
           <ListGroupItem
             key={app.id}
             data-id={app.id}
             className="d-flex justify-content-between"
           >
-            {app.name || app.id}
+            {app.name || `Unnamed ${index}`}
             <Button icon="chevronRight" onClick={this.onEdit} />
           </ListGroupItem>
         )}

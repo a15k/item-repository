@@ -12,8 +12,9 @@ class Assessment < ApplicationRecord
 
   enum visibility: %i[internal external]
 
-  before_validation :set_fingerprint
+  before_validation :set_default_identifier, on: :create
   before_validation :set_version, on: :create
+  before_validation :set_fingerprint
 
   validates :version, uniqueness: { scope: :identifier }
   validates :fingerprint, uniqueness: true # { scope: :member_id } # TODO decide if should be scoped
@@ -24,6 +25,10 @@ class Assessment < ApplicationRecord
   end
 
   protected
+
+  def set_default_identifier
+    self.identifier ||= SecureRandom.uuid
+  end
 
   def set_fingerprint
     self.fingerprint = digest

@@ -12,6 +12,9 @@ class Assessment < ApplicationRecord
 
   enum visibility: %i[internal external]
 
+  # serializer stores values here temporarily before they're sent to metadata
+  attr_accessor :metadata
+
   before_validation :set_default_identifier, on: :create
   before_validation :set_version, on: :create
   before_validation :set_fingerprint

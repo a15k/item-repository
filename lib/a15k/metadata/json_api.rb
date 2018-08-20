@@ -30,9 +30,15 @@ module A15K::Metadata
     end
 
     class Resource < Model
+
       has_one :format
       has_one :application
       has_one :application_user
+    end
+
+    class Metadatas < Model
+      has_one :application
+      belongs_to :resource
     end
 
   end

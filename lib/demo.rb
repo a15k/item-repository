@@ -33,15 +33,18 @@ class Demo
   def create_assessment(solutions_count: 4)
     question = select_unused_question
     solutions = DATA['solutions'].sample(solutions_count)
-    a = Assessment.create(
+    assessment = Assessment.create(
       preview_html: Preview.new(question, solutions, solutions.sample).generate,
       member: member,
+      metadata: {
+        tags: DATA['tags'].sample(rand(1..4)),
+      },
       questions: [
         Question.new(format_id: format_id, content: question)
       ]
     )
-    debugger if a.new_record?
-    a
+    A15K::Metadata.api.create(assessment)
+    assessment
   end
 
 end

@@ -12,7 +12,7 @@ task :demo, [:count] => :environment do |tt,args|
 
   members.each do |member|
     demo = Demo.new(member: member)
-    (args[:count] || 1).times do
+    (args[:count].to_i || 1).times do
       assessment = demo.create_assessment(solutions_count: (rand * 3).round + 2)
       puts assessment.preview_html if ENV['VERBOSE']
     end

@@ -75,6 +75,23 @@ exports[`Search renders help 1`] = `
 exports[`Search renders search 1`] = `
 .c0 {
   margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid grey;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+.c1 > * {
+  margin-left: 0.3rem;
 }
 
 <div
@@ -142,11 +159,17 @@ exports[`Search renders search 1`] = `
   </div>
   <div
     className="c0"
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "<p>Ipsa qui unde nihil laudantium nihil autem eius voluptas. Vel dignissimos facilis voluptates quae inventore asperiores sit est quae. Cum sint mollitia aut provident qui ipsa voluptatem natus et. Voluptas quas animi aut vitae. Nihil error neque consequatur aperiam et voluptas. Rem temporibus et asperiores eum a sed autem eveniet quis.</p>",
+  >
+    <div
+      className="c1"
+    />
+    <div
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<p>Ipsa qui unde nihil laudantium nihil autem eius voluptas. Vel dignissimos facilis voluptates quae inventore asperiores sit est quae. Cum sint mollitia aut provident qui ipsa voluptatem natus et. Voluptas quas animi aut vitae. Nihil error neque consequatur aperiam et voluptas. Rem temporibus et asperiores eum a sed autem eveniet quis.</p>",
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;

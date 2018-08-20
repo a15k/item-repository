@@ -29,8 +29,10 @@ class Api::V1::AssessmentsController < ApiController
       render api_response(success: false, message: 'must include "q" query parameter')
       return
     end
-    found = A15K::Metadata.api.query(params[:q])
-    render api_response data: Assessment.where(id: found.map(&:id))
+    found = A15K::Metadata.api.query(params[:q]).index_by(&:id)
+    assessments = Assessment.where(id: found.keys)
+    assessments.each{|a| a.metadata = { tags: ['one', 'great', 'day' ] } }
+    render api_response data: assessments
   end
 
   swagger_path '/assessments/{id}' do

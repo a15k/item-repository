@@ -5,7 +5,10 @@ module A15K::Metadata
     include AssessmentToMetadata
 
     def query(clause, options = {})
-      JsonApi::Resource.where({ query: clause }.merge(options)).all
+      JsonApi::Resource
+        .includes(:metadatas)
+        .where({ query: clause }.merge(options))
+        .all
     end
 
     def create(assessment)

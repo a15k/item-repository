@@ -1,6 +1,7 @@
 import {
-  BaseModel, identifiedBy, field, identifier,
+  BaseModel, identifiedBy, field, session, identifier, computed,
 } from './base';
+import { get } from 'lodash';
 
 @identifiedBy('assessments')
 export default class Accessment extends BaseModel {
@@ -10,4 +11,9 @@ export default class Accessment extends BaseModel {
   @field contents;
   @field preview_html;
 
+  @session({ type: 'object' }) metadata;
+
+  @computed get tags() {
+    return get(this.metadata, 'tags', []);
+  }
 }

@@ -1,7 +1,7 @@
 import { React, PropTypes, observer, observable, action } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-  InputGroup, InputGroupAddon, Button, Input, FormText,
+  InputGroup, InputGroupAddon, Button, Input, FormText, Badge,
 } from 'reactstrap';
 import AssessmentCollection from './search/collection';
 import styled from 'styled-components';
@@ -9,15 +9,32 @@ import ModelErrors from '../components/model-errors';
 
 const PreviewWrapper = styled.div`
 margin-top: 1rem;
+padding-top: 1rem;
+border-top: 1px solid grey;
 `;
 
-const Preview = ({ assessment }) => {
+const Tags = styled.div`
+display: flex;
+justify-content: flex-end;
+> * { margin-left: 0.3rem; }
+`;
+
+const Preview = ({ assessment, className }) => {
   const html = { __html: assessment.preview_html };
-  return <PreviewWrapper dangerouslySetInnerHTML={html} />;
+  return (
+    <PreviewWrapper>
+      <Tags>
+        {assessment.tags.map(t => <Badge key={t} color="secondary">{t}</Badge>)}
+      </Tags>
+      <div dangerouslySetInnerHTML={html} />
+    </PreviewWrapper>
+  );
 };
 Preview.propTypes = {
   assessment: PropTypes.shape({ preview_html: PropTypes.string }).isRequired,
 };
+
+
 
 const HELP = {
   Text: 'Enter text to search for.  Assessment metadata is searched first and then statisistics',

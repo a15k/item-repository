@@ -1,12 +1,12 @@
+import { withRouter } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import { React, PropTypes, observer, observable, action } from '../helpers/react';
+import { React, PropTypes, observer, action } from '../helpers/react';
 import styled from 'styled-components';
 import Format from '../models/format';
 import Button from '../components/button';
 import ActivityIndicator from '../components/activity-indicator';
 import ModelCollection from '../models/model-collection';
 import NotFound from './not-found';
-import { withRouter } from "react-router-dom";
 
 const FormatItem = styled(ListGroupItem)`
   display: flex;
@@ -19,6 +19,8 @@ export default class Formats extends React.Component {
 
   static propTypes = {
     collection: PropTypes.instanceOf(ModelCollection),
+    match: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -46,7 +48,7 @@ export default class Formats extends React.Component {
     if (id) {
       const format = collection.get(id);
       if (!format) {
-        return <NotFound heading="Format not found" />
+        return <NotFound heading="Format not found" />;
       }
       return (
         <div>

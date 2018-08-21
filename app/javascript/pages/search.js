@@ -19,7 +19,7 @@ justify-content: flex-end;
 > * { margin-left: 0.3rem; }
 `;
 
-const Preview = ({ assessment, className }) => {
+const Preview = ({ assessment }) => {
   const html = { __html: assessment.preview_html };
   return (
     <PreviewWrapper>
@@ -33,8 +33,6 @@ const Preview = ({ assessment, className }) => {
 Preview.propTypes = {
   assessment: PropTypes.shape({ preview_html: PropTypes.string }).isRequired,
 };
-
-
 
 const HELP = {
   Text: 'Enter text to search for.  Assessment metadata is searched first and then statisistics',

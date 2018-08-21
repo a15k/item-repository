@@ -1,7 +1,6 @@
 import {
-  BaseModel, identifiedBy, field, session, identifier, computed,
+  BaseModel, identifiedBy, field, identifier,
 } from './base';
-import { get } from 'lodash';
 
 @identifiedBy('formats')
 export default class Format extends BaseModel {

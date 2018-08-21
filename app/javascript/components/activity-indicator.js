@@ -20,3 +20,8 @@ export default function ActivityIndicator({
     </Indicator>
   );
 }
+
+ActivityIndicator.propTypes = {
+  icon: PropTypes.string,
+  label: PropTypes.string,
+};

@@ -73,13 +73,55 @@ exports[`Search renders help 1`] = `
 `;
 
 exports[`Search renders search 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 .icon + span {
+  margin-left: 0.5rem;
+}
+
+.c1 {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+.c4 {
+  color: #49a0b5;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c4 + .c4 {
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid #acdbd8;
+}
+
 .c0 {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid grey;
 }
 
-.c1 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -88,10 +130,6 @@ exports[`Search renders search 1`] = `
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
   justify-content: flex-end;
-}
-
-.c1 > * {
-  margin-left: 0.3rem;
 }
 
 <div
@@ -160,6 +198,15 @@ exports[`Search renders search 1`] = `
   <div
     className="c0"
   >
+    <button
+      className="c1 c2 btn btn-secondary btn-sm"
+      onClick={[Function]}
+      type="button"
+    >
+      <span>
+        Download
+      </span>
+    </button>
     <div
       dangerouslySetInnerHTML={
         Object {
@@ -168,17 +215,40 @@ exports[`Search renders search 1`] = `
       }
     />
     <div
-      className="c1"
+      className="c3"
     >
-      <a
-        aria-current={null}
-        className="badge badge-dark"
-        href="/formats/esse"
-        onClick={[Function]}
-        style={undefined}
+      <div
+        className="c4"
       >
-        Format: 
-      </a>
+        Member: 
+      </div>
+      <div
+        className="c4"
+      >
+        ID: 
+        379d79cc-cd42-443c-9f2e-15087a5bc518
+      </div>
+      <div
+        className="c4"
+      >
+        Version: 
+      </div>
+      <div
+        className="c4"
+      >
+        <a
+          aria-current={null}
+          className={undefined}
+          href="/formats/esse"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Format: 
+        </a>
+      </div>
+      <div
+        className="c4"
+      />
     </div>
   </div>
 </div>

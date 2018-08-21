@@ -90,7 +90,7 @@ export default class ModelApi {
     if (req && req.then) {
       return req
         .then(resp => {
-          this.requestsInProgress.delete(fetch);
+          this.requestsInProgress.delete(method);
           this.requestCounts[method] += 1;
           model.lastServerResponse = resp;
           return resp.json && resp.status !== 204 ? // 204 == no content

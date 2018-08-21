@@ -51,6 +51,8 @@ gem "openstax_healthcheck"
 # For getting secrets from AWS Parameter Store
 gem "aws-sdk-ssm"
 
+gem 'faker' # Lorem Ipsum
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -59,7 +61,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'dotenv-rails'
   gem 'guard-rspec', require: false
-  gem 'faker' # Lorem Ipsum
 end
 
 group :development do

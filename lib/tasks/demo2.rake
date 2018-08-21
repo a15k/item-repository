@@ -6,9 +6,9 @@ desc <<-DESC.strip_heredoc
 DESC
 task :demo2, [] => :environment do |tt,args|
 
-  demo_member_a = Demo2::MemberA.new(member_name: "OpenStax")
-  create_user(username: "ox", member: demo_member_a.member, power_user: false)
-  create_user(username: "ox_power_user", member: demo_member_a.member, power_user: true)
+  demo_member_a = Demo2::MemberA.new(member_name: "Assessify")
+  create_user(username: "as", member: demo_member_a.member, power_user: false)
+  create_user(username: "as_power_user", member: demo_member_a.member, power_user: true)
 
   7.times { demo_member_a.generate_multiple_choice }
   4.times { demo_member_a.generate_fill_in_the_blank }

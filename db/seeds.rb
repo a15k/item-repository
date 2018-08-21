@@ -16,7 +16,7 @@ if Rails.env.development?
     ].each do |username, role|
 
       account = ::OpenStax::Accounts::FindOrCreateAccount.call(
-        email: 'support@openstax.org', username: username, password: 'password'
+        email: "support+#{SecureRandom.hex(6)}@a15k.org", username: username, password: 'password'
       ).outputs.account
       User.create!(
         member_id: OX_MEMBER.id, account_id: account.id, role: role

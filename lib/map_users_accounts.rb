@@ -20,7 +20,7 @@ module MapUsersAccounts
       begin
         user = User.where(account: account).first
         return user if user.present?
-        User.create!(account: account, member: Member.find_by(name: 'OpenStax'))
+        User.create!(account: account)
       rescue RuntimeError, ActiveRecord::RecordNotUnique, ::PG::UniqueViolation
         raise if retry_count >= 3
 

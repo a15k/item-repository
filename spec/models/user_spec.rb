@@ -37,4 +37,12 @@ RSpec.describe User, type: :model do
     expect(user2.errors[:member]).to eq ['must have at least one power user']
   end
 
+  it 'requires unique accounts' do
+    member = FactoryBot.create :member
+    user1 = FactoryBot.create :user, member: member, role: 'power_user'
+    user2 = FactoryBot.create :user, member: member, role: 'power_user'
+    user2.update_attributes account_id: user1.account_id
+    expect(user2.errors).not_to be_empty
+  end
+
 end

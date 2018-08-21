@@ -11,6 +11,7 @@ class User < ApplicationRecord
   scope :power_users, -> { where(role: 'power_user') }
 
   validate :membership_has_power_users, on: :update
+  validates :account_id, uniqueness: true
 
   def self.anonymous
     ::User::Anonymous.instance

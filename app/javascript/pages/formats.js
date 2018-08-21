@@ -28,7 +28,9 @@ export default class Formats extends React.Component {
   };
 
   componentDidMount() {
-    this.props.collection.fetch();
+    if (!this.props.collection.api.isFetchedOrFetching) {
+      this.props.collection.fetch();
+    }
   }
 
   @action.bound onDisplay(ev) {

@@ -35,7 +35,9 @@ export default class Search extends React.Component {
   @observable searchingBy = 'Text'
 
   componentDidMount() {
-    this.props.formats.fetch();
+    if (!this.props.formats.api.isFetchedOrFetching) {
+      this.props.formats.fetch();
+    }
   }
 
   @action.bound onDropdownToggle() {

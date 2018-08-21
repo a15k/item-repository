@@ -23,10 +23,10 @@ const Preview = ({ assessment, className }) => {
   const html = { __html: assessment.preview_html };
   return (
     <PreviewWrapper>
-      <Tags>
-        {assessment.tags.map(t => <Badge key={t} color="secondary">{t}</Badge>)}
-      </Tags>
       <div dangerouslySetInnerHTML={html} />
+      <Tags>
+        {assessment.tags.map(t => <Badge key={t} color="info">{t}</Badge>)}
+      </Tags>
     </PreviewWrapper>
   );
 };

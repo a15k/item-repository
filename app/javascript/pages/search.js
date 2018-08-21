@@ -1,38 +1,13 @@
 import { React, PropTypes, observer, observable, action } from '../helpers/react';
 import {
   InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-  InputGroup, InputGroupAddon, Button, Input, FormText, Badge,
+  InputGroup, InputGroupAddon, Button, Input, FormText,
 } from 'reactstrap';
+import ModelCollection from '../models/model-collection';
 import AssessmentCollection from './search/collection';
-import styled from 'styled-components';
+import Format from '../models/format';
 import ModelErrors from '../components/model-errors';
-
-const PreviewWrapper = styled.div`
-margin-top: 1rem;
-padding-top: 1rem;
-border-top: 1px solid grey;
-`;
-
-const Tags = styled.div`
-display: flex;
-justify-content: flex-end;
-> * { margin-left: 0.3rem; }
-`;
-
-const Preview = ({ assessment }) => {
-  const html = { __html: assessment.preview_html };
-  return (
-    <PreviewWrapper>
-      <div dangerouslySetInnerHTML={html} />
-      <Tags>
-        {assessment.tags.map(t => <Badge key={t} color="info">{t}</Badge>)}
-      </Tags>
-    </PreviewWrapper>
-  );
-};
-Preview.propTypes = {
-  assessment: PropTypes.shape({ preview_html: PropTypes.string }).isRequired,
-};
+import Preview from './search/preview';
 
 const HELP = {
   Text: 'Enter text to search for.  Assessment metadata is searched first and then statisistics',
@@ -48,11 +23,20 @@ export default class Search extends React.Component {
 
   static propTypes = {
     collection: PropTypes.instanceOf(AssessmentCollection),
+    formats: PropTypes.instanceOf(ModelCollection),
+  };
+
+  static defaultProps = {
+    formats: Format.collection,
   };
 
   @observable collection = this.props.collection || new AssessmentCollection();
   @observable isDropdownOpen = false;
   @observable searchingBy = 'Text'
+
+  componentDidMount() {
+    this.props.formats.fetch();
+  }
 
   @action.bound onDropdownToggle() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -78,6 +62,8 @@ export default class Search extends React.Component {
   }
 
   render() {
+    const { formats } = this.props;
+
     return (
       <div className="search-page">
         <InputGroup>
@@ -114,7 +100,7 @@ export default class Search extends React.Component {
         </InputGroup>
         <SearchHelp type={this.searchingBy} results={this.collection} />
         <ModelErrors model={this.assessment} />
-        {this.collection.map(a => <Preview key={a.id} assessment={a} />)}
+        {this.collection.map(a => <Preview key={a.id} formats={formats} assessment={a} />)}
       </div>
     );
   }

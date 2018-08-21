@@ -61,11 +61,16 @@ class A15KApplication extends React.Component {
             <Title>Assessment Network</Title>
             {User.isMember &&
               (
-                <Menu isOpen={this.isActionsMenuOpen} toggle={this.onActionsMenuToggle}>
+                <Menu
+                  isOpen={this.isActionsMenuOpen}
+                  toggle={this.onActionsMenuToggle}
+                >
                   <DropdownToggle caret>
                     Actions
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu right
+                    onClick={(e) => e.currentTarget.parentElement.click()}
+                  >
                     <MenuLink to="/search" name="Search" />
                     {User.isPowerUser && <MenuLink to="/users" name="Users" />}
                     {User.isPowerUser && <MenuLink to="/api" name="Api Access" />}

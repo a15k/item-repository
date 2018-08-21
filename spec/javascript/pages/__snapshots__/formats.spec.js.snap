@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Formats Page renders formats 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 .icon + span {
+  margin-left: 0.5rem;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+<div
+  className="formats-page"
+>
+  <ul
+    className="list-group"
+  >
+    <li
+      className="c0 list-group-item"
+    >
+      <span />
+      <span>
+        379d79cc-cd42-443c-9f2e-15087a5bc518
+      </span>
+      <button
+        className="c1 btn btn-secondary"
+        data-id="379d79cc-cd42-443c-9f2e-15087a5bc518"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-chevron-right fa-w-10 icon"
+          data-icon="chevron-right"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 320 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </button>
+    </li>
+    <li
+      className="c0 list-group-item"
+    >
+      <span>
+        Test Format
+      </span>
+      <span>
+        1234
+      </span>
+      <button
+        className="c1 btn btn-secondary"
+        data-id="1234"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-chevron-right fa-w-10 icon"
+          data-icon="chevron-right"
+          data-prefix="fas"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 320 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </button>
+    </li>
+  </ul>
+</div>
+`;

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+$(npm bin)/eslint app/javascript/
+
+bundle exec rspec
+
+npm run test
+
+echo looks good

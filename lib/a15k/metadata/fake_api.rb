@@ -16,6 +16,7 @@ module A15K::Metadata
 
     def create(assessment)
       @@created[assessment.id] = assessment_to_json(assessment)
+      create_metadata(assessment) if assessment.metadata.present?
       ApiResult.new(assessment.id)
     end
 
@@ -37,5 +38,8 @@ module A15K::Metadata
       )
     end
 
+    def create_metadata(assessment)
+      assessment.metadata
+    end
   end
 end

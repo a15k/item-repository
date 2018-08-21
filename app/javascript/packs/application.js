@@ -7,7 +7,13 @@ import whenDomReady from 'when-dom-ready';
 import User from '../models/user';
 import Config from '../models/config';
 import InteractionsApp from '../models/interaction-app';
-import * as Pages from '../pages';
+import Home from '../pages/home';
+import Api from '../pages/api';
+import Search from '../pages/search';
+import NotFound from '../pages/not-found';
+import Users from '../pages/users';
+import Formats from '../pages/formats';
+
 
 const MenuLink = ({ to, name }) => (
   <NavLink activeClassName="active" className="dropdown-item" to={to}>
@@ -63,6 +69,7 @@ class A15KApplication extends React.Component {
                     <MenuLink to="/search" name="Search" />
                     {User.isPowerUser && <MenuLink to="/users" name="Users" />}
                     {User.isPowerUser && <MenuLink to="/api" name="Api Access" />}
+                    <MenuLink to="/formats" name="Formats" />
                   </DropdownMenu>
                 </Menu>
               )}
@@ -84,11 +91,12 @@ class A15KApplication extends React.Component {
           </Nav>
           <Container>
             <Switch>
-              <Route path="/" exact component={Pages.Home} />
-              <Route path="/search" component={Pages.Search} />
-              <Route path="/users" component={Pages.Users} />
-              <Route path="/api" component={Pages.Api} />
-              <Route component={Pages.NotFound} />
+              <Route path="/" exact component={Home} />
+              <Route path="/search" component={Search} />
+              <Route path="/users" component={Users} />
+              <Route path="/formats/:id?" component={Formats} />
+              <Route path="/api" component={Api} />
+              <Route component={NotFound} />
             </Switch>
           </Container>
           <form id="logout-form" action="/accounts/logout" method="post">

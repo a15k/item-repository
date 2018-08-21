@@ -42,6 +42,19 @@ module Api
         new_record? ? user_options[:current_member] : nil
       }
 
+      property :metadata,
+               reader: ->(input:, **) { input[:metadata] ? input[:metadata].to_unsafe_h : nil },
+               description: 'Additional searchable metadata to be associated with the assessment' do |doc|
+        doc.property :tags do
+          key :description, 'A list of tags to mark the assessment with'
+          key :type, :array
+          items do
+            key :type, :string
+          end
+        end
+
+      end
+
       property :questions,
                collection: true,
                extend: QuestionSerializer,
@@ -51,6 +64,7 @@ module Api
           key :'$ref', :Question
         end
       end
+
 
     end
 

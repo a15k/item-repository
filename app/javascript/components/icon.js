@@ -11,6 +11,7 @@ import envelope from '@fortawesome/fontawesome-free-solid/faEnvelope';
 import chevronRight from '@fortawesome/fontawesome-free-solid/faChevronRight';
 import chevronLeft from '@fortawesome/fontawesome-free-solid/faChevronLeft';
 import save from '@fortawesome/fontawesome-free-solid/faSave';
+import spinner from '@fortawesome/fontawesome-free-solid/faSpinner';
 
 const ICONS = {
   signIn,
@@ -21,6 +22,7 @@ const ICONS = {
   chevronRight,
   chevronLeft,
   save,
+  spinner,
 };
 
 export default function Icon({ icon, className, ...props }) {

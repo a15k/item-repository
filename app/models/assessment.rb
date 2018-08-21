@@ -12,6 +12,10 @@ class Assessment < ApplicationRecord
 
   enum visibility: %i[internal external]
 
+  # values are stored here temporarily when they're
+  # being sent to and from the metadata repository
+  attr_accessor :metadata
+
   before_validation :set_default_identifier, on: :create
   before_validation :set_version, on: :create
   before_validation :set_fingerprint

@@ -54,6 +54,15 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
         >
           Search
         </a>
+        <a
+          aria-current={null}
+          className="dropdown-item"
+          href="/formats"
+          onClick={[Function]}
+          style={undefined}
+        >
+          Formats
+        </a>
       </div>
     </div>
     <div

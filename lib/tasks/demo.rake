@@ -10,9 +10,9 @@ task :demo, [:count] => :environment do |tt,args|
     Member.create!(name: "Demo #{i}", website: 'openstax.org')
   end
 
-  members.each do |member|
+  [members.first].each do |member|
     demo = Demo.new(member: member)
-    (args[:count].to_i || 1).times do
+    (args[:count] || 1).to_i.times do
       assessment = demo.create_assessment(solutions_count: (rand * 3).round + 2)
       puts assessment.preview_html if ENV['VERBOSE']
     end

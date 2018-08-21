@@ -12,9 +12,9 @@ module A15K::Metadata
 
       def self.custom_headers
         super.merge(
-          'Metadata-Api-Token' => Rails.application.secrets.metadata_api[:token],
+          'Authorization' => Rails.application.secrets.metadata_api[:token],
           'Accept' => 'application/vnd.api.metadata.a15k.org+json; version=1',
-          'content_type' => 'application/vnd.api.metadata.a15k.org+json; version=1',
+          'content_type' => 'application/json'
         )
       end
 
@@ -33,6 +33,12 @@ module A15K::Metadata
       has_one :format
       has_one :application
       has_one :application_user
+      has_many :metadatas
+    end
+
+    class Metadatas < Model
+      has_one :application
+      belongs_to :resource
     end
 
   end

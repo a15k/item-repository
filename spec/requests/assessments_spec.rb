@@ -53,27 +53,36 @@ describe 'Assessments API', type: :request do
   end
 
   describe 'POST' do
+
+    let(:metadata) {
+      { foo: 'bar', tags: ['first', 'test:true'] }
+    }
+    let(:params) {
+      {
+        identifier: SecureRandom.uuid,
+        content: '1234 this is content',
+        metadata: metadata,
+        questions: [
+          {
+            format_id: format.id,
+            content: '1234 this is question content',
+            solutions: [
+              {
+                format_id: format.id,
+                content: '1234 this is question solution 1'
+              }, {
+                format_id: format.id,
+                content: '1234 this is question solution 2'
+              }
+            ]
+          }
+        ]
+      }
+    }
+
     it 'can create an assessment' do
       expect {
-        post "/api/v1/assessments.json", params: {
-               identifier: SecureRandom.uuid,
-               content: '1234 this is content',
-               questions: [
-                 {
-                   format_id: format.id,
-                   content: '1234 this is question content',
-                   solutions: [
-                     {
-                       format_id: format.id,
-                       content: '1234 this is question solution 1'
-                     }, {
-                       format_id: format.id,
-                       content: '1234 this is question solution 2'
-                     }
-                   ]
-                 }
-               ]
-             }.to_json, headers: headers
+        post "/api/v1/assessments.json", params: params.to_json, headers: headers
         expect(response).to be_ok
         expect(response_json['success']).to be true
         expect(response_data['questions'].length).to eq 1
@@ -81,6 +90,18 @@ describe 'Assessments API', type: :request do
       }.to change {
         Assessment.count
       }.by 1
+    end
+
+    it 'saves metadata' do
+      metadata_api = A15K::Metadata::FakeApi.new
+      expect(metadata_api).to receive(:create)
+                                .with(kind_of(Assessment))
+                                .and_call_original
+      expect(metadata_api).to receive(:create_metadata)
+                                 .with(kind_of(Assessment))
+      expect(A15K::Metadata).to receive(:api).and_return(metadata_api)
+      post "/api/v1/assessments.json", params: params.to_json, headers: headers
+      expect(response).to be_ok
     end
 
     describe "multiple versions" do

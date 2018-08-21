@@ -161,14 +161,14 @@ exports[`Search renders search 1`] = `
     className="c0"
   >
     <div
-      className="c1"
-    />
-    <div
       dangerouslySetInnerHTML={
         Object {
           "__html": "<p>Ipsa qui unde nihil laudantium nihil autem eius voluptas. Vel dignissimos facilis voluptates quae inventore asperiores sit est quae. Cum sint mollitia aut provident qui ipsa voluptatem natus et. Voluptas quas animi aut vitae. Nihil error neque consequatur aperiam et voluptas. Rem temporibus et asperiores eum a sed autem eveniet quis.</p>",
         }
       }
+    />
+    <div
+      className="c1"
     />
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { React } from '../helpers/react';
 
-export default function NotFound() {
+export default function NotFound({ heading = 'Not Found' }) {
   return (
-    <h3>Not Found</h3>
+    <h3>{heading}</h3>
   );
 }

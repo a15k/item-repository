@@ -14,7 +14,7 @@ export default class ModelCollection {
     this.baseUrl = baseUrl;
   }
 
-  fetch({ id }) {
+  fetch({ id } = {}) {
     let url = this.api.baseUrl;
     if (id) { url += `/${id}`; }
     return this.api.request({ model: this, url });

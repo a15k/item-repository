@@ -53,7 +53,7 @@ export default class Formats extends React.Component {
       return (
         <div>
           <h3>
-            <Button icon="chevronLeft" onClick={this.onDisplayAll} />
+            <Button icon="chevronLeft" onClick={this.onDisplayAll}>Display All</Button>
             {format.name}
           </h3>
           <p>{format.specification}</p>

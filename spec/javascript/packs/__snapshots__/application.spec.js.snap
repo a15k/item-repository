@@ -42,6 +42,7 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
       <div
         aria-hidden={true}
         className="dropdown-menu dropdown-menu-right"
+        onClick={[Function]}
         role="menu"
         tabIndex="-1"
       >

@@ -11,6 +11,10 @@ import NotFound from './not-found';
 const FormatItem = styled(ListGroupItem)`
   display: flex;
   justify-content: space-between;
+  > * {
+    flex: 1;
+    &:last-child { flex: 0; }
+  }
 `;
 
 @withRouter
@@ -55,7 +59,7 @@ export default class Formats extends React.Component {
       return (
         <div>
           <h3>
-            <Button icon="chevronLeft" onClick={this.onDisplayAll}>Display All</Button>
+            <Button icon="chevronLeft" onClick={this.onDisplayAll}>Formats listing</Button>
             {format.name}
           </h3>
           <p>{format.specification}</p>
@@ -64,6 +68,7 @@ export default class Formats extends React.Component {
     }
     return (
       <div className="formats-page">
+        <h3>Formats</h3>
         <ListGroup>
           {collection.array.map(f =>
             <FormatItem key={f.id}>

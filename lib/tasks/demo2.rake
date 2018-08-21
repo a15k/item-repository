@@ -26,7 +26,7 @@ end
 
 def create_user(username:, member:, power_user:)
   account = ::OpenStax::Accounts::FindOrCreateAccount.call(
-    email: 'support@openstax.org', username: username, password: 'password'
+    email: "demo+#{SecureRandom.hex(6)}@a15k.org", username: username, password: 'password'
   ).outputs.account
   User.create!(
     member_id: member.id, account_id: account.id, role: power_user ? 'power_user' : 'standard_user'

@@ -37,10 +37,12 @@ module Api
                type: :string,
                format: 'Date'
 
-      property :member, document: false, readable: false,
+      property :member,
+               description: 'The member who contributed the assessment. Is only included by the search api and not when assessments are requested by id',
+               getter:  ->(**) { association(:member).loaded? ? MemberSerializer.new(member).as_json : nil },
                reader: ->(user_options:, **) {
-        new_record? ? user_options[:current_member] : nil
-      }
+                 new_record? ? user_options[:current_member] : nil
+               }
 
       property :metadata,
                reader: ->(input:, **) { input[:metadata] ? input[:metadata].to_unsafe_h : nil },

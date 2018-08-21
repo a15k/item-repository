@@ -23,7 +23,7 @@ before_script:
   - bundle exec rake db:create db:migrate --trace
   - yarn install
 script:
-  - bundle exec rake
+  - bundle exec rspec
   - npm run test
   - $(npm bin)/eslint app/javascript/
   - bundle exec rake assets:precompile

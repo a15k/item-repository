@@ -32,8 +32,11 @@ class Api::V1::AssessmentsController < ApiController
     found = A15K::Metadata.api.query(params[:q]).index_by(&:id)
     assessments = Assessment.includes(:member).where(id: found.keys)
     assessments.each{ |a|
-      a.metadata = { # TODO: change to be set to: found[a.id].metadata
-        tags: rand(1..4).times.map{ Faker::Job.key_skill }
+      a.metadata = {
+        tags: (found[a.id].metadatas || [])
+          .map{|m| m.value['tags'] }
+          .flatten
+          .uniq
       }
     }
     render api_response data: assessments

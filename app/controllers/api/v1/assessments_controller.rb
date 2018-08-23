@@ -31,7 +31,14 @@ class Api::V1::AssessmentsController < ApiController
     end
     found = A15K::Metadata.api.query(params[:q]).index_by(&:id)
     assessments = Assessment.includes(:member).where(id: found.keys)
-    assessments.each{|a| a.metadata = { tags: ['one', 'great', 'day' ] } }
+    assessments.each{ |a|
+      a.metadata = {
+        tags: (found[a.id].metadatas || [])
+          .map{|m| m.value['tags'] }
+          .flatten
+          .uniq
+      }
+    }
     render api_response data: assessments
   end
 
@@ -88,16 +95,8 @@ class Api::V1::AssessmentsController < ApiController
     assessment = Api::V1::AssessmentSerializer.new(
       Assessment.new,
     ).from_hash(params, user_options: { current_member: current_member })
-    success = assessment.save
-    if success
-      begin
-        A15K::Metadata.api.create(assessment)
-      rescue => e
-        Rails.logger.warn "Failed to create metadata for new assment: #{e}"
-        Rails.logger.warn assessment.errors.as_json
-      end
-    end
-    render api_response data: assessment, success: success
+
+    render api_response data: assessment, success: assessment.save
   end
 
 end

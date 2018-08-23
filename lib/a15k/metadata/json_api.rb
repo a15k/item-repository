@@ -41,5 +41,10 @@ module A15K::Metadata
       belongs_to :resource
     end
 
+    class Metadatum < Model
+      has_one :application
+      belongs_to :resource
+    end
+
   end
 end

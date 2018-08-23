@@ -43,7 +43,6 @@ class Demo
         Question.new(format_id: format_id, content: question)
       ]
     )
-    A15K::Metadata.api.create(assessment)
     assessment
   end
 

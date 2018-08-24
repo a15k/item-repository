@@ -86,7 +86,7 @@ export default class Users extends React.Component {
           isOpen={!!this.inviteDeliveredTo}
           toggle={this.onInviteMessageHide}
         >
-          An invitation email has been sent to {this.inviteDeliveredTo}
+          If {this.inviteDeliveredTo} already has an account, they can now access a15k.  If not, an invitation email has been sent.
         </InvitedNotice>
 
         <ErrorDisplay errors={users.errors} />

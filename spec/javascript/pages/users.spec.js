@@ -89,7 +89,7 @@ describe(Users, () => {
       users.find('[icon="envelope"] .btn-secondary').simulate('click');
       expect(props.users.invite).toHaveBeenCalled();
       await testhelper.waitUntil(() => users.instance().inviteDeliveredTo)
-      expect(users.find('Alert[color="info"]').text()).toContain('email has been sent to bob@test.com');
+      expect(users.find('Alert[color="info"]').text()).toContain('invitation email has been sent');
       users.unmount();
     });
 

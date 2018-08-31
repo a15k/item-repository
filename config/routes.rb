@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :interactions
     end
   end
-
+  get 'assessment/preview/:id', to: 'assessment#preview'
   get 'api/docs/v1', to: 'api/docs/v1#index'
   get 'terms', to: 'home#terms'
   get '*path', to: 'home#index'

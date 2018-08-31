@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { React, PropTypes, action, observer } from '../../helpers/react';
+import iframeResizer from 'iframe-resizer/js/iframeResizer';
 import { Badge } from 'reactstrap';
 import { get } from 'lodash';
 import ModelCollection from '../../models/model-collection';
@@ -8,9 +9,29 @@ import Assessment from '../../models/assessment';
 import Button from '../../components/button';
 import { saveAs } from 'file-saver/FileSaver';
 
+class Iframe extends React.Component {
+  static propTypes = {
+    assessment: PropTypes.instanceOf(Assessment).isRequired,
+  }
+  componentDidMount() {
+    iframeResizer({}, `#preview-${this.props.assessment.id}`);
+  }
+  render() {
+    const { assessment } = this.props;
+    return (
+      <iframe
+        id={`preview-${assessment.id}`}
+        src={`/assessment/preview/${assessment.id}`}
+        style={{ width: '1px', minWidth: '100%', border: '0px' }}
+      />
+    );
+  }
+}
+
+
 const RightButton = styled(Button)`
-float:right;
-margin: 0 0 1rem 1rem;
+margin: 0.5rem 0;
+float: right;
 `;
 
 const InfoBit = styled.div`
@@ -66,13 +87,10 @@ class Download extends React.Component {
 }
 
 const Preview = ({ assessment, formats }) => {
-  const html = { __html: assessment.preview_html };
   return (
     <PreviewWrapper>
       <Download assessment={assessment} />
-
-      <div dangerouslySetInnerHTML={html} />
-
+      <Iframe assessment={assessment} />
       <Info>
         <InfoBit>Member: {get(assessment.member, 'name')}</InfoBit>
         <InfoBit>ID: {assessment.id}</InfoBit>

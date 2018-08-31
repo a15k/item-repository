@@ -89,8 +89,8 @@ exports[`Search renders search 1`] = `
 }
 
 .c1 {
+  margin: 0.5rem 0;
   float: right;
-  margin: 0 0 1rem 1rem;
 }
 
 .c4 {
@@ -207,10 +207,14 @@ exports[`Search renders search 1`] = `
         Download
       </span>
     </button>
-    <div
-      dangerouslySetInnerHTML={
+    <iframe
+      id="preview-379d79cc-cd42-443c-9f2e-15087a5bc518"
+      src="/assessment/preview/379d79cc-cd42-443c-9f2e-15087a5bc518"
+      style={
         Object {
-          "__html": "<p>Ipsa qui unde nihil laudantium nihil autem eius voluptas. Vel dignissimos facilis voluptates quae inventore asperiores sit est quae. Cum sint mollitia aut provident qui ipsa voluptatem natus et. Voluptas quas animi aut vitae. Nihil error neque consequatur aperiam et voluptas. Rem temporibus et asperiores eum a sed autem eveniet quis.</p>",
+          "border": "0px",
+          "minWidth": "100%",
+          "width": "1px",
         }
       }
     />

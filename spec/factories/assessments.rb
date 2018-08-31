@@ -11,10 +11,10 @@ FactoryBot.define do
     end
 
     after(:create) do |asm, evaluator|
-      if asm.questions.none?
-        asm.questions << FactoryBot.create(:question,
-                                           assessment: asm,
-                                           format: evaluator.format)
+      if asm.variants.none?
+        asm.variants << FactoryBot.create(:variant,
+                                          assessment: asm,
+                                          format: evaluator.format)
       end
     end
 

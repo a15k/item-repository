@@ -32,7 +32,7 @@ describe 'Ruby client', type: :api do
       response = api_instance.create_assessment(
         identifier: 'TEST-Test-AND-TEST-MORE',
         content: { text: Faker::Lorem.paragraph }.to_json,
-        questions: 2.times.map{|question_index|
+        variants: 2.times.map{|question_index|
           {
             format_id: format.id,
             variant_id: question_index.to_s,

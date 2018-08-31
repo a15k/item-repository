@@ -96,6 +96,8 @@ class Api::V1::AssessmentsController < ApiController
       Assessment.new,
     ).from_hash(params, user_options: { current_member: current_member })
 
+    # TODO where to handle member_identifier vs a15k_identifier vs none?
+
     render api_response data: assessment, success: assessment.save
   end
 

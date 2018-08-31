@@ -2,15 +2,13 @@
 class Assessment < ApplicationRecord
 
   belongs_to :member
-  has_many :questions, inverse_of: :assessment,
+  has_many :variants, inverse_of: :assessment,
            after_add: :save_fingerprint, after_remove: :save_fingerprint
 
   has_many :other_versions,
            -> (a) { where.not(id: a.id) },
            class_name: 'Assessment',
-           foreign_key: :identifier, primary_key: :identifier
-
-  enum visibility: %i[internal external]
+           foreign_key: :a15k_version_stable_id, primary_key: :a15k_version_stable_id
 
   # values are stored here temporarily when they're
   # being sent to and from the metadata repository
@@ -20,14 +18,15 @@ class Assessment < ApplicationRecord
   before_validation :set_version, on: :create
   before_validation :set_fingerprint
 
-  validates :version, uniqueness: { scope: :identifier }
-  validates :fingerprint, uniqueness: true # { scope: :member_id } # TODO decide if should be scoped
+  validates :a15k_version_stable_id, presence: true
+  validates :a15k_version, presence: true, uniqueness: { scope: :a15k_version_stable_id }
+  validates :fingerprint, uniqueness: true
   validate :ensure_member_matches_other_versions
 
   after_commit :send_to_metadata_repo, on: :create
 
   def digest
-    Digest::MD5.hexdigest questions.map(&:content).sort.join
+    Digest::MD5.hexdigest variants.map(&:content).sort.join
   end
 
   protected
@@ -45,7 +44,7 @@ class Assessment < ApplicationRecord
   end
 
   def set_version
-    self.version = other_versions.size + 1
+    self.a15k_version = other_versions.size + 1
   end
 
   def ensure_member_matches_other_versions
@@ -55,11 +54,6 @@ class Assessment < ApplicationRecord
   end
 
   def send_to_metadata_repo
-    begin
-      A15K::Metadata.api.create(self)
-    rescue => e
-      Rails.logger.warn "Failed to create metadata for new assessment #{self.id}"
-      Rails.logger.warn e
-    end
+    SubmitAssessmentToMetadataJob.perform_later(self)
   end
 end

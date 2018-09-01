@@ -24,6 +24,9 @@ module A15kClient
     # The content of the variant. The formatting the the content is indicated by the assessment's linked format
     attr_accessor :content
 
+    # If provided, will be used to generate a preview on the a15k website
+    attr_accessor :preview_html
+
     attr_accessor :solutions
 
 
@@ -33,6 +36,7 @@ module A15kClient
         :'format_id' => :'format_id',
         :'variant_id' => :'variant_id',
         :'content' => :'content',
+        :'preview_html' => :'preview_html',
         :'solutions' => :'solutions'
       }
     end
@@ -43,6 +47,7 @@ module A15kClient
         :'format_id' => :'String',
         :'variant_id' => :'String',
         :'content' => :'String',
+        :'preview_html' => :'String',
         :'solutions' => :'Array<Solution>'
       }
     end
@@ -65,6 +70,10 @@ module A15kClient
 
       if attributes.has_key?(:'content')
         self.content = attributes[:'content']
+      end
+
+      if attributes.has_key?(:'preview_html')
+        self.preview_html = attributes[:'preview_html']
       end
 
       if attributes.has_key?(:'solutions')
@@ -106,6 +115,7 @@ module A15kClient
           format_id == o.format_id &&
           variant_id == o.variant_id &&
           content == o.content &&
+          preview_html == o.preview_html &&
           solutions == o.solutions
     end
 
@@ -118,7 +128,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_id, variant_id, content, solutions].hash
+      [format_id, variant_id, content, preview_html, solutions].hash
     end
 
     # Builds the object from hash

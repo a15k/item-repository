@@ -26,9 +26,6 @@ module A15kClient
     # The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier
     attr_accessor :version
 
-    # If provided, will be used to generate a preview on the a15k website
-    attr_accessor :preview_html
-
     attr_accessor :metadata
 
     attr_accessor :variants
@@ -41,7 +38,6 @@ module A15kClient
         :'created_at' => :'created_at',
         :'identifier' => :'identifier',
         :'version' => :'version',
-        :'preview_html' => :'preview_html',
         :'metadata' => :'metadata',
         :'variants' => :'variants'
       }
@@ -54,7 +50,6 @@ module A15kClient
         :'created_at' => :'String',
         :'identifier' => :'String',
         :'version' => :'String',
-        :'preview_html' => :'String',
         :'metadata' => :'AssessmentMetadata',
         :'variants' => :'Array<Variant>'
       }
@@ -82,10 +77,6 @@ module A15kClient
 
       if attributes.has_key?(:'version')
         self.version = attributes[:'version']
-      end
-
-      if attributes.has_key?(:'preview_html')
-        self.preview_html = attributes[:'preview_html']
       end
 
       if attributes.has_key?(:'metadata')
@@ -137,7 +128,6 @@ module A15kClient
           created_at == o.created_at &&
           identifier == o.identifier &&
           version == o.version &&
-          preview_html == o.preview_html &&
           metadata == o.metadata &&
           variants == o.variants
     end
@@ -151,7 +141,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, identifier, version, preview_html, metadata, variants].hash
+      [id, created_at, identifier, version, metadata, variants].hash
     end
 
     # Builds the object from hash

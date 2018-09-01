@@ -10,8 +10,6 @@ class Assessment < ApplicationRecord
            class_name: 'Assessment',
            foreign_key: :identifier, primary_key: :identifier
 
-  enum visibility: %i[internal external]
-
   # values are stored here temporarily when they're
   # being sent to and from the metadata repository
   attr_accessor :metadata

@@ -8,7 +8,7 @@ describe 'Metadata repo client' do
   let(:api) { A15K::Metadata.api }
 
   it 'can search' do
-    assessment.questions.first.update_attributes! content: 'testing'
+    assessment.variants.first.update_attributes! content: 'testing'
     api.create(assessment)
     expect(api.query('testing').length).to be >= 1
   end
@@ -28,20 +28,20 @@ describe 'Metadata repo client' do
   end
 
   it 'can update metadata' do
-    assessment.questions.first.update_attributes! content: 'pre-create'
+    assessment.variants.first.update_attributes! content: 'pre-create'
     api.create(assessment)
     resource = api.retrieve(assessment).first
     expect(
-      JSON.parse(resource.content)['questions'].first['content']
+      JSON.parse(resource.content)['variants'].first['content']
     ).to eq 'pre-create'
 
-    assessment.questions.first.update_attributes! content: 'post-create'
+    assessment.variants.first.update_attributes! content: 'post-create'
     result = api.update(assessment)
     expect(result.ok?).to be true
 
     resource = api.retrieve(assessment).first
     expect(
-      JSON.parse(resource.content)['questions'].first['content']
+      JSON.parse(resource.content)['variants'].first['content']
     ).to eq 'post-create'
   end
 end

@@ -1,7 +1,7 @@
 =begin
 #Assessment Network API
 
-#> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org. 
+#> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org.
 
 OpenAPI spec version: 1.0.0
 
@@ -38,7 +38,7 @@ describe 'Question' do
     end
   end
 
-  describe 'test attribute "variant_id"' do
+  describe 'test attribute "member_variant_id"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

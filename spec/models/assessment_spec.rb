@@ -32,7 +32,7 @@ RSpec.describe Assessment, type: :model do
 
   it 'blocks duplicate assessment content' do
     dupe = FactoryBot.build :assessment
-    assessment.questions.each{ |q| dupe.questions.build(content: q.content, format: q.format) }
+    assessment.variants.each{ |q| dupe.variants.build(content: q.content, format: q.format) }
     expect(dupe.save).to be false
     expect(dupe.errors.full_messages).to include 'Fingerprint has already been taken'
   end

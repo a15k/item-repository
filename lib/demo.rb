@@ -39,8 +39,8 @@ class Demo
       metadata: {
         tags: DATA['tags'].sample(rand(1..4)),
       },
-      questions: [
-        Question.new(format_id: format_id, content: question)
+      variants: [
+        Variant.new(format_id: format_id, content: question)
       ]
     )
     assessment

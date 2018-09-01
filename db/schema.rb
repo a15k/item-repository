@@ -144,11 +144,11 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "assessment_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
-    t.text "variant_id"
+    t.text "member_variant_id"
     t.datetime "created_at", null: false
     t.index ["assessment_id"], name: "index_questions_on_assessment_id"
     t.index ["format_id"], name: "index_questions_on_format_id"
-    t.index ["variant_id"], name: "index_questions_on_variant_id"
+    t.index ["member_variant_id"], name: "index_questions_on_member_variant_id"
   end
 
   create_table "solutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

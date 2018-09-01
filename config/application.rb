@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module ItemRepository
+module Mothership
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
@@ -28,6 +28,7 @@ module ItemRepository
       g.assets false
     end
 
+    config.active_job.queue_adapter = :delayed_job
   end
 
 end

@@ -1,20 +1,22 @@
 FactoryBot.define do
   factory :assessment do
 
-    identifier { SecureRandom.uuid }
+    member_version_stable_id { SecureRandom.hex(8) }
+    a15k_version_stable_id { SecureRandom.uuid }
+    a15k_version { 1 }
+
     association :member, factory: :member
     preview_html { Faker::Lorem.paragraphs }
-    visibility { :internal }
 
     transient do
       format { FactoryBot.create(:format) }
     end
 
     after(:create) do |asm, evaluator|
-      if asm.questions.none?
-        asm.questions << FactoryBot.create(:question,
-                                           assessment: asm,
-                                           format: evaluator.format)
+      if asm.variants.none?
+        asm.variants << FactoryBot.create(:variant,
+                                          assessment: asm,
+                                          format: evaluator.format)
       end
     end
 

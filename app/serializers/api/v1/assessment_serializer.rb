@@ -57,13 +57,13 @@ module Api
 
       end
 
-      property :questions,
+      property :variants,
                collection: true,
-               extend: QuestionSerializer,
-               class: Question do |doc|
+               extend: VariantSerializer,
+               class: Variant do |doc|
         doc.key :type, :array
         doc.items do
-          key :'$ref', :Question
+          key :'$ref', :Variant
         end
       end
 

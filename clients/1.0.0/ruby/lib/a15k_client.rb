@@ -19,6 +19,7 @@ require 'a15k_client/configuration'
 # Models
 require 'a15k_client/models/access_token'
 require 'a15k_client/models/assessment'
+require 'a15k_client/models/assessment_metadata'
 require 'a15k_client/models/error'
 require 'a15k_client/models/format'
 require 'a15k_client/models/inline_response_200'
@@ -28,9 +29,9 @@ require 'a15k_client/models/inline_response_200_3'
 require 'a15k_client/models/inline_response_200_4'
 require 'a15k_client/models/inline_response_200_5'
 require 'a15k_client/models/inline_response_200_6'
-require 'a15k_client/models/question'
 require 'a15k_client/models/solution'
 require 'a15k_client/models/user'
+require 'a15k_client/models/variant'
 
 # APIs
 require 'a15k_client/api/access_tokens_api'

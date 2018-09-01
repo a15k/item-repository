@@ -75,6 +75,55 @@ module A15kClient
       return data, status_code, headers
     end
 
+    # delete  a token
+    # 
+    # @param [Hash] opts the optional parameters
+    # @return [InlineResponse2006]
+    def delete_token(opts = {})
+      data, _status_code, _headers = delete_token_with_http_info(opts)
+      return data
+    end
+
+    # delete  a token
+    # 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(InlineResponse2006, Fixnum, Hash)>] InlineResponse2006 data, response status code and response headers
+    def delete_token_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "Calling API: AccessTokensApi.delete_token ..."
+      end
+      # resource path
+      local_var_path = "/access_tokens/{id}"
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['api_token']
+      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'InlineResponse2006')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccessTokensApi#delete_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Get all tokens
     # List all known tokens
     # @param [Hash] opts the optional parameters

@@ -44,6 +44,17 @@ describe 'AccessTokensApi' do
     end
   end
 
+  # unit tests for delete_token
+  # delete  a token
+  # 
+  # @param [Hash] opts the optional parameters
+  # @return [InlineResponse2006]
+  describe 'delete_token test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_tokens
   # Get all tokens
   # List all known tokens

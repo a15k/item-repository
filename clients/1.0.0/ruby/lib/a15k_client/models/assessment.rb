@@ -26,35 +26,13 @@ module A15kClient
     # The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier
     attr_accessor :version
 
-    # If the assessment may be viewed by the public, or only by other a15k members.  Defaults to \"internal\"
-    attr_accessor :visibility
-
     # If provided, will be used to generate a preview on the a15k website
     attr_accessor :preview_html
 
-    attr_accessor :questions
+    attr_accessor :metadata
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :variants
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -63,9 +41,9 @@ module A15kClient
         :'created_at' => :'created_at',
         :'identifier' => :'identifier',
         :'version' => :'version',
-        :'visibility' => :'visibility',
         :'preview_html' => :'preview_html',
-        :'questions' => :'questions'
+        :'metadata' => :'metadata',
+        :'variants' => :'variants'
       }
     end
 
@@ -76,9 +54,9 @@ module A15kClient
         :'created_at' => :'String',
         :'identifier' => :'String',
         :'version' => :'String',
-        :'visibility' => :'String',
         :'preview_html' => :'String',
-        :'questions' => :'Array<Question>'
+        :'metadata' => :'AssessmentMetadata',
+        :'variants' => :'Array<Variant>'
       }
     end
 
@@ -106,17 +84,17 @@ module A15kClient
         self.version = attributes[:'version']
       end
 
-      if attributes.has_key?(:'visibility')
-        self.visibility = attributes[:'visibility']
-      end
-
       if attributes.has_key?(:'preview_html')
         self.preview_html = attributes[:'preview_html']
       end
 
-      if attributes.has_key?(:'questions')
-        if (value = attributes[:'questions']).is_a?(Array)
-          self.questions = value
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'variants')
+        if (value = attributes[:'variants']).is_a?(Array)
+          self.variants = value
         end
       end
 
@@ -138,10 +116,6 @@ module A15kClient
         invalid_properties.push("invalid value for 'version', version cannot be nil.")
       end
 
-      if @visibility.nil?
-        invalid_properties.push("invalid value for 'visibility', visibility cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -151,20 +125,7 @@ module A15kClient
       return false if @id.nil?
       return false if @created_at.nil?
       return false if @version.nil?
-      return false if @visibility.nil?
-      visibility_validator = EnumAttributeValidator.new('String', ["internal", "external"])
-      return false unless visibility_validator.valid?(@visibility)
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] visibility Object to be assigned
-    def visibility=(visibility)
-      validator = EnumAttributeValidator.new('String', ["internal", "external"])
-      unless validator.valid?(visibility)
-        fail ArgumentError, "invalid value for 'visibility', must be one of #{validator.allowable_values}."
-      end
-      @visibility = visibility
     end
 
     # Checks equality by comparing each attribute.
@@ -176,9 +137,9 @@ module A15kClient
           created_at == o.created_at &&
           identifier == o.identifier &&
           version == o.version &&
-          visibility == o.visibility &&
           preview_html == o.preview_html &&
-          questions == o.questions
+          metadata == o.metadata &&
+          variants == o.variants
     end
 
     # @see the `==` method
@@ -190,7 +151,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, identifier, version, visibility, preview_html, questions].hash
+      [id, created_at, identifier, version, preview_html, metadata, variants].hash
     end
 
     # Builds the object from hash

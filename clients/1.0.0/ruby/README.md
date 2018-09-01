@@ -84,6 +84,7 @@ All URIs are relative to *https://null/api/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *A15kClient::AccessTokensApi* | [**create_token**](docs/AccessTokensApi.md#create_token) | **POST** /access_tokens | create  a token
+*A15kClient::AccessTokensApi* | [**delete_token**](docs/AccessTokensApi.md#delete_token) | **DELETE** /access_tokens/{id} | delete  a token
 *A15kClient::AccessTokensApi* | [**get_tokens**](docs/AccessTokensApi.md#get_tokens) | **GET** /access_tokens | Get all tokens
 *A15kClient::AccessTokensApi* | [**update_token**](docs/AccessTokensApi.md#update_token) | **PUT** /access_tokens/{id} | update  a token
 *A15kClient::AssessmentsApi* | [**create_assessment**](docs/AssessmentsApi.md#create_assessment) | **POST** /assessments | create an assessment
@@ -101,6 +102,7 @@ Class | Method | HTTP request | Description
 
  - [A15kClient::AccessToken](docs/AccessToken.md)
  - [A15kClient::Assessment](docs/Assessment.md)
+ - [A15kClient::AssessmentMetadata](docs/AssessmentMetadata.md)
  - [A15kClient::Error](docs/Error.md)
  - [A15kClient::Format](docs/Format.md)
  - [A15kClient::InlineResponse200](docs/InlineResponse200.md)
@@ -110,9 +112,9 @@ Class | Method | HTTP request | Description
  - [A15kClient::InlineResponse2004](docs/InlineResponse2004.md)
  - [A15kClient::InlineResponse2005](docs/InlineResponse2005.md)
  - [A15kClient::InlineResponse2006](docs/InlineResponse2006.md)
- - [A15kClient::Question](docs/Question.md)
  - [A15kClient::Solution](docs/Solution.md)
  - [A15kClient::User](docs/User.md)
+ - [A15kClient::Variant](docs/Variant.md)
 
 
 ## Documentation for Authorization

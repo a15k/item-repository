@@ -6,6 +6,7 @@ FactoryBot.define do
 
     format
     content { Faker::Hacker.say_something_smart }
+    preview_html { Faker::Lorem.paragraphs.join("<br/>") }
 
     transient do
       solutions_count 1

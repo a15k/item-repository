@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "member_id", null: false
     t.integer "version", default: 1, null: false
     t.text "fingerprint", null: false
-    t.text "preview_html"
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_assessments_on_created_at"
     t.index ["fingerprint"], name: "index_assessments_on_fingerprint"
@@ -173,6 +172,7 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "format_id", null: false
     t.text "content", null: false
     t.text "variant_id"
+    t.text "preview_html"
     t.datetime "created_at", null: false
     t.index ["assessment_id"], name: "index_variants_on_assessment_id"
     t.index ["format_id"], name: "index_variants_on_format_id"

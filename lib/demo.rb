@@ -34,13 +34,16 @@ class Demo
     question = select_unused_question
     solutions = DATA['solutions'].sample(solutions_count)
     assessment = Assessment.create(
-      preview_html: Preview.new(question, solutions, solutions.sample).generate,
       member: member,
       metadata: {
         tags: DATA['tags'].sample(rand(1..4)),
       },
       variants: [
-        Variant.new(format_id: format_id, content: question)
+        Variant.new(
+          format_id: format_id,
+          content: question,
+          preview_html: Preview.new(question, solutions, solutions.sample).generate
+        )
       ]
     )
     assessment

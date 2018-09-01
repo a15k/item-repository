@@ -29,6 +29,30 @@ describe 'complete api flow', type: :api do
 
     # create a simple assessment using the newly created format
     assessments = A15kClient::AssessmentsApi.new
+
+    content = <<~EOC
+    A car drives at 60 mph for half an hour.  How far does it travel?
+
+    a) 120 miles
+    b) 30 miles
+    c) 60 miles
+
+    **answer: b**
+    EOC
+
+    preview_html = <<~EOS
+    <div>
+      <p>
+        A car drives at 60 mph for half an hour.  How far does it travel?
+      </p>
+      <ul>
+        <li>a) 120 miles</li>
+        <li>b) 30 miles</li>
+        <li>c) 60 miles</li>
+       </ul>
+    </div>
+    EOS
+
     assessment = assessments.create_assessment(
       format_id: format.id,
       identifier: 'driving-speed-distance', # must be a unique value
@@ -38,35 +62,16 @@ describe 'complete api flow', type: :api do
           solutions: [
             { format_id: format.id, content: "(60 mph)(0.5 hours) = 30 miles" }
           ],
-          content: <<~EOC
-          A car drives at 60 mph for half an hour.  How far does it travel?
-
-          a) 120 miles
-          b) 30 miles
-          c) 60 miles
-
-          **answer: b**
-          EOC
+          content: content,
+          preview_html: preview_html
         }
-      ],
-      preview_html: <<~EOS
-       <div>
-         <p>
-          A car drives at 60 mph for half an hour.  How far does it travel?
-         </p>
-         <ul>
-          <li>a) 120 miles</li>
-          <li>b) 30 miles</li>
-          <li>c) 60 miles</li>
-         </ul>
-       </div>
-      EOS
+      ]
     ).data
 
 
     fetched = assessments.get_assessment(assessment.id).data
     expect(fetched.variants[0].content).to include 'drives at 60 mph'
-    expect(fetched.preview_html).to include 'drives at 60 mph'
+    expect(fetched.variants[0].preview_html).to include 'drives at 60 mph'
   end
 
 end

@@ -33,6 +33,10 @@ module Api
       property :content,    type: :string,
                description: "The content of the variant. The formatting the the content is indicated by the assessment's linked format"
 
+      property :preview_html,
+               type: :string,
+               description: 'If provided, will be used to generate a preview on the a15k website'
+
       property :solutions, collection: true, extend: SolutionSerializer, class: Solution do |doc|
         doc.key :type, :array
         doc.items do

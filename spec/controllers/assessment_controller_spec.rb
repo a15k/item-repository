@@ -8,7 +8,7 @@ RSpec.describe AssessmentController, type: :controller do
     describe "GET preview" do
       it "renders the assessment preview html" do
         get :preview, params: { id: assessment.id }
-        expect(response.body).to include assessment.preview_html
+        expect(response.body).to include assessment.variants[0].preview_html
       end
     end
 end

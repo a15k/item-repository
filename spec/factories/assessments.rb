@@ -3,7 +3,6 @@ FactoryBot.define do
 
     identifier { SecureRandom.uuid }
     association :member, factory: :member
-    preview_html { Faker::Lorem.paragraphs }
 
     transient do
       format { FactoryBot.create(:format) }

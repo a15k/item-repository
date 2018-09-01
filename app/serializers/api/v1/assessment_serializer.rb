@@ -24,10 +24,6 @@ module Api
                type: :string,
                description: 'The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier'
 
-      property :preview_html,
-               type: :string,
-               description: 'If provided, will be used to generate a preview on the a15k website'
-
       property :created_at,
                type: :string,
                format: 'Date'

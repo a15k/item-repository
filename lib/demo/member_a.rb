@@ -33,6 +33,7 @@ module Demo2
           Variant.new(
             format_id: multiple_choice_format.id,
             content: question_content.to_json,
+            preview_html: MC_TEMPLATE.result(binding),
             solutions: [
               Solution.new(
                 format_id: plain_text_format.id,
@@ -42,7 +43,6 @@ module Demo2
             ]
           )
         ],
-        preview_html: MC_TEMPLATE.result(binding),
         member: member
       )
     end
@@ -61,6 +61,7 @@ module Demo2
           Variant.new(
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_json,
+            preview_html: FITB_TEMPLATE.result(binding),
             solutions: [
               Solution.new(
                 format_id: plain_text_format.id,
@@ -70,7 +71,6 @@ module Demo2
             ]
           )
         ],
-        preview_html: FITB_TEMPLATE.result(binding),
         member: member
       )
     end
@@ -89,6 +89,7 @@ module Demo2
           Variant.new(
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_json,
+            preview_html: SHORT_TEMPLATE.result(binding),
             solutions: [
               Solution.new(
                 format_id: plain_text_format.id,
@@ -98,7 +99,6 @@ module Demo2
             ]
           )
         ],
-        preview_html: SHORT_TEMPLATE.result(binding),
         member: member
       )
     end

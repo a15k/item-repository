@@ -1,7 +1,7 @@
 =begin
 #Assessment Network API
 
-#> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org. 
+#> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org.
 
 OpenAPI spec version: 1.0.0
 
@@ -13,13 +13,13 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module A15kClient
-  # The container for all of the content needed to present an assessment and to grade it. E.g. for a multiple-choice assessment, the question would contain the stem, the answer choices, and the correct choice would be flagged.  Assessments typically only have one question. Multiple questions are allowed to support generative assessments.  A generative assessment is a single assessment that has many variants, which are often randomly generated.  Typically, the author of a generative assessment uses a small amount of code to create many variants of the same question where all of the numbers change between variants. Because these variants are essentially the same one original question, we bundle them all under one Assessment. 
+  # The container for all of the content needed to present an assessment and to grade it. E.g. for a multiple-choice assessment, the question would contain the stem, the answer choices, and the correct choice would be flagged.  Assessments typically only have one question. Multiple questions are allowed to support generative assessments.  A generative assessment is a single assessment that has many variants, which are often randomly generated.  Typically, the author of a generative assessment uses a small amount of code to create many variants of the same question where all of the numbers change between variants. Because these variants are essentially the same one original question, we bundle them all under one Assessment.
   class Question
     # The uuid of a previously registered format
     attr_accessor :format_id
 
     # Identifies which variant of a generative item this question is. Only required for generative items.
-    attr_accessor :variant_id
+    attr_accessor :member_variant_id
 
     # The content of the question. The formatting the the content is indicated by the assessment's linked format
     attr_accessor :content
@@ -31,7 +31,7 @@ module A15kClient
     def self.attribute_map
       {
         :'format_id' => :'format_id',
-        :'variant_id' => :'variant_id',
+        :'member_variant_id' => :'member_variant_id',
         :'content' => :'content',
         :'solutions' => :'solutions'
       }
@@ -41,7 +41,7 @@ module A15kClient
     def self.swagger_types
       {
         :'format_id' => :'String',
-        :'variant_id' => :'String',
+        :'member_variant_id' => :'String',
         :'content' => :'String',
         :'solutions' => :'Array<Solution>'
       }
@@ -59,8 +59,8 @@ module A15kClient
         self.format_id = attributes[:'format_id']
       end
 
-      if attributes.has_key?(:'variant_id')
-        self.variant_id = attributes[:'variant_id']
+      if attributes.has_key?(:'member_variant_id')
+        self.member_variant_id = attributes[:'member_variant_id']
       end
 
       if attributes.has_key?(:'content')
@@ -104,7 +104,7 @@ module A15kClient
       return true if self.equal?(o)
       self.class == o.class &&
           format_id == o.format_id &&
-          variant_id == o.variant_id &&
+          member_variant_id == o.member_variant_id &&
           content == o.content &&
           solutions == o.solutions
     end
@@ -118,7 +118,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_id, variant_id, content, solutions].hash
+      [format_id, member_variant_id, content, solutions].hash
     end
 
     # Builds the object from hash

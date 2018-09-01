@@ -27,7 +27,7 @@ module Api
       property :format_id,  type: :string, format: :uuid,
                description: 'The uuid of a previously registered format'
 
-      property :member_variant_id, type: :string,
+      property :member_member_variant_id, type: :string,
                description: <<~EOS
                  A label identifying which variant of a generative item is provided here.
                  Not required; if given, must be unique among variants in this assessment.

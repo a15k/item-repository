@@ -5,7 +5,7 @@ class CreateVariants < ActiveRecord::Migration[5.1]
       t.belongs_to :format, type: :uuid, null: false, foreign_key: true
       t.text :content, null: false
       t.text :preview_html
-      t.text :member_variant_id, index: true
+      t.text :member_member_variant_id, index: true
       t.timestamp :created_at, null: false
     end
   end

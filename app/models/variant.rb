@@ -10,6 +10,6 @@ class Variant < ApplicationRecord
   validates :format, presence: true
 
   # If provided, should be unique within the assessment
-  validates :source_identifier, uniqueness: { scope: :assessment }, allow_blank: true
+  validates :member_variant_id, uniqueness: { scope: :assessment }, allow_blank: true
 
 end

@@ -31,7 +31,7 @@ describe 'complete api flow', type: :api do
     assessments = A15kClient::AssessmentsApi.new
     assessment = assessments.create_assessment(
       format_id: format.id,
-      identifier: 'driving-speed-distance', # must be a unique value
+      member_version_stable_id: 'driving-speed-distance', # must be a unique value
       variants: [
         {
           format_id: format.id,

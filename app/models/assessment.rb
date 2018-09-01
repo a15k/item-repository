@@ -14,7 +14,6 @@ class Assessment < ApplicationRecord
   # being sent to and from the metadata repository
   attr_accessor :metadata
 
-  before_validation :set_default_identifier, on: :create
   before_validation :set_version, on: :create
   before_validation :set_fingerprint
 
@@ -30,10 +29,6 @@ class Assessment < ApplicationRecord
   end
 
   protected
-
-  def set_default_identifier
-    self.identifier ||= SecureRandom.uuid
-  end
 
   def set_fingerprint
     self.fingerprint = digest

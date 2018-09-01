@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.string "identifier"
     t.uuid "member_id", null: false
     t.integer "version", default: 1, null: false
-    t.integer "visibility", limit: 2
     t.text "fingerprint", null: false
     t.text "preview_html"
     t.datetime "created_at", null: false
@@ -140,26 +139,15 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.index ["openstax_uid"], name: "index_openstax_accounts_groups_on_openstax_uid", unique: true
   end
 
-  create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "assessment_id", null: false
-    t.uuid "format_id", null: false
-    t.text "content", null: false
-    t.text "variant_id"
-    t.datetime "created_at", null: false
-    t.index ["assessment_id"], name: "index_questions_on_assessment_id"
-    t.index ["format_id"], name: "index_questions_on_format_id"
-    t.index ["variant_id"], name: "index_questions_on_variant_id"
-  end
-
   create_table "solutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "question_id", null: false
+    t.uuid "variant_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
     t.uuid "member_id", null: false
     t.datetime "created_at", null: false
     t.index ["format_id"], name: "index_solutions_on_format_id"
     t.index ["member_id"], name: "index_solutions_on_member_id"
-    t.index ["question_id"], name: "index_solutions_on_question_id"
+    t.index ["variant_id"], name: "index_solutions_on_variant_id"
   end
 
   create_table "translators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -180,16 +168,27 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.index ["member_id"], name: "index_users_on_member_id"
   end
 
+  create_table "variants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "assessment_id", null: false
+    t.uuid "format_id", null: false
+    t.text "content", null: false
+    t.text "variant_id"
+    t.datetime "created_at", null: false
+    t.index ["assessment_id"], name: "index_variants_on_assessment_id"
+    t.index ["format_id"], name: "index_variants_on_format_id"
+    t.index ["variant_id"], name: "index_variants_on_variant_id"
+  end
+
   add_foreign_key "access_tokens", "members"
   add_foreign_key "assessments", "members"
   add_foreign_key "assets", "members", column: "created_by_id"
   add_foreign_key "formats", "members", column: "created_by_id"
-  add_foreign_key "questions", "assessments"
-  add_foreign_key "questions", "formats"
   add_foreign_key "solutions", "formats"
   add_foreign_key "solutions", "members"
-  add_foreign_key "solutions", "questions"
+  add_foreign_key "solutions", "variants"
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
   add_foreign_key "users", "members"
+  add_foreign_key "variants", "assessments"
+  add_foreign_key "variants", "formats"
 end

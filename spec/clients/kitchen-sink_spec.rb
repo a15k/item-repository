@@ -32,7 +32,7 @@ describe 'complete api flow', type: :api do
     assessment = assessments.create_assessment(
       format_id: format.id,
       identifier: 'driving-speed-distance', # must be a unique value
-      questions: [
+      variants: [
         {
           format_id: format.id,
           solutions: [
@@ -65,7 +65,7 @@ describe 'complete api flow', type: :api do
 
 
     fetched = assessments.get_assessment(assessment.id).data
-    expect(fetched.questions[0].content).to include 'drives at 60 mph'
+    expect(fetched.variants[0].content).to include 'drives at 60 mph'
     expect(fetched.preview_html).to include 'drives at 60 mph'
   end
 

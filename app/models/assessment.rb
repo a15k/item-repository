@@ -2,7 +2,7 @@
 class Assessment < ApplicationRecord
 
   belongs_to :member
-  has_many :questions, inverse_of: :assessment,
+  has_many :variants, inverse_of: :assessment,
            after_add: :save_fingerprint, after_remove: :save_fingerprint
 
   has_many :other_versions,
@@ -25,7 +25,7 @@ class Assessment < ApplicationRecord
   after_commit :send_to_metadata_repo, on: :create
 
   def digest
-    Digest::MD5.hexdigest questions.map(&:content).sort.join
+    Digest::MD5.hexdigest variants.map(&:content).sort.join
   end
 
   protected

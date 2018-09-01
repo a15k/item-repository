@@ -29,8 +29,8 @@ module Demo2
       solution = Demo2::Utils.sentence
 
       Assessment.create(
-        questions: [
-          Question.new(
+        variants: [
+          Variant.new(
             format_id: multiple_choice_format.id,
             content: question_content.to_json,
             solutions: [
@@ -57,8 +57,8 @@ module Demo2
       solution = Faker::Lorem.word
 
       Assessment.create(
-        questions: [
-          Question.new(
+        variants: [
+          Variant.new(
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_json,
             solutions: [
@@ -85,8 +85,8 @@ module Demo2
       solution = Demo2::Utils.sentence
 
       Assessment.create(
-        questions: [
-          Question.new(
+        variants: [
+          Variant.new(
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_json,
             solutions: [

@@ -20,13 +20,13 @@ module A15kClient
 
     attr_accessor :created_at
 
-    # A member-controlled identifier that is shared between all versions of this assessment in the member's assessment repository (the source).
+    # A member-controlled identifier that is shared between all versions of this assessment in the member's assessment repository (the source).  If contributing a new version of a previous contribution, provide the source_identifier you provided for other versions or the a15k_identifier from those versions. 
     attr_accessor :source_identifier
 
     # A member-controlled value identifying this assessment's version in the member's assessment repository (the source).
     attr_accessor :source_version
 
-    # An a15k-provided UUID that is shared between all versions of this assessment within the network.
+    # An a15k-provided UUID that is shared between all versions of this assessment within the network. If contributing a new version of a previous contribution, provide this a15k_identifier or the source_identifier you provided for the other versions. 
     attr_accessor :a15k_identifier
 
     # An a15k-provided number identifying which version this assessment is.

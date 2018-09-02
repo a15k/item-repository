@@ -18,7 +18,11 @@ module Api
 
       property :source_identifier,
                type: :string,
-               description: "A member-controlled identifier that is shared between all versions of this assessment in the member's assessment repository (the source)."
+               description: <<~EOS
+                 A member-controlled identifier that is shared between all versions of this assessment in the member's assessment
+                 repository (the source).  If contributing a new version of a previous contribution, provide the source_identifier
+                 you provided for other versions or the a15k_identifier from those versions.
+               EOS
 
       property :source_version,
                type: :string,
@@ -27,7 +31,11 @@ module Api
       property :a15k_identifier,
                type: :string,
                format: :uuid,
-               description: "An a15k-provided UUID that is shared between all versions of this assessment within the network."
+               description: <<~EOS
+                 An a15k-provided UUID that is shared between all versions of this assessment within the network.
+                 If contributing a new version of a previous contribution, provide this a15k_identifier or the
+                 source_identifier you provided for the other versions.
+               EOS
 
       property :a15k_version,
                type: :integer,

@@ -49,7 +49,7 @@ PATH
   remote: clients/1.0.0/ruby
   specs:
     a15k_client (1.0.0)
-      json
+      json (~> 2.1, >= 2.1.0)
       typhoeus (~> 1.0, >= 1.0.1)
 
 GEM

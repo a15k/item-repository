@@ -13,18 +13,24 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module A15kClient
-  # The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants
+  # The umbrella record for all things related to an assessment.
   class Assessment
-    # A unique value that can be used to link the assessment back to the contributors copy
+    # A UUID for this specific assessment version
     attr_accessor :id
 
     attr_accessor :created_at
 
-    # An unique contributed-provided identifier that can be used to link the assessment back to the contributor's original version
-    attr_accessor :identifier
+    # A member-controlled identifier that is shared between all versions of this assessment in the member's assessment repository (the source).
+    attr_accessor :source_identifier
 
-    # The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier
-    attr_accessor :version
+    # A member-controlled value identifying this assessment's version in the member's assessment repository (the source).
+    attr_accessor :source_version
+
+    # An a15k-provided UUID that is shared between all versions of this assessment within the network.
+    attr_accessor :a15k_identifier
+
+    # An a15k-provided number identifying which version this assessment is.
+    attr_accessor :a15k_version
 
     attr_accessor :metadata
 
@@ -36,8 +42,10 @@ module A15kClient
       {
         :'id' => :'id',
         :'created_at' => :'created_at',
-        :'identifier' => :'identifier',
-        :'version' => :'version',
+        :'source_identifier' => :'source_identifier',
+        :'source_version' => :'source_version',
+        :'a15k_identifier' => :'a15k_identifier',
+        :'a15k_version' => :'a15k_version',
         :'metadata' => :'metadata',
         :'variants' => :'variants'
       }
@@ -48,8 +56,10 @@ module A15kClient
       {
         :'id' => :'String',
         :'created_at' => :'String',
-        :'identifier' => :'String',
-        :'version' => :'String',
+        :'source_identifier' => :'String',
+        :'source_version' => :'String',
+        :'a15k_identifier' => :'String',
+        :'a15k_version' => :'Integer',
         :'metadata' => :'AssessmentMetadata',
         :'variants' => :'Array<Variant>'
       }
@@ -71,12 +81,20 @@ module A15kClient
         self.created_at = attributes[:'created_at']
       end
 
-      if attributes.has_key?(:'identifier')
-        self.identifier = attributes[:'identifier']
+      if attributes.has_key?(:'source_identifier')
+        self.source_identifier = attributes[:'source_identifier']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'source_version')
+        self.source_version = attributes[:'source_version']
+      end
+
+      if attributes.has_key?(:'a15k_identifier')
+        self.a15k_identifier = attributes[:'a15k_identifier']
+      end
+
+      if attributes.has_key?(:'a15k_version')
+        self.a15k_version = attributes[:'a15k_version']
       end
 
       if attributes.has_key?(:'metadata')
@@ -103,8 +121,12 @@ module A15kClient
         invalid_properties.push("invalid value for 'created_at', created_at cannot be nil.")
       end
 
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+      if @a15k_identifier.nil?
+        invalid_properties.push("invalid value for 'a15k_identifier', a15k_identifier cannot be nil.")
+      end
+
+      if @a15k_version.nil?
+        invalid_properties.push("invalid value for 'a15k_version', a15k_version cannot be nil.")
       end
 
       return invalid_properties
@@ -115,7 +137,8 @@ module A15kClient
     def valid?
       return false if @id.nil?
       return false if @created_at.nil?
-      return false if @version.nil?
+      return false if @a15k_identifier.nil?
+      return false if @a15k_version.nil?
       return true
     end
 
@@ -126,8 +149,10 @@ module A15kClient
       self.class == o.class &&
           id == o.id &&
           created_at == o.created_at &&
-          identifier == o.identifier &&
-          version == o.version &&
+          source_identifier == o.source_identifier &&
+          source_version == o.source_version &&
+          a15k_identifier == o.a15k_identifier &&
+          a15k_version == o.a15k_version &&
           metadata == o.metadata &&
           variants == o.variants
     end
@@ -141,7 +166,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, identifier, version, metadata, variants].hash
+      [id, created_at, source_identifier, source_version, a15k_identifier, a15k_version, metadata, variants].hash
     end
 
     # Builds the object from hash

@@ -5,8 +5,8 @@ module Api
     class AssessmentSerializer < Serializer
 
       swagger_schema :Assessment do
-        key :description, "The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants"
-        key :required, [:id, :version, :content, :created_at]
+        key :description, "The umbrella record for all things related to an assessment."
+        key :required, [:id, :a15k_identifier, :a15k_version, :created_at]
         property :id,           type: :string, format: :uuid
         property :created_at,   type: :string, format: 'date-time'
       end
@@ -14,15 +14,24 @@ module Api
       property :id,
                type: :string,
                format: :uuid,
-               description: 'A unique value that can be used to link the assessment back to the contributors copy'
+               description: 'A UUID for this specific assessment version'
 
-      property :identifier,
+      property :source_identifier,
                type: :string,
-               description: "An unique contributed-provided identifier that can be used to link the assessment back to the contributor's original version"
+               description: "A member-controlled identifier that is shared between all versions of this assessment in the member's assessment repository (the source)."
 
-      property :version,
+      property :source_version,
                type: :string,
-               description: 'The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier'
+               description: "A member-controlled value identifying this assessment's version in the member's assessment repository (the source)."
+
+      property :a15k_identifier,
+               type: :string,
+               format: :uuid,
+               description: "An a15k-provided UUID that is shared between all versions of this assessment within the network."
+
+      property :a15k_version,
+               type: :integer,
+               description: "An a15k-provided number identifying which version this assessment is."
 
       property :created_at,
                type: :string,

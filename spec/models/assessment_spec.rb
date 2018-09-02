@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Assessment, type: :model do
   let(:member) { FactoryBot.create :member }
-  let(:assessment) { FactoryBot.create :assessment, member: member, identifier: '1234' }
+  let(:assessment) { FactoryBot.create :assessment, member: member, source_identifier: '1234' }
 
   it 'tracks versions' do
-    expect(assessment.version).to eq 1
-    other = FactoryBot.create :assessment, member: member, identifier: '1234'
-    expect(other.version).to eq 2
+    expect(assessment.a15k_version).to eq 1
+    other = FactoryBot.create :assessment, member: member, source_identifier: '1234'
+    expect(other.a15k_version).to eq 2
     versions = assessment.other_versions.reload
     expect(versions).not_to include assessment
     expect(versions).to include other
@@ -19,10 +19,19 @@ RSpec.describe Assessment, type: :model do
     expect(assessment.other_versions).to be_empty
   end
 
-  it 'disallows other members from making new versions' do
+  it 'allows a member to reuse another members source_identifier' do
     other_member = FactoryBot.create :member
     other = Assessment.new(
-      identifier: assessment.identifier,
+      source_identifier: assessment.source_identifier,
+      member: other_member
+    )
+    expect(other.save).to be true
+  end
+
+  it 'disallows other members from making new versions using a15k_identifier' do
+    other_member = FactoryBot.create :member
+    other = Assessment.new(
+      a15k_identifier: assessment.a15k_identifier,
       member: other_member
     )
     expect(other.other_versions.size).to eq 1

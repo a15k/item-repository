@@ -25,16 +25,18 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
   end
 
   create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "identifier"
+    t.string "source_identifier"
+    t.string "source_version"
+    t.uuid "a15k_identifier", null: false
+    t.integer "a15k_version", default: 1, null: false
     t.uuid "member_id", null: false
-    t.integer "version", default: 1, null: false
     t.text "fingerprint", null: false
     t.datetime "created_at", null: false
+    t.index ["a15k_identifier", "a15k_version"], name: "index_assessments_on_a15k_identifier_and_a15k_version", unique: true
     t.index ["created_at"], name: "index_assessments_on_created_at"
     t.index ["fingerprint"], name: "index_assessments_on_fingerprint"
-    t.index ["identifier", "version"], name: "index_assessments_on_identifier_and_version", unique: true
-    t.index ["identifier"], name: "index_assessments_on_identifier"
     t.index ["member_id"], name: "index_assessments_on_member_id"
+    t.index ["source_identifier", "member_id", "source_version"], name: "index_assessments_on_source_id_member_id_source_version", unique: true
   end
 
   create_table "assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

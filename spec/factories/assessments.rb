@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :assessment do
 
-    identifier { SecureRandom.uuid }
+    source_identifier { SecureRandom.hex(8) }
     association :member, factory: :member
 
     transient do

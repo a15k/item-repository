@@ -7,20 +7,10 @@ class Variant < ApplicationRecord
 
   validates :content, presence: true
   validates :assessment, presence: true
-  # the variant id may be left blank unless the assessment has multiple variants
-  validates :variant_id, uniqueness: { scope: :assessment }, allow_blank: true
-  validate :ensure_variant_id_present_for_generative
+  validates :source_identifier, uniqueness: { scope: :assessment }, allow_blank: true
 
   def other_variants
     assessment ? assessment.variants.without(self) : []
-  end
-
-  protected
-
-  def ensure_variant_id_present_for_generative
-    if other_variants.any? && variant_id.blank?
-      errors.add(:variant_id, 'must be present and unique when assessment is generative')
-    end
   end
 
 end

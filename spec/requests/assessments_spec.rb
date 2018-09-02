@@ -149,7 +149,7 @@ describe 'Assessments API', type: :request do
                  (1..10).map do |b|
                    {
                      format_id: format.id,
-                     variant_id: "#{a}-#{b}",
+                     source_identifier: "#{a}-#{b}",
                      content: <<~EOQ
                      <question>
                        What is the length of the hypotenuse for a right
@@ -174,9 +174,7 @@ describe 'Assessments API', type: :request do
                  { format_id: format.id, content: '2nd' },
                ]
              }.to_json, headers: headers
-        expect(response.status).to eq 422
-        expect(response_json['success']).to be false
-        expect(response_json['message']).to include 'Variants'
+        expect(response.status).to eq 200
     end
   end
 

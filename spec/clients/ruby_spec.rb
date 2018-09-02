@@ -35,7 +35,7 @@ describe 'Ruby client', type: :api do
         variants: 2.times.map{|question_index|
           {
             format_id: format.id,
-            variant_id: question_index.to_s,
+            source_identifier: question_index.to_s,
             content: {
               index: question_index,
               text: Faker::Lorem.paragraph

@@ -173,12 +173,12 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "assessment_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
-    t.text "variant_id"
+    t.text "source_identifier"
     t.text "preview_html"
     t.datetime "created_at", null: false
     t.index ["assessment_id"], name: "index_variants_on_assessment_id"
     t.index ["format_id"], name: "index_variants_on_format_id"
-    t.index ["variant_id"], name: "index_variants_on_variant_id"
+    t.index ["source_identifier"], name: "index_variants_on_source_identifier"
   end
 
   add_foreign_key "access_tokens", "members"

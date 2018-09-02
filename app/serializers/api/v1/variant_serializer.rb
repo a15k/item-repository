@@ -23,12 +23,14 @@ module Api
         EOS
       end
 
-      property :id, document: false
+      property :id,
+               description: 'A UUID for this variant'
+
       property :format_id,  type: :string, format: :uuid,
                description: 'The uuid of a previously registered format'
 
-      property :variant_id, type: :string,
-               description: 'Identifies which variant of a generative item this question is. Only required for generative items.'
+      property :source_identifier, type: :string,
+               description: 'A member-provided identifier for this variant; useful if multiple variants are contributed (for a generative assessment) but not required.'
 
       property :content,    type: :string,
                description: "The content of the variant. The formatting the the content is indicated by the assessment's linked format"

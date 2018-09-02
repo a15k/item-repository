@@ -46,4 +46,29 @@ RSpec.describe Assessment, type: :model do
     expect(dupe.errors.full_messages).to include 'Fingerprint has already been taken'
   end
 
+  it 'requires source_identifier if source_version set' do
+    assessment = FactoryBot.build :assessment, source_version: "blah", source_identifier: nil
+    expect(assessment).not_to be_valid
+    expect(assessment.errors[:source_identifier]).to include("can't be blank")
+  end
+
+  it 'requires source version and identifier to be unique in a member' do
+    assessment = FactoryBot.create :assessment, source_version: "1", source_identifier: "1"
+    other_assessment = FactoryBot.build :assessment, source_version: "1", source_identifier: "1", member: assessment.member
+    expect(other_assessment).not_to be_valid
+    expect(other_assessment.errors[:source_version]).to include(/taken/)
+  end
+
+  it 'allows source version and identifier to be repeated across members' do
+    assessment = FactoryBot.create :assessment, source_version: "1", source_identifier: "1"
+    other_assessment = FactoryBot.build :assessment, source_version: "1", source_identifier: "1"
+    expect(other_assessment).to be_valid
+  end
+
+  it 'requires a prior version if a15k_identifier set before create' do
+    assessment = Assessment.create(a15k_identifier: "howdy")
+    expect(assessment).not_to be_valid
+    expect(assessment.errors[:a15k_identifier]).to include(/can only be given when a prior version/)
+  end
+
 end

@@ -22,7 +22,7 @@ class Assessment < ApplicationRecord
   validates :a15k_version, presence: true, uniqueness: { scope: :a15k_identifier }
   validates :source_identifier, presence: true, if: :source_version?
   validates :source_version, uniqueness: { scope: [:member_id, :source_identifier], allow_blank: true }
-  validates :fingerprint, uniqueness: true # { scope: :member_id } # TODO decide if should be scoped
+  validates :fingerprint, uniqueness: true
   validate :ensure_member_matches_other_versions
 
   after_commit :send_to_metadata_repo, on: :create

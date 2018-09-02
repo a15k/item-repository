@@ -18,8 +18,8 @@ module A15kClient
     # The uuid of a previously registered format
     attr_accessor :format_id
 
-    # Identifies which variant of a generative item this question is. Only required for generative items.
-    attr_accessor :variant_id
+    # A member-provided identifier for this variant; useful if multiple variants are contributed (for a generative assessment) but not required.
+    attr_accessor :source_identifier
 
     # The content of the variant. The formatting the the content is indicated by the assessment's linked format
     attr_accessor :content
@@ -34,7 +34,7 @@ module A15kClient
     def self.attribute_map
       {
         :'format_id' => :'format_id',
-        :'variant_id' => :'variant_id',
+        :'source_identifier' => :'source_identifier',
         :'content' => :'content',
         :'preview_html' => :'preview_html',
         :'solutions' => :'solutions'
@@ -45,7 +45,7 @@ module A15kClient
     def self.swagger_types
       {
         :'format_id' => :'String',
-        :'variant_id' => :'String',
+        :'source_identifier' => :'String',
         :'content' => :'String',
         :'preview_html' => :'String',
         :'solutions' => :'Array<Solution>'
@@ -64,8 +64,8 @@ module A15kClient
         self.format_id = attributes[:'format_id']
       end
 
-      if attributes.has_key?(:'variant_id')
-        self.variant_id = attributes[:'variant_id']
+      if attributes.has_key?(:'source_identifier')
+        self.source_identifier = attributes[:'source_identifier']
       end
 
       if attributes.has_key?(:'content')
@@ -113,7 +113,7 @@ module A15kClient
       return true if self.equal?(o)
       self.class == o.class &&
           format_id == o.format_id &&
-          variant_id == o.variant_id &&
+          source_identifier == o.source_identifier &&
           content == o.content &&
           preview_html == o.preview_html &&
           solutions == o.solutions
@@ -128,7 +128,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_id, variant_id, content, preview_html, solutions].hash
+      [format_id, source_identifier, content, preview_html, solutions].hash
     end
 
     # Builds the object from hash

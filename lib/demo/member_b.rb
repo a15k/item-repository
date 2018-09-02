@@ -23,10 +23,9 @@ module Demo2
             content: Demo2::Utils.sentence,
             correct: ii == correct_index ? true : false
           }
-        end
+        end,
+        solution: Demo2::Utils.sentence
       }
-
-      solution = Demo2::Utils.sentence
 
       Assessment.create(
         variants: [
@@ -34,13 +33,6 @@ module Demo2
             format_id: multiple_choice_format.id,
             content: question_content.to_xml(root: "question"),
             preview_html: MC_TEMPLATE.result(binding),
-            solutions: [
-              Solution.new(
-                format_id: plain_text_format.id,
-                content: solution,
-                member: member
-              )
-            ]
           )
         ],
         member: member
@@ -52,9 +44,8 @@ module Demo2
     def generate_fill_in_the_blank(keyword: nil, tags: [])
       question_content = {
         stimulus: Demo2::Utils.sentence(keyword: keyword || PHYSICS_KEYWORDS.sample, blank: true),
+        solution: Faker::Lorem.word
       }
-
-      solution = Faker::Lorem.word
 
       Assessment.create(
         variants: [
@@ -62,13 +53,6 @@ module Demo2
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_xml(root: "question"),
             preview_html: FITB_TEMPLATE.result(binding),
-            solutions: [
-              Solution.new(
-                format_id: plain_text_format.id,
-                content: solution,
-                member: member
-              )
-            ]
           )
         ],
         member: member
@@ -80,9 +64,8 @@ module Demo2
     def generate_short_answer(keyword: nil, tags: [])
       question_content = {
         stimulus: Demo2::Utils.sentence(keyword: keyword || PHYSICS_KEYWORDS.sample, question: true),
+        solution: Demo2::Utils.sentence
       }
-
-      solution = Demo2::Utils.sentence
 
       Assessment.create(
         variants: [
@@ -90,13 +73,6 @@ module Demo2
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_xml(root: "question"),
             preview_html: SHORT_TEMPLATE.result(binding),
-            solutions: [
-              Solution.new(
-                format_id: plain_text_format.id,
-                content: solution,
-                member: member
-              )
-            ]
           )
         ],
         member: member

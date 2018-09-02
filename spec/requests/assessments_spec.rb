@@ -66,15 +66,6 @@ describe 'Assessments API', type: :request do
           {
             format_id: format.id,
             content: '1234 this is question content',
-            solutions: [
-              {
-                format_id: format.id,
-                content: '1234 this is question solution 1'
-              }, {
-                format_id: format.id,
-                content: '1234 this is question solution 2'
-              }
-            ]
           }
         ]
       }
@@ -86,7 +77,6 @@ describe 'Assessments API', type: :request do
         expect(response).to be_ok
         expect(response_json['success']).to be true
         expect(response_data['variants'].length).to eq 1
-        expect(response_data['variants'][0]['solutions'].length).to eq 2
       }.to change {
         Assessment.count
       }.by 1

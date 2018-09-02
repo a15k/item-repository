@@ -39,12 +39,13 @@ module Api
                type: :string,
                description: 'If provided, will be used to generate a preview on the a15k website'
 
-      property :solutions, collection: true, extend: SolutionSerializer, class: Solution do |doc|
-        doc.key :type, :array
-        doc.items do
-          key :'$ref', :Solution
-        end
-      end
+      # Commenting out until we figure out how we want to deal with community solutions
+      # property :solutions, collection: true, extend: SolutionSerializer, class: Solution do |doc|
+      #   doc.key :type, :array
+      #   doc.items do
+      #     key :'$ref', :Solution
+      #   end
+      # end
 
     end
   end

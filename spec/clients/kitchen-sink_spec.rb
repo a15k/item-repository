@@ -59,9 +59,6 @@ describe 'complete api flow', type: :api do
       variants: [
         {
           format_id: format.id,
-          solutions: [
-            { format_id: format.id, content: "(60 mph)(0.5 hours) = 30 miles" }
-          ],
           content: content,
           preview_html: preview_html
         }

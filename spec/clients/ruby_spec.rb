@@ -40,14 +40,6 @@ describe 'Ruby client', type: :api do
               index: question_index,
               text: Faker::Lorem.paragraph
             }.to_json,
-            solutions: [
-              {
-                format_id: format.id,
-                content: {
-                  text: Faker::Lorem.paragraph
-                }.to_json,
-              }
-            ]
           }
         }
       )
@@ -56,7 +48,6 @@ describe 'Ruby client', type: :api do
       assessment = response.data
       expect(assessment.source_identifier).to eq('TEST-Test-AND-TEST-MORE')
       expect(assessment.variants.length).to eq(2)
-      expect(assessment.variants[0].solutions.length).to eq(1)
     end
 
   end

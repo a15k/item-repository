@@ -187,10 +187,10 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
   add_foreign_key "formats", "members", column: "created_by_id"
   add_foreign_key "solutions", "formats"
   add_foreign_key "solutions", "members"
-  add_foreign_key "solutions", "variants"
+  add_foreign_key "solutions", "variants", on_delete: :cascade
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
   add_foreign_key "users", "members"
-  add_foreign_key "variants", "assessments"
+  add_foreign_key "variants", "assessments", on_delete: :cascade
   add_foreign_key "variants", "formats"
 end

@@ -71,4 +71,16 @@ RSpec.describe Assessment, type: :model do
     expect(assessment.errors[:a15k_identifier]).to include(/can only be given when a prior version/)
   end
 
+  it 'requires that a flag be set to enable deletion' do
+    assessment = FactoryBot.create(:assessment)
+    assessment.destroy
+    expect(assessment).not_to be_destroyed
+    expect(Assessment.count).to eq 1
+
+    assessment.enable_destroy = true
+    assessment.destroy
+    expect(assessment).to be_destroyed
+    expect(Assessment.count).to eq 0
+  end
+
 end

@@ -3,7 +3,8 @@ class Assessment < ApplicationRecord
 
   belongs_to :member
   has_many :variants, inverse_of: :assessment,
-           after_add: :save_fingerprint, after_remove: :save_fingerprint
+           after_add: :save_fingerprint, after_remove: :save_fingerprint,
+           dependent: :destroy
 
   has_many :other_versions,
            -> (a) { where.not(id: a.id) },
@@ -30,6 +31,10 @@ class Assessment < ApplicationRecord
   def digest
     Digest::MD5.hexdigest variants.map(&:content).sort.join
   end
+
+  # Put a safety on assessment destruction
+  attr_accessor :enable_destroy
+  before_destroy :abort_unless_destroy_enabled
 
   protected
 
@@ -77,6 +82,10 @@ class Assessment < ApplicationRecord
     if other_versions.any? && member_id != other_versions.last.member_id
       errors.add(:member, 'must be the same as other versions')
     end
+  end
+
+  def abort_unless_destroy_enabled
+    throw(:abort) unless enable_destroy
   end
 
   def send_to_metadata_repo

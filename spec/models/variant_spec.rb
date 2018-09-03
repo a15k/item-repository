@@ -19,4 +19,17 @@ RSpec.describe Variant, type: :model do
     assessment.variants << second
     expect(second).to be_valid
   end
+
+  it 'can only be destroyed via the assessment' do
+    variant = FactoryBot.create(:variant)
+
+    variant.destroy
+    expect(Variant.count).to eq 1
+
+    assessment = variant.assessment
+    assessment.enable_destroy = true
+    assessment.destroy
+
+    expect(Variant.count).to eq 0
+  end
 end

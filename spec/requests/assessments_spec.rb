@@ -156,7 +156,7 @@ describe 'Assessments API', type: :request do
       }.by 200
     end
 
-    it 'errors when variants are not correct' do
+    it 'accepts variants without source_identifiers' do
         post "/api/v1/assessments.json", params: {
                source_identifier: SecureRandom.uuid,
                variants: [

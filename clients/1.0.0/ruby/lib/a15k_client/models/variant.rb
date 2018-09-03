@@ -27,8 +27,6 @@ module A15kClient
     # If provided, will be used to generate a preview on the a15k website
     attr_accessor :preview_html
 
-    attr_accessor :solutions
-
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -36,8 +34,7 @@ module A15kClient
         :'format_id' => :'format_id',
         :'source_identifier' => :'source_identifier',
         :'content' => :'content',
-        :'preview_html' => :'preview_html',
-        :'solutions' => :'solutions'
+        :'preview_html' => :'preview_html'
       }
     end
 
@@ -47,8 +44,7 @@ module A15kClient
         :'format_id' => :'String',
         :'source_identifier' => :'String',
         :'content' => :'String',
-        :'preview_html' => :'String',
-        :'solutions' => :'Array<Solution>'
+        :'preview_html' => :'String'
       }
     end
 
@@ -74,12 +70,6 @@ module A15kClient
 
       if attributes.has_key?(:'preview_html')
         self.preview_html = attributes[:'preview_html']
-      end
-
-      if attributes.has_key?(:'solutions')
-        if (value = attributes[:'solutions']).is_a?(Array)
-          self.solutions = value
-        end
       end
 
     end
@@ -115,8 +105,7 @@ module A15kClient
           format_id == o.format_id &&
           source_identifier == o.source_identifier &&
           content == o.content &&
-          preview_html == o.preview_html &&
-          solutions == o.solutions
+          preview_html == o.preview_html
     end
 
     # @see the `==` method
@@ -128,7 +117,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [format_id, source_identifier, content, preview_html, solutions].hash
+      [format_id, source_identifier, content, preview_html].hash
     end
 
     # Builds the object from hash

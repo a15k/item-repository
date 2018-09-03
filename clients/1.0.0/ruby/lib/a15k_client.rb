@@ -29,7 +29,6 @@ require 'a15k_client/models/inline_response_200_3'
 require 'a15k_client/models/inline_response_200_4'
 require 'a15k_client/models/inline_response_200_5'
 require 'a15k_client/models/inline_response_200_6'
-require 'a15k_client/models/solution'
 require 'a15k_client/models/user'
 require 'a15k_client/models/variant'
 

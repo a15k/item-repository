@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Assessment <%= @assessment.id %></title>
+    <title>Assessment <%= @assessment_id %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'preview' %>
   </head>
   <body>
-    <%=raw @assessment.preview_html %>
+    <%=raw @preview_html %>
   </body>
 </html>

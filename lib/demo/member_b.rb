@@ -23,26 +23,18 @@ module Demo2
             content: Demo2::Utils.sentence,
             correct: ii == correct_index ? true : false
           }
-        end
+        end,
+        solution: Demo2::Utils.sentence
       }
 
-      solution = Demo2::Utils.sentence
-
       Assessment.create(
-        questions: [
-          Question.new(
+        variants: [
+          Variant.new(
             format_id: multiple_choice_format.id,
             content: question_content.to_xml(root: "question"),
-            solutions: [
-              Solution.new(
-                format_id: plain_text_format.id,
-                content: solution,
-                member: member
-              )
-            ]
+            preview_html: MC_TEMPLATE.result(binding),
           )
         ],
-        preview_html: MC_TEMPLATE.result(binding),
         member: member
       )
     end
@@ -52,25 +44,17 @@ module Demo2
     def generate_fill_in_the_blank(keyword: nil, tags: [])
       question_content = {
         stimulus: Demo2::Utils.sentence(keyword: keyword || PHYSICS_KEYWORDS.sample, blank: true),
+        solution: Faker::Lorem.word
       }
 
-      solution = Faker::Lorem.word
-
       Assessment.create(
-        questions: [
-          Question.new(
+        variants: [
+          Variant.new(
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_xml(root: "question"),
-            solutions: [
-              Solution.new(
-                format_id: plain_text_format.id,
-                content: solution,
-                member: member
-              )
-            ]
+            preview_html: FITB_TEMPLATE.result(binding),
           )
         ],
-        preview_html: FITB_TEMPLATE.result(binding),
         member: member
       )
     end
@@ -80,25 +64,17 @@ module Demo2
     def generate_short_answer(keyword: nil, tags: [])
       question_content = {
         stimulus: Demo2::Utils.sentence(keyword: keyword || PHYSICS_KEYWORDS.sample, question: true),
+        solution: Demo2::Utils.sentence
       }
 
-      solution = Demo2::Utils.sentence
-
       Assessment.create(
-        questions: [
-          Question.new(
+        variants: [
+          Variant.new(
             format_id: fill_in_the_blank_format.id,
             content: question_content.to_xml(root: "question"),
-            solutions: [
-              Solution.new(
-                format_id: plain_text_format.id,
-                content: solution,
-                member: member
-              )
-            ]
+            preview_html: SHORT_TEMPLATE.result(binding),
           )
         ],
-        preview_html: SHORT_TEMPLATE.result(binding),
         member: member
       )
     end

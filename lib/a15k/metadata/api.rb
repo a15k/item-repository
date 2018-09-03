@@ -19,7 +19,7 @@ module A15K::Metadata
         content: content_for_assessment(assessment)
       )
       resource.relationships.format = JsonApi::Format.new(
-        id: assessment.questions.first.format.id,
+        id: assessment.variants.first.format.id,
       )
       resource.relationships.application = JsonApi::Application.new(
         id: Rails.application.secrets.metadata_api[:application_uuid]
@@ -48,7 +48,7 @@ module A15K::Metadata
         value: assessment.metadata,
       )
       metadata.relationships.format = JsonApi::Format.new(
-        id: assessment.questions.first.format.id,
+        id: assessment.variants.first.format.id,
       )
       metadata.save
       ApiResult.new(metadata.id, metadata.last_result_set.errors)

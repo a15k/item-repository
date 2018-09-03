@@ -17,9 +17,6 @@ module A15kClient
   class AccessToken
     attr_accessor :id
 
-    # Is the token de-activated and cannot be used
-    attr_accessor :is_revoked
-
     # The name assigned to the token so it can be identified
     attr_accessor :name
 
@@ -30,7 +27,6 @@ module A15kClient
     def self.attribute_map
       {
         :'id' => :'id',
-        :'is_revoked' => :'is_revoked',
         :'name' => :'name',
         :'token' => :'token'
       }
@@ -40,7 +36,6 @@ module A15kClient
     def self.swagger_types
       {
         :'id' => :'String',
-        :'is_revoked' => :'BOOLEAN',
         :'name' => :'String',
         :'token' => :'String'
       }
@@ -56,10 +51,6 @@ module A15kClient
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'is_revoked')
-        self.is_revoked = attributes[:'is_revoked']
       end
 
       if attributes.has_key?(:'name')
@@ -101,7 +92,6 @@ module A15kClient
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          is_revoked == o.is_revoked &&
           name == o.name &&
           token == o.token
     end
@@ -115,7 +105,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, is_revoked, name, token].hash
+      [id, name, token].hash
     end
 
     # Builds the object from hash

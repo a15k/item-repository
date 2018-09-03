@@ -24,7 +24,7 @@ class Demo
   def select_unused_question
     question = DATA['questions'].sample
     DATA['questions'].length.times do
-      return question unless Question.where(content: question).exists?
+      return question unless Variant.where(content: question).exists?
       question = DATA['questions'].sample
     end
     raise("Failed to find question that wasn't in use")
@@ -34,13 +34,16 @@ class Demo
     question = select_unused_question
     solutions = DATA['solutions'].sample(solutions_count)
     assessment = Assessment.create(
-      preview_html: Preview.new(question, solutions, solutions.sample).generate,
       member: member,
       metadata: {
         tags: DATA['tags'].sample(rand(1..4)),
       },
-      questions: [
-        Question.new(format_id: format_id, content: question)
+      variants: [
+        Variant.new(
+          format_id: format_id,
+          content: question,
+          preview_html: Preview.new(question, solutions, solutions.sample).generate
+        )
       ]
     )
     assessment

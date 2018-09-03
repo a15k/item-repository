@@ -13,59 +13,41 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module A15kClient
-  # The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants
+  # The umbrella record for all things related to an assessment.
   class Assessment
-    # A unique value that can be used to link the assessment back to the contributors copy
+    # A UUID for this specific assessment version
     attr_accessor :id
 
     attr_accessor :created_at
 
-    # An unique contributed-provided identifier that can be used to link the assessment back to the contributor's original version
-    attr_accessor :identifier
+    # A member-controlled identifier that is shared between all versions of this assessment in the member's assessment repository (the source).  If contributing a new version of a previous contribution, provide the source_identifier you provided for other versions or the a15k_identifier from those versions. 
+    attr_accessor :source_identifier
 
-    # The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier
-    attr_accessor :version
+    # A member-controlled value identifying this assessment's version in the member's assessment repository (the source).
+    attr_accessor :source_version
 
-    # If the assessment may be viewed by the public, or only by other a15k members.  Defaults to \"internal\"
-    attr_accessor :visibility
+    # An a15k-provided UUID that is shared between all versions of this assessment within the network. If contributing a new version of a previous contribution, provide this a15k_identifier or the source_identifier you provided for the other versions. 
+    attr_accessor :a15k_identifier
 
-    # If provided, will be used to generate a preview on the a15k website
-    attr_accessor :preview_html
+    # An a15k-provided number identifying which version this assessment is.
+    attr_accessor :a15k_version
 
-    attr_accessor :questions
+    attr_accessor :metadata
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :variants
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'created_at' => :'created_at',
-        :'identifier' => :'identifier',
-        :'version' => :'version',
-        :'visibility' => :'visibility',
-        :'preview_html' => :'preview_html',
-        :'questions' => :'questions'
+        :'source_identifier' => :'source_identifier',
+        :'source_version' => :'source_version',
+        :'a15k_identifier' => :'a15k_identifier',
+        :'a15k_version' => :'a15k_version',
+        :'metadata' => :'metadata',
+        :'variants' => :'variants'
       }
     end
 
@@ -74,11 +56,12 @@ module A15kClient
       {
         :'id' => :'String',
         :'created_at' => :'String',
-        :'identifier' => :'String',
-        :'version' => :'String',
-        :'visibility' => :'String',
-        :'preview_html' => :'String',
-        :'questions' => :'Array<Question>'
+        :'source_identifier' => :'String',
+        :'source_version' => :'String',
+        :'a15k_identifier' => :'String',
+        :'a15k_version' => :'Integer',
+        :'metadata' => :'AssessmentMetadata',
+        :'variants' => :'Array<Variant>'
       }
     end
 
@@ -98,25 +81,29 @@ module A15kClient
         self.created_at = attributes[:'created_at']
       end
 
-      if attributes.has_key?(:'identifier')
-        self.identifier = attributes[:'identifier']
+      if attributes.has_key?(:'source_identifier')
+        self.source_identifier = attributes[:'source_identifier']
       end
 
-      if attributes.has_key?(:'version')
-        self.version = attributes[:'version']
+      if attributes.has_key?(:'source_version')
+        self.source_version = attributes[:'source_version']
       end
 
-      if attributes.has_key?(:'visibility')
-        self.visibility = attributes[:'visibility']
+      if attributes.has_key?(:'a15k_identifier')
+        self.a15k_identifier = attributes[:'a15k_identifier']
       end
 
-      if attributes.has_key?(:'preview_html')
-        self.preview_html = attributes[:'preview_html']
+      if attributes.has_key?(:'a15k_version')
+        self.a15k_version = attributes[:'a15k_version']
       end
 
-      if attributes.has_key?(:'questions')
-        if (value = attributes[:'questions']).is_a?(Array)
-          self.questions = value
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'variants')
+        if (value = attributes[:'variants']).is_a?(Array)
+          self.variants = value
         end
       end
 
@@ -134,12 +121,12 @@ module A15kClient
         invalid_properties.push("invalid value for 'created_at', created_at cannot be nil.")
       end
 
-      if @version.nil?
-        invalid_properties.push("invalid value for 'version', version cannot be nil.")
+      if @a15k_identifier.nil?
+        invalid_properties.push("invalid value for 'a15k_identifier', a15k_identifier cannot be nil.")
       end
 
-      if @visibility.nil?
-        invalid_properties.push("invalid value for 'visibility', visibility cannot be nil.")
+      if @a15k_version.nil?
+        invalid_properties.push("invalid value for 'a15k_version', a15k_version cannot be nil.")
       end
 
       return invalid_properties
@@ -150,21 +137,9 @@ module A15kClient
     def valid?
       return false if @id.nil?
       return false if @created_at.nil?
-      return false if @version.nil?
-      return false if @visibility.nil?
-      visibility_validator = EnumAttributeValidator.new('String', ["internal", "external"])
-      return false unless visibility_validator.valid?(@visibility)
+      return false if @a15k_identifier.nil?
+      return false if @a15k_version.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] visibility Object to be assigned
-    def visibility=(visibility)
-      validator = EnumAttributeValidator.new('String', ["internal", "external"])
-      unless validator.valid?(visibility)
-        fail ArgumentError, "invalid value for 'visibility', must be one of #{validator.allowable_values}."
-      end
-      @visibility = visibility
     end
 
     # Checks equality by comparing each attribute.
@@ -174,11 +149,12 @@ module A15kClient
       self.class == o.class &&
           id == o.id &&
           created_at == o.created_at &&
-          identifier == o.identifier &&
-          version == o.version &&
-          visibility == o.visibility &&
-          preview_html == o.preview_html &&
-          questions == o.questions
+          source_identifier == o.source_identifier &&
+          source_version == o.source_version &&
+          a15k_identifier == o.a15k_identifier &&
+          a15k_version == o.a15k_version &&
+          metadata == o.metadata &&
+          variants == o.variants
     end
 
     # @see the `==` method
@@ -190,7 +166,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, created_at, identifier, version, visibility, preview_html, questions].hash
+      [id, created_at, source_identifier, source_version, a15k_identifier, a15k_version, metadata, variants].hash
     end
 
     # Builds the object from hash

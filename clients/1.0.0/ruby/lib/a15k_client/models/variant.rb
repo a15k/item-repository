@@ -13,28 +13,38 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module A15kClient
-  # A walkthrough of how to answer the question. This is often some prose combined with math formulas or diagrams. A Solution is not the answer to a question (e.g. it isn't the (a), (b), and (c) answers of a multiple choice question.)  Solutions are recommended but not required when contributing assessments. A dditionally, other members may contribute solutions to your assessments without involving you. 
-  class Solution
-    # A walkthrough of how to answer the question.  The formatting the the content is indicated by the assessment's linked format
-    attr_accessor :content
-
+  # The container for all of the content needed to present an assessment and to grade it. E.g. for a multiple-choice assessment, the variant would contain the stem, the answer choices, and the correct choice would be flagged.  Assessments typically only have one variant. Multiple variantss are allowed to support generative assessments.  A generative assessment is a single assessment that has many variants, which are often randomly generated.  Typically, the author of a generative assessment uses a small amount of code to create many variants of the same question where all of the numbers change between variants. Because these variants are essentially the same one original question, we bundle them all under one Assessment. 
+  class Variant
     # The uuid of a previously registered format
     attr_accessor :format_id
+
+    # A member-provided identifier for this variant; useful if multiple variants are contributed (for a generative assessment) but not required.
+    attr_accessor :source_identifier
+
+    # The content of the variant. The formatting the the content is indicated by the assessment's linked format
+    attr_accessor :content
+
+    # If provided, will be used to generate a preview on the a15k website
+    attr_accessor :preview_html
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'format_id' => :'format_id',
+        :'source_identifier' => :'source_identifier',
         :'content' => :'content',
-        :'format_id' => :'format_id'
+        :'preview_html' => :'preview_html'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'format_id' => :'String',
+        :'source_identifier' => :'String',
         :'content' => :'String',
-        :'format_id' => :'String'
+        :'preview_html' => :'String'
       }
     end
 
@@ -46,12 +56,20 @@ module A15kClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
+      if attributes.has_key?(:'format_id')
+        self.format_id = attributes[:'format_id']
+      end
+
+      if attributes.has_key?(:'source_identifier')
+        self.source_identifier = attributes[:'source_identifier']
+      end
+
       if attributes.has_key?(:'content')
         self.content = attributes[:'content']
       end
 
-      if attributes.has_key?(:'format_id')
-        self.format_id = attributes[:'format_id']
+      if attributes.has_key?(:'preview_html')
+        self.preview_html = attributes[:'preview_html']
       end
 
     end
@@ -60,12 +78,12 @@ module A15kClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @content.nil?
-        invalid_properties.push("invalid value for 'content', content cannot be nil.")
-      end
-
       if @format_id.nil?
         invalid_properties.push("invalid value for 'format_id', format_id cannot be nil.")
+      end
+
+      if @content.nil?
+        invalid_properties.push("invalid value for 'content', content cannot be nil.")
       end
 
       return invalid_properties
@@ -74,8 +92,8 @@ module A15kClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @content.nil?
       return false if @format_id.nil?
+      return false if @content.nil?
       return true
     end
 
@@ -84,8 +102,10 @@ module A15kClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          format_id == o.format_id &&
+          source_identifier == o.source_identifier &&
           content == o.content &&
-          format_id == o.format_id
+          preview_html == o.preview_html
     end
 
     # @see the `==` method
@@ -97,7 +117,7 @@ module A15kClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [content, format_id].hash
+      [format_id, source_identifier, content, preview_html].hash
     end
 
     # Builds the object from hash

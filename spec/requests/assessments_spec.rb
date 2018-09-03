@@ -12,7 +12,7 @@ describe 'Assessments API', type: :request do
     it "finds assessments" do
       assessment = FactoryBot.create :assessment
       A15K::Metadata.api.create(assessment)
-      word = assessment.questions[0].content.split(' ').first
+      word = assessment.variants[0].content.split(' ').first
       get "/api/v1/assessments", params: { q: word }, headers: headers
       expect(response).to be_ok
       expect(response_data.length).to eq 1
@@ -59,22 +59,13 @@ describe 'Assessments API', type: :request do
     }
     let(:params) {
       {
-        identifier: SecureRandom.uuid,
+        source_identifier: SecureRandom.uuid,
         content: '1234 this is content',
         metadata: metadata,
-        questions: [
+        variants: [
           {
             format_id: format.id,
             content: '1234 this is question content',
-            solutions: [
-              {
-                format_id: format.id,
-                content: '1234 this is question solution 1'
-              }, {
-                format_id: format.id,
-                content: '1234 this is question solution 2'
-              }
-            ]
           }
         ]
       }
@@ -85,8 +76,7 @@ describe 'Assessments API', type: :request do
         post "/api/v1/assessments.json", params: params.to_json, headers: headers
         expect(response).to be_ok
         expect(response_json['success']).to be true
-        expect(response_data['questions'].length).to eq 1
-        expect(response_data['questions'][0]['solutions'].length).to eq 2
+        expect(response_data['variants'].length).to eq 1
       }.to change {
         Assessment.count
       }.by 1
@@ -108,39 +98,48 @@ describe 'Assessments API', type: :request do
       it 'can create multiple versions' do
         id = SecureRandom.uuid
         post "/api/v1/assessments.json", params: {
-               identifier: id, version: '1',
-               questions: [{ format_id: format.id, content: '1st' }]
+               source_identifier: id, version: '1',
+               variants: [{ format_id: format.id, content: '1st' }]
              }.to_json, headers: headers
         expect(response).to be_ok
 
         post "/api/v1/assessments.json", params: {
-               identifier: id, version: '2',
-               questions: [{ format_id: format.id, content: '2st' }]
+               source_identifier: id, version: '2',
+               variants: [{ format_id: format.id, content: '2st' }]
              }.to_json, headers: headers
         expect(response).to be_ok
-        expect(Assessment.where(identifier: id).count).to eq 2
+        expect(Assessment.where(source_identifier: id).count).to eq 2
       end
 
-      it 'fails if member is different' do
-        asm = FactoryBot.create :assessment, identifier: '1'
+      it 'fails if one member uses another members a15k_identifier' do
+        asm = FactoryBot.create :assessment, source_identifier: '1'
         post "/api/v1/assessments.json", params: {
-               identifier: asm.identifier, version: asm.version,
-               questions: [{ format_id: format.id, content: '1st' }]
+               a15k_identifier: asm.a15k_identifier, source_version: "whatever",
+               variants: [{ format_id: format.id, content: '1st' }]
              }.to_json, headers: headers
         expect(response.status).to eq 422
         expect(response_json['success']).to be false
         expect(response_json['message']).to include 'Member must be the same'
       end
+
+      it 'succeeds if one member uses another members source_identifier' do
+        asm = FactoryBot.create :assessment, source_identifier: '1'
+        post "/api/v1/assessments.json", params: {
+               source_identifier: asm.source_identifier, source_version: "whatever",
+               variants: [{ format_id: format.id, content: '1st' }]
+             }.to_json, headers: headers
+        expect(response.status).to eq 200
+      end
     end
     it 'can create a generative assessments' do
       expect {
         post "/api/v1/assessments.json", params: {
-               identifier: SecureRandom.uuid,
-               questions: (1..20).flat_map do |a|
+               source_identifier: SecureRandom.uuid,
+               variants: (1..20).flat_map do |a|
                  (1..10).map do |b|
                    {
                      format_id: format.id,
-                     variant_id: "#{a}-#{b}",
+                     source_identifier: "#{a}-#{b}",
                      content: <<~EOQ
                      <question>
                        What is the length of the hypotenuse for a right
@@ -153,21 +152,19 @@ describe 'Assessments API', type: :request do
                end
              }.to_json, headers: headers
       }.to change {
-        Question.count
+        Variant.count
       }.by 200
     end
 
-    it 'errors when variants are not correct' do
+    it 'accepts variants without source_identifiers' do
         post "/api/v1/assessments.json", params: {
-               identifier: SecureRandom.uuid,
-               questions: [
+               source_identifier: SecureRandom.uuid,
+               variants: [
                  { format_id: format.id, content: '1st' },
                  { format_id: format.id, content: '2nd' },
                ]
              }.to_json, headers: headers
-        expect(response.status).to eq 422
-        expect(response_json['success']).to be false
-        expect(response_json['message']).to include 'Questions'
+        expect(response.status).to eq 200
     end
   end
 

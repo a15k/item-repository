@@ -30,33 +30,24 @@ describe 'Ruby client', type: :api do
 
     it 'can be created' do
       response = api_instance.create_assessment(
-        identifier: 'TEST-Test-AND-TEST-MORE',
+        source_identifier: 'TEST-Test-AND-TEST-MORE',
         content: { text: Faker::Lorem.paragraph }.to_json,
-        questions: 2.times.map{|question_index|
+        variants: 2.times.map{|question_index|
           {
             format_id: format.id,
-            variant_id: question_index.to_s,
+            source_identifier: question_index.to_s,
             content: {
               index: question_index,
               text: Faker::Lorem.paragraph
             }.to_json,
-            solutions: [
-              {
-                format_id: format.id,
-                content: {
-                  text: Faker::Lorem.paragraph
-                }.to_json,
-              }
-            ]
           }
         }
       )
       expect(response.success).to eq(true)
       expect(response.data).to be_a_kind_of(A15kClient::Assessment)
       assessment = response.data
-      expect(assessment.identifier).to eq('TEST-Test-AND-TEST-MORE')
-      expect(assessment.questions.length).to eq(2)
-      expect(assessment.questions[0].solutions.length).to eq(1)
+      expect(assessment.source_identifier).to eq('TEST-Test-AND-TEST-MORE')
+      expect(assessment.variants.length).to eq(2)
     end
 
   end

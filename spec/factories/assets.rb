@@ -3,8 +3,8 @@ FactoryBot.define do
 
   factory :asset do
 
-    trait :for_question do
-      association :owner, factory: :question
+    trait :for_variant do
+      association :owner, factory: :variant
     end
 
     trait :for_solution do

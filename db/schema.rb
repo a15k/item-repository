@@ -25,18 +25,18 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
   end
 
   create_table "assessments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "identifier"
+    t.string "source_identifier"
+    t.string "source_version"
+    t.uuid "a15k_identifier", null: false
+    t.integer "a15k_version", default: 1, null: false
     t.uuid "member_id", null: false
-    t.integer "version", default: 1, null: false
-    t.integer "visibility", limit: 2
     t.text "fingerprint", null: false
-    t.text "preview_html"
     t.datetime "created_at", null: false
+    t.index ["a15k_identifier", "a15k_version"], name: "index_assessments_on_a15k_identifier_and_a15k_version", unique: true
     t.index ["created_at"], name: "index_assessments_on_created_at"
     t.index ["fingerprint"], name: "index_assessments_on_fingerprint"
-    t.index ["identifier", "version"], name: "index_assessments_on_identifier_and_version", unique: true
-    t.index ["identifier"], name: "index_assessments_on_identifier"
     t.index ["member_id"], name: "index_assessments_on_member_id"
+    t.index ["source_identifier", "member_id", "source_version"], name: "index_assessments_on_source_id_member_id_source_version", unique: true
   end
 
   create_table "assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -140,26 +140,15 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.index ["openstax_uid"], name: "index_openstax_accounts_groups_on_openstax_uid", unique: true
   end
 
-  create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "assessment_id", null: false
-    t.uuid "format_id", null: false
-    t.text "content", null: false
-    t.text "variant_id"
-    t.datetime "created_at", null: false
-    t.index ["assessment_id"], name: "index_questions_on_assessment_id"
-    t.index ["format_id"], name: "index_questions_on_format_id"
-    t.index ["variant_id"], name: "index_questions_on_variant_id"
-  end
-
   create_table "solutions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "question_id", null: false
+    t.uuid "variant_id", null: false
     t.uuid "format_id", null: false
     t.text "content", null: false
     t.uuid "member_id", null: false
     t.datetime "created_at", null: false
     t.index ["format_id"], name: "index_solutions_on_format_id"
     t.index ["member_id"], name: "index_solutions_on_member_id"
-    t.index ["question_id"], name: "index_solutions_on_question_id"
+    t.index ["variant_id"], name: "index_solutions_on_variant_id"
   end
 
   create_table "translators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -180,16 +169,28 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.index ["member_id"], name: "index_users_on_member_id"
   end
 
+  create_table "variants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "assessment_id", null: false
+    t.uuid "format_id", null: false
+    t.text "content", null: false
+    t.text "source_identifier"
+    t.text "preview_html"
+    t.datetime "created_at", null: false
+    t.index ["assessment_id"], name: "index_variants_on_assessment_id"
+    t.index ["format_id"], name: "index_variants_on_format_id"
+    t.index ["source_identifier"], name: "index_variants_on_source_identifier"
+  end
+
   add_foreign_key "access_tokens", "members"
   add_foreign_key "assessments", "members"
   add_foreign_key "assets", "members", column: "created_by_id"
   add_foreign_key "formats", "members", column: "created_by_id"
-  add_foreign_key "questions", "assessments"
-  add_foreign_key "questions", "formats"
   add_foreign_key "solutions", "formats"
   add_foreign_key "solutions", "members"
-  add_foreign_key "solutions", "questions"
+  add_foreign_key "solutions", "variants", on_delete: :cascade
   add_foreign_key "translators", "formats", column: "input_id"
   add_foreign_key "translators", "formats", column: "output_id"
   add_foreign_key "users", "members"
+  add_foreign_key "variants", "assessments", on_delete: :cascade
+  add_foreign_key "variants", "formats"
 end

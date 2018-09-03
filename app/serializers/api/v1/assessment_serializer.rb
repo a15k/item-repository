@@ -5,8 +5,8 @@ module Api
     class AssessmentSerializer < Serializer
 
       swagger_schema :Assessment do
-        key :description, "The umbrella record for all things related to an exercises that a student could work, including its stem, answer, solutions, and variants"
-        key :required, [:id, :version, :visibility, :content, :created_at]
+        key :description, "The umbrella record for all things related to an assessment."
+        key :required, [:id, :a15k_identifier, :a15k_version, :created_at]
         property :id,           type: :string, format: :uuid
         property :created_at,   type: :string, format: 'date-time'
       end
@@ -14,24 +14,32 @@ module Api
       property :id,
                type: :string,
                format: :uuid,
-               description: 'A unique value that can be used to link the assessment back to the contributors copy'
+               description: 'A UUID for this specific assessment version'
 
-      property :identifier,
+      property :source_identifier,
                type: :string,
-               description: "An unique contributed-provided identifier that can be used to link the assessment back to the contributor's original version"
+               description: <<~EOS
+                 A member-controlled identifier that is shared between all versions of this assessment in the member's assessment
+                 repository (the source).  If contributing a new version of a previous contribution, provide the source_identifier
+                 you provided for other versions or the a15k_identifier from those versions.
+               EOS
 
-      property :version,
+      property :source_version,
                type: :string,
-               description: 'The version for the assessment, an incrementing number is recommended, but any string value is allowed as long as it‘s unique within the scope of the identifier'
+               description: "A member-controlled value identifying this assessment's version in the member's assessment repository (the source)."
 
-      property :visibility,
+      property :a15k_identifier,
                type: :string,
-               enum: ['internal', 'external'],
-               description: 'If the assessment may be viewed by the public, or only by other a15k members.  Defaults to "internal"'
+               format: :uuid,
+               description: <<~EOS
+                 An a15k-provided UUID that is shared between all versions of this assessment within the network.
+                 If contributing a new version of a previous contribution, provide this a15k_identifier or the
+                 source_identifier you provided for the other versions.
+               EOS
 
-      property :preview_html,
-               type: :string,
-               description: 'If provided, will be used to generate a preview on the a15k website'
+      property :a15k_version,
+               type: :integer,
+               description: "An a15k-provided number identifying which version this assessment is."
 
       property :created_at,
                type: :string,
@@ -57,13 +65,13 @@ module Api
 
       end
 
-      property :questions,
+      property :variants,
                collection: true,
-               extend: QuestionSerializer,
-               class: Question do |doc|
+               extend: VariantSerializer,
+               class: Variant do |doc|
         doc.key :type, :array
         doc.items do
-          key :'$ref', :Question
+          key :'$ref', :Variant
         end
       end
 

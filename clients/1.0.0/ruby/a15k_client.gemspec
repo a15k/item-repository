@@ -3,7 +3,7 @@
 =begin
 #Assessment Network API
 
-#> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org.
+#> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org. 
 
 OpenAPI spec version: 1.0.0
 
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/swagger-api/swagger-codegen"
   s.summary     = "Assessment Network API Ruby Gem"
   s.description = "> Stores content for the Assessment Network  API Version is specified in the URL path as `api/<version>/resource` Version will default to the latest if it's ommited  All endpoints require an API key to be passed in the request header. API keys can be obtained by members at www.a15k.org. "
-  # TODO uncommnet and update below with a proper license
+  # TODO uncommnet and update below with a proper license 
   #s.license     = "Apache 2.0"
   s.required_ruby_version = ">= 1.9"
 

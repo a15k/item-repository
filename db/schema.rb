@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_16_193738) do
+ActiveRecord::Schema.define(version: 2018_09_02_214247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -32,11 +32,13 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.uuid "member_id", null: false
     t.text "fingerprint", null: false
     t.datetime "created_at", null: false
+    t.datetime "submitted_to_metadata_at"
     t.index ["a15k_identifier", "a15k_version"], name: "index_assessments_on_a15k_identifier_and_a15k_version", unique: true
     t.index ["created_at"], name: "index_assessments_on_created_at"
     t.index ["fingerprint"], name: "index_assessments_on_fingerprint"
     t.index ["member_id"], name: "index_assessments_on_member_id"
     t.index ["source_identifier", "member_id", "source_version"], name: "index_assessments_on_source_id_member_id_source_version", unique: true
+    t.index ["submitted_to_metadata_at"], name: "index_assessments_on_submitted_to_metadata_at"
   end
 
   create_table "assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -48,6 +50,21 @@ ActiveRecord::Schema.define(version: 2018_05_16_193738) do
     t.datetime "created_at", null: false
     t.index ["created_by_id"], name: "index_assets_on_created_by_id"
     t.index ["owner_type", "owner_id"], name: "index_assets_on_owner_type_and_owner_id"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "formats", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -9,6 +9,7 @@ class CreateAssessments < ActiveRecord::Migration[5.1]
       t.belongs_to :member, type: :uuid, null: false, foreign_key: true
       t.text :fingerprint, null: false, index: true
       t.timestamp :created_at, null: false, index: true
+      t.timestamp :submitted_to_metadata_at, null: true, index: true
     end
 
     add_index :assessments, [:a15k_identifier, :a15k_version], unique: true

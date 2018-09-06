@@ -43,9 +43,9 @@ Factory.define('Assessment')
   .created_at('2018-06-26T20:16:56.580Z')
   .identifier(uuid)
   .preview_html(() => `<p>${faker.lorem.paragraph()}</p>`)
-  .questions(Factory.reference('Question', { count: 1 }));
+  .variants(Factory.reference('Variant', { count: 1 }));
 
-Factory.define('Question')
+Factory.define('Variant')
   .id(uuid)
   .format_id(({ format }) => format ? format.identifier : faker.lorem.word())
   .content(faker.lorem.paragraph)

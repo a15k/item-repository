@@ -14,7 +14,10 @@ class Iframe extends React.Component {
     assessment: PropTypes.instanceOf(Assessment).isRequired,
   }
   componentDidMount() {
-    iframeResizer({}, `#preview-${this.props.assessment.id}`);
+    this.ifFrame = iframeResizer({}, `#preview-${this.props.assessment.id}`)[0];
+  }
+  componentWillUnmount() {
+    this.ifFrame.iFrameResizer.close();
   }
   render() {
     const { assessment } = this.props;

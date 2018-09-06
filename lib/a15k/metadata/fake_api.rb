@@ -8,7 +8,7 @@ module A15K::Metadata
       assessments = @@created.values.select{|a| a.content.include?(clause) }
       if assessments.none?
         assessments = Variant.where('preview_html like :clause', {clause: "%#{clause}%"})
-                             .include(:assessment).map do |vv|
+                             .includes(:assessment).map do |vv|
           assessment_to_json(vv.assessment)
         end
       end

@@ -54,14 +54,11 @@ describe 'Assessments API', type: :request do
 
   describe 'POST' do
 
-    let(:metadata) {
-      { foo: 'bar', tags: ['first', 'test:true'] }
-    }
+
     let(:params) {
       {
         source_identifier: SecureRandom.uuid,
         content: '1234 this is content',
-        metadata: metadata,
         variants: [
           {
             format_id: format.id,
@@ -82,16 +79,33 @@ describe 'Assessments API', type: :request do
       }.by 1
     end
 
-    it 'saves metadata' do
-      metadata_api = A15K::Metadata::FakeApi.new
-      expect(metadata_api).to receive(:create)
-                                .with(kind_of(Assessment))
-                                .and_call_original
-      expect(metadata_api).to receive(:create_metadata)
-                                 .with(kind_of(Assessment))
-      expect(A15K::Metadata).to receive(:api).and_return(metadata_api)
-      post "/api/v1/assessments.json", params: params.to_json, headers: headers
-      expect(response).to be_ok
+
+    describe 'metadata' do
+      let(:metadata) {
+        {
+          foo: 'bar',
+          baz: [1, 2, 3],
+          tags: ['one', 'two', 'three'],
+          sillyStuff: 'forSure'
+        }
+      }
+
+      it 'saves with arbitrary objects' do
+        metadata_api = A15K::Metadata::FakeApi.new
+        expect(metadata_api).to receive(:create)
+                                  .with(kind_of(Assessment))
+                                  .and_call_original
+        expect(metadata_api).to receive(:create_metadata) do |assessment|
+          expect(assessment).to be_kind_of(Assessment)
+          expect(assessment.metadata).to eq(metadata.stringify_keys)
+        end
+
+        expect(A15K::Metadata).to receive(:api).and_return(metadata_api)
+        post "/api/v1/assessments.json",
+             params: params.merge(metadata: metadata).to_json,
+             headers: headers
+        expect(response).to be_ok
+      end
     end
 
     describe "multiple versions" do

@@ -93,8 +93,8 @@ const Preview = ({ assessment, formats }) => {
       <Iframe assessment={assessment} />
       <Info>
         <InfoBit>Member: {get(assessment.member, 'name')}</InfoBit>
-        <InfoBit>ID: {assessment.id}</InfoBit>
-        <InfoBit>Version: {assessment.version}</InfoBit>
+        <InfoBit>ID: {assessment.a15k_identifier}</InfoBit>
+        <InfoBit>Version: {assessment.a15k_version}</InfoBit>
         <InfoBit>
           <NavLink to={`/formats/${assessment.format_id}`}>
             Format: {get(formats.get(assessment.format_id), 'name')}

@@ -2,19 +2,19 @@ import {
   BaseModel, identifiedBy, field, session, identifier, computed, hasMany, belongsTo,
 } from './base';
 import { first, get } from 'lodash';
-import Question from './question';
+import Variant from './variant';
 import Member from './member';
 
 @identifiedBy('assessments')
-export default class Accessment extends BaseModel {
+export default class Assessment extends BaseModel {
 
   @identifier id;
-  @field format_identifier;
+  @field a15k_identifier;
   @field preview_html;
-  @field version;
+  @field a15k_version;
 
   @belongsTo({ model: Member }) member;
-  @hasMany({ model: Question }) questions;
+  @hasMany({ model: Variant }) variants;
 
   @session({ type: 'object' }) metadata;
 
@@ -23,7 +23,7 @@ export default class Accessment extends BaseModel {
   }
 
   @computed get format_id() {
-    return get(first(this.questions), 'format_id');
+    return get(first(this.variants), 'format_id');
   }
 
 }

@@ -3,8 +3,8 @@ import {
 } from './base';
 import Solution from './solution';
 
-@identifiedBy('question')
-export default class Question extends BaseModel {
+@identifiedBy('variant')
+export default class Variant extends BaseModel {
 
   @identifier id;
   @field format_id;

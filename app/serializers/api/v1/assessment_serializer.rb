@@ -54,7 +54,8 @@ module Api
 
       property :metadata,
                reader: ->(input:, **) { input[:metadata] ? input[:metadata].to_unsafe_h : nil },
-               description: 'Additional searchable metadata to be associated with the assessment' do |doc|
+               description: 'A object containing searchable metadata that’s associated with the assessment.  May optionally contain a “tags” property with a list of strings which will be displayed as part of the assessment preview.' do |doc|
+
         doc.property :tags do
           key :description, 'A list of tags to mark the assessment with'
           key :type, :array

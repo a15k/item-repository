@@ -210,6 +210,19 @@ exports[`Search renders search 1`] = `
     <iframe
       id="preview-379d79cc-cd42-443c-9f2e-15087a5bc518"
       src="/assessment/preview/379d79cc-cd42-443c-9f2e-15087a5bc518"
+      srcDoc="
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Assessment Preview for 379d79cc-cd42-443c-9f2e-15087a5bc518</title>
+      <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"undefined\\">
+      <script src=\\"/preview.js\\"></script>
+    </head>
+    <body>
+      
+    </body>
+  </html>
+"
       style={
         Object {
           "border": "0px",

@@ -9,6 +9,7 @@ export default class Variant extends BaseModel {
   @identifier id;
   @field format_id;
   @field({ type: 'object' }) content;
+  @field preview_html;
   @hasMany({ model: Solution }) solutions;
 
 }

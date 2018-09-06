@@ -1,16 +1,17 @@
 import {
   BaseModel, identifiedBy, field, session, identifier, computed, hasMany, belongsTo,
 } from './base';
-import { first, get } from 'lodash';
+import { first, get, map } from 'lodash';
 import Variant from './variant';
 import Member from './member';
+import AssessmentPreview from './assessment/preview';
 
 @identifiedBy('assessments')
 export default class Assessment extends BaseModel {
 
   @identifier id;
   @field a15k_identifier;
-  @field preview_html;
+
   @field a15k_version;
 
   @belongsTo({ model: Member }) member;
@@ -24,6 +25,14 @@ export default class Assessment extends BaseModel {
 
   @computed get format_id() {
     return get(first(this.variants), 'format_id');
+  }
+
+  @computed get preview_html() {
+    return map(this.variants, 'preview_html').join('');
+  }
+
+  @computed get preview_document() {
+    return AssessmentPreview.generate(this);
   }
 
 }

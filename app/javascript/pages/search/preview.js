@@ -14,12 +14,18 @@ class Iframe extends React.Component {
     assessment: PropTypes.instanceOf(Assessment).isRequired,
   }
   componentDidMount() {
-    iframeResizer({}, `#preview-${this.props.assessment.id}`);
+    this.iframe = iframeResizer({}, `#preview-${this.props.assessment.id}`)[0];
+  }
+  componentWillUnmount() {
+    if (this.iframe) {
+      this.iframe.iFrameResizer.close();
+    }
   }
   render() {
     const { assessment } = this.props;
     return (
       <iframe
+        srcDoc={assessment.preview_document}
         id={`preview-${assessment.id}`}
         src={`/assessment/preview/${assessment.id}`}
         style={{ width: '1px', minWidth: '100%', border: '0px' }}

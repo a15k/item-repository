@@ -3,6 +3,10 @@
       user: Api::V1::UserSerializer.new(current_user).as_json.merge(
         member_id: current_user.member_id,
       ),
+      preview_page_assets: {
+        javascript: asset_pack_path('preview.js'),
+        styles: stylesheet_path('application')
+      },
       openstax_accounts_url: Rails.application.secrets.openstax[:accounts][:url],
       interactions_api_url: Rails.application.secrets.interactions_api[:url],
     }.merge(

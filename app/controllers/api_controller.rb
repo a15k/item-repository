@@ -34,16 +34,19 @@ class ApiController < ActionController::API
 
   def api_response(data: {},
                    success: true,
+                   total_count: nil,
                    status: success ? :ok : :unprocessable_entity,
                    message: status_message(success: success, record: data),
                    serializer: serializer_for_record(data))
+    json = {
+      success: success,
+      data: serialized_data(data, serializer),
+      message: message
+    }
+    json[:total_count] = total_count unless total_count.nil?
     {
       status: status,
-      json: {
-        success: success,
-        data: serialized_data(data, serializer),
-        message: message
-      },
+      json: json,
     }
   end
 

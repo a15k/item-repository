@@ -4,11 +4,14 @@ module A15K::Metadata
   class Api
     include AssessmentToMetadata
 
-    def query(clause, options = {})
-      JsonApi::Resource
+    def query(query)
+      result = QueryResult.new
+      q = JsonApi::Resource
         .includes(:metadatas)
-        .where({ query: clause }.merge(options))
-        .all
+        .where(query)
+      # TODO: extract page info
+      result.assessments = q.all
+      result
     end
 
     def create(assessment)

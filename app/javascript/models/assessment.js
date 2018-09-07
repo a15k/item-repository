@@ -1,5 +1,6 @@
 import {
-  BaseModel, identifiedBy, field, session, identifier, computed, hasMany, belongsTo,
+  BaseModel, identifiedBy, observable, field, session,
+  identifier, computed, hasMany, belongsTo,
 } from './base';
 import { first, get } from 'lodash';
 import Variant from './variant';
@@ -11,13 +12,14 @@ export default class Assessment extends BaseModel {
 
   @identifier id;
   @field a15k_identifier;
-
   @field a15k_version;
 
   @belongsTo({ model: Member }) member;
   @hasMany({ model: Variant }) variants;
 
   @session({ type: 'object' }) metadata;
+
+  @observable renderedHeight = 300;
 
   @computed get tags() {
     return get(this.metadata, 'tags', []);

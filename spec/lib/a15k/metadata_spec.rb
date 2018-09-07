@@ -10,7 +10,8 @@ describe 'Metadata repo client' do
   it 'can search' do
     assessment.variants.first.update_attributes! content: 'testing'
     api.create(assessment)
-    expect(api.query('testing').length).to be >= 1
+    result = api.query({ query: 'testing' })
+    expect(result.assessments.length).to be >= 1
   end
 
   it 'can create a resource for assessments' do

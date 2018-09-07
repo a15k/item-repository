@@ -4,15 +4,25 @@ module A15K::Metadata
 
     @@created = {}
 
-    def query(clause, options = {})
-      assessments = @@created.values.select{|a| a.content.include?(clause) }
-      if assessments.none?
-        assessments = Variant.where('preview_html like :clause', {clause: "%#{clause}%"})
-                             .includes(:assessment).map do |vv|
-          assessment_to_json(vv.assessment)
-        end
-      end
-      assessments
+    def query(query)
+      result = QueryResult.new
+      q = query[:query]
+      page = query[:page] ? query[:page].to_i : 1
+      per_page = query[:per_page] ? query[:per_page].to_i : 10
+      query = Assessment
+                .joins(:variants)
+                .includes(:variants)
+                .where(
+                  variants: Variant.where(
+                    'preview_html like :clause or content like :clause', {clause: "%#{q}%"}
+                  )
+                )
+      result.total_count = query.dup.count
+      result.assessments = query
+                             .limit(per_page)
+                             .offset(per_page * (page - 1))
+                             .map{ |a| assessment_to_json(a) }
+      result
     end
 
     def create(assessment)

@@ -1,7 +1,7 @@
 import {
   BaseModel, identifiedBy, field, session, identifier, computed, hasMany, belongsTo,
 } from './base';
-import { first, get, map } from 'lodash';
+import { first, get } from 'lodash';
 import Variant from './variant';
 import Member from './member';
 import AssessmentPreview from './assessment/preview';
@@ -28,7 +28,7 @@ export default class Assessment extends BaseModel {
   }
 
   @computed get preview_html() {
-    return map(this.variants, 'preview_html').join('');
+    return this.variants[0].preview_html;
   }
 
   @computed get preview_document() {

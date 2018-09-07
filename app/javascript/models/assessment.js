@@ -28,7 +28,7 @@ export default class Assessment extends BaseModel {
   }
 
   @computed get preview_html() {
-    return map(this.variants, 'preview_html').join('');
+    return this.variants[0].preview_html;
   }
 
   @computed get preview_document() {

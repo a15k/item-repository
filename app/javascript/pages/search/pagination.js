@@ -6,11 +6,11 @@ import AssessmentsCollection from './collection';
 // https://github.com/AdeleD/react-paginate/issues/220
 const PaginationWrapper = styled.div`
 
-  display: flex;
   margin-top: 2rem;
+  display: flex;
+  justify-content: center;
 
   ul {
-    flex: 1;
     display: flex;
     padding-left: 0;
   }
@@ -99,6 +99,7 @@ export default class Pagination extends React.Component {
 
   render() {
     const { assessments } = this.props;
+    if (assessments.isEmpty) { return null; }
 
     return (
       <PaginationWrapper>

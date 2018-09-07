@@ -61,10 +61,18 @@ border-top: 1px solid grey;
 const Info = styled.div`
 display: flex;
 justify-content: flex-end;
+margin-top: 0.5rem;
+`;
+
+const Tags = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: flex-end;
 `;
 
 const Tag = styled(Badge)`
-& + & { margin-left: 0.3rem; }
+  margin-left: 0.3rem;
+  margin-top: 0.3rem;
 `;
 
 @observer
@@ -97,6 +105,9 @@ const Preview = ({ assessment, formats }) => {
     <PreviewWrapper>
       <Download assessment={assessment} />
       <Iframe assessment={assessment} />
+      <Tags>
+        {assessment.tags.map(t => <Tag key={t} color="info">{t}</Tag>)}
+      </Tags>
       <Info>
         <InfoBit>Member: {get(assessment.member, 'name')}</InfoBit>
         <InfoBit>ID: {assessment.a15k_identifier}</InfoBit>
@@ -105,9 +116,6 @@ const Preview = ({ assessment, formats }) => {
           <NavLink to={`/formats/${assessment.format_id}`}>
             Format: {get(formats.get(assessment.format_id), 'name')}
           </NavLink>
-        </InfoBit>
-        <InfoBit>
-          {assessment.tags.map(t => <Tag key={t} color="info">{t}</Tag>)}
         </InfoBit>
       </Info>
 

@@ -30,7 +30,7 @@ class Api::V1::AssessmentsController < ApiController
       return
     end
     found = A15K::Metadata.api.query(params[:q]).index_by(&:id)
-    assessments = Assessment.includes(:member).where(id: found.keys)
+    assessments = Assessment.includes(:member, :variants).where(id: found.keys)
     assessments.each{ |a|
       a.metadata = {
         tags: (found[a.id].metadatas || [])

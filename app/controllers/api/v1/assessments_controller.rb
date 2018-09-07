@@ -11,11 +11,11 @@ class Api::V1::AssessmentsController < ApiController
         key :api_token, []
       end
       key :tags, ['Assessments']
-      parameter name: :query, in: :path, type: :string, required: true,
+      parameter name: :query, in: :query, type: :string, required: true,
                 description: 'the query string to search for'
-      parameter name: :page, in: :path, type: :int, required: false,
+      parameter name: :page, in: :query, type: :int, required: false,
                 description: 'the page index to return, the first page is 1'
-      parameter name: :per_page, type: :int, required: false,
+      parameter name: :per_page, in: :query, type: :int, required: false,
                 description: 'how many assessments should be returned for a page'
 
       extend Api::SwaggerResponses
@@ -24,7 +24,7 @@ class Api::V1::AssessmentsController < ApiController
   end
   def index
     if params[:query].blank?
-      render api_response(success: false, message: 'must include "q" query parameter')
+      render api_response(success: false, message: 'must include "query" query parameter')
       return
     end
     result = A15K::Metadata.api.query(

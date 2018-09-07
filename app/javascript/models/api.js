@@ -99,7 +99,7 @@ export default class ModelApi {
         .then(msg => {
           model.errors = null;
           if (msg.success) {
-            model.fromJSON(msg.data);
+            model.fromJSON(msg.data, msg);
           } else {
             model.errors = msg.errors || { base: msg.message };
           }

@@ -1,13 +1,15 @@
 import { React, PropTypes, observer, observable, action } from '../helpers/react';
 import {
-  InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
   InputGroup, InputGroupAddon, Button, Input, FormText,
 } from 'reactstrap';
+import qs from 'query-string';
+import { withRouter } from 'react-router-dom';
 import ModelCollection from '../models/model-collection';
 import AssessmentCollection from './search/collection';
 import Format from '../models/format';
 import ModelErrors from '../components/model-errors';
-import Preview from './search/preview';
+import Pagination from './search/pagination';
+import Results from './search/results';
 
 const HELP = {
   Text: 'Enter text to search for.  Assessment metadata is searched first and then statisistics',
@@ -15,28 +17,40 @@ const HELP = {
 };
 
 const SearchHelp = ({ type, results }) => (
-  results.assessments.length == 0 && <FormText color="muted">{HELP[type]}</FormText>
+  results.isEmpty && <FormText color="muted">{HELP[type]}</FormText>
 );
 
 @observer
-export default class Search extends React.Component {
-
-  static propTypes = {
-    collection: PropTypes.instanceOf(AssessmentCollection),
-    formats: PropTypes.instanceOf(ModelCollection),
-  };
+export class Search extends React.Component {
 
   static defaultProps = {
     formats: Format.collection,
   };
 
+  static propTypes = {
+    collection: PropTypes.instanceOf(AssessmentCollection),
+    formats: PropTypes.instanceOf(ModelCollection),
+    query: PropTypes.string,
+    page: PropTypes.string,
+    offset: PropTypes.string,
+    updateSearch: PropTypes.func.isRequired,
+  };
+
   @observable collection = this.props.collection || new AssessmentCollection();
   @observable isDropdownOpen = false;
-  @observable searchingBy = 'Text'
+
+  @action.bound updateSearch(search) {
+    this.collection.update(search);
+    this.props.updateSearch(this.collection.queryParams);
+  }
 
   componentDidMount() {
-    if (!this.props.formats.api.isFetchedOrFetching) {
-      this.props.formats.fetch();
+    const { formats, query, page } = this.props;
+    if (!formats.api.isFetchedOrFetching) {
+      formats.fetch();
+    }
+    if (query) {
+      this.collection.update({ query, page });
     }
   }
 
@@ -45,11 +59,9 @@ export default class Search extends React.Component {
   }
 
   @action.bound onSearchClick() {
-    if ('ID' == this.searchingBy) {
-      this.collection.fetchById(this.inputRef.value);
-    } else {
-      this.collection.search(this.inputRef.value);
-    }
+    this.updateSearch({
+      page: 1, query: this.inputRef.value,
+    });
   }
 
   @action.bound detectEnterPress(ev) {
@@ -58,53 +70,51 @@ export default class Search extends React.Component {
 
   @action.bound setInputRef(input) { this.inputRef = input; }
 
-  @action.bound onSearchTypeChange(ev) {
-    this.searchingBy = ev.target.dataset.type;
-    this.inputRef.focus();
-  }
-
   render() {
-    const { formats } = this.props;
+    const { formats, query } = this.props;
 
     return (
       <div className="search-page">
         <InputGroup>
-          <InputGroupButtonDropdown
-            addonType="prepend"
-            isOpen={this.isDropdownOpen}
-            toggle={this.onDropdownToggle}
-          >
-            <DropdownToggle caret>
-              Search by {this.searchingBy}
-            </DropdownToggle>
-
-            <DropdownMenu>
-              <DropdownItem
-                data-type="ID"
-                onClick={this.onSearchTypeChange}
-              >
-                ID
-              </DropdownItem>
-
-              <DropdownItem
-                data-type="Text"
-                onClick={this.onSearchTypeChange}
-              >
-                Text
-              </DropdownItem>
-            </DropdownMenu>
-
-          </InputGroupButtonDropdown>
-          <Input type="text" innerRef={this.setInputRef} onKeyPress={this.detectEnterPress} />
+          <Input defaultValue={query} type="text" innerRef={this.setInputRef} onKeyPress={this.detectEnterPress} />
           <InputGroupAddon addonType="append">
             <Button onClick={this.onSearchClick} color="secondary">Search</Button>
           </InputGroupAddon>
         </InputGroup>
         <SearchHelp type={this.searchingBy} results={this.collection} />
         <ModelErrors model={this.assessment} />
-        {this.collection.map(a => <Preview key={a.id} formats={formats} assessment={a} />)}
+        <Pagination onChange={this.updateSearch} assessments={this.collection} />
+        <Results
+          key={this.collection.queryParams}
+          assessments={this.collection} formats={formats}
+        />
       </div>
     );
+  }
+
+}
+
+
+@observer
+@withRouter
+export default class SearchFromURL extends React.Component {
+
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  };
+
+  @action.bound updateSearch(search) {
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      search,
+    });
+  }
+
+  render() {
+    const { search } = this.props.location;
+    const props = qs.parse(search);
+    return <Search updateSearch={this.updateSearch} { ...props } />;
   }
 
 }

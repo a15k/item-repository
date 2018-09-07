@@ -1,54 +1,136 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Search renders help 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2rem;
+}
+
+.c0 ul {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+}
+
+.c0 li {
+  min-width: 40px;
+  min-height: 40px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-width: 1px 1px 1px 0;
+}
+
+.c0 li > a,
+.c0 li > span {
+  position: relative;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #2c689c;
+  background-color: #fff;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.c0 li.break {
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c0 li:first-child {
+  border-left-width: 1px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  min-width: 80px;
+}
+
+.c0 li:last-child {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  min-width: 80px;
+}
+
+.c0 li > a:hover,
+.c0 li > span:hover,
+.c0 li > a:focus,
+.c0 li > span:focus {
+  z-index: 2;
+  color: #1b4060;
+  background-color: #eeeeee;
+  border-color: #ddd;
+}
+
+.c0 .active > a,
+.c0 .active > span,
+.c0 .active > a:hover,
+.c0 .active > span:hover,
+.c0 .active > a:focus,
+.c0 .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  background-color: #2c689c;
+  border-color: #2c689c;
+  cursor: default;
+}
+
+.c0 .disabled > span,
+.c0 .disabled > span:hover,
+.c0 .disabled > span:focus,
+.c0 .disabled > a,
+.c0 .disabled > a:hover,
+.c0 .disabled > a:focus {
+  color: #777777;
+  background-color: #fff;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
 <div
   className="search-page"
 >
   <div
     className="input-group"
   >
-    <div
-      className="input-group-prepend"
-      onKeyDown={[Function]}
-    >
-      <button
-        aria-expanded={false}
-        aria-haspopup={true}
-        className="dropdown-toggle btn btn-secondary"
-        onClick={[Function]}
-        type="button"
-      >
-        Search by 
-        Text
-      </button>
-      <div
-        aria-hidden={true}
-        className="dropdown-menu"
-        role="menu"
-        tabIndex="-1"
-      >
-        <button
-          className="dropdown-item"
-          data-type="ID"
-          onClick={[Function]}
-          tabIndex="0"
-          type="button"
-        >
-          ID
-        </button>
-        <button
-          className="dropdown-item"
-          data-type="Text"
-          onClick={[Function]}
-          tabIndex="0"
-          type="button"
-        >
-          Text
-        </button>
-      </div>
-    </div>
     <input
       className="form-control"
+      defaultValue={undefined}
       onKeyPress={[Function]}
       type="text"
     />
@@ -66,14 +148,188 @@ exports[`Search renders help 1`] = `
   </div>
   <small
     className="form-text text-muted"
+  />
+  <div
+    className="c0"
   >
-    Enter text to search for.  Assessment metadata is searched first and then statisistics
-  </small>
+    <ul
+      className={undefined}
+    >
+      <li
+        className="previous disabled"
+      >
+        <a
+          className={undefined}
+          href={undefined}
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          Previous
+        </a>
+      </li>
+      <li
+        className="active"
+      >
+        <a
+          aria-current="page"
+          aria-label="Page 1 is your current page"
+          className={undefined}
+          href={undefined}
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          1
+        </a>
+      </li>
+      <li
+        className="next disabled"
+      >
+        <a
+          className={undefined}
+          href={undefined}
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          Next
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="search-results"
+  />
 </div>
 `;
 
 exports[`Search renders search 1`] = `
-.c2 {
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2rem;
+}
+
+.c0 ul {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+}
+
+.c0 li {
+  min-width: 40px;
+  min-height: 40px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-width: 1px 1px 1px 0;
+}
+
+.c0 li > a,
+.c0 li > span {
+  position: relative;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #2c689c;
+  background-color: #fff;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.c0 li.break {
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c0 li:first-child {
+  border-left-width: 1px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  min-width: 80px;
+}
+
+.c0 li:last-child {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  min-width: 80px;
+}
+
+.c0 li > a:hover,
+.c0 li > span:hover,
+.c0 li > a:focus,
+.c0 li > span:focus {
+  z-index: 2;
+  color: #1b4060;
+  background-color: #eeeeee;
+  border-color: #ddd;
+}
+
+.c0 .active > a,
+.c0 .active > span,
+.c0 .active > a:hover,
+.c0 .active > span:hover,
+.c0 .active > a:focus,
+.c0 .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  background-color: #2c689c;
+  border-color: #2c689c;
+  cursor: default;
+}
+
+.c0 .disabled > span,
+.c0 .disabled > span:hover,
+.c0 .disabled > span:focus,
+.c0 .disabled > a,
+.c0 .disabled > a:hover,
+.c0 .disabled > a:focus {
+  color: #777777;
+  background-color: #fff;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -84,16 +340,16 @@ exports[`Search renders search 1`] = `
   align-items: center;
 }
 
-.c2 .icon + span {
+.c3 .icon + span {
   margin-left: 0.5rem;
 }
 
-.c1 {
+.c2 {
   margin: 0.5rem 0;
   float: right;
 }
 
-.c4 {
+.c6 {
   color: #49a0b5;
   display: -webkit-box;
   display: -webkit-flex;
@@ -109,23 +365,38 @@ exports[`Search renders search 1`] = `
   justify-content: center;
 }
 
-.c4 + .c4 {
+.c6 + .c6 {
   margin-left: 0.5rem;
   padding-left: 0.5rem;
   border-left: 1px solid #acdbd8;
 }
 
-.c0 {
+.c1 {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid grey;
 }
 
-.c3 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
@@ -138,48 +409,9 @@ exports[`Search renders search 1`] = `
   <div
     className="input-group"
   >
-    <div
-      className="input-group-prepend"
-      onKeyDown={[Function]}
-    >
-      <button
-        aria-expanded={false}
-        aria-haspopup={true}
-        className="dropdown-toggle btn btn-secondary"
-        onClick={[Function]}
-        type="button"
-      >
-        Search by 
-        Text
-      </button>
-      <div
-        aria-hidden={true}
-        className="dropdown-menu"
-        role="menu"
-        tabIndex="-1"
-      >
-        <button
-          className="dropdown-item"
-          data-type="ID"
-          onClick={[Function]}
-          tabIndex="0"
-          type="button"
-        >
-          ID
-        </button>
-        <button
-          className="dropdown-item"
-          data-type="Text"
-          onClick={[Function]}
-          tabIndex="0"
-          type="button"
-        >
-          Text
-        </button>
-      </div>
-    </div>
     <input
       className="form-control"
+      defaultValue={undefined}
       onKeyPress={[Function]}
       type="text"
     />
@@ -198,19 +430,74 @@ exports[`Search renders search 1`] = `
   <div
     className="c0"
   >
-    <button
-      className="c1 c2 btn btn-secondary btn-sm"
-      onClick={[Function]}
-      type="button"
+    <ul
+      className={undefined}
     >
-      <span>
-        Download
-      </span>
-    </button>
-    <iframe
-      id="preview-379d79cc-cd42-443c-9f2e-15087a5bc518"
-      src="/assessment/preview/379d79cc-cd42-443c-9f2e-15087a5bc518"
-      srcDoc="
+      <li
+        className="previous disabled"
+      >
+        <a
+          className={undefined}
+          href={undefined}
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          Previous
+        </a>
+      </li>
+      <li
+        className="active"
+      >
+        <a
+          aria-current="page"
+          aria-label="Page 1 is your current page"
+          className={undefined}
+          href={undefined}
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          1
+        </a>
+      </li>
+      <li
+        className="next disabled"
+      >
+        <a
+          className={undefined}
+          href={undefined}
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex="0"
+        >
+          Next
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div
+    className="search-results"
+  >
+    <div
+      className="c1"
+    >
+      <button
+        className="c2 c3 btn btn-secondary btn-sm"
+        onClick={[Function]}
+        type="button"
+      >
+        <span>
+          Download
+        </span>
+      </button>
+      <iframe
+        id="preview-379d79cc-cd42-443c-9f2e-15087a5bc518"
+        src="/assessment/preview/379d79cc-cd42-443c-9f2e-15087a5bc518"
+        srcDoc="
   <!DOCTYPE html>
   <html>
     <head>
@@ -219,52 +506,53 @@ exports[`Search renders search 1`] = `
       <script src=\\"/preview.js\\"></script>
     </head>
     <body>
-      
+      undefined
     </body>
   </html>
 "
-      style={
-        Object {
-          "border": "0px",
-          "minWidth": "100%",
-          "width": "1px",
+        style={
+          Object {
+            "border": "0px",
+            "minWidth": "100%",
+            "width": "1px",
+          }
         }
-      }
-    />
-    <div
-      className="c3"
-    >
-      <div
-        className="c4"
-      >
-        Member: 
-      </div>
-      <div
-        className="c4"
-      >
-        ID: 
-      </div>
-      <div
-        className="c4"
-      >
-        Version: 
-      </div>
-      <div
-        className="c4"
-      >
-        <a
-          aria-current={null}
-          className={undefined}
-          href="/formats/esse"
-          onClick={[Function]}
-          style={undefined}
-        >
-          Format: 
-        </a>
-      </div>
+      />
       <div
         className="c4"
       />
+      <div
+        className="c5"
+      >
+        <div
+          className="c6"
+        >
+          Member: 
+        </div>
+        <div
+          className="c6"
+        >
+          ID: 
+        </div>
+        <div
+          className="c6"
+        >
+          Version: 
+        </div>
+        <div
+          className="c6"
+        >
+          <a
+            aria-current={null}
+            className={undefined}
+            href="/formats/esse"
+            onClick={[Function]}
+            style={undefined}
+          >
+            Format: 
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

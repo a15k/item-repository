@@ -11,25 +11,26 @@ class Api::V1::AssessmentsController < ApiController
         key :api_token, []
       end
       key :tags, ['Assessments']
-
-      parameter do
-        key :name, :q
-        key :in, :path
-        key :description, 'query to execute'
-        key :required, true
-        key :type, :string
-      end
+      parameter name: :query, in: :path, type: :string, required: true,
+                description: 'the query string to search for'
+      parameter name: :page, in: :path, type: :int, required: false,
+                description: 'the page index to return, the first page is 1'
+      parameter name: :per_page, type: :int, required: false,
+                description: 'how many assessments should be returned for a page'
 
       extend Api::SwaggerResponses
       include_success_schema(model: 'Assessment')
     end
   end
   def index
-    if params[:q].blank?
+    if params[:query].blank?
       render api_response(success: false, message: 'must include "q" query parameter')
       return
     end
-    found = A15K::Metadata.api.query(params[:q]).index_by(&:id)
+    result = A15K::Metadata.api.query(
+      params.permit(:query, :page, :per_page)
+    )
+    found = result.as_hash
     assessments = Assessment.includes(:member, :variants).where(id: found.keys)
     assessments.each{ |a|
       a.metadata = {
@@ -39,7 +40,7 @@ class Api::V1::AssessmentsController < ApiController
           .uniq
       }
     }
-    render api_response data: assessments
+    render api_response total_count: result.total_count, data: assessments
   end
 
   swagger_path '/assessments/{id}' do

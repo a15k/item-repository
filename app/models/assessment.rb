@@ -46,7 +46,7 @@ class Assessment < ApplicationRecord
 
     if a15k_identifier.present? && source_identifier.present?
       if other_versions.first.source_identififer != source_identififer
-        errors.add(:source_identifier, "does not match previous values for the given A15k identifier")
+
       end
       return
     end

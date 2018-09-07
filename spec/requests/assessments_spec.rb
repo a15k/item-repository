@@ -13,7 +13,7 @@ describe 'Assessments API', type: :request do
       assessment = FactoryBot.create :assessment
       A15K::Metadata.api.create(assessment)
       word = assessment.variants[0].content.split(' ').first
-      get "/api/v1/assessments", params: { q: word }, headers: headers
+      get "/api/v1/assessments", params: { query: word }, headers: headers
       expect(response).to be_ok
       expect(response_data.length).to eq 1
       expect(response_data.first['id']).to eq assessment.id

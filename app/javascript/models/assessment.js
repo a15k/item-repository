@@ -1,7 +1,7 @@
 import {
   BaseModel, identifiedBy, field, session, identifier, computed, hasMany, belongsTo,
 } from './base';
-import { first, get, map } from 'lodash';
+import { first, get } from 'lodash';
 import Variant from './variant';
 import Member from './member';
 import AssessmentPreview from './assessment/preview';

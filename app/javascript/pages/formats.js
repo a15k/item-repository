@@ -62,7 +62,7 @@ export default class Formats extends React.Component {
             <Button icon="chevronLeft" onClick={this.onDisplayAll}>Formats listing</Button>
             {format.name}
           </h3>
-          <p>{format.specification}</p>
+          <div dangerouslySetInnerHTML={{ __html: format.specification }} />
         </div>
       );
     }

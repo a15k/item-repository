@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     end
   end
   get 'assessment/preview/:id', to: 'assessment#preview'
+  get 'assessment/format/:id', to: 'assessment#format'
   get 'api/docs/v1', to: 'api/docs/v1#index'
   get 'terms', to: 'home#terms'
   get '*path', to: 'home#index'

@@ -1,10 +1,15 @@
 module A15K::Metadata
   class JsonApi
 
+    class MetadataPaginator < JsonApiClient::Paginating::Paginator
+      self.page_param = 'number'
+      self.per_page_param = 'size'
+    end
+
     class Model < JsonApiClient::Resource
       # set the api base url in an abstract base class
       self.site = "#{Rails.application.secrets.metadata_api[:url]}/api"
-
+      self.paginator = MetadataPaginator
       # identical to table_name, but singular
       def self.type
         route_formatter.format(resource_name.singularize)

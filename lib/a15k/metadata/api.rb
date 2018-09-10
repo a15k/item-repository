@@ -4,12 +4,15 @@ module A15K::Metadata
   class Api
     include AssessmentToMetadata
 
-    def query(query)
+    def query(opts)
       result = QueryResult.new
+
       q = JsonApi::Resource
-        .includes(:metadatas)
-        .where(query)
-      # TODO: extract page info
+            .includes(:metadatas)
+            .where(query: opts[:query])
+            .paginate(page: opts[:page], per_page: opts[:per_page])
+
+      result.total_count = q.meta.count
       result.assessments = q.all
       result
     end

@@ -1,5 +1,5 @@
 import iframeResizer from 'iframe-resizer/js/iframeResizer';
-import { React, PropTypes, observer, action } from '../../helpers/react';
+import { React, PropTypes, observer } from '../../helpers/react';
 import Format from '../../models/format';
 
 @observer

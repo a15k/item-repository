@@ -64,7 +64,7 @@ class A15KApplication extends React.Component {
                 <Menu
                   isOpen={this.isActionsMenuOpen}
                   toggle={this.onActionsMenuToggle}
-                  >
+                >
                   <DropdownToggle caret>
                     Actions
                   </DropdownToggle>

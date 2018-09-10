@@ -13,7 +13,7 @@ import Search from '../pages/search';
 import NotFound from '../pages/not-found';
 import Users from '../pages/users';
 import Formats from '../pages/formats';
-import previewPage from '../models/assessment/preview';
+import IframeSettings from '../models/iframe-settings';
 
 const MenuLink = ({ to, name }) => (
   <NavLink activeClassName="active" className="dropdown-item" to={to}>
@@ -64,7 +64,7 @@ class A15KApplication extends React.Component {
                 <Menu
                   isOpen={this.isActionsMenuOpen}
                   toggle={this.onActionsMenuToggle}
-                >
+                  >
                   <DropdownToggle caret>
                     Actions
                   </DropdownToggle>
@@ -117,7 +117,7 @@ class A15KApplication extends React.Component {
 whenDomReady(() => {
   const data = JSON.parse(document.getElementById('bootstrap-data').innerText);
   User.bootstrap(data);
-  previewPage.assets = data.preview_page_assets;
+  IframeSettings.assets = data.iframe_assets;
   InteractionsApp.api_url = data.interactions_api_url;
   ReactDOM.render(<A15KApplication />, document.getElementById('application-root'));
 });

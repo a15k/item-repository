@@ -1,8 +1,6 @@
-import { observable } from 'mobx';
+import IframeSettings from '../iframe-settings';
 
 const AssessmentPreview = {
-
-  @observable assets: '',
 
   generate(assessment) {
     return `
@@ -10,8 +8,8 @@ const AssessmentPreview = {
   <html>
     <head>
       <title>Assessment Preview for ${assessment.id}</title>
-      <link rel="stylesheet" media="all" href="${this.assets.styles}">
-      <script src="${this.assets.javascript}"></script>
+      <link rel="stylesheet" media="all" href="${IframeSettings.assets.styles}">
+      <script src="${IframeSettings.assets.javascript}"></script>
     </head>
     <body>
       ${assessment.preview_html}

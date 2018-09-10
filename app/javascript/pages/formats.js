@@ -7,6 +7,7 @@ import Button from '../components/button';
 import ActivityIndicator from '../components/activity-indicator';
 import ModelCollection from '../models/model-collection';
 import NotFound from './not-found';
+import FormatSpecification from './formats/specification';
 
 const FormatItem = styled(ListGroupItem)`
   display: flex;
@@ -16,6 +17,7 @@ const FormatItem = styled(ListGroupItem)`
     &:last-child { flex: 0; }
   }
 `;
+
 
 @withRouter
 @observer
@@ -62,7 +64,7 @@ export default class Formats extends React.Component {
             <Button icon="chevronLeft" onClick={this.onDisplayAll}>Formats listing</Button>
             {format.name}
           </h3>
-          <div dangerouslySetInnerHTML={{ __html: format.specification }} />
+          <FormatSpecification format={format} />
         </div>
       );
     }

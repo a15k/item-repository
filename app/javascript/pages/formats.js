@@ -7,6 +7,7 @@ import Button from '../components/button';
 import ActivityIndicator from '../components/activity-indicator';
 import ModelCollection from '../models/model-collection';
 import NotFound from './not-found';
+import FormatSpecification from './formats/specification';
 
 const FormatItem = styled(ListGroupItem)`
   display: flex;
@@ -17,9 +18,9 @@ const FormatItem = styled(ListGroupItem)`
   }
 `;
 
-@withRouter
+
 @observer
-export default class Formats extends React.Component {
+export class Formats extends React.Component {
 
   static propTypes = {
     collection: PropTypes.instanceOf(ModelCollection),
@@ -50,7 +51,6 @@ export default class Formats extends React.Component {
     if (collection.api.isPending) {
       return <ActivityIndicator />;
     }
-
     if (id) {
       const format = collection.get(id);
       if (!format) {
@@ -62,7 +62,7 @@ export default class Formats extends React.Component {
             <Button icon="chevronLeft" onClick={this.onDisplayAll}>Formats listing</Button>
             {format.name}
           </h3>
-          <p>{format.specification}</p>
+          <FormatSpecification format={format} />
         </div>
       );
     }
@@ -81,3 +81,5 @@ export default class Formats extends React.Component {
     );
   }
 }
+
+export default withRouter(Formats);

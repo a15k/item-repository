@@ -9,6 +9,7 @@ import Assessment from '../../models/assessment';
 import Button from '../../components/button';
 import { saveAs } from 'file-saver/FileSaver';
 
+@observer
 class Iframe extends React.Component {
   static propTypes = {
     assessment: PropTypes.instanceOf(Assessment).isRequired,

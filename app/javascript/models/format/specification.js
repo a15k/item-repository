@@ -1,22 +1,22 @@
 import IframeSettings from '../iframe-settings';
 
-const AssessmentPreview = {
+const FormatSpecification = {
 
-  generate(assessment) {
+  generate(format) {
     return `
   <!DOCTYPE html>
   <html>
     <head>
-      <title>Assessment Preview for ${assessment.id}</title>
+      <title>Format Specification for ${format.identifier}</title>
       <link rel="stylesheet" media="all" href="${IframeSettings.assets.styles}">
       <script src="${IframeSettings.assets.javascript}"></script>
     </head>
     <body>
-      ${assessment.preview_html}
+      ${format.specification}
     </body>
   </html>
 `;
   },
 };
 
-export default AssessmentPreview;
+export default FormatSpecification;

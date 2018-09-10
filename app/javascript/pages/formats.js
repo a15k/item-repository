@@ -19,7 +19,6 @@ const FormatItem = styled(ListGroupItem)`
 `;
 
 
-
 @observer
 export class Formats extends React.Component {
 

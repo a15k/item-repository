@@ -1,6 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Formats Page renders formats 1`] = `
+exports[`Formats Page renders a format spec 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 .icon + span {
+  margin-left: 0.5rem;
+}
+
+<div>
+  <h3>
+    <button
+      className="c0 btn btn-secondary"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-chevron-left fa-w-10 icon"
+        data-icon="chevron-left"
+        data-prefix="fas"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 320 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
+          fill="currentColor"
+          style={Object {}}
+        />
+      </svg>
+      <span>
+        Formats listing
+      </span>
+    </button>
+    Kiehn - Ankunding
+  </h3>
+  <iframe
+    id="format-specification-379d79cc-cd42-443c-9f2e-15087a5bc518"
+    src="/assessment/format/379d79cc-cd42-443c-9f2e-15087a5bc518"
+    srcDoc="
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Format Specification for illo</title>
+      <link rel=\\"stylesheet\\" media=\\"all\\" href=\\"undefined\\">
+      <script src=\\"/preview.js\\"></script>
+    </head>
+    <body>
+      undefined
+    </body>
+  </html>
+"
+    style={
+      Object {
+        "border": "0px",
+        "minWidth": "100%",
+        "width": "1px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Formats Page renders formats listing 1`] = `
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -51,7 +123,9 @@ exports[`Formats Page renders formats 1`] = `
     <li
       className="c0 list-group-item"
     >
-      <span />
+      <span>
+        Kiehn - Ankunding
+      </span>
       <span>
         379d79cc-cd42-443c-9f2e-15087a5bc518
       </span>

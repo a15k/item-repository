@@ -13,6 +13,8 @@ export default class Assessment extends BaseModel {
   @identifier id;
   @field a15k_identifier;
   @field a15k_version;
+  @field source_identifier;
+  @field source_version;
 
   @belongsTo({ model: Member }) member;
   @hasMany({ model: Variant }) variants;

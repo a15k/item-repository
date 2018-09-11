@@ -77,7 +77,7 @@ export default class InteractionEdit extends React.Component {
           ))}
         </ListGroup>
         <FormGroup>
-          <CopyInput label="API ID" readOnly value={app.id} />
+          <CopyInput label="API ID" readOnly value={app.api_id} />
         </FormGroup>
         <FormGroup>
           <CopyInput label="API Token" readOnly value={app.api_token} />

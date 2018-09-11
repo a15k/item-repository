@@ -9,7 +9,9 @@ module A15K
   module Metadata
 
     def self.api(stub: Rails.application.secrets.metadata_api[:stub])
-      stub ? FakeApi.new : Api.new
+      ActiveAttr::Typecasting::BooleanTypecaster.new.call(stub) ?
+        FakeApi.new :
+        Api.new
     end
 
   end

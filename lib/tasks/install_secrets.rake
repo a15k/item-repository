@@ -70,7 +70,15 @@ end
 
 def deep_populate(hash, keys, value)
   if keys.length == 1
-    hash[keys[0]] = value
+    hash[keys[0]] =
+      case value
+      when "true"
+        true
+      when "false"
+        false
+      else
+        value
+      end
   else
     hash[keys[0]] ||= {}
     deep_populate(hash[keys[0]], keys[1..-1], value)

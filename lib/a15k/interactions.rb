@@ -6,7 +6,9 @@ module A15K
 
     def self.api(stub: Rails.application.secrets.interactions_api[:stub])
       @api ||= (
-        stub ? FakeApi : A15kInteractions::AppsApi.new
+        ActiveAttr::Typecasting::BooleanTypecaster.new.call(stub) ?
+          FakeApi :
+          A15kInteractions::AppsApi.new
       )
     end
 

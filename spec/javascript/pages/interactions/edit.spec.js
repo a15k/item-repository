@@ -1,3 +1,4 @@
+import renderer from 'react-test-renderer';
 import Edit from 'pages/interactions/edit';
 import Factory from '../../factories';
 
@@ -12,6 +13,12 @@ describe(Edit, () => {
       onDone: jest.fn(),
       app,
     };
+  });
+
+  it('matches snapshot', () => {
+    const edit = renderer.create(<Edit {...props} />);
+    expect(edit.toJSON()).toMatchSnapshot();
+    edit.unmount();
   });
 
   it('displays values', () => {

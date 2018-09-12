@@ -59,7 +59,10 @@ end
 
 def yaml(hash)
   # write the hash as yaml, getting rid of the "---\n" at the front
+  # and undoing the quoting of false and true
   hash.to_yaml[4..-1]
+      .gsub("'false'", "false")
+      .gsub("'true'", "true")
 end
 
 def get_env_var!(name)

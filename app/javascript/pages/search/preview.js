@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { React, PropTypes, action, observer } from '../../helpers/react';
+import { React, PropTypes, action, observer, computed } from '../../helpers/react';
 import iframeResizer from 'iframe-resizer/js/iframeResizer';
 import { Badge } from 'reactstrap';
 import { get } from 'lodash';
@@ -14,12 +14,17 @@ class Iframe extends React.Component {
   static propTypes = {
     assessment: PropTypes.instanceOf(Assessment).isRequired,
   }
-  componentDidMount() {
-    this.iframe = iframeResizer({}, `#preview-${this.props.assessment.id}`)[0];
+  @computed get identifier() {
+    return `preview-${this.props.assessment.id}`;
   }
+  componentDidMount() {
+    this.iframe = iframeResizer({}, '#' + this.identifier)[0];
+  }
+
   componentWillUnmount() {
     if (this.iframe) {
-      this.iframe.iFrameResizer.close();
+      const { iFrameResizer } = this.iframe;
+      setTimeout(() => iFrameResizer.close());
     }
   }
   render() {
@@ -27,7 +32,7 @@ class Iframe extends React.Component {
     return (
       <iframe
         srcDoc={assessment.preview_document}
-        id={`preview-${assessment.id}`}
+        id={this.identifier}
         src={`/assessment/preview/${assessment.id}`}
         style={{ width: '1px', minWidth: '100%', border: '0px' }}
       />

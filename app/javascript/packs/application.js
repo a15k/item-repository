@@ -27,6 +27,9 @@ MenuLink.propTypes = {
 
 const Nav = styled.nav`
  margin-bottom: 1rem;
+ a {
+  color: white;
+ }
 `;
 
 const Title = styled.div.attrs({
@@ -58,7 +61,7 @@ class A15KApplication extends React.Component {
       <BrowserRouter>
         <div className="a15k-root">
           <Nav className="navbar navbar-dark bg-dark">
-            <Title>Assessment Network</Title>
+            <Title><NavLink to="/">Assessment Network</NavLink></Title>
             {User.isMember &&
               (
                 <Menu

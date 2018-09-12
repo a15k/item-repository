@@ -5,6 +5,10 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
   margin-bottom: 1rem;
 }
 
+.c0 a {
+  color: white;
+}
+
 .c1 {
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -24,7 +28,15 @@ exports[`A15KApplication renders and matches snapshot 1`] = `
     <div
       className="navbar-brand c1"
     >
-      Assessment Network
+      <a
+        aria-current={null}
+        className={undefined}
+        href="/"
+        onClick={[Function]}
+        style={undefined}
+      >
+        Assessment Network
+      </a>
     </div>
     <div
       className="c2 dropdown"

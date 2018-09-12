@@ -16,6 +16,13 @@ export default class Assessment extends BaseModel {
   @field source_identifier;
   @field source_version;
 
+  @observable raw = {};
+
+  constructor(json) {
+    super(json);
+    this.raw = json;
+  }
+
   @belongsTo({ model: Member }) member;
   @hasMany({ model: Variant }) variants;
 

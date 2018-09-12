@@ -90,7 +90,7 @@ class Download extends React.Component {
   @action.bound onClick() {
     const { assessment } = this.props;
     const fileName = `${assessment.id}.json`;
-    const fileToSave = new Blob([JSON.stringify(assessment.serialize())], {
+    const fileToSave = new Blob([JSON.stringify(assessment.raw)], {
       type: 'application/json',
       name: fileName,
     });

@@ -17,7 +17,7 @@ export default class SearchResults extends React.Component {
 
   render() {
     const { assessments, formats } = this.props;
-
+    if (assessments.api.isPending) { return null; }
     return (
       <div className="search-results">
         {assessments.map(a => <Preview key={a.id} formats={formats} assessment={a} />)}

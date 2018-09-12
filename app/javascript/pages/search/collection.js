@@ -22,6 +22,7 @@ export default class SearchCollection {
       page: values.page ? parseInt(values.page) : this.page,
       per_page: values.per_page ? parseInt(values.per_page) : this.per_page,
     });
+    this._assessments.clear();
     return this;
   }
 
@@ -34,7 +35,7 @@ export default class SearchCollection {
 
   fromJSON(models, { total_count } = {}) {
     this.total_count = total_count;
-    this._assessments = models.map(a => new Assessment(a));
+    this._assessments.replace(models.map(a => new Assessment(a)));
   }
 
   map(fn) {

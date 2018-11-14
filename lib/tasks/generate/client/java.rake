@@ -25,7 +25,7 @@ namespace 'generate:client' do
         output_dir: output_dir,
         config: {
           developerName: 'A15K',
-          developerEmail: 'contact@a15k.org',
+          developerEmail: '',
           developerOrganization: 'A15K',
           developerOrganizationUrl: 'https://a15k.org',
           invokerPackage: client_package,

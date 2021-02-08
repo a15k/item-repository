@@ -89,11 +89,6 @@ class Assessment < ApplicationRecord
   end
 
   def send_to_metadata_repo
-    begin
-      A15K::Metadata.api.create(self)
-    rescue => e
-      Rails.logger.warn "Failed to create metadata for new assessment #{self.id}"
-      Rails.logger.warn e
-    end
+    SubmitAssessmentToMetadata.perform_later(self)
   end
 end

@@ -45,12 +45,12 @@ export class Search extends React.Component {
   }
 
   componentDidMount() {
-    const { formats, query, page } = this.props;
+    const { formats, query } = this.props;
     if (!formats.api.isFetchedOrFetching) {
       formats.fetch();
     }
     if (query) {
-      this.collection.update({ query, page });
+      this.collection.update(this.props);
     }
   }
 
